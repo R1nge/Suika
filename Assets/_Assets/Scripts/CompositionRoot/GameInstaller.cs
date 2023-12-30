@@ -1,4 +1,5 @@
 ﻿using _Assets.Scripts.Misc;
+using _Assets.Scripts.Services;
 using _Assets.Scripts.Services.Factories;
 using _Assets.Scripts.Services.StateMachine;
 using _Assets.Scripts.Services.UIs.StateMachine;
@@ -18,6 +19,9 @@ namespace _Assets.Scripts.CompositionRoot
             builder.RegisterComponent(coroutineRunner);
             builder.RegisterComponent(playerFactory);
             builder.RegisterComponent(containerFactory);
+
+            builder.Register<RandomNumberGenerator>(Lifetime.Singleton);
+            builder.Register<SuikasFactory>(Lifetime.Singleton);
             
             //TODO: leader board service
             

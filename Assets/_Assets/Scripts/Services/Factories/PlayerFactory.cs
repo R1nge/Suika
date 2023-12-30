@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using VContainer;
+using VContainer.Unity;
 
 namespace _Assets.Scripts.Services.Factories
 {
@@ -6,10 +8,11 @@ namespace _Assets.Scripts.Services.Factories
     {
         [SerializeField] private GameObject playerPrefab;
         [SerializeField] private Transform spawnPoint;
+        [Inject] private IObjectResolver _objectResolver;
 
         public GameObject Create()
         {
-            var player = Instantiate(playerPrefab, spawnPoint.position, Quaternion.identity);
+            var player = _objectResolver.Instantiate(playerPrefab, spawnPoint.position, Quaternion.identity);
             return player;
         }
     }
