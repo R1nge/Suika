@@ -12,7 +12,9 @@ namespace _Assets.Scripts.Services.StateMachine
         {
             _states = new Dictionary<GameStateType, IGameState>
             {
-                { GameStateType.Game, gameStatesFactory.CreateGameState(this) }
+                { GameStateType.LoadSavedData, gameStatesFactory.CreateLoadSaveDataState(this) },
+                { GameStateType.Game, gameStatesFactory.CreateGameState(this) },
+                { GameStateType.GameOver, gameStatesFactory.CreateGameOverState(this) }
             };
         }
 

@@ -3,6 +3,7 @@
     public enum GameStateType
     {
         LoadSavedData,
-        Game
+        Game,
+        GameOver
     }
 }
