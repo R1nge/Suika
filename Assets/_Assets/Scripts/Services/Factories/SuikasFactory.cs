@@ -20,32 +20,27 @@ namespace _Assets.Scripts.Services.Factories
             _randomNumberGenerator = randomNumberGenerator;
         }
 
-        public Suika Create(Vector3 position)
+        public void Create(Vector3 position)
         {
             var index = _randomNumberGenerator.PickRandomSuika();
-            var suika = _configProvider.SuikasConfig.GetPrefab(index);
-            var suikaInstance = _objectResolver.Instantiate(suika.gameObject, position, Quaternion.identity);
-            var ss = suikaInstance.GetComponent<Suika>();
-            ss.SetIndex(index);
-            return ss;
-        }
-        
-        public Suika CreateWithZeroScale(Vector3 position)
-        {
-            var index = _randomNumberGenerator.PickRandomSuika();
-            var suika = _configProvider.SuikasConfig.GetPrefab(index);
-            var suikaInstance = _objectResolver.Instantiate(suika.gameObject, position, Quaternion.identity).GetComponent<Suika>();
+            var suikaPrefab = _configProvider.SuikasConfig.GetPrefab(index);
+            var suikaInstance = _objectResolver.Instantiate(suikaPrefab.gameObject, position, Quaternion.identity).GetComponent<Suika>();
             suikaInstance.SetIndex(index);
-            return suikaInstance;
         }
 
-        public Suika CreateWithZeroScale(int index, Vector3 position)
+        public void Create(int index, Vector3 position)
         {
             index++;
-            var suika = _configProvider.SuikasConfig.GetPrefab(index);
-            var suikaInstance = _objectResolver.Instantiate(suika.gameObject, position, Quaternion.identity).GetComponent<Suika>();
+
+            if (!_configProvider.SuikasConfig.HasPrefab(index))
+            {
+                Debug.LogWarning($"SuikasFactory: Index is out of range {index}");
+                return;
+            }
+
+            var suikaPrefab = _configProvider.SuikasConfig.GetPrefab(index);
+            var suikaInstance = _objectResolver.Instantiate(suikaPrefab.gameObject, position, Quaternion.identity).GetComponent<Suika>();
             suikaInstance.SetIndex(index);
-            return suikaInstance;
         }
     }
 }

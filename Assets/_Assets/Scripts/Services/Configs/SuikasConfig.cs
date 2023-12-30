@@ -11,6 +11,7 @@ namespace _Assets.Scripts.Services.Configs
 
         public Sprite GetIcon(int index) => suikas[index].Icon;
         public Suika GetPrefab(int index) => suikas[index].Prefab;
+        public bool HasPrefab(int index) => suikas[index].Prefab != null;
 
         [Serializable]
         public struct SuikaData

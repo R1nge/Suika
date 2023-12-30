@@ -16,7 +16,7 @@ namespace _Assets.Scripts.Gameplay
             if (Input.GetMouseButtonDown(0) && _canDrop)
             {
                 StartCoroutine(Wait());
-                _suikasFactory.CreateWithZeroScale(transform.position);
+                _suikasFactory.Create(transform.position);
             }
         }
 

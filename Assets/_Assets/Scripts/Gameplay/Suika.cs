@@ -27,7 +27,7 @@ namespace _Assets.Scripts.Gameplay
                     //Or move it to the another suika position
                     //var suikaPosition = suika.transform.position;
                     //newSuikaInstance.transform.position = suikaPosition;
-                    _suikasFactory.CreateWithZeroScale(_index, middle);
+                    _suikasFactory.Create(_index, middle);
                     Destroy(gameObject);
                     Destroy(suika.gameObject);
                 }
