@@ -6,7 +6,11 @@
 
         public GameState(GameStateMachine stateMachine) => _stateMachine = stateMachine;
 
-        public void Enter() { }
+        public void Enter()
+        {
+            //TODO: show in game ui
+            //TODO: spawn player
+        }
 
         public void Exit() { }
     }

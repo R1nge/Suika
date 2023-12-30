@@ -24,6 +24,7 @@ namespace _Assets.Scripts.Services.Datas
             }
             
             PlayerPrefs.Save();
+            Debug.LogWarning("Saved data");
         }
 
         public void LoadData()

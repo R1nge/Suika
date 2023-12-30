@@ -30,12 +30,12 @@ namespace _Assets.Scripts.Services.StateMachine
 
         public IGameState CreateGameOverState(GameStateMachine stateMachine)
         {
-            return new GameOverState(_dataService);
+            return new GameOverState();
         }
 
         public IGameState CreateSaveDataState(GameStateMachine stateMachine)
         {
-            return new SaveDataState();
+            return new SaveDataState(_dataService);
         }
     }
 }
