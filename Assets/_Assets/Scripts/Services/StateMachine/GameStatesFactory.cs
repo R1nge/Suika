@@ -1,18 +1,20 @@
-﻿using _Assets.Scripts.Services.StateMachine.States;
+﻿using _Assets.Scripts.Services.Datas;
+using _Assets.Scripts.Services.StateMachine.States;
 
 namespace _Assets.Scripts.Services.StateMachine
 {
     public class GameStatesFactory
     {
-        private IDataService _dataService;
+        private readonly IDataService _dataService;
+
         private GameStatesFactory(IDataService dataService)
         {
             _dataService = dataService;
         }
-        
+
         public IGameState CreateLoadSaveDataState(GameStateMachine stateMachine)
         {
-            return new LoadSaveDataState(stateMachine);
+            return new LoadSaveDataState(stateMachine, _dataService);
         }
 
         public IGameState CreateGameState(GameStateMachine stateMachine)
