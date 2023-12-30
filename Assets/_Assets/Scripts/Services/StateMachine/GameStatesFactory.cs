@@ -12,13 +12,15 @@ namespace _Assets.Scripts.Services.StateMachine
         private readonly UIStateMachine _uiStateMachine;
         private readonly CoroutineRunner _coroutineRunner;
         private readonly PlayerFactory _playerFactory;
+        private readonly ContainerFactory _containerFactory;
 
-        private GameStatesFactory(IDataService dataService, UIStateMachine uiStateMachine, CoroutineRunner coroutineRunner, PlayerFactory playerFactory)
+        private GameStatesFactory(IDataService dataService, UIStateMachine uiStateMachine, CoroutineRunner coroutineRunner, PlayerFactory playerFactory, ContainerFactory containerFactory)
         {
             _dataService = dataService;
             _uiStateMachine = uiStateMachine;
             _coroutineRunner = coroutineRunner;
             _playerFactory = playerFactory;
+            _containerFactory = containerFactory;
         }
 
         public IGameState CreateLoadSaveDataState(GameStateMachine stateMachine)
@@ -28,7 +30,7 @@ namespace _Assets.Scripts.Services.StateMachine
 
         public IGameState CreateGameState(GameStateMachine stateMachine)
         {
-            return new GameState(stateMachine, _uiStateMachine, _playerFactory);
+            return new GameState(stateMachine, _uiStateMachine, _playerFactory, _containerFactory);
         }
 
         public IGameState CreateGameOverState(GameStateMachine stateMachine)

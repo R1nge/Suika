@@ -12,11 +12,12 @@ namespace _Assets.Scripts.CompositionRoot
     {
         [SerializeField] private CoroutineRunner coroutineRunner;
         [SerializeField] private PlayerFactory playerFactory;
-
+        [SerializeField] private ContainerFactory containerFactory;
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterComponent(coroutineRunner);
             builder.RegisterComponent(playerFactory);
+            builder.RegisterComponent(containerFactory);
             
             //TODO: leader board service
             
