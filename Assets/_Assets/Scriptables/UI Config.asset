@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadingMenu: {fileID: 3032346258083289967, guid: 65f150163cf495c49b5f3da5d1677266, type: 3}
   mainMenu: {fileID: 7134135243074798241, guid: 8f2821dadc0fe5248803f4ad6320baca, type: 3}
-  inGameMenu: {fileID: 0}
+  inGameMenu: {fileID: 4895176568063786644, guid: 5abd69c9cd1eab54694cd7f709c88db1, type: 3}
   gameOverMenu: {fileID: 0}

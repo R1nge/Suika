@@ -1,17 +1,29 @@
-﻿namespace _Assets.Scripts.Services.StateMachine.States
+﻿using _Assets.Scripts.Services.Factories;
+using _Assets.Scripts.Services.UIs.StateMachine;
+
+namespace _Assets.Scripts.Services.StateMachine.States
 {
     public class GameState : IGameState
     {
         private readonly GameStateMachine _stateMachine;
+        private readonly UIStateMachine _uiStateMachine;
+        private readonly PlayerFactory _playerFactory;
 
-        public GameState(GameStateMachine stateMachine) => _stateMachine = stateMachine;
+        public GameState(GameStateMachine stateMachine, UIStateMachine uiStateMachine, PlayerFactory playerFactory)
+        {
+            _stateMachine = stateMachine;
+            _uiStateMachine = uiStateMachine;
+            _playerFactory = playerFactory;
+        }
 
         public void Enter()
         {
-            //TODO: show in game ui
-            //TODO: spawn player
+            _uiStateMachine.SwitchState(UIStateType.Game);
+            _playerFactory.Create();
         }
 
-        public void Exit() { }
+        public void Exit()
+        {
+        }
     }
 }
