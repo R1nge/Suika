@@ -12,7 +12,8 @@ namespace _Assets.Scripts.Services.Factories
         private readonly ConfigProvider _configProvider;
         private readonly RandomNumberGenerator _randomNumberGenerator;
 
-        private SuikasFactory(IObjectResolver objectResolver, ConfigProvider configProvider, RandomNumberGenerator randomNumberGenerator)
+        private SuikasFactory(IObjectResolver objectResolver, ConfigProvider configProvider,
+            RandomNumberGenerator randomNumberGenerator)
         {
             _objectResolver = objectResolver;
             _configProvider = configProvider;
@@ -28,13 +29,25 @@ namespace _Assets.Scripts.Services.Factories
             ss.SetIndex(index);
             return ss;
         }
+        
+        public Suika CreateWithZeroScale(Vector3 position)
+        {
+            var index = _randomNumberGenerator.PickRandomSuika();
+            var suika = _configProvider.SuikasConfig.GetPrefab(index);
+            var suikaInstance = _objectResolver.Instantiate(suika.gameObject, position, Quaternion.identity).GetComponent<Suika>();
+            suikaInstance.transform.localScale = new Vector3(.1f, .1f, 1f);
+            suikaInstance.SetIndex(index);
+            return suikaInstance;
+        }
 
         public Suika CreateWithZeroScale(int index, Vector3 position)
         {
+            index++;
             var suika = _configProvider.SuikasConfig.GetPrefab(index);
-            var suikaInstance = _objectResolver.Instantiate(suika.gameObject, position, Quaternion.identity);
+            var suikaInstance = _objectResolver.Instantiate(suika.gameObject, position, Quaternion.identity).GetComponent<Suika>();
             suikaInstance.transform.localScale = new Vector3(.1f, .1f, 1f);
-            return suikaInstance.GetComponent<Suika>();
+            suikaInstance.SetIndex(index);
+            return suikaInstance;
         }
     }
 }

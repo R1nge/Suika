@@ -12,7 +12,7 @@ namespace _Assets.Scripts.Gameplay
         {
             if (Input.GetMouseButtonDown(0))
             {
-                _suikasFactory.Create(transform.position);
+                _suikasFactory.CreateWithZeroScale(transform.position);
             }
         }
     }
