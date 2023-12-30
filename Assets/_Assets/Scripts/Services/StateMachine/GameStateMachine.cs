@@ -15,7 +15,8 @@ namespace _Assets.Scripts.Services.StateMachine
             {
                 { GameStateType.LoadSavedData, gameStatesFactory.CreateLoadSaveDataState(this) },
                 { GameStateType.Game, gameStatesFactory.CreateGameState(this) },
-                { GameStateType.GameOver, gameStatesFactory.CreateGameOverState(this) }
+                { GameStateType.GameOver, gameStatesFactory.CreateGameOverState(this) },
+                { GameStateType.SaveData, gameStatesFactory.CreateSaveDataState(this) }
             };
         }
 

@@ -1,25 +1,24 @@
-﻿using System;
-using _Assets.Scripts.Services.Configs;
+﻿using _Assets.Scripts.Services.Configs;
+using UnityEngine;
+using VContainer;
+using VContainer.Unity;
 
 namespace _Assets.Scripts.Services.UIs.StateMachine.States
 {
     public class GameOverState : IUIState
     {
         private readonly ConfigProvider _configProvider;
+        private readonly IObjectResolver _objectResolver;
+        private GameObject _ui;
 
-        public GameOverState(ConfigProvider configProvider)
+        public GameOverState(ConfigProvider configProvider, IObjectResolver objectResolver)
         {
             _configProvider = configProvider;
-        }
-        
-        public void Enter()
-        {
-            throw new NotImplementedException();
+            _objectResolver = objectResolver;
         }
 
-        public void Exit()
-        {
-            throw new NotImplementedException();
-        }
+        public void Enter() => _ui = _objectResolver.Instantiate(_configProvider.UIConfig.GameOverMenu);
+
+        public void Exit() => Object.Destroy(_ui);
     }
 }

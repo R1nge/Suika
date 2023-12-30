@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cda0cc0ac66e48f9a097ac7c8ee8c960, type: 3}
   m_Name: UI Config
   m_EditorClassIdentifier: 
-  mainMenu: {fileID: 0}
+  loadingMenu: {fileID: 3032346258083289967, guid: 65f150163cf495c49b5f3da5d1677266, type: 3}
+  mainMenu: {fileID: 7134135243074798241, guid: 8f2821dadc0fe5248803f4ad6320baca, type: 3}
   inGameMenu: {fileID: 0}
   gameOverMenu: {fileID: 0}
