@@ -17,10 +17,7 @@ namespace _Assets.Scripts.Services.UIs
             quitButton.onClick.AddListener(Quit);
         }
 
-        private void Play()
-        {
-            _gameStateMachine.SwitchState(GameStateType.Game);
-        }
+        private void Play() => _gameStateMachine.SwitchState(GameStateType.Game);
 
         private void Quit()
         {

@@ -1,4 +1,6 @@
-﻿using _Assets.Scripts.Services;
+﻿using System;
+using System.Collections.Generic;
+using _Assets.Scripts.Services;
 using UnityEngine;
 using VContainer;
 
@@ -8,25 +10,32 @@ namespace _Assets.Scripts.Gameplay
     {
         private const float TriggerThreshold = 1f;
         private float _time;
+        private List<Suika> _collidedSuikas = new(10);
         [Inject] private GameOverTimer _gameOverTimer;
 
-        private void OnTriggerStay2D(Collider2D other)
+        private void Update()
+        {
+            if (_collidedSuikas.Count > 0)
+            {
+                _time += Time.deltaTime;
+
+                if (_time >= TriggerThreshold)
+                {
+                    _gameOverTimer.StartTimer();
+                }
+            }
+            else
+            {
+                _gameOverTimer.StopTimer();
+                _time = 0;
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.TryGetComponent(out Suika suika))
             {
-                if (suika.IsLanded)
-                {
-                    _time += Time.deltaTime;
-
-                    if (_time >= TriggerThreshold)
-                    {
-                        _gameOverTimer.StartTimer();
-                    }
-                }
-                else
-                {
-                    _time = 0;
-                }
+                _collidedSuikas.Add(suika);
             }
         }
 
@@ -34,7 +43,7 @@ namespace _Assets.Scripts.Gameplay
         {
             if (other.TryGetComponent(out Suika suika))
             {
-                _gameOverTimer.StopTimer();
+                _collidedSuikas.Remove(suika);
             }
         }
     }

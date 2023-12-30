@@ -8,7 +8,7 @@ namespace _Assets.Scripts.Gameplay
     public class PlayerDrop : MonoBehaviour
     {
         [Inject] private SuikasFactory _suikasFactory;
-        private readonly YieldInstruction _wait = new WaitForSeconds(.25f);
+        private readonly YieldInstruction _wait = new WaitForSeconds(.5f);
         private bool _canDrop = true;
 
         private void Update()

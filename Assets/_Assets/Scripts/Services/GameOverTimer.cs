@@ -19,12 +19,14 @@ namespace _Assets.Scripts.Services
         {
             if (_isRunning) return;
             _isRunning = true;
+            _time = StartTime;
             Debug.LogError("Start Timer");
             OnTimerStarted?.Invoke(StartTime, _time);
         }
 
         public void StopTimer()
         {
+            if (!_isRunning) return;
             _isRunning = false;
             _time = StartTime;
             Debug.LogError("Stop Timer");
