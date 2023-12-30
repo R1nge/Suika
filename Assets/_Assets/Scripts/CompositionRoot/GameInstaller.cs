@@ -21,7 +21,10 @@ namespace _Assets.Scripts.CompositionRoot
             builder.RegisterComponent(containerFactory);
 
             builder.Register<RandomNumberGenerator>(Lifetime.Singleton);
+            builder.RegisterEntryPoint<GameOverTimer>().AsSelf();
             builder.Register<SuikasFactory>(Lifetime.Singleton);
+
+            
             
             //TODO: leader board service
             
