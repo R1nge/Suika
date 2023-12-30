@@ -12,18 +12,7 @@ namespace _Assets.Scripts.Gameplay
         private bool _collided;
         [Inject] private SuikasFactory _suikasFactory;
 
-        public void SetIndex(int index)
-        {
-            _index = index;
-        }
-
-        private void Update()
-        {
-            if (transform.localScale.x < _index * .5f)
-            {
-                transform.localScale += Vector3.one * Time.deltaTime;
-            }
-        }
+        public void SetIndex(int index) => _index = index;
 
         private void OnCollisionEnter2D(Collision2D other)
         {
@@ -35,6 +24,9 @@ namespace _Assets.Scripts.Gameplay
                     _collided = true;
                     suika._collided = true;
                     var middle = (transform.position + suika.transform.position) / 2f;
+                    //Or move it to the another suika position
+                    //var suikaPosition = suika.transform.position;
+                    //newSuikaInstance.transform.position = suikaPosition;
                     _suikasFactory.CreateWithZeroScale(_index, middle);
                     Destroy(gameObject);
                     Destroy(suika.gameObject);

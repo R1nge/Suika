@@ -35,7 +35,6 @@ namespace _Assets.Scripts.Services.Factories
             var index = _randomNumberGenerator.PickRandomSuika();
             var suika = _configProvider.SuikasConfig.GetPrefab(index);
             var suikaInstance = _objectResolver.Instantiate(suika.gameObject, position, Quaternion.identity).GetComponent<Suika>();
-            suikaInstance.transform.localScale = new Vector3(.1f, .1f, 1f);
             suikaInstance.SetIndex(index);
             return suikaInstance;
         }
@@ -45,7 +44,6 @@ namespace _Assets.Scripts.Services.Factories
             index++;
             var suika = _configProvider.SuikasConfig.GetPrefab(index);
             var suikaInstance = _objectResolver.Instantiate(suika.gameObject, position, Quaternion.identity).GetComponent<Suika>();
-            suikaInstance.transform.localScale = new Vector3(.1f, .1f, 1f);
             suikaInstance.SetIndex(index);
             return suikaInstance;
         }
