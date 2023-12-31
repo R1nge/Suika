@@ -14,3 +14,10 @@
             pineapple 180x180 2.25 scale
             melon 220x220 2.75 scale
             watermelon 260x260 3.25 scale
+
+//TODO:
+//Game over
+//Skins
+//UI:
+//Leader board (local)
+//Evolution line

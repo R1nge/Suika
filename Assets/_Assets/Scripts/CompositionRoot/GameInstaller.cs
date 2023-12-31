@@ -24,12 +24,9 @@ namespace _Assets.Scripts.CompositionRoot
             builder.Register<RandomNumberGenerator>(Lifetime.Singleton);
 
             builder.Register<SuikaDataProvider>(Lifetime.Singleton);
-            
-            builder.RegisterEntryPoint<GameOverTimer>().AsSelf();
             builder.Register<SuikasFactory>(Lifetime.Singleton);
 
-            
-            
+            builder.RegisterEntryPoint<GameOverTimer>().AsSelf();
             //TODO: leader board service
             
             builder.Register<UIStatesFactory>(Lifetime.Singleton);
@@ -37,6 +34,8 @@ namespace _Assets.Scripts.CompositionRoot
             
             builder.Register<GameStatesFactory>(Lifetime.Singleton);
             builder.Register<GameStateMachine>(Lifetime.Singleton);
+
+            builder.RegisterEntryPoint<GameOverService>();
         }
     }
 }

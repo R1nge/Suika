@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace _Assets.Scripts.Services.StateMachine.States
 {
@@ -8,7 +9,7 @@ namespace _Assets.Scripts.Services.StateMachine.States
         public void Enter()
         {
             //TODO: Show Game Over (Retry, main menu)
-            
+            Debug.LogError("GAME OVER");
         }
 
         public void Exit()

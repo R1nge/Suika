@@ -9,8 +9,7 @@ namespace _Assets.Scripts.Services.Factories
         [SerializeField] private GameObject containerPrefab;
         [SerializeField] private Transform spawnPoint;
         [Inject] private IObjectResolver _objectResolver;
-        
-        
+
         public GameObject Create()
         {
             var container = _objectResolver.Instantiate(containerPrefab, spawnPoint.position, Quaternion.identity);
