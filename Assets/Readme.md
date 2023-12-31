@@ -16,7 +16,6 @@
             watermelon 260x260 3.25 scale
 
 //TODO:
-//Game over
 //Skins
 //UI:
 //Leader board (local)

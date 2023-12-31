@@ -31,11 +31,17 @@ namespace _Assets.Scripts.Gameplay
             }
         }
 
-        private void OnTriggerEnter2D(Collider2D other)
+        private void OnTriggerStay2D(Collider2D other)
         {
             if (other.TryGetComponent(out Suika suika))
             {
-                _collidedSuikas.Add(suika);
+                if (!_collidedSuikas.Contains(suika))
+                {
+                    if (suika.HasLanded)
+                    {
+                        _collidedSuikas.Add(suika);
+                    }
+                }
             }
         }
 
@@ -43,7 +49,10 @@ namespace _Assets.Scripts.Gameplay
         {
             if (other.TryGetComponent(out Suika suika))
             {
-                _collidedSuikas.Remove(suika);
+                if (_collidedSuikas.Contains(suika))
+                {
+                    _collidedSuikas.Remove(suika);
+                }
             }
         }
     }
