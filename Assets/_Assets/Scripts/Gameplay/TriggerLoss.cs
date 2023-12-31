@@ -8,7 +8,7 @@ namespace _Assets.Scripts.Gameplay
 {
     public class TriggerLoss : MonoBehaviour
     {
-        private const float TriggerThreshold = 1f;
+        private const float TriggerThreshold = 1.5f;
         private float _time;
         private List<Suika> _collidedSuikas = new(10);
         [Inject] private GameOverTimer _gameOverTimer;
