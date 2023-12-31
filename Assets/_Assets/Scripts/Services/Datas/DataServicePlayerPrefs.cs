@@ -55,6 +55,10 @@ namespace _Assets.Scripts.Services.Datas
             {
                 _gameDatas.Add(dataSorted[i]);
             }
+            
+            dataJson = JsonConvert.SerializeObject(_gameDatas);
+            PlayerPrefs.SetString(DataKeyBase, dataJson);
+            PlayerPrefs.Save();
 
             Debug.LogWarning("Loaded data");
         }
