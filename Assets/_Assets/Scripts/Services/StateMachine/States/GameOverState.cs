@@ -1,6 +1,4 @@
-﻿using System;
-using _Assets.Scripts.Services.UIs.StateMachine;
-using UnityEngine;
+﻿using _Assets.Scripts.Services.UIs.StateMachine;
 
 namespace _Assets.Scripts.Services.StateMachine.States
 {
@@ -8,18 +6,20 @@ namespace _Assets.Scripts.Services.StateMachine.States
     {
         private readonly GameStateMachine _gameStateMachine;
         private readonly UIStateMachine _uiStateMachine;
+        private readonly PlayerInput _playerInput;
 
-        public GameOverState(GameStateMachine gameStateMachine, UIStateMachine uiStateMachine)
+        public GameOverState(GameStateMachine gameStateMachine, UIStateMachine uiStateMachine, PlayerInput playerInput)
         {
             _gameStateMachine = gameStateMachine;
             _uiStateMachine = uiStateMachine;
+            _playerInput = playerInput;
         }
 
         public void Enter()
         {
+            _playerInput.Disable();
             _uiStateMachine.SwitchState(UIStateType.GameOver);
             _gameStateMachine.SwitchState(GameStateType.SaveData);
-            Debug.LogError("GAME OVER");
         }
 
         public void Exit()

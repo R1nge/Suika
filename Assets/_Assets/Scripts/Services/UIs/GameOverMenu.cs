@@ -17,14 +17,8 @@ namespace _Assets.Scripts.Services.UIs
             restart.onClick.AddListener(Restart);
         }
 
-        private void ShowMainMenu()
-        {
-            _stateMachine.SwitchState(GameStateType.ResetAndMainMenu);
-        }
+        private void ShowMainMenu() => _stateMachine.SwitchState(GameStateType.ResetAndMainMenu);
 
-        private void Restart()
-        {
-            _stateMachine.SwitchState(GameStateType.ResetAndRetry);
-        }
+        private void Restart() => _stateMachine.SwitchState(GameStateType.ResetAndRetry);
     }
 }

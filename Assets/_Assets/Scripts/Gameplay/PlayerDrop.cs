@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using _Assets.Scripts.Services;
 using _Assets.Scripts.Services.Factories;
 using _Assets.Scripts.Services.UIs;
 using UnityEngine;
@@ -11,12 +12,13 @@ namespace _Assets.Scripts.Gameplay
         [SerializeField] private SpriteRenderer spriteRenderer;
         [Inject] private SuikasFactory _suikasFactory;
         [Inject] private SuikaDataProvider _suikaDataProvider;
+        [Inject] private PlayerInput _playerInput;
         private readonly YieldInstruction _wait = new WaitForSeconds(.5f);
         private bool _canDrop = true;
 
         private void Update()
         {
-            if (Input.GetMouseButtonDown(0) && _canDrop)
+            if (Input.GetMouseButtonDown(0) && _canDrop && _playerInput.Enabled)
             {
                 Drop();
                 UpdateSprite();

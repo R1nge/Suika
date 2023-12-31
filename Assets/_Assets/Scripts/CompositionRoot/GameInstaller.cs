@@ -17,9 +17,12 @@ namespace _Assets.Scripts.CompositionRoot
         [SerializeField] private ContainerFactory containerFactory;
         protected override void Configure(IContainerBuilder builder)
         {
+            builder.Register<PlayerInput>(Lifetime.Singleton);
+            
             builder.RegisterComponent(coroutineRunner);
             builder.RegisterComponent(playerFactory);
             builder.RegisterComponent(containerFactory);
+
 
             builder.Register<RandomNumberGenerator>(Lifetime.Singleton);
 
