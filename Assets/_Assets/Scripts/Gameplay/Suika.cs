@@ -14,6 +14,7 @@ namespace _Assets.Scripts.Gameplay
         private bool _collided;
         private bool _landed;
         [Inject] private SuikasFactory _suikasFactory;
+        [Inject] private ScoreService _scoreService;
 
 
         public void SetIndex(int index) => _index = index;
