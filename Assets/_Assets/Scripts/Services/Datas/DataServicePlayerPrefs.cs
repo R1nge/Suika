@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -15,78 +15,48 @@ namespace _Assets.Scripts.Services.Datas
 
         public DataServicePlayerPrefs(ScoreService scoreService) => _scoreService = scoreService;
 
-        //TODO: fix
         public void SaveData()
         {
-            if (_gameDatas.Count < _gameDatas.Capacity)
-            {
-                _gameDatas.Add(new GameData(_scoreService.Score));
-                var dataJson = JsonConvert.SerializeObject(_gameDatas[^1]);
-                PlayerPrefs.SetString(DataKeyBase + (_gameDatas.Count - 1), dataJson);
-            }
-            else
-            {
-                for (int i = 0; i < _gameDatas.Count; i++)
-                {
-                    if (_gameDatas[i].Score < _scoreService.Score)
-                    {
-                        _gameDatas.Insert(i, new GameData(_scoreService.Score));
-                        var dataJson = JsonUtility.ToJson(_gameDatas[i]);
-                        PlayerPrefs.SetString(DataKeyBase + i, dataJson);
-                        break;
-                    }
-                }
-            }
+            var data = new GameData(_scoreService.Score);
+            _gameDatas.Add(data);
 
+            _gameDatas = _gameDatas.OrderByDescending(gameData => gameData).ToList();
+
+            var dataToSave = new List<GameData>(5);
+
+            for (int i = 0; i < _gameDatas.Count; i++)
+            {
+                dataToSave.Add(_gameDatas[i]);
+            }
+            
+            var dataJson = JsonConvert.SerializeObject(dataToSave);
+            PlayerPrefs.SetString(DataKeyBase, dataJson);
             PlayerPrefs.Save();
-            Debug.LogWarning("Saved data");
+            Debug.LogError("Saved data");
         }
 
         public void LoadData()
         {
-           
-            for (int i = 0; i < _gameDatas.Capacity; i++)
+            var dataJson = PlayerPrefs.GetString(DataKeyBase);
+
+            if (string.IsNullOrEmpty(dataJson) || dataJson == "{}")
             {
-                var dataJson = PlayerPrefs.GetString(DataKeyBase + i);
+                Debug.LogWarning("Data not found");
+                return;
+            }
 
-                if (string.IsNullOrEmpty(dataJson) || dataJson == "{}")
-                {
-                    Debug.LogWarning($"Data{i} not found");
+            var data = JsonConvert.DeserializeObject<List<GameData>>(dataJson);
 
-                    for (int j = 0; j < _gameDatas.Count; j++)
-                    {
-                        Debug.LogError($"Game data{j} Score: {_gameDatas[j].Score}");
-                    }
-                    
-                    return;
-                }
+            var dataSorted = data.OrderByDescending(gameData => gameData).ToArray();
 
-                var data = JsonConvert.DeserializeObject<GameData>(dataJson);
-                _gameDatas.Add(data);
+            var length = _gameDatas.Capacity > dataSorted.Length ?  dataSorted.Length : _gameDatas.Capacity;
+
+            for (int i = 0; i < length; i++)
+            {
+                _gameDatas.Add(dataSorted[i]);
             }
 
             Debug.LogWarning("Loaded data");
-
-            for (int i = 0; i < _gameDatas.Count; i++)
-            {
-                Debug.LogError($"Game data{i} Score: {_gameDatas[i].Score}");
-            }
         }
-    }
-}
-
-[Serializable]
-public struct GameData : IComparable<GameData>
-{
-    public int Score;
-
-    public GameData(int score)
-    {
-        Score = score;
-    }
-
-    public int CompareTo(GameData other)
-    {
-        return Score.CompareTo(other.Score);
     }
 }
