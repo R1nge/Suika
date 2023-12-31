@@ -15,7 +15,6 @@ namespace _Assets.Scripts.Services
             _gameStateMachine = gameStateMachine;
         }
 
-
         public void Initialize() => _gameOverTimer.OnTimerEnded += GameOver;
 
         private void GameOver() => _gameStateMachine.SwitchState(GameStateType.GameOver);

@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using _Assets.Scripts.Services.StateMachine;
+using UnityEngine;
 using UnityEngine.UI;
+using VContainer;
 
 namespace _Assets.Scripts.Services.UIs
 {
@@ -7,6 +9,7 @@ namespace _Assets.Scripts.Services.UIs
     {
         [SerializeField] private Button mainMenu;
         [SerializeField] private Button restart;
+        [Inject] private GameStateMachine _stateMachine;
 
         private void Awake()
         {
@@ -16,15 +19,12 @@ namespace _Assets.Scripts.Services.UIs
 
         private void ShowMainMenu()
         {
-            //TODO: destroy everything
-            //TODO: show main menu
+            _stateMachine.SwitchState(GameStateType.ResetAndMainMenu);
         }
 
         private void Restart()
         {
-            //TODO: restart game
-            //Show game UI
-            //Destroy suikas
+            _stateMachine.SwitchState(GameStateType.ResetAndRetry);
         }
     }
 }

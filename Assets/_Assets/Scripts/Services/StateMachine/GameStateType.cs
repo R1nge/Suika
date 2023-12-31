@@ -6,6 +6,8 @@
         LoadSavedData = 1,
         Game = 2,
         GameOver = 3,
-        SaveData = 4
+        SaveData = 4,
+        ResetAndRetry = 5,
+        ResetAndMainMenu = 6
     }
 }

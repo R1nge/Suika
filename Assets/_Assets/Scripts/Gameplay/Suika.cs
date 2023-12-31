@@ -1,6 +1,6 @@
-﻿using System;
-using _Assets.Scripts.Services;
+﻿using _Assets.Scripts.Services;
 using _Assets.Scripts.Services.Factories;
+using _Assets.Scripts.Services.StateMachine;
 using UnityEngine;
 using VContainer;
 
@@ -15,6 +15,7 @@ namespace _Assets.Scripts.Gameplay
         private bool _landed;
         [Inject] private SuikasFactory _suikasFactory;
         [Inject] private ScoreService _scoreService;
+        [Inject] private ResetService _resetService;
 
 
         public void SetIndex(int index) => _index = index;
@@ -34,6 +35,8 @@ namespace _Assets.Scripts.Gameplay
                     //var suikaPosition = suika.transform.position;
                     //newSuikaInstance.transform.position = suikaPosition;
                     _suikasFactory.Create(_index, middle);
+                    _resetService.RemoveSuika(this);
+                    _resetService.RemoveSuika(suika);
                     Destroy(gameObject);
                     Destroy(suika.gameObject);
                 }

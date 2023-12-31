@@ -1,6 +1,7 @@
 ﻿using _Assets.Scripts.Services;
 using _Assets.Scripts.Services.Configs;
 using _Assets.Scripts.Services.Datas;
+using _Assets.Scripts.Services.StateMachine;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -16,6 +17,7 @@ namespace _Assets.Scripts.CompositionRoot
             builder.RegisterComponent(configProvider);
             builder.Register<ScoreService>(Lifetime.Singleton);
             builder.Register<DataServicePlayerPrefs>(Lifetime.Singleton).As<IDataService>();
+            builder.Register<ResetService>(Lifetime.Singleton);
         }
     }
 }
