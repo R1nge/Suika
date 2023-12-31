@@ -1,6 +1,5 @@
 ﻿namespace _Assets.Scripts.Services.StateMachine.States
 {
-    //TODO: two states: ResetAndRetry and ResetAndMainMenu
     public class ResetAndRetry : IGameState
     {
         private readonly GameStateMachine _gameStateMachine;

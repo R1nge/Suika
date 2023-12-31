@@ -49,5 +49,10 @@ namespace _Assets.Scripts.Services.StateMachine
         {
             return new ResetAndRetry(stateMachine, _resetService);
         }
+        
+        public IGameState CreateResetAndMainMenuState(GameStateMachine stateMachine)
+        {
+            return new ResetAndMainMenu(stateMachine, _resetService, _uiStateMachine);
+        }
     }
 }

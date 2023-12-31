@@ -27,6 +27,7 @@ namespace _Assets.Scripts.CompositionRoot
             builder.Register<SuikasFactory>(Lifetime.Singleton);
 
             builder.RegisterEntryPoint<GameOverTimer>().AsSelf();
+            builder.Register<ResetService>(Lifetime.Singleton);
             //TODO: leader board service
             
             builder.Register<UIStatesFactory>(Lifetime.Singleton);
