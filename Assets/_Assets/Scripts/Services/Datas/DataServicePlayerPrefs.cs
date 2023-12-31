@@ -11,10 +11,9 @@ namespace _Assets.Scripts.Services.Datas
         private List<GameData> _gameDatas = new(5);
         private const string DataKeyBase = "Data";
 
-        public DataServicePlayerPrefs(ScoreService scoreService)
-        {
-            _scoreService = scoreService;
-        }
+        public List<GameData> GameDatas => _gameDatas;
+
+        public DataServicePlayerPrefs(ScoreService scoreService) => _scoreService = scoreService;
 
         public void SaveData()
         {

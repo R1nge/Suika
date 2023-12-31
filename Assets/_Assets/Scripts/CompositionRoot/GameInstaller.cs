@@ -28,7 +28,8 @@ namespace _Assets.Scripts.CompositionRoot
 
             builder.RegisterEntryPoint<GameOverTimer>().AsSelf();
             builder.Register<ResetService>(Lifetime.Singleton);
-            //TODO: leader board service
+
+            builder.Register<LeaderBoardService>(Lifetime.Singleton);
             
             builder.Register<UIStatesFactory>(Lifetime.Singleton);
             builder.Register<UIStateMachine>(Lifetime.Singleton);
