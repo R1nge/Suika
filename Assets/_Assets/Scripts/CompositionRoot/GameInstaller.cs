@@ -2,6 +2,7 @@
 using _Assets.Scripts.Services;
 using _Assets.Scripts.Services.Factories;
 using _Assets.Scripts.Services.StateMachine;
+using _Assets.Scripts.Services.UIs;
 using _Assets.Scripts.Services.UIs.StateMachine;
 using UnityEngine;
 using VContainer;
@@ -21,6 +22,9 @@ namespace _Assets.Scripts.CompositionRoot
             builder.RegisterComponent(containerFactory);
 
             builder.Register<RandomNumberGenerator>(Lifetime.Singleton);
+
+            builder.Register<SuikaDataProvider>(Lifetime.Singleton);
+            
             builder.RegisterEntryPoint<GameOverTimer>().AsSelf();
             builder.Register<SuikasFactory>(Lifetime.Singleton);
 

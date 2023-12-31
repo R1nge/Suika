@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Random = System.Random;
 
 namespace _Assets.Scripts.Services
@@ -7,6 +8,8 @@ namespace _Assets.Scripts.Services
     {
         private readonly Random _random = new();
         private int _previous, _current, _next;
+
+        public event Action<int, int, int> OnSuikaPicked;
 
         public int Previous => _previous;
         public int Current => _current;
@@ -19,6 +22,8 @@ namespace _Assets.Scripts.Services
             _next = _random.Next(0, 5);
             
             Debug.Log($"Previous: {_previous}, Current: {_current}, Next: {_next}");
+            
+            OnSuikaPicked?.Invoke(_previous, _current, _next);
             
             return _current;
         }
