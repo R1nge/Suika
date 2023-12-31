@@ -28,7 +28,6 @@ namespace _Assets.Scripts.Services.Factories
             var suikaPrefab = _configProvider.SuikasConfig.GetPrefab(index);
             var suikaInstance = _objectResolver.Instantiate(suikaPrefab.gameObject, position, Quaternion.identity).GetComponent<Suika>();
             suikaInstance.SetIndex(index);
-            AddScore(index);
         }
 
         public void Create(int index, Vector3 position)
@@ -43,11 +42,19 @@ namespace _Assets.Scripts.Services.Factories
             }
 
             var suikaPrefab = _configProvider.SuikasConfig.GetPrefab(index);
-            var suikaInstance = _objectResolver.Instantiate(suikaPrefab.gameObject, position, Quaternion.identity).GetComponent<Suika>();
+            var suikaInstance = _objectResolver.Instantiate(suikaPrefab.gameObject, position, Quaternion.identity)
+                .GetComponent<Suika>();
             suikaInstance.SetIndex(index);
             AddScore(index);
         }
 
-        private void AddScore(int index) => _scoreService.AddScore(_configProvider.SuikasConfig.GetPoints(index));
+        private void AddScore(int index)
+        {
+            //Previous + level (index) + points? 
+            var currentLevel = index;
+            var previousPoints = _configProvider.SuikasConfig.GetPoints(Mathf.Clamp(index - 1, 0, 1000));
+            var totalPoints = currentLevel + previousPoints;
+            _scoreService.AddScore(totalPoints);
+        }
     }
 }
