@@ -19,10 +19,6 @@ namespace _Assets.Scripts.Services.UIs
 
         private void Play() => _gameStateMachine.SwitchState(GameStateType.Game);
 
-        private void Quit()
-        {
-            _gameStateMachine.SwitchState(GameStateType.SaveData);
-            Application.Quit();
-        }
+        private void Quit() => Application.Quit();
     }
 }
