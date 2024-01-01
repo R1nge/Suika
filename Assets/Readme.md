@@ -16,8 +16,13 @@
             watermelon 260x260 3.25 scale
 
 //TODO:
-//Shake?
+//Suika drop chance
+//Change music with suika change
+//Shake? Or spin
 //Skins
 //UI:
 //Leader board (local)
 //Evolution line
+
+//Container is actually a jar, that can be closed when spinning??
+//Save jars as a highscore/record, add ability to view them

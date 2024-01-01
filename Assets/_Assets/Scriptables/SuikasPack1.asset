@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: SuikasPack1
   m_EditorClassIdentifier: 
   suikas:
+  - Icon: {fileID: 0}
+    Prefab: {fileID: -7569481309259978130, guid: 00e52d74c5d11a0458a5c1736e6609d6, type: 3}
+    Points: 0
   - Icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
     Prefab: {fileID: 3185433131483969232, guid: 336b270bfe857b44bb15b1aa9e32bb0b, type: 3}
     Points: 0

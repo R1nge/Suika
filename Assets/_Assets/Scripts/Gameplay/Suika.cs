@@ -10,36 +10,41 @@ namespace _Assets.Scripts.Gameplay
     {
         //TODO: when suikas collide, destroy them and spawn one at the middle of them (between) with almost zero scale and scale it up to the original size
         public bool HasLanded => _landed;
-        private int _index;
-        private bool _collided;
+        protected internal int Index;
+        protected internal bool Collided;
         private bool _landed;
-        [Inject] private SuikasFactory _suikasFactory;
-        [Inject] private ScoreService _scoreService;
-        [Inject] private ResetService _resetService;
+        [Inject] protected SuikasFactory SuikasFactory;
+        [Inject] protected ScoreService ScoreService;
+        [Inject] protected ResetService ResetService;
 
 
-        public void SetIndex(int index) => _index = index;
+        public void SetIndex(int index) => Index = index;
 
         private void OnCollisionEnter2D(Collision2D other)
         {
             _landed = true;
             if (other.gameObject.TryGetComponent(out Suika suika))
             {
-                if (suika._index == _index)
-                {
-                    if (_collided || suika._collided) return;
-                    _collided = true;
-                    suika._collided = true;
-                    var middle = (transform.position + suika.transform.position) / 2f;
-                    //Or move it to the another suika position
-                    //var suikaPosition = suika.transform.position;
-                    //newSuikaInstance.transform.position = suikaPosition;
-                    _suikasFactory.Create(_index, middle);
-                    _resetService.RemoveSuika(this);
-                    _resetService.RemoveSuika(suika);
-                    Destroy(gameObject);
-                    Destroy(suika.gameObject);
-                }
+                OnCollision(suika);
+            }
+        }
+
+        protected virtual void OnCollision(Suika suika)
+        {
+            if (suika.Index == Index)
+            {
+                if (Collided || suika.Collided) return;
+                Collided = true;
+                suika.Collided = true;
+                var middle = (transform.position + suika.transform.position) / 2f;
+                //Or move it to the another suika position
+                //var suikaPosition = suika.transform.position;
+                //newSuikaInstance.transform.position = suikaPosition;
+                SuikasFactory.Create(Index, middle);
+                ResetService.RemoveSuika(this);
+                ResetService.RemoveSuika(suika);
+                Destroy(gameObject);
+                Destroy(suika.gameObject);
             }
         }
     }
