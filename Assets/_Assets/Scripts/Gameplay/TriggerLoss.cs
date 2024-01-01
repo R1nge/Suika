@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using _Assets.Scripts.Services;
+using _Assets.Scripts.Services.Datas.GameConfigs;
 using UnityEngine;
 using VContainer;
 
@@ -8,10 +9,10 @@ namespace _Assets.Scripts.Gameplay
 {
     public class TriggerLoss : MonoBehaviour
     {
-        private const float TriggerThreshold = 0;//1.5f;
         private float _time;
         private List<Suika> _collidedSuikas = new(10);
         [Inject] private GameOverTimer _gameOverTimer;
+        [Inject] private IConfigLoader _configLoader;
 
         private void Update()
         {
@@ -19,7 +20,7 @@ namespace _Assets.Scripts.Gameplay
             {
                 _time += Time.deltaTime;
 
-                if (_time >= TriggerThreshold)
+                if (_time >= _configLoader.GameConfig.TimeBeforeTimerTrigger)
                 {
                     _gameOverTimer.StartTimer();
                 }

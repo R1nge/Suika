@@ -1,4 +1,5 @@
 ﻿using System;
+using _Assets.Scripts.Services.Datas.GameConfigs;
 using UnityEngine;
 using VContainer.Unity;
 
@@ -13,22 +14,24 @@ namespace _Assets.Scripts.Services
         public float Time => _time;
         private bool _isRunning;
         private float _time;
-        private const float StartTime = 0f;//5f;
+        private readonly IConfigLoader _configLoader;
+
+        public GameOverTimer(IConfigLoader configLoader) => _configLoader = configLoader;
 
         public void StartTimer()
         {
             if (_isRunning) return;
             _isRunning = true;
-            _time = StartTime;
+            _time = _configLoader.GameConfig.TimerStartTime;
             Debug.LogError("Start Timer");
-            OnTimerStarted?.Invoke(StartTime, _time);
+            OnTimerStarted?.Invoke(_configLoader.GameConfig.TimerStartTime, _time);
         }
 
         public void StopTimer()
         {
             if (!_isRunning) return;
             _isRunning = false;
-            _time = StartTime;
+            _time = _configLoader.GameConfig.TimerStartTime;
             Debug.LogError("Stop Timer");
             OnTimerStopped?.Invoke(_time);
         }
@@ -37,7 +40,7 @@ namespace _Assets.Scripts.Services
         {
             if (_isRunning)
             {
-                _time = Mathf.Clamp(_time - UnityEngine.Time.deltaTime, 0, StartTime);
+                _time = Mathf.Clamp(_time - UnityEngine.Time.deltaTime, 0, _configLoader.GameConfig.TimerStartTime);
 
                 OnTimeChanged?.Invoke(_time);
 

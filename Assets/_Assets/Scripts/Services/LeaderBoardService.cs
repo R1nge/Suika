@@ -4,21 +4,21 @@ namespace _Assets.Scripts.Services
 {
     public class LeaderBoardService
     {
-        private readonly IDataService _dataService;
+        private readonly IPlayerDataLoader _playerDataLoader;
 
-        private LeaderBoardService(IDataService dataService)
+        private LeaderBoardService(IPlayerDataLoader playerDataLoader)
         {
-            _dataService = dataService;
+            _playerDataLoader = playerDataLoader;
         }
 
         public int GetScore(int index)
         {
-            if (index > _dataService.GameDatas.Count - 1)
+            if (index > _playerDataLoader.GameDatas.Count - 1)
             {
                 return 0;
             }
 
-            return _dataService.GameDatas[index].Score;
+            return _playerDataLoader.GameDatas[index].Score;
         }
     }
 }

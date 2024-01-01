@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace _Assets.Scripts.Services.Datas
 {
-    public class DataServicePlayerPrefs : IDataService
+    public class PlayerDataLoaderPlayerPrefs : IPlayerDataLoader
     {
         private readonly ScoreService _scoreService;
         private List<GameData> _gameDatas = new(5);
@@ -13,7 +13,7 @@ namespace _Assets.Scripts.Services.Datas
 
         public List<GameData> GameDatas => _gameDatas;
 
-        public DataServicePlayerPrefs(ScoreService scoreService) => _scoreService = scoreService;
+        public PlayerDataLoaderPlayerPrefs(ScoreService scoreService) => _scoreService = scoreService;
 
         public void SaveData()
         {

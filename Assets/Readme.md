@@ -17,13 +17,24 @@
 
 //TODO:
 //Change music with suika change
-//Shake? Or spin
-//Mods support: 
-(change music and suika images) (Parse title, preview image, skins)
-(change drop chance)
+//Shake? OR spin
 
 //Container is actually a jar, that can be closed when spinning??
 //Save jars as a highscore/record, add ability to view them
+
 //UI:
 //Leader board (local)
 //Evolution line
+
+//Mods support: 
+(change music and suika images) (Parse title, preview image, skins)
+(change drop chance)
+'ll have to parse it from a json, so create a game config struct or something
+(
+Loss trigger threshold,
+Timer time,
+Suika Data:
+Skins image file path
+Music file path
+Drop chance
+)

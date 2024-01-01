@@ -4,16 +4,16 @@ namespace _Assets.Scripts.Services.StateMachine.States
 {
     public class SaveDataState : IGameState
     {
-        private readonly IDataService _dataService;
+        private readonly IPlayerDataLoader _playerDataLoader;
 
-        public SaveDataState(IDataService dataService)
+        public SaveDataState(IPlayerDataLoader playerDataLoader)
         {
-            _dataService = dataService;
+            _playerDataLoader = playerDataLoader;
         }
 
         public void Enter()
         {
-            _dataService.SaveData();
+            _playerDataLoader.SaveData();
         }
 
         public void Exit()
