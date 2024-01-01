@@ -28,3 +28,5 @@
 
 //Mods support:
 change music
+
+Check if android build is moddable

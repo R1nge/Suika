@@ -9,7 +9,8 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
     {
         private GameConfig _currentConfig;
         private List<GameConfig> _allConfigs;
-        private readonly string _path = $"{Application.dataPath}\\Mods";
+        //TODO: use persistant data path?
+        private readonly string _path = Path.Combine(Application.persistentDataPath, "Mods");
 
         public List<GameConfig> AllConfigs => _allConfigs;
         public GameConfig CurrentConfig => _currentConfig;
