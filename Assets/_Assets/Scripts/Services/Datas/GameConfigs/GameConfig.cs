@@ -2,6 +2,8 @@
 {
     public struct GameConfig
     {
+        public string ModName;
+        public string ModIconPath;
         public string ContainerImagePath;
         public string[] SuikaSkinsImagesPaths;
         public string[] SuikaSkinsAudioPaths;

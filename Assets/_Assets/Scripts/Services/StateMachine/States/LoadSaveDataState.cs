@@ -30,7 +30,7 @@ namespace _Assets.Scripts.Services.StateMachine.States
         {
             _uiStateMachine.SwitchState(UIStateType.Loading);
             _playerDataLoader.LoadData();
-            _configLoader.LoadConfig();
+            _configLoader.LoadAllConfigs();
             yield return new WaitForSeconds(2f);
             _uiStateMachine.SwitchState(UIStateType.MainMenu);
         }

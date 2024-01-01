@@ -1,0 +1,10 @@
+{
+  "modName": "Default",
+  "modIconPath": "C:\\Users\\RINGE\\Documents\\UnityProjects\\Suika\\Assets\\Mods\\MyMod1\\mod1Icon.png",
+  "containerImagePath": null,
+  "suikaSkinsImagesPaths": null,
+  "suikaSkinsAudioPaths": null,
+  "suikaDropChances": null,
+  "timeBeforeTimerTrigger": 10,
+  "timerStartTime": 7.0
+}

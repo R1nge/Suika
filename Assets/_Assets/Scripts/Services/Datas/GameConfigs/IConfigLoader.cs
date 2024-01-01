@@ -1,8 +1,12 @@
-﻿namespace _Assets.Scripts.Services.Datas.GameConfigs
+﻿using System.Collections.Generic;
+
+namespace _Assets.Scripts.Services.Datas.GameConfigs
 {
     public interface IConfigLoader
     {
-        public GameConfig GameConfig { get; }
-        public GameConfig LoadConfig();
+        public GameConfig CurrentConfig { get; }
+        public List<GameConfig> AllConfigs { get; }
+        public void LoadAllConfigs();
+        public void SetCurrentConfig(int index);
     }
 }

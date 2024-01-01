@@ -34,5 +34,10 @@ namespace _Assets.Scripts.Services.UIs.StateMachine
         {
             return new GameOverState(_configProvider, _objectResolver);
         }
+
+        public IUIState CreateModsState(UIStateMachine stateMachine)
+        {
+            return new ModsState(_configProvider, _objectResolver);
+        }
     }
 }

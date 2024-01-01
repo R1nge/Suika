@@ -15,6 +15,7 @@ namespace _Assets.Scripts.CompositionRoot
         [SerializeField] private CoroutineRunner coroutineRunner;
         [SerializeField] private PlayerFactory playerFactory;
         [SerializeField] private ContainerFactory containerFactory;
+        [SerializeField] private ModSlotFactory modSlotFactory;
         protected override void Configure(IContainerBuilder builder)
         {
             builder.Register<PlayerInput>(Lifetime.Singleton);
@@ -22,6 +23,7 @@ namespace _Assets.Scripts.CompositionRoot
             builder.RegisterComponent(coroutineRunner);
             builder.RegisterComponent(playerFactory);
             builder.RegisterComponent(containerFactory);
+            builder.RegisterComponent(modSlotFactory);
 
 
             builder.Register<RandomNumberGenerator>(Lifetime.Singleton);

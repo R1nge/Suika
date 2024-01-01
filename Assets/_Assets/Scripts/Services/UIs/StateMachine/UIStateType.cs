@@ -6,6 +6,7 @@
         Loading = 1,
         MainMenu = 2,
         Game = 3,
-        GameOver = 4
+        GameOver = 4,
+        Mods = 5
     }
 }

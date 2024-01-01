@@ -15,6 +15,7 @@ namespace _Assets.Scripts.Services.UIs.StateMachine
             {
                 { UIStateType.Loading, uiStatesFactory.CreateLoadingState(this) },
                 { UIStateType.MainMenu, uiStatesFactory.CreateMainMenuState(this) },
+                { UIStateType.Mods, uiStatesFactory.CreateModsState(this) },
                 { UIStateType.Game, uiStatesFactory.CreateGameState(this) },
                 { UIStateType.GameOver, uiStatesFactory.CreateGameOverState(this) }
             };

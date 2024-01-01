@@ -22,16 +22,16 @@ namespace _Assets.Scripts.Services
         {
             if (_isRunning) return;
             _isRunning = true;
-            _time = _configLoader.GameConfig.TimerStartTime;
+            _time = _configLoader.CurrentConfig.TimerStartTime;
             Debug.LogError("Start Timer");
-            OnTimerStarted?.Invoke(_configLoader.GameConfig.TimerStartTime, _time);
+            OnTimerStarted?.Invoke(_configLoader.CurrentConfig.TimerStartTime, _time);
         }
 
         public void StopTimer()
         {
             if (!_isRunning) return;
             _isRunning = false;
-            _time = _configLoader.GameConfig.TimerStartTime;
+            _time = _configLoader.CurrentConfig.TimerStartTime;
             Debug.LogError("Stop Timer");
             OnTimerStopped?.Invoke(_time);
         }
@@ -40,7 +40,7 @@ namespace _Assets.Scripts.Services
         {
             if (_isRunning)
             {
-                _time = Mathf.Clamp(_time - UnityEngine.Time.deltaTime, 0, _configLoader.GameConfig.TimerStartTime);
+                _time = Mathf.Clamp(_time - UnityEngine.Time.deltaTime, 0, _configLoader.CurrentConfig.TimerStartTime);
 
                 OnTimeChanged?.Invoke(_time);
 

@@ -20,7 +20,7 @@ namespace _Assets.Scripts.Gameplay
             {
                 _time += Time.deltaTime;
 
-                if (_time >= _configLoader.GameConfig.TimeBeforeTimerTrigger)
+                if (_time >= _configLoader.CurrentConfig.TimeBeforeTimerTrigger)
                 {
                     _gameOverTimer.StartTimer();
                 }
