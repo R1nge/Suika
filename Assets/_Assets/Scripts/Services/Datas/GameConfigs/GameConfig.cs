@@ -6,8 +6,8 @@
         public string ModIconPath;
         public string ContainerImagePath;
         public string[] SuikaSkinsImagesPaths;
-        public string[] SuikaSkinsAudioPaths;
-        public int[] SuikaDropChances;
+        public string[] SuikaAudioPaths;
+        public float[] SuikaDropChances;
         public float TimeBeforeTimerTrigger;
         public float TimerStartTime;
     }

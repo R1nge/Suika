@@ -9,22 +9,6 @@ namespace _Assets.Scripts.Services.Configs
     {
         [SerializeField] private SuikaData[] suikas;
 
-        private void OnValidate()
-        {
-            for (int i = 0; i < suikas.Length; i++)
-            {
-                if (suikas[i].DropChance <= 0)
-                {
-                    Debug.LogError($"Drop chance can't be less or equal to 0. Suika index {i} has {suikas[i].DropChance}");
-                }
-
-                if (suikas[i].DropChance >= 1)
-                {
-                    Debug.LogError($"Drop chance can't be more or equal to 1. Suika index {i} has {suikas[i].DropChance}");
-                }
-            }
-        }
-
         public Sprite GetIcon(int index) => suikas[index].Icon;
         public Suika GetPrefab(int index) => suikas[index].Prefab;
         public int GetPoints(int index) => suikas[index].Points;

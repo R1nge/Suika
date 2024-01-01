@@ -1,10 +1,10 @@
 {
   "modName": "Apple mod",
-  "modIconPath": "C:\\Users\\RINGE\\Documents\\UnityProjects\\Suika\\Assets\\Mods\\MyMod2\\mod2Icon.png",
-  "containerImagePath": null,
-  "suikaSkinsImagesPaths": null,
-  "suikaSkinsAudioPaths": null,
-  "suikaDropChances": null,
+  "modIconPath": "MyMod2\\mod2Icon.png",
+  "containerImagePath": "MyMod2\\mod2Icon.png",
+  "suikaSkinsImagesPaths": ["MyMod1\\mod1Icon.png","MyMod1\\mod1Icon.png","MyMod1\\mod1Icon.png","MyMod1\\mod1Icon.png","MyMod1\\mod1Icon.png","MyMod1\\mod1Icon.png","MyMod1\\mod1Icon.png","MyMod1\\mod1Icon.png","MyMod1\\mod1Icon.png","MyMod1\\mod1Icon.png","MyMod1\\mod1Icon.png"],
+  "suikaAudioPaths": ["MyMod1\\mod1Icon.png","MyMod1\\mod1Icon.png","MyMod1\\mod1Icon.png","MyMod1\\mod1Icon.png","MyMod1\\mod1Icon.png","MyMod1\\mod1Icon.png","MyMod1\\mod1Icon.png","MyMod1\\mod1Icon.png","MyMod1\\mod1Icon.png","MyMod1\\mod1Icon.png","MyMod1\\mod1Icon.png"],
+  "suikaDropChances": [0.1,1,1,1,1,1,1,1,1,1,1],
   "timeBeforeTimerTrigger": 0,
   "timerStartTime": 20.0
 }

@@ -9,7 +9,7 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
     {
         private GameConfig _currentConfig;
         private List<GameConfig> _allConfigs;
-        private readonly string _path = $"{Application.dataPath}/Mods/";
+        private readonly string _path = $"{Application.dataPath}\\Mods";
 
         public List<GameConfig> AllConfigs => _allConfigs;
         public GameConfig CurrentConfig => _currentConfig;
@@ -44,7 +44,26 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
                     {
                         var json = reader.ReadToEnd();
                         Debug.LogError($"Json: {json}");
-                        _allConfigs.Add(JsonConvert.DeserializeObject<GameConfig>(json));
+                        var config = JsonConvert.DeserializeObject<GameConfig>(json);
+                        var modIconRelativePath = Path.Combine(_path, config.ModIconPath);
+                        Debug.LogError("RELATIVE PATH: " + modIconRelativePath);
+                        config.ModIconPath = modIconRelativePath;
+                        var containerImageRelativePath = Path.Combine(_path, config.ContainerImagePath);
+                        config.ContainerImagePath = containerImageRelativePath;
+                        
+                        for (int i = 0; i < config.SuikaSkinsImagesPaths.Length; i++)
+                        {
+                            var skinImageRelativePath = Path.Combine(_path, config.SuikaSkinsImagesPaths[i]);
+                            config.SuikaSkinsImagesPaths[i] = skinImageRelativePath;
+                        }
+
+                        for (int i = 0; i < config.SuikaAudioPaths.Length; i++)
+                        {
+                            var suikaAudioRelativePath = Path.Combine(_path, config.SuikaAudioPaths[i]);
+                            config.SuikaSkinsImagesPaths[i] = suikaAudioRelativePath;
+                        }
+                        
+                        _allConfigs.Add(config);
                         
                     }
                 }
