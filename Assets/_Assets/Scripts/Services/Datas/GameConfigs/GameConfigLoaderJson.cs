@@ -43,10 +43,8 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
                     using (StreamReader reader = new StreamReader(fileInfo.FullName))
                     {
                         var json = reader.ReadToEnd();
-                        Debug.LogError($"Json: {json}");
                         var config = JsonConvert.DeserializeObject<GameConfig>(json);
                         var modIconRelativePath = Path.Combine(_path, config.ModIconPath);
-                        Debug.LogError("RELATIVE PATH: " + modIconRelativePath);
                         config.ModIconPath = modIconRelativePath;
                         var containerImageRelativePath = Path.Combine(_path, config.ContainerImagePath);
                         config.ContainerImagePath = containerImageRelativePath;
@@ -55,6 +53,12 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
                         {
                             var skinImageRelativePath = Path.Combine(_path, config.SuikaSkinsImagesPaths[i]);
                             config.SuikaSkinsImagesPaths[i] = skinImageRelativePath;
+                        }
+
+                        for (int i = 0; i < config.SuikaIconsPaths.Length; i++)
+                        {
+                            var suikaIconsRelativePath = Path.Combine(_path, config.SuikaIconsPaths[i]);
+                            config.SuikaIconsPaths[i] = suikaIconsRelativePath;
                         }
 
                         for (int i = 0; i < config.SuikaAudioPaths.Length; i++)
