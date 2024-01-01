@@ -26,7 +26,6 @@
 //Leader board (local)
 //Evolution line
 
-//Mods support: 
-change music
+//Mods support:
 change suika images/skins
-change drop chance
+change music

@@ -1,5 +1,6 @@
 ﻿using _Assets.Scripts.Gameplay;
 using _Assets.Scripts.Services.Configs;
+using _Assets.Scripts.Services.Datas.GameConfigs;
 using _Assets.Scripts.Services.StateMachine;
 using UnityEngine;
 using VContainer;
@@ -14,21 +15,23 @@ namespace _Assets.Scripts.Services.Factories
         private readonly RandomNumberGenerator _randomNumberGenerator;
         private readonly ScoreService _scoreService;
         private readonly ResetService _resetService;
+        private readonly IConfigLoader _configLoader;
 
         private SuikasFactory(IObjectResolver objectResolver, ConfigProvider configProvider,
-            RandomNumberGenerator randomNumberGenerator, ScoreService scoreService, ResetService resetService)
+            RandomNumberGenerator randomNumberGenerator, ScoreService scoreService, ResetService resetService, IConfigLoader configLoader)
         {
             _objectResolver = objectResolver;
             _configProvider = configProvider;
             _randomNumberGenerator = randomNumberGenerator;
             _scoreService = scoreService;
             _resetService = resetService;
+            _configLoader = configLoader;
         }
 
         public Rigidbody2D CreateKinematic(Vector3 position, Transform parent)
         {
             var index = _randomNumberGenerator.PickRandomSuika();
-            var chance = _configProvider.SuikasConfig.GetDropChance(index);
+            var chance = _configLoader.CurrentConfig.SuikaDropChances[index];
             
             if (Random.Range(0, 1f) > chance)
             {

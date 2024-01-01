@@ -12,7 +12,6 @@ namespace _Assets.Scripts.Services.Configs
         public Sprite GetIcon(int index) => suikas[index].Icon;
         public Suika GetPrefab(int index) => suikas[index].Prefab;
         public int GetPoints(int index) => suikas[index].Points;
-        public float GetDropChance(int index) => suikas[index].DropChance;
         public bool HasPrefab(int index) => suikas[index].Prefab != null;
 
         [Serializable]
@@ -21,14 +20,12 @@ namespace _Assets.Scripts.Services.Configs
             public Sprite Icon;
             public Suika Prefab;
             public int Points;
-            public float DropChance;
 
-            public SuikaData(Sprite icon, Suika prefab, int points, float dropChance)
+            public SuikaData(Sprite icon, Suika prefab, int points)
             {
                 Icon = icon;
                 Prefab = prefab;
                 Points = points;
-                DropChance = dropChance;
             }
         }
     }
