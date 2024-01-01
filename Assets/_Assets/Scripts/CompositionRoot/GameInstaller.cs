@@ -1,5 +1,6 @@
 ﻿using _Assets.Scripts.Misc;
 using _Assets.Scripts.Services;
+using _Assets.Scripts.Services.Audio;
 using _Assets.Scripts.Services.Factories;
 using _Assets.Scripts.Services.StateMachine;
 using _Assets.Scripts.Services.UIs;
@@ -16,6 +17,8 @@ namespace _Assets.Scripts.CompositionRoot
         [SerializeField] private PlayerFactory playerFactory;
         [SerializeField] private ContainerFactory containerFactory;
         [SerializeField] private ModSlotFactory modSlotFactory;
+        [SerializeField] private AudioService audioService;
+        
         protected override void Configure(IContainerBuilder builder)
         {
             builder.Register<PlayerInput>(Lifetime.Singleton);
@@ -24,7 +27,7 @@ namespace _Assets.Scripts.CompositionRoot
             builder.RegisterComponent(playerFactory);
             builder.RegisterComponent(containerFactory);
             builder.RegisterComponent(modSlotFactory);
-
+            builder.RegisterComponent(audioService);
 
             builder.Register<RandomNumberGenerator>(Lifetime.Singleton);
 

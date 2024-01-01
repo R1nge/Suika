@@ -15,18 +15,16 @@
             melon 220x220 2.75 scale
             watermelon 260x260 3.25 scale
 
-//TODO:
-//Change music with suika change
-//Shake? OR spin
+TODO:
+Shake? OR spin
 
-//Container is actually a jar, that can be closed when spinning??
-//Save jars as a highscore/record, add ability to view them
+UI:
+Leader board (local)
+Evolution line
 
-//UI:
-//Leader board (local)
-//Evolution line
+Mods support:
+Change music with suika change
+change music (done?)
 
-//Mods support:
-change music
 
-Check if android build is moddable
+Save containers as a highscore/record, add ability to view them???

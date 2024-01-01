@@ -1,4 +1,5 @@
 ﻿using _Assets.Scripts.Misc;
+using _Assets.Scripts.Services.Audio;
 using _Assets.Scripts.Services.Datas;
 using _Assets.Scripts.Services.Datas.GameConfigs;
 using _Assets.Scripts.Services.Factories;
@@ -17,8 +18,9 @@ namespace _Assets.Scripts.Services.StateMachine
         private readonly ResetService _resetService;
         private readonly PlayerInput _playerInput;
         private readonly IConfigLoader _configLoader;
+        private readonly AudioService _audioService;
 
-        private GameStatesFactory(IPlayerDataLoader playerDataLoader, UIStateMachine uiStateMachine, CoroutineRunner coroutineRunner, PlayerFactory playerFactory, ContainerFactory containerFactory, ResetService resetService, PlayerInput playerInput, IConfigLoader configLoader)
+        private GameStatesFactory(IPlayerDataLoader playerDataLoader, UIStateMachine uiStateMachine, CoroutineRunner coroutineRunner, PlayerFactory playerFactory, ContainerFactory containerFactory, ResetService resetService, PlayerInput playerInput, IConfigLoader configLoader, AudioService audioService)
         {
             _playerDataLoader = playerDataLoader;
             _uiStateMachine = uiStateMachine;
@@ -28,6 +30,7 @@ namespace _Assets.Scripts.Services.StateMachine
             _resetService = resetService;
             _playerInput = playerInput;
             _configLoader = configLoader;
+            _audioService = audioService;
         }
 
         public IGameState CreateLoadSaveDataState(GameStateMachine stateMachine)
@@ -37,7 +40,7 @@ namespace _Assets.Scripts.Services.StateMachine
 
         public IGameState CreateGameState(GameStateMachine stateMachine)
         {
-            return new GameState(stateMachine, _uiStateMachine, _playerFactory, _containerFactory, _playerInput);
+            return new GameState(stateMachine, _uiStateMachine, _playerFactory, _containerFactory, _playerInput, _audioService);
         }
 
         public IGameState CreateGameOverState(GameStateMachine stateMachine)
