@@ -28,7 +28,7 @@ namespace _Assets.Scripts.CompositionRoot
 
             builder.Register<RandomNumberGenerator>(Lifetime.Singleton);
 
-            builder.Register<SuikaDataProvider>(Lifetime.Singleton);
+            builder.Register<SuikaUIDataProvider>(Lifetime.Singleton);
             builder.Register<SuikasFactory>(Lifetime.Singleton);
 
             builder.RegisterEntryPoint<GameOverTimer>().AsSelf();

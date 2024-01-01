@@ -10,7 +10,7 @@ namespace _Assets.Scripts.Gameplay
     public class PlayerDrop : MonoBehaviour
     {
         [Inject] private SuikasFactory _suikasFactory;
-        [Inject] private SuikaDataProvider _suikaDataProvider;
+        [Inject] private SuikaUIDataProvider _suikaUIDataProvider;
         [Inject] private PlayerInput _playerInput;
         private readonly YieldInstruction _wait = new WaitForSeconds(1f);
         private bool _canDrop = true;

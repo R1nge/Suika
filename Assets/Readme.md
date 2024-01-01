@@ -28,4 +28,5 @@
 
 //Mods support:
 change suika images/skins
+change suika icons
 change music

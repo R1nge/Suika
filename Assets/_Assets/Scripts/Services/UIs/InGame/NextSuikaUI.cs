@@ -8,13 +8,13 @@ namespace _Assets.Scripts.Services.UIs.InGame
     {
         [SerializeField] private Image nextSuikaImage;
         [Inject] private RandomNumberGenerator _randomNumberGenerator;
-        [Inject] private SuikaDataProvider _suikaDataProvider;
+        [Inject] private SuikaUIDataProvider _suikaUIDataProvider;
 
         private void Start() => _randomNumberGenerator.OnSuikaPicked += NextSuikaPicked;
 
         private void NextSuikaPicked(int previous, int current, int next)
         {
-            nextSuikaImage.sprite = _suikaDataProvider.GetNextSuika();
+            nextSuikaImage.sprite = _suikaUIDataProvider.GetNextSuika();
         }
 
         private void OnDestroy() => _randomNumberGenerator.OnSuikaPicked -= NextSuikaPicked;
