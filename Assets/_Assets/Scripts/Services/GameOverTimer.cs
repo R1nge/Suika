@@ -13,7 +13,7 @@ namespace _Assets.Scripts.Services
         public float Time => _time;
         private bool _isRunning;
         private float _time;
-        private const float StartTime = 5f;
+        private const float StartTime = 0f;//5f;
 
         public void StartTimer()
         {

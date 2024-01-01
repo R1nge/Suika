@@ -25,13 +25,23 @@ namespace _Assets.Scripts.Services.Factories
             _resetService = resetService;
         }
 
-        public void Create(Vector3 position)
+        public Rigidbody2D CreateKinematic(Vector3 position, Transform parent)
         {
             var index = _randomNumberGenerator.PickRandomSuika();
+            var chance = _configProvider.SuikasConfig.GetDropChance(index);
+            
+            if (Random.Range(0, 1f) > chance)
+            {
+                return CreateKinematic(position, parent);
+            }
+
             var suikaPrefab = _configProvider.SuikasConfig.GetPrefab(index);
-            var suikaInstance = _objectResolver.Instantiate(suikaPrefab.gameObject, position, Quaternion.identity).GetComponent<Suika>();
+            var suikaInstance = _objectResolver.Instantiate(suikaPrefab.gameObject, position, Quaternion.identity, parent).GetComponent<Suika>();
             suikaInstance.SetIndex(index);
+            var rigidbody = suikaInstance.GetComponent<Rigidbody2D>();
+            rigidbody.isKinematic = true;
             AddToResetService(suikaInstance);
+            return rigidbody;
         }
 
         public void Create(int index, Vector3 position)
@@ -60,7 +70,7 @@ namespace _Assets.Scripts.Services.Factories
             var totalPoints = currentLevel + previousPoints;
             _scoreService.AddScore(totalPoints);
         }
-        
+
         private void AddToResetService(Suika suika) => _resetService.AddSuika(suika);
     }
 }

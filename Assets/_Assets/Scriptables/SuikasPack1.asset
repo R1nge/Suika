@@ -16,36 +16,48 @@ MonoBehaviour:
   - Icon: {fileID: 0}
     Prefab: {fileID: -7569481309259978130, guid: 00e52d74c5d11a0458a5c1736e6609d6, type: 3}
     Points: 0
+    DropChance: 0.1
   - Icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
     Prefab: {fileID: 3185433131483969232, guid: 336b270bfe857b44bb15b1aa9e32bb0b, type: 3}
     Points: 0
+    DropChance: 0.6
   - Icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
     Prefab: {fileID: 3185433131483969232, guid: a29868db143b5fa498769a8a9b007580, type: 3}
     Points: 1
+    DropChance: 0.4
   - Icon: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
     Prefab: {fileID: 3185433131483969232, guid: b415f59892569274db8de6da3dfef39a, type: 3}
     Points: 3
+    DropChance: 0.3
   - Icon: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
     Prefab: {fileID: 3185433131483969232, guid: ab9bd36a8ef1fcf46a2de863cf675fdc, type: 3}
     Points: 6
+    DropChance: 0.2
   - Icon: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
     Prefab: {fileID: 3185433131483969232, guid: 5b782bf2d476fa349b8e77813bcda1e9, type: 3}
     Points: 10
+    DropChance: 0.1
   - Icon: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
     Prefab: {fileID: 3185433131483969232, guid: 8ee2ae7cd5ceabc4b8b34656b00c6281, type: 3}
     Points: 15
+    DropChance: 0
   - Icon: {fileID: 0}
     Prefab: {fileID: 3185433131483969232, guid: 1d27a10591e24ba429774debf1159b41, type: 3}
     Points: 21
+    DropChance: 0
   - Icon: {fileID: 0}
     Prefab: {fileID: 3185433131483969232, guid: c33ec2b2057449249bdf0578e69832a4, type: 3}
     Points: 28
+    DropChance: 0
   - Icon: {fileID: 0}
     Prefab: {fileID: 3185433131483969232, guid: 727ae1ae233b18044902a9da17d6a551, type: 3}
     Points: 36
+    DropChance: 0
   - Icon: {fileID: 0}
     Prefab: {fileID: 3185433131483969232, guid: 0935105515926364ca5c322ec422acba, type: 3}
     Points: 45
+    DropChance: 0
   - Icon: {fileID: 0}
     Prefab: {fileID: 3185433131483969232, guid: 86415847d66af784cb50d619db9bfc55, type: 3}
     Points: 55
+    DropChance: 0

@@ -16,13 +16,14 @@
             watermelon 260x260 3.25 scale
 
 //TODO:
-//Suika drop chance
 //Change music with suika change
 //Shake? Or spin
-//Skins
-//UI:
-//Leader board (local)
-//Evolution line
+//Mods support: 
+(change music and suika images) (Parse title, preview image, skins)
+(change drop chance)
 
 //Container is actually a jar, that can be closed when spinning??
 //Save jars as a highscore/record, add ability to view them
+//UI:
+//Leader board (local)
+//Evolution line

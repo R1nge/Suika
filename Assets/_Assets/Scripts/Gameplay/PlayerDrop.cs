@@ -9,35 +9,47 @@ namespace _Assets.Scripts.Gameplay
 {
     public class PlayerDrop : MonoBehaviour
     {
-        [SerializeField] private SpriteRenderer spriteRenderer;
         [Inject] private SuikasFactory _suikasFactory;
         [Inject] private SuikaDataProvider _suikaDataProvider;
         [Inject] private PlayerInput _playerInput;
-        private readonly YieldInstruction _wait = new WaitForSeconds(.5f);
+        private readonly YieldInstruction _wait = new WaitForSeconds(1f);
         private bool _canDrop = true;
+        private Rigidbody2D _suikaRigidbody;
+
+        private void Start() => Spawn();
 
         private void Update()
         {
             if (Input.GetMouseButtonDown(0) && _canDrop && _playerInput.Enabled)
             {
                 Drop();
-                UpdateSprite();
+                StartCoroutine(Cooldown());
             }
+        }
+
+        private void Spawn()
+        {
+            _suikaRigidbody = _suikasFactory.CreateKinematic(transform.position, transform);
+            Debug.LogError("SPAWN");
         }
 
         private void Drop()
         {
-            StartCoroutine(DropCooldown());
-            _suikasFactory.Create(transform.position);
+            _suikaRigidbody.transform.parent = null;
+            _suikaRigidbody.isKinematic = false;
+            _suikaRigidbody = null;
         }
 
-        private void UpdateSprite() => spriteRenderer.sprite = _suikaDataProvider.GetCurrentSuika();
-
-        private IEnumerator DropCooldown()
+        private IEnumerator Cooldown()
         {
             _canDrop = false;
             yield return _wait;
             _canDrop = true;
+
+            if (_suikaRigidbody == null)
+            {
+                Spawn();
+            }
         }
     }
 }
