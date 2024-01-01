@@ -45,10 +45,11 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
                         var json = reader.ReadToEnd();
                         var config = JsonConvert.DeserializeObject<GameConfig>(json);
                         var modIconRelativePath = Path.Combine(_path, config.ModIconPath);
+
                         config.ModIconPath = modIconRelativePath;
                         var containerImageRelativePath = Path.Combine(_path, config.ContainerImagePath);
                         config.ContainerImagePath = containerImageRelativePath;
-                        
+
                         for (int i = 0; i < config.SuikaSkinsImagesPaths.Length; i++)
                         {
                             var skinImageRelativePath = Path.Combine(_path, config.SuikaSkinsImagesPaths[i]);
@@ -64,11 +65,10 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
                         for (int i = 0; i < config.SuikaAudioPaths.Length; i++)
                         {
                             var suikaAudioRelativePath = Path.Combine(_path, config.SuikaAudioPaths[i]);
-                            config.SuikaSkinsImagesPaths[i] = suikaAudioRelativePath;
+                            config.SuikaAudioPaths[i] = suikaAudioRelativePath;
                         }
-                        
+
                         _allConfigs.Add(config);
-                        
                     }
                 }
             }

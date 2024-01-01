@@ -1,4 +1,5 @@
 ﻿using _Assets.Scripts.Gameplay;
+using _Assets.Scripts.Misc;
 using _Assets.Scripts.Services.Configs;
 using _Assets.Scripts.Services.Datas.GameConfigs;
 using _Assets.Scripts.Services.StateMachine;
@@ -41,6 +42,7 @@ namespace _Assets.Scripts.Services.Factories
             var suikaPrefab = _configProvider.SuikasConfig.GetPrefab(index);
             var suikaInstance = _objectResolver.Instantiate(suikaPrefab.gameObject, position, Quaternion.identity, parent).GetComponent<Suika>();
             suikaInstance.SetIndex(index);
+            suikaInstance.SetSprite(SpriteHelper.CreateSprite(_configLoader.CurrentConfig.SuikaSkinsImagesPaths[index], StaticData.SuikaSkinSpriteSize,StaticData.SuikaSkinSpriteSize));
             var rigidbody = suikaInstance.GetComponent<Rigidbody2D>();
             rigidbody.isKinematic = true;
             AddToResetService(suikaInstance);
@@ -61,6 +63,7 @@ namespace _Assets.Scripts.Services.Factories
             var suikaPrefab = _configProvider.SuikasConfig.GetPrefab(index);
             var suikaInstance = _objectResolver.Instantiate(suikaPrefab.gameObject, position, Quaternion.identity).GetComponent<Suika>();
             suikaInstance.SetIndex(index);
+            suikaInstance.SetSprite(SpriteHelper.CreateSprite(_configLoader.CurrentConfig.SuikaSkinsImagesPaths[index], StaticData.SuikaSkinSpriteSize,StaticData.SuikaSkinSpriteSize));
             AddScore(index);
             AddToResetService(suikaInstance);
         }

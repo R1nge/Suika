@@ -3,17 +3,17 @@
   "modIconPath": "MyMod1\\mod1Icon.png",
   "containerImagePath": "MyMod1\\mod1Icon.png",
   "suikaSkinsImagesPaths": [
-    "MyMod1\\mod1Icon.png",
-    "MyMod1\\mod1Icon.png",
-    "MyMod1\\mod1Icon.png",
-    "MyMod1\\mod1Icon.png",
-    "MyMod1\\mod1Icon.png",
-    "MyMod1\\mod1Icon.png",
-    "MyMod1\\mod1Icon.png",
-    "MyMod1\\mod1Icon.png",
-    "MyMod1\\mod1Icon.png",
-    "MyMod1\\mod1Icon.png",
-    "MyMod1\\mod1Icon.png"
+    "MyMod1\\mod1SuikaSkin1.png",
+    "MyMod1\\mod1SuikaSkin1.png",
+    "MyMod1\\mod1SuikaSkin1.png",
+    "MyMod1\\mod1SuikaSkin1.png",
+    "MyMod1\\mod1SuikaSkin1.png",
+    "MyMod1\\mod1SuikaSkin1.png",
+    "MyMod1\\mod1SuikaSkin1.png",
+    "MyMod1\\mod1SuikaSkin1.png",
+    "MyMod1\\mod1SuikaSkin1.png",
+    "MyMod1\\mod1SuikaSkin1.png",
+    "MyMod1\\mod1SuikaSkin1.png"
   ],
   "suikaIconsPaths": [
     "MyMod1\\mod1Icon.png",

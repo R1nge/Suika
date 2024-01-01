@@ -19,7 +19,7 @@ namespace _Assets.Scripts.Services.Factories
         {
             var container = _objectResolver.Instantiate(containerPrefab, spawnPoint.position, Quaternion.identity);
             var imagePath = _configLoader.CurrentConfig.ContainerImagePath;
-            container.GetComponentInChildren<SpriteRenderer>().sprite = SpriteHelper.CreateSprite(imagePath, 128, 128);
+            container.GetComponentInChildren<SpriteRenderer>().sprite = SpriteHelper.CreateSprite(imagePath, StaticData.ContainerSpriteSize, StaticData.ContainerSpriteSize);
             _resetService.SetContainer(container);
         }
     }

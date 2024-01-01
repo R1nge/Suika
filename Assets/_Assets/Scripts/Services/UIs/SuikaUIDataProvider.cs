@@ -20,7 +20,7 @@ namespace _Assets.Scripts.Services.UIs
         {
             var current = _randomNumberGenerator.Current;
             var path = _configLoader.CurrentConfig.SuikaIconsPaths[current];
-            const int size = 128;
+            var size = StaticData.SuikaIconSpriteSize;
             return SpriteHelper.CreateSprite(path, size, size);
         }
 
@@ -28,7 +28,7 @@ namespace _Assets.Scripts.Services.UIs
         {
             var next = _randomNumberGenerator.Next;
             var path = _configLoader.CurrentConfig.SuikaIconsPaths[next];
-            const int size = 128;
+            var size = StaticData.SuikaIconSpriteSize;
             return SpriteHelper.CreateSprite(path, size, size);
         }
     }

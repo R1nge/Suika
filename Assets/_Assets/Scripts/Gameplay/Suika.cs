@@ -1,4 +1,5 @@
-﻿using _Assets.Scripts.Services;
+﻿using _Assets.Scripts.Misc;
+using _Assets.Scripts.Services;
 using _Assets.Scripts.Services.Factories;
 using _Assets.Scripts.Services.StateMachine;
 using UnityEngine;
@@ -9,6 +10,7 @@ namespace _Assets.Scripts.Gameplay
     public class Suika : MonoBehaviour
     {
         //TODO: when suikas collide, destroy them and spawn one at the middle of them (between) with almost zero scale and scale it up to the original size
+        [SerializeField] private SpriteRenderer spriteRenderer;
         public bool HasLanded => _landed;
         protected internal int Index;
         protected internal bool Collided;
@@ -46,6 +48,16 @@ namespace _Assets.Scripts.Gameplay
                 Destroy(gameObject);
                 Destroy(suika.gameObject);
             }
+        }
+        
+        public void SetSprite(Sprite sprite)
+        {
+            Debug.LogError($"Sprite is null: {sprite == null}");
+            //float pixel2units = mySprite.rect.width / mySprite.bounds.size.x;
+            spriteRenderer.sprite = sprite;
+            spriteRenderer.size = new Vector2(256, 256);
+            //TODO: find a better solution
+            spriteRenderer.transform.localScale = new Vector3(0.4f, 0.4f, 1f);
         }
     }
 }
