@@ -27,14 +27,6 @@
 //Evolution line
 
 //Mods support: 
-(change music and suika images) (Parse title, preview image, skins)
-(change drop chance)
-'ll have to parse it from a json, so create a game config struct or something
-(
-Loss trigger threshold,
-Timer time,
-Suika Data:
-Skins image file path
-Music file path
-Drop chance
-)
+change music
+change suika images/skins
+change drop chance

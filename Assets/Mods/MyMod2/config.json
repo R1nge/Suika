@@ -2,9 +2,45 @@
   "modName": "Apple mod",
   "modIconPath": "MyMod2\\mod2Icon.png",
   "containerImagePath": "MyMod2\\mod2Icon.png",
-  "suikaSkinsImagesPaths": ["MyMod1\\mod1Icon.png","MyMod1\\mod1Icon.png","MyMod1\\mod1Icon.png","MyMod1\\mod1Icon.png","MyMod1\\mod1Icon.png","MyMod1\\mod1Icon.png","MyMod1\\mod1Icon.png","MyMod1\\mod1Icon.png","MyMod1\\mod1Icon.png","MyMod1\\mod1Icon.png","MyMod1\\mod1Icon.png"],
-  "suikaAudioPaths": ["MyMod1\\mod1Icon.png","MyMod1\\mod1Icon.png","MyMod1\\mod1Icon.png","MyMod1\\mod1Icon.png","MyMod1\\mod1Icon.png","MyMod1\\mod1Icon.png","MyMod1\\mod1Icon.png","MyMod1\\mod1Icon.png","MyMod1\\mod1Icon.png","MyMod1\\mod1Icon.png","MyMod1\\mod1Icon.png"],
-  "suikaDropChances": [0.1,1,1,1,1,1,1,1,1,1,1],
+  "suikaSkinsImagesPaths": [
+    "MyMod1\\mod1Icon.png",
+    "MyMod1\\mod1Icon.png",
+    "MyMod1\\mod1Icon.png",
+    "MyMod1\\mod1Icon.png",
+    "MyMod1\\mod1Icon.png",
+    "MyMod1\\mod1Icon.png",
+    "MyMod1\\mod1Icon.png",
+    "MyMod1\\mod1Icon.png",
+    "MyMod1\\mod1Icon.png",
+    "MyMod1\\mod1Icon.png",
+    "MyMod1\\mod1Icon.png"
+  ],
+  "suikaAudioPaths": [
+    "MyMod1\\mod1Icon.png",
+    "MyMod1\\mod1Icon.png",
+    "MyMod1\\mod1Icon.png",
+    "MyMod1\\mod1Icon.png",
+    "MyMod1\\mod1Icon.png",
+    "MyMod1\\mod1Icon.png",
+    "MyMod1\\mod1Icon.png",
+    "MyMod1\\mod1Icon.png",
+    "MyMod1\\mod1Icon.png",
+    "MyMod1\\mod1Icon.png",
+    "MyMod1\\mod1Icon.png"
+  ],
+  "suikaDropChances": [
+    0.1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
   "timeBeforeTimerTrigger": 0,
-  "timerStartTime": 20.0
+  "timerStartTime": 20
 }
