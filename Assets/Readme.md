@@ -24,7 +24,7 @@ Evolution line
 
 Mods support:
 Change music with suika change
-change music (done?)
+Load music (done?)
 
 
 Save containers as a highscore/record, add ability to view them???

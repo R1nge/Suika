@@ -1,5 +1,6 @@
 ﻿using _Assets.Scripts.Gameplay;
 using _Assets.Scripts.Misc;
+using _Assets.Scripts.Services.Audio;
 using _Assets.Scripts.Services.Configs;
 using _Assets.Scripts.Services.Datas.GameConfigs;
 using _Assets.Scripts.Services.StateMachine;
@@ -17,9 +18,10 @@ namespace _Assets.Scripts.Services.Factories
         private readonly ScoreService _scoreService;
         private readonly ResetService _resetService;
         private readonly IConfigLoader _configLoader;
+        private readonly AudioService _audioService;
 
         private SuikasFactory(IObjectResolver objectResolver, ConfigProvider configProvider,
-            RandomNumberGenerator randomNumberGenerator, ScoreService scoreService, ResetService resetService, IConfigLoader configLoader)
+            RandomNumberGenerator randomNumberGenerator, ScoreService scoreService, ResetService resetService, IConfigLoader configLoader, AudioService audioService)
         {
             _objectResolver = objectResolver;
             _configProvider = configProvider;
@@ -27,6 +29,7 @@ namespace _Assets.Scripts.Services.Factories
             _scoreService = scoreService;
             _resetService = resetService;
             _configLoader = configLoader;
+            _audioService = audioService;
         }
 
         public Rigidbody2D CreateKinematic(Vector3 position, Transform parent)
@@ -66,6 +69,8 @@ namespace _Assets.Scripts.Services.Factories
             suikaInstance.SetSprite(SpriteHelper.CreateSprite(_configLoader.CurrentConfig.SuikaSkinsImagesPaths[index], StaticData.SuikaSkinSpriteSize,StaticData.SuikaSkinSpriteSize));
             AddScore(index);
             AddToResetService(suikaInstance);
+            
+            _audioService.PlaySong(index);
         }
 
         private void AddScore(int index)
