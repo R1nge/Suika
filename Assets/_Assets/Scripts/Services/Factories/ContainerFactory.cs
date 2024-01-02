@@ -22,7 +22,6 @@ namespace _Assets.Scripts.Services.Factories
             
             if (!_configLoader.IsDefault)
             {
-                
                 var sprite = await SpriteHelper.CreateSprite(imagePath, StaticData.ContainerSpriteSize, StaticData.ContainerSpriteSize);
                 container.GetComponentInChildren<SpriteRenderer>().sprite = sprite;
             }

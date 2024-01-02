@@ -17,7 +17,6 @@ namespace _Assets.Scripts.Misc
 
         public static async UniTask<Sprite> CreateSpriteFromStreamingAssests(string relativePath, float width, float height)
         {
-            relativePath = Path.Combine(Application.streamingAssetsPath, relativePath);
             using (var webRequest = UnityWebRequestTexture.GetTexture(relativePath))
             {
                 await webRequest.SendWebRequest();

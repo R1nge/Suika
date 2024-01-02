@@ -23,6 +23,8 @@ Shake? OR spin
 Refactor default mod handling, create a class, that will handle all of that
 Like, load from STREAMING ASSETS or directory; Separate loader from handler
 
+Loading curtain to hide loading process
+
 ![img_1.png](img_1.png)
 
 Since "Default" mod is always included in the build, I can assume, that it's always at 0 index
