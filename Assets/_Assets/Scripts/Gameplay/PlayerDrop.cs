@@ -20,11 +20,20 @@ namespace _Assets.Scripts.Gameplay
 
         private void Update()
         {
-            if (Input.GetMouseButtonDown(0) && _canDrop && _playerInput.Enabled)
+#if UNITY_ANDROID
+            if (Input.GetMouseButtonUp(0) && _canDrop && _playerInput.Enabled)
             {
                 Drop();
                 StartCoroutine(Cooldown());
             }
+
+#else
+             if (Input.GetMouseButtonDown(0) && _canDrop && _playerInput.Enabled)
+            {
+                Drop();
+                StartCoroutine(Cooldown());
+            }
+#endif
         }
 
         private void Spawn()

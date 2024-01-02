@@ -7,14 +7,16 @@ namespace _Assets.Scripts.Gameplay
     public class PlayerMovement : MonoBehaviour
     {
         [SerializeField] private float horizontalLimit = 4;
-        [SerializeField] private float speed;
         [Inject] private PlayerInput _playerInput;
+        private Camera _camera;
+
+        private void Awake() => _camera = Camera.main;
 
         private void Update()
         {
             if (!_playerInput.Enabled) return;
-            var position = new Vector3(Input.GetAxis("Horizontal"), 0, 0) * (Time.deltaTime * speed);
-            var finalPosition = Mathf.Clamp(transform.position.x + position.x, -horizontalLimit, horizontalLimit);
+            var position = _camera.ScreenToWorldPoint(Input.mousePosition);
+            var finalPosition = Mathf.Clamp(position.x, -horizontalLimit, horizontalLimit);
             transform.position = new Vector3(finalPosition, transform.position.y, transform.position.z);
         }
     }

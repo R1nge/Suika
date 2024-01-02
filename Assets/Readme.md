@@ -20,11 +20,6 @@ Shake? OR spin
 
 UI:
 Leader board (local)
-Evolution line
-
-Mods support:
-Change music with suika change
-Load music (done?)
-
+Evolution line (use suika icons)
 
 Save containers as a highscore/record, add ability to view them???
