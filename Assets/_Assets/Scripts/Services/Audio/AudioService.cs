@@ -32,7 +32,7 @@ namespace _Assets.Scripts.Services.Audio
             path = "file://" + path;
             Debug.LogError("Android path: " + path);
 #endif
-            var webRequest = new UnityWebRequest(path, "GET", new DownloadHandlerAudioClip(path,  AudioType.MPEG), null);
+            var webRequest = new UnityWebRequest(path, "GET", new DownloadHandlerAudioClip(path, AudioType.MPEG), null);
             await webRequest.SendWebRequest();
             ((DownloadHandlerAudioClip)webRequest.downloadHandler).streamAudio = true;
             var song = DownloadHandlerAudioClip.GetContent(webRequest);

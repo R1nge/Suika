@@ -18,6 +18,15 @@
 TODO:
 Shake? OR spin
 
+![img.png](img.png)
+
+Refactor default mod handling, create a class, that will handle all of that
+Like, load from STREAMING ASSETS or directory; Separate loader from handler
+
+![img_1.png](img_1.png)
+
+Since "Default" mod is always included in the build, I can assume, that it's always at 0 index
+
 UI:
 Leader board (local)
 Evolution line (use suika icons)

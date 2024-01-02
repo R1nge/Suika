@@ -15,11 +15,23 @@ namespace _Assets.Scripts.Services.Factories
         [Inject] private ResetService _resetService;
         [Inject] private IConfigLoader _configLoader;
 
-        public void Create()
+        public async void Create()
         {
             var container = _objectResolver.Instantiate(containerPrefab, spawnPoint.position, Quaternion.identity);
             var imagePath = _configLoader.CurrentConfig.ContainerImagePath;
-            container.GetComponentInChildren<SpriteRenderer>().sprite = SpriteHelper.CreateSprite(imagePath, StaticData.ContainerSpriteSize, StaticData.ContainerSpriteSize);
+            
+            if (!_configLoader.IsDefault)
+            {
+                
+                var sprite = await SpriteHelper.CreateSprite(imagePath, StaticData.ContainerSpriteSize, StaticData.ContainerSpriteSize);
+                container.GetComponentInChildren<SpriteRenderer>().sprite = sprite;
+            }
+            else
+            {
+                var sprite = await SpriteHelper.CreateSpriteFromStreamingAssests(imagePath, StaticData.ContainerSpriteSize, StaticData.ContainerSpriteSize);
+                container.GetComponentInChildren<SpriteRenderer>().sprite = sprite;
+            }
+
             _resetService.SetContainer(container);
         }
     }

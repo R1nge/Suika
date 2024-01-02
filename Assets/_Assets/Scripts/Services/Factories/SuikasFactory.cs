@@ -4,6 +4,7 @@ using _Assets.Scripts.Services.Audio;
 using _Assets.Scripts.Services.Configs;
 using _Assets.Scripts.Services.Datas.GameConfigs;
 using _Assets.Scripts.Services.StateMachine;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -21,7 +22,8 @@ namespace _Assets.Scripts.Services.Factories
         private readonly AudioService _audioService;
 
         private SuikasFactory(IObjectResolver objectResolver, ConfigProvider configProvider,
-            RandomNumberGenerator randomNumberGenerator, ScoreService scoreService, ResetService resetService, IConfigLoader configLoader, AudioService audioService)
+            RandomNumberGenerator randomNumberGenerator, ScoreService scoreService, ResetService resetService,
+            IConfigLoader configLoader, AudioService audioService)
         {
             _objectResolver = objectResolver;
             _configProvider = configProvider;
@@ -32,28 +34,46 @@ namespace _Assets.Scripts.Services.Factories
             _audioService = audioService;
         }
 
-        public Rigidbody2D CreateKinematic(Vector3 position, Transform parent)
+        public async UniTask<Rigidbody2D> CreateKinematic(Vector3 position, Transform parent)
         {
             var index = _randomNumberGenerator.PickRandomSuika();
             var chance = _configLoader.CurrentConfig.SuikaDropChances[index];
-            
+
             if (Random.Range(0, 1f) > chance)
             {
-                return CreateKinematic(position, parent);
+                return await CreateKinematic(position, parent);
             }
 
             var suikaPrefab = _configProvider.SuikasConfig.GetPrefab(index);
-            var suikaInstance = _objectResolver.Instantiate(suikaPrefab.gameObject, position, Quaternion.identity, parent).GetComponent<Suika>();
+            var suikaInstance = _objectResolver
+                .Instantiate(suikaPrefab.gameObject, position, Quaternion.identity, parent).GetComponent<Suika>();
             suikaInstance.SetIndex(index);
-            suikaInstance.SetSprite(SpriteHelper.CreateSprite(_configLoader.CurrentConfig.SuikaSkinsImagesPaths[index], StaticData.SuikaSkinSpriteSize,StaticData.SuikaSkinSpriteSize));
+
             var rigidbody = suikaInstance.GetComponent<Rigidbody2D>();
             rigidbody.isKinematic = true;
+
+
+            if (!_configLoader.IsDefault)
+            {
+                var sprite = await SpriteHelper.CreateSprite(_configLoader.CurrentConfig.SuikaSkinsImagesPaths[index],
+                    StaticData.SuikaSkinSpriteSize, StaticData.SuikaSkinSpriteSize);
+                suikaInstance.SetSprite(sprite);
+            }
+            else
+            {
+                var sprite = await SpriteHelper.CreateSpriteFromStreamingAssests(
+                    _configLoader.CurrentConfig.SuikaSkinsImagesPaths[index], StaticData.SuikaSkinSpriteSize,
+                    StaticData.SuikaSkinSpriteSize);
+                suikaInstance.SetSprite(sprite);
+            }
+
             AddToResetService(suikaInstance);
             AddPolygonCollider(suikaInstance.gameObject);
+
             return rigidbody;
         }
 
-        public void Create(int index, Vector3 position)
+        public async void Create(int index, Vector3 position)
         {
             index++;
 
@@ -65,9 +85,24 @@ namespace _Assets.Scripts.Services.Factories
             }
 
             var suikaPrefab = _configProvider.SuikasConfig.GetPrefab(index);
-            var suikaInstance = _objectResolver.Instantiate(suikaPrefab.gameObject, position, Quaternion.identity).GetComponent<Suika>();
+            var suikaInstance = _objectResolver.Instantiate(suikaPrefab.gameObject, position, Quaternion.identity)
+                .GetComponent<Suika>();
             suikaInstance.SetIndex(index);
-            suikaInstance.SetSprite(SpriteHelper.CreateSprite(_configLoader.CurrentConfig.SuikaSkinsImagesPaths[index], StaticData.SuikaSkinSpriteSize,StaticData.SuikaSkinSpriteSize));
+
+            if (!_configLoader.IsDefault)
+            {
+                var sprite = await SpriteHelper.CreateSprite(_configLoader.CurrentConfig.SuikaSkinsImagesPaths[index],
+                    StaticData.SuikaSkinSpriteSize, StaticData.SuikaSkinSpriteSize);
+                suikaInstance.SetSprite(sprite);
+            }
+            else
+            {
+                var sprite = await SpriteHelper.CreateSpriteFromStreamingAssests(
+                    _configLoader.CurrentConfig.SuikaSkinsImagesPaths[index], StaticData.SuikaSkinSpriteSize,
+                    StaticData.SuikaSkinSpriteSize);
+                suikaInstance.SetSprite(sprite);
+            }
+
             AddScore(index);
             AddToResetService(suikaInstance);
             AddPolygonCollider(suikaInstance.gameObject);
@@ -85,6 +120,7 @@ namespace _Assets.Scripts.Services.Factories
 
         private void AddToResetService(Suika suika) => _resetService.AddSuika(suika);
 
-        private void AddPolygonCollider(GameObject gameObject) => gameObject.transform.GetChild(0).gameObject.AddComponent<PolygonCollider2D>();
+        private void AddPolygonCollider(GameObject gameObject) =>
+            gameObject.transform.GetChild(0).gameObject.AddComponent<PolygonCollider2D>();
     }
 }

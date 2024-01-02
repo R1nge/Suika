@@ -36,9 +36,9 @@ namespace _Assets.Scripts.Gameplay
 #endif
         }
 
-        private void Spawn()
+        private async void Spawn()
         {
-            _suikaRigidbody = _suikasFactory.CreateKinematic(transform.position, transform);
+            _suikaRigidbody = await _suikasFactory.CreateKinematic(transform.position, transform);
             Debug.LogError("SPAWN");
         }
 

@@ -4,6 +4,9 @@ using _Assets.Scripts.Services.UIs.StateMachine;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
+using _Assets.Scripts.Misc;
+using Cysharp.Threading.Tasks;
+using UnityEngine.Networking;
 using VContainer;
 
 namespace _Assets.Scripts.Services.UIs.Mods
@@ -19,7 +22,7 @@ namespace _Assets.Scripts.Services.UIs.Mods
         private void Start()
         {
             close.onClick.AddListener(SwitchToMainMenu);
-            
+
             for (int i = 0; i < _configLoader.AllConfigs.Count; i++)
             {
                 CreateSlot(i);
@@ -28,17 +31,24 @@ namespace _Assets.Scripts.Services.UIs.Mods
 
         private void SwitchToMainMenu() => _uiStateMachine.SwitchState(UIStateType.MainMenu);
 
-        private void CreateSlot(int index)
+        private async void CreateSlot(int index)
         {
             var slot = _modSlotFactory.CreateSlot();
             slot.transform.SetParent(slotParent);
             slot.transform.localScale = Vector3.one;
+
             var iconPath = _configLoader.AllConfigs[index].ModIconPath;
-            var iconBytes = File.ReadAllBytes(iconPath);
-            var iconTexture = new Texture2D(128, 128);
-            iconTexture.LoadImage(iconBytes);
-            var iconSprite = Sprite.Create(iconTexture, new Rect(0, 0, 128, 128), new Vector2(0.5f, 0.5f));
-            slot.SetSlotData(iconSprite, _configLoader.AllConfigs[index].ModName, index);
+
+            if (index == 0)
+            {
+                var iconSprite = await SpriteHelper.CreateSpriteFromStreamingAssests(iconPath, 128, 128);
+                slot.SetSlotData(iconSprite, _configLoader.AllConfigs[index].ModName, index);
+            }
+            else
+            {
+                var iconSprite = await SpriteHelper.CreateSprite(iconPath, 128, 128);
+                slot.SetSlotData(iconSprite, _configLoader.AllConfigs[index].ModName, index);
+            }
         }
     }
 }

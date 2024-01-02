@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 
 namespace _Assets.Scripts.Services.Datas.GameConfigs
 {
@@ -6,7 +7,9 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
     {
         public GameConfig CurrentConfig { get; }
         public List<GameConfig> AllConfigs { get; }
+        public void LoadDefaultConfig();
         public void LoadAllConfigs();
         public void SetCurrentConfig(int index);
+        public bool IsDefault { get; }
     }
 }

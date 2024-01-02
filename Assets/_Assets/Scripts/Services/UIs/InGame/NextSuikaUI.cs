@@ -12,9 +12,9 @@ namespace _Assets.Scripts.Services.UIs.InGame
 
         private void Start() => _randomNumberGenerator.OnSuikaPicked += NextSuikaPicked;
 
-        private void NextSuikaPicked(int previous, int current, int next)
+        private async void NextSuikaPicked(int previous, int current, int next)
         {
-            nextSuikaImage.sprite = _suikaUIDataProvider.GetNextSuika();
+            nextSuikaImage.sprite = await _suikaUIDataProvider.GetNextSuika();
         }
 
         private void OnDestroy() => _randomNumberGenerator.OnSuikaPicked -= NextSuikaPicked;
