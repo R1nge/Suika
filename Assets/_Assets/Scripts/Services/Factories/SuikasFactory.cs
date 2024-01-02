@@ -49,6 +49,7 @@ namespace _Assets.Scripts.Services.Factories
             var rigidbody = suikaInstance.GetComponent<Rigidbody2D>();
             rigidbody.isKinematic = true;
             AddToResetService(suikaInstance);
+            AddPolygonCollider(suikaInstance.gameObject);
             return rigidbody;
         }
 
@@ -69,7 +70,7 @@ namespace _Assets.Scripts.Services.Factories
             suikaInstance.SetSprite(SpriteHelper.CreateSprite(_configLoader.CurrentConfig.SuikaSkinsImagesPaths[index], StaticData.SuikaSkinSpriteSize,StaticData.SuikaSkinSpriteSize));
             AddScore(index);
             AddToResetService(suikaInstance);
-            
+            AddPolygonCollider(suikaInstance.gameObject);
             _audioService.PlaySong(index);
         }
 
@@ -83,5 +84,7 @@ namespace _Assets.Scripts.Services.Factories
         }
 
         private void AddToResetService(Suika suika) => _resetService.AddSuika(suika);
+
+        private void AddPolygonCollider(GameObject gameObject) => gameObject.transform.GetChild(0).gameObject.AddComponent<PolygonCollider2D>();
     }
 }

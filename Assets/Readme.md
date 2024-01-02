@@ -17,7 +17,6 @@
 
 TODO:
 Shake? OR spin
-Fix lag spike, when loading audio file
 
 UI:
 Leader board (local)
