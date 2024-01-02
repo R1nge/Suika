@@ -17,9 +17,11 @@
 
 TODO:
 Shake? OR spin
+Fix lag spike, when loading audio file
 
 UI:
 Leader board (local)
 Evolution line (use suika icons)
+Show error message/error icon, when mods is invalid
 
 Save containers as a highscore/record, add ability to view them???

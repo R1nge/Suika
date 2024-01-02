@@ -1,5 +1,4 @@
-﻿using System.IO;
-using _Assets.Scripts.Services.Datas.GameConfigs;
+﻿using _Assets.Scripts.Services.Datas.GameConfigs;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -13,13 +12,13 @@ namespace _Assets.Scripts.Services.Audio
         [Inject] private IConfigLoader _configLoader;
         private int _lastIndex;
 
-        public async void PlaySong(int index)
+        public void PlaySong(int index)
         {
             if (_lastIndex < index)
             {
                 _lastIndex = index;
                 var path = _configLoader.CurrentConfig.SuikaAudioPaths[index];
-                await DownloadAndPlay(path);
+                DownloadAndPlay(path).Forget();
             }
             else
             {
