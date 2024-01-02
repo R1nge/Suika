@@ -1,4 +1,5 @@
-﻿using _Assets.Scripts.Services.Datas.GameConfigs;
+﻿using System.IO;
+using _Assets.Scripts.Services.Datas.GameConfigs;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -28,6 +29,10 @@ namespace _Assets.Scripts.Services.Audio
 
         private async UniTask DownloadAndPlay(string path)
         {
+#if UNITY_ANDROID
+            path = "file://" + path;
+            Debug.LogError("Android path: " + path);
+#endif
             var webRequest = new UnityWebRequest(path, "GET", new DownloadHandlerAudioClip(path,  AudioType.MPEG), null);
             await webRequest.SendWebRequest();
             ((DownloadHandlerAudioClip)webRequest.downloadHandler).streamAudio = true;
