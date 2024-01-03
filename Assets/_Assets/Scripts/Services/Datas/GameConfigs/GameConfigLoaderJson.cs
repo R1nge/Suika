@@ -68,7 +68,7 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
                 
                 if (config.TimerStartTime < 0)
                 {
-                    Debug.LogError($"TimerStartTime is less than 0. Setting from default config. Value: {_allConfigs[0].TimeBeforeTimerTrigger}");
+                    Debug.LogError($"TimerStartTime is less than 0. Setting from default config. Value: {_allConfigs[0].TimerStartTime}");
                 }
 
                 _allConfigs.Add(config);
