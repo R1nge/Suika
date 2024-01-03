@@ -19,8 +19,10 @@ Different suikas amount (!= 12)
 Scripting
 
 # Modding guide
-Suika skin sprite = 256x256  
-Suika ui icon sprite = 128x128  
-Container skin sprite = 128x128 (should change to 256x256)  
+The game supports image of any size in PNG JPEG formats  
+But, to avoid lag spikes while loading images, it's better to stick to recomended sizes  
+Suika skin sprite = 256-512  
+Suika ui icon sprite = 128-256  
+Container skin sprite = 256-512  
 
 Look at the example mod
