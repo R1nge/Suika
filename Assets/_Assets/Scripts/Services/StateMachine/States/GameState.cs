@@ -1,5 +1,4 @@
-﻿using System;
-using _Assets.Scripts.Gameplay;
+﻿using _Assets.Scripts.Gameplay;
 using _Assets.Scripts.Services.Audio;
 using _Assets.Scripts.Services.Factories;
 using _Assets.Scripts.Services.UIs.StateMachine;

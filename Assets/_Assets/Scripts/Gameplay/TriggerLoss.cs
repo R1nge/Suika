@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using _Assets.Scripts.Services;
 using _Assets.Scripts.Services.Datas.GameConfigs;
 using UnityEngine;

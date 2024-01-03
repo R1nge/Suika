@@ -1,5 +1,4 @@
-﻿using _Assets.Scripts.Services;
-using _Assets.Scripts.Services.Datas.GameConfigs;
+﻿using _Assets.Scripts.Services.Datas.GameConfigs;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 

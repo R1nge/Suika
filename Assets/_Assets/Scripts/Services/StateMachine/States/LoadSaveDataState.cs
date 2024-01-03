@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using _Assets.Scripts.Misc;
-using _Assets.Scripts.Services.Datas;
+﻿using _Assets.Scripts.Services.Datas;
 using _Assets.Scripts.Services.Datas.GameConfigs;
 using _Assets.Scripts.Services.UIs.StateMachine;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 
 namespace _Assets.Scripts.Services.StateMachine.States
 {
