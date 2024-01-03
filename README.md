@@ -8,12 +8,12 @@ Suika skins change
 Suika icons change  
 Container skins change  
 Music change  
-Drop chances change
+Drop chances change  
+Auto image size detection  
 
 # Modding DOES NOT support  
 Loading screen icon change (soon)  
 Background image change (soon)  
-Auto image size detection (soon)  
 Points system change  
 Different suikas amount (!= 12)  
 Scripting
