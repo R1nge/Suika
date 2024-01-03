@@ -76,6 +76,9 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
                 {
                     Debug.LogError($"TimerStartTime is less than 0. Setting from default config. Value: {_allConfigs[0].TimerStartTime}");
                 }
+                
+                var inGameBackground = Path.Combine(_streamingAssetsPath, config.InGameBackgroundPath);
+                config.InGameBackgroundPath = inGameBackground;
 
                 _allConfigs.Add(config);
 

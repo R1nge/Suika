@@ -20,6 +20,7 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
             ValidateSuikaDropChances(ref defaultConfig, ref config);
             ValidateTimeBeforeTimerTrigger(ref defaultConfig, ref config);
             ValidateTimerStartTime(ref defaultConfig, ref config);
+            ValidateInGameBackground(ref defaultConfig, ref config);
             //Save(ref config);
         }
 
@@ -97,6 +98,11 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
                 Debug.LogError($"Mod: {config.ModName} TimerStartTime is less than 0. Setting from default config. Value: {defaultConfig.TimeBeforeTimerTrigger}");
                 config.TimerStartTime = defaultConfig.TimerStartTime;
             }
+        }
+
+        private void ValidateInGameBackground(ref GameConfig defaultConfig, ref GameConfig config)
+        {
+            config.InGameBackgroundPath = GetFilePath(config.InGameBackgroundPath, defaultConfig.InGameBackgroundPath, config.ModName);
         }
 
         private string GetFilePath(string filePath, string defaultPath, string modName)

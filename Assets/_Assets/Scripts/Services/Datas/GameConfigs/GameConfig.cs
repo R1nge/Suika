@@ -14,6 +14,7 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
         public float[] SuikaDropChances;
         public float TimeBeforeTimerTrigger;
         public float TimerStartTime;
+        public string InGameBackgroundPath;
 
         public int CompareTo(GameConfig other)
         {
@@ -25,7 +26,9 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
             if (containerImagePathComparison != 0) return containerImagePathComparison;
             var timeBeforeTimerTriggerComparison = TimeBeforeTimerTrigger.CompareTo(other.TimeBeforeTimerTrigger);
             if (timeBeforeTimerTriggerComparison != 0) return timeBeforeTimerTriggerComparison;
-            return TimerStartTime.CompareTo(other.TimerStartTime);
+            var timerStartTimeComparison = TimerStartTime.CompareTo(other.TimerStartTime);
+            if (timerStartTimeComparison != 0) return timerStartTimeComparison;
+            return string.Compare(InGameBackgroundPath, other.InGameBackgroundPath, StringComparison.Ordinal);
         }
     }
 }

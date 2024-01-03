@@ -44,5 +44,11 @@ namespace _Assets.Scripts.Misc
             var path = _configLoader.CurrentConfig.ContainerImagePath;
             return await SpriteHelper.CreateSprite(path);
         }
+
+        public async UniTask<Sprite> CreateInGameBackground()
+        {
+            var path = _configLoader.CurrentConfig.InGameBackgroundPath;
+            return await SpriteHelper.CreateSprite(path);
+        }
     }
 }

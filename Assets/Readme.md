@@ -18,8 +18,6 @@
 TODO:
 Shake? OR spin
 
-In-game Background image mod support
-
 Save selected mod index
 Loading screen icon mod support
 Loading screen background mod support
