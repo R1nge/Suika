@@ -1,4 +1,5 @@
-﻿using _Assets.Scripts.Services;
+﻿using _Assets.Scripts.Misc;
+using _Assets.Scripts.Services;
 using _Assets.Scripts.Services.Configs;
 using _Assets.Scripts.Services.Datas;
 using _Assets.Scripts.Services.Datas.GameConfigs;
@@ -18,6 +19,8 @@ namespace _Assets.Scripts.CompositionRoot
             builder.Register<ScoreService>(Lifetime.Singleton);
             builder.Register<GameConfigLoaderJson>(Lifetime.Singleton).As<IConfigLoader>();
             builder.Register<PlayerDataLoaderPlayerPrefs>(Lifetime.Singleton).As<IPlayerDataLoader>();
+            builder.Register<RandomNumberGenerator>(Lifetime.Singleton);
+            builder.Register<SpriteCreator>(Lifetime.Singleton);
         }
     }
 }

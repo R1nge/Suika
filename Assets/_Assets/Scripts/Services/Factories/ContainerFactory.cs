@@ -1,5 +1,4 @@
 ﻿using _Assets.Scripts.Misc;
-using _Assets.Scripts.Services.Datas.GameConfigs;
 using _Assets.Scripts.Services.StateMachine;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -14,23 +13,14 @@ namespace _Assets.Scripts.Services.Factories
         [SerializeField] private Transform spawnPoint;
         [Inject] private IObjectResolver _objectResolver;
         [Inject] private ResetService _resetService;
-        [Inject] private IConfigLoader _configLoader;
+        [Inject] private SpriteCreator _spriteCreator;
 
         public async UniTask Create()
         {
             var container = _objectResolver.Instantiate(containerPrefab, spawnPoint.position, Quaternion.identity);
-            var imagePath = _configLoader.CurrentConfig.ContainerImagePath;
-            
-            if (!_configLoader.IsDefault)
-            {
-                var sprite = await SpriteHelper.CreateSprite(imagePath, StaticData.ContainerSpriteSize, StaticData.ContainerSpriteSize);
-                container.GetComponentInChildren<SpriteRenderer>().sprite = sprite;
-            }
-            else
-            {
-                var sprite = await SpriteHelper.CreateSpriteFromStreamingAssests(imagePath, StaticData.ContainerSpriteSize, StaticData.ContainerSpriteSize);
-                container.GetComponentInChildren<SpriteRenderer>().sprite = sprite;
-            }
+
+            var sprite = await _spriteCreator.CreateContainerSprite();
+            container.GetComponentInChildren<SpriteRenderer>().sprite = sprite;
 
             _resetService.SetContainer(container);
         }

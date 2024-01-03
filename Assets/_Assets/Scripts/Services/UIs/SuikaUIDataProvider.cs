@@ -9,48 +9,28 @@ namespace _Assets.Scripts.Services.UIs
     public class SuikaUIDataProvider
     {
         private readonly RandomNumberGenerator _randomNumberGenerator;
-        private readonly IConfigLoader _configLoader;
+        private readonly SpriteCreator _spriteCreator;
 
 
-        private SuikaUIDataProvider(RandomNumberGenerator randomNumberGenerator, IConfigLoader configLoader)
+        private SuikaUIDataProvider(RandomNumberGenerator randomNumberGenerator, SpriteCreator spriteCreator)
         {
             _randomNumberGenerator = randomNumberGenerator;
-            _configLoader = configLoader;
+            _spriteCreator = spriteCreator;
         }
 
         public async UniTask<Sprite> GetCurrentSuika()
         {
             var current = _randomNumberGenerator.Current;
-            if (!_configLoader.IsDefault)
-            {
-                var path = _configLoader.CurrentConfig.SuikaIconsPaths[current];
-                var size = StaticData.SuikaIconSpriteSize;
-                return await SpriteHelper.CreateSprite(path, size, size);
-            }
-            else
-            {
-                var path = _configLoader.CurrentConfig.SuikaIconsPaths[current];
-                var sprite = await SpriteHelper.CreateSpriteFromStreamingAssests(path, StaticData.SuikaIconSpriteSize,
-                    StaticData.SuikaIconSpriteSize);
-                return sprite;
-            }
+            var sprite = await _spriteCreator.CreateSuikaIconSprite(current);
+            return sprite;
         }
+
 
         public async UniTask<Sprite> GetNextSuika()
         {
             var next = _randomNumberGenerator.Next;
-            var size = StaticData.SuikaIconSpriteSize;
-            if (!_configLoader.IsDefault)
-            {
-                var path = _configLoader.CurrentConfig.SuikaIconsPaths[next];
-
-                return await SpriteHelper.CreateSprite(path, size, size);
-            }
-            else
-            {
-                var path = _configLoader.CurrentConfig.SuikaIconsPaths[next];
-                return await SpriteHelper.CreateSpriteFromStreamingAssests(path, size, size);
-            }
+            var sprite = await _spriteCreator.CreateSuikaIconSprite(next);
+            return sprite;
         }
     }
 }

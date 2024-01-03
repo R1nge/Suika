@@ -29,8 +29,6 @@ namespace _Assets.Scripts.CompositionRoot
             builder.RegisterComponent(modSlotFactory);
             builder.RegisterComponent(audioService);
 
-            builder.Register<RandomNumberGenerator>(Lifetime.Singleton);
-
             builder.Register<SuikaUIDataProvider>(Lifetime.Singleton);
             builder.Register<SuikasFactory>(Lifetime.Singleton);
 
