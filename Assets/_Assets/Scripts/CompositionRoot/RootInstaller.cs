@@ -17,6 +17,7 @@ namespace _Assets.Scripts.CompositionRoot
         {
             builder.RegisterComponent(configProvider);
             builder.Register<ScoreService>(Lifetime.Singleton);
+            builder.Register<GameConfigValidator>(Lifetime.Singleton);
             builder.Register<GameConfigLoaderJson>(Lifetime.Singleton).As<IConfigLoader>();
             builder.Register<PlayerDataLoaderJson>(Lifetime.Singleton).As<IPlayerDataLoader>();
             builder.Register<RandomNumberGenerator>(Lifetime.Singleton);
