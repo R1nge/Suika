@@ -11,10 +11,12 @@ namespace _Assets.Scripts.Gameplay
         //TODO: when suikas collide, destroy them and spawn one at the middle of them (between) with almost zero scale and scale it up to the original size
         [SerializeField] private SpriteRenderer spriteRenderer;
         public bool HasLanded => _landed;
+        public bool HasDropped => _dropped;
         public SpriteRenderer SpriteRenderer => spriteRenderer;
         protected internal int Index;
         protected internal bool Collided;
         private bool _landed;
+        private bool _dropped;
         [Inject] protected SuikasFactory SuikasFactory;
         [Inject] protected ScoreService ScoreService;
         [Inject] protected ResetService ResetService;
@@ -22,12 +24,17 @@ namespace _Assets.Scripts.Gameplay
 
         public void SetIndex(int index) => Index = index;
 
+        public void Drop() => _dropped = true;
+
         private void OnCollisionEnter2D(Collision2D other)
         {
-            _landed = true;
-            if (other.gameObject.TryGetComponent(out Suika suika))
+            if (_dropped)
             {
-                OnCollision(suika);
+                _landed = true;
+                if (other.gameObject.TryGetComponent(out Suika suika))
+                {
+                    OnCollision(suika);
+                }
             }
         }
 
@@ -49,7 +56,7 @@ namespace _Assets.Scripts.Gameplay
                 Destroy(suika.gameObject);
             }
         }
-        
+
         public void SetSprite(Sprite sprite)
         {
             //float pixel2units = mySprite.rect.width / mySprite.bounds.size.x;

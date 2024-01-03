@@ -29,13 +29,9 @@ namespace _Assets.Scripts.Services
             }
 
             var chance = Random.Range(0f, 1f);
-
-            
-
             var next = Random.Range(0, 5);
             
-            Debug.LogError(
-                $"Current Chance: {chance}, Drop chance: {_configLoader.CurrentConfig.SuikaDropChances[next]}, Spawn: {chance <= _configLoader.CurrentConfig.SuikaDropChances[next]}");
+            Debug.LogError($"Current Chance: {chance}, Drop chance: {_configLoader.CurrentConfig.SuikaDropChances[next]}, Spawn: {chance <= _configLoader.CurrentConfig.SuikaDropChances[next]}");
 
             if (chance <= _configLoader.CurrentConfig.SuikaDropChances[next])
             {

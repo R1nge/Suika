@@ -73,6 +73,7 @@ namespace _Assets.Scripts.Services.Factories
             var suikaInstance = _objectResolver.Instantiate(suikaPrefab.gameObject, position, Quaternion.identity)
                 .GetComponent<Suika>();
             suikaInstance.SetIndex(index);
+            suikaInstance.Drop();
 
             var sprite = await _spriteCreator.CreateSuikaSprite(index);
             suikaInstance.SetSprite(sprite);

@@ -2,6 +2,7 @@
 using _Assets.Scripts.Services;
 using _Assets.Scripts.Services.Factories;
 using _Assets.Scripts.Services.UIs;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
 
@@ -16,54 +17,44 @@ namespace _Assets.Scripts.Gameplay
         private Rigidbody2D _suikaRigidbody;
         private bool _canDrop = true;
 
-        public void SpawnSuika() => Spawn();
+        public void SpawnSuika() => Spawn().Forget();
 
         private void Update()
         {
 #if UNITY_ANDROID
-            if (Input.GetMouseButtonUp(0) && _playerInput.Enabled)
+            if (Input.GetMouseButtonUp(0) && _canDrop && _playerInput.Enabled)
             {
-                if (_canDrop)
-                {
-                    Drop();
-                    StartCoroutine(Cooldown());
-                }
+                Drop();
+                Cooldown().Forget();
             }
 
 #else
              if (Input.GetMouseButtonDown(0) && _canDrop && _playerInput.Enabled)
             {
                 Drop();
-                StartCoroutine(Cooldown());
+                Cooldown().Forget();
             }
 #endif
         }
 
-        private async void Spawn()
+        private async UniTask Spawn()
         {
             _suikaRigidbody = await _suikasFactory.CreateKinematic(transform.position, transform);
         }
 
         private void Drop()
         {
-            if (_suikaRigidbody != null)
-            {
-                _suikaRigidbody.transform.parent = null;
-                _suikaRigidbody.isKinematic = false;
-                _suikaRigidbody = null;
-            }
+            _suikaRigidbody.transform.parent = null;
+            _suikaRigidbody.isKinematic = false;
+            _suikaRigidbody.GetComponent<Suika>().Drop();
+            _suikaRigidbody = null;
         }
 
-        private IEnumerator Cooldown()
+        private async UniTask Cooldown()
         {
             _canDrop = false;
-            yield return _wait;
-
-            if (_suikaRigidbody == null)
-            {
-                Spawn();
-            }
-
+            await UniTask.Delay(1000);
+            await Spawn();
             _canDrop = true;
         }
     }
