@@ -38,12 +38,12 @@ namespace _Assets.Scripts.Services.UIs.Mods
 
             if (index == 0)
             {
-                var iconSprite = await SpriteHelper.CreateSpriteFromStreamingAssests(iconPath, 128, 128);
+                var iconSprite = await SpriteHelper.CreateSpriteFromStreamingAssests(iconPath);
                 slot.SetSlotData(iconSprite, _configLoader.AllConfigs[index].ModName, index);
             }
             else
             {
-                var iconSprite = await SpriteHelper.CreateSprite(iconPath, 128, 128);
+                var iconSprite = await SpriteHelper.CreateSprite(iconPath);
                 slot.SetSlotData(iconSprite, _configLoader.AllConfigs[index].ModName, index);
             }
         }

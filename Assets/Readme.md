@@ -21,9 +21,6 @@ Shake? OR spin
 Save selected mod index
 In-game Background image mod support
 
-Auto detect loading image size and create a sprite based of that using:
-You can just use Image.FromStream(Stream, bool, bool) with "false" 2nd and 3rd parameter to avoid loading file into memory.
-
 UI:
 Leader board (local)
 Evolution line (use suika icons)

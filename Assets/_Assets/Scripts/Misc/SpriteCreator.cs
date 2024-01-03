@@ -15,14 +15,12 @@ namespace _Assets.Scripts.Misc
             if (!_configLoader.IsDefault)
             {
                 var path = _configLoader.CurrentConfig.SuikaIconsPaths[index];
-                var size = StaticData.SuikaIconSpriteSize;
-                return await SpriteHelper.CreateSprite(path, size, size);
+                return await SpriteHelper.CreateSprite(path);
             }
             else
             {
                 var path = _configLoader.CurrentConfig.SuikaIconsPaths[index];
-                var sprite = await SpriteHelper.CreateSpriteFromStreamingAssests(path, StaticData.SuikaIconSpriteSize,
-                    StaticData.SuikaIconSpriteSize);
+                var sprite = await SpriteHelper.CreateSpriteFromStreamingAssests(path);
                 return sprite;
             }
         }
@@ -32,22 +30,19 @@ namespace _Assets.Scripts.Misc
             if (!_configLoader.IsDefault)
             {
                 var path = _configLoader.CurrentConfig.SuikaSkinsImagesPaths[index];
-                var size = StaticData.SuikaSkinSpriteSize;
-                return await SpriteHelper.CreateSprite(path, size, size);
+                return await SpriteHelper.CreateSprite(path);
             }
             else
             {
                 var path = _configLoader.CurrentConfig.SuikaSkinsImagesPaths[index];
-                var size = StaticData.SuikaSkinSpriteSize;
-                return await SpriteHelper.CreateSpriteFromStreamingAssests(path, size, size);
+                return await SpriteHelper.CreateSpriteFromStreamingAssests(path);
             }
         }
 
         public async UniTask<Sprite> CreateContainerSprite()
         {
             var path = _configLoader.CurrentConfig.ContainerImagePath;
-            var size = StaticData.ContainerSpriteSize;
-            return await SpriteHelper.CreateSprite(path, size, size);
+            return await SpriteHelper.CreateSprite(path);
         }
     }
 }
