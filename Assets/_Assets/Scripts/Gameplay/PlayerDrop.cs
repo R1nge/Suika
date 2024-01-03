@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using _Assets.Scripts.Services;
+﻿using _Assets.Scripts.Services;
 using _Assets.Scripts.Services.Factories;
 using _Assets.Scripts.Services.UIs;
 using Cysharp.Threading.Tasks;
@@ -13,7 +12,6 @@ namespace _Assets.Scripts.Gameplay
         [Inject] private SuikasFactory _suikasFactory;
         [Inject] private SuikaUIDataProvider _suikaUIDataProvider;
         [Inject] private PlayerInput _playerInput;
-        private readonly YieldInstruction _wait = new WaitForSeconds(1f);
         private Rigidbody2D _suikaRigidbody;
         private bool _canDrop = true;
 

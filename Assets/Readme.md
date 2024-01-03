@@ -19,6 +19,8 @@ TODO:
 Shake? OR spin
 
 Save selected mod index
+
+(Separate start game loading screen from loading screen???)
 Loading screen icon mod support
 Loading screen background mod support
 
