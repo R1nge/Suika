@@ -24,7 +24,7 @@ namespace _Assets.Scripts.Services.StateMachine.States
         {
             _uiStateMachine.SwitchState(UIStateType.Loading);
             _playerDataLoader.LoadData();
-            _configLoader.LoadDefaultConfig();
+            await _configLoader.LoadDefaultConfig();
             _configLoader.LoadAllConfigs();
             await UniTask.Delay(500);
             _uiStateMachine.SwitchState(UIStateType.MainMenu);

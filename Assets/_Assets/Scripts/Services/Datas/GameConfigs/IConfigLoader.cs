@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 
 namespace _Assets.Scripts.Services.Datas.GameConfigs
 {
@@ -6,7 +7,7 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
     {
         public GameConfig CurrentConfig { get; }
         public List<GameConfig> AllConfigs { get; }
-        public void LoadDefaultConfig();
+        public UniTask LoadDefaultConfig();
         public void LoadAllConfigs();
         public void SetCurrentConfig(int index);
         public bool IsDefault { get; }

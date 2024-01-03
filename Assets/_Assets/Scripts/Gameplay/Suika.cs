@@ -59,11 +59,8 @@ namespace _Assets.Scripts.Gameplay
 
         public void SetSprite(Sprite sprite)
         {
-            //float pixel2units = mySprite.rect.width / mySprite.bounds.size.x;
             spriteRenderer.sprite = sprite;
             spriteRenderer.size = new Vector2(256, 256);
-            //TODO: find a better solution
-            //spriteRenderer.transform.localScale = new Vector3(0.4f, 0.4f, 1f);
         }
     }
 }

@@ -13,9 +13,11 @@
     "defaultSuikaSkin1.png",
     "defaultSuikaSkin1.png",
     "defaultSuikaSkin1.png",
+    "defaultSuikaSkin1.png",
     "defaultSuikaSkin1.png"
   ],
   "suikaIconsPaths": [
+    "default1Icon.png",
     "default1Icon.png",
     "default1Icon.png",
     "default1Icon.png",
@@ -35,6 +37,7 @@
     "song1.mp3",
     "song1.mp3",
     "song1.mp3",
+    "silence.mp3",
     "silence.mp3",
     "silence.mp3",
     "silence.mp3",

@@ -18,8 +18,12 @@
 TODO:
 Shake? OR spin
 
-Save selected mod index
 In-game Background image mod support
+
+Save selected mod index
+Loading screen icon mod support
+Loading screen background mod support
+
 
 UI:
 Leader board (local)

@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -19,7 +21,7 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
         public bool IsDefault => _currentConfig.Equals(_allConfigs[0]);
 
 
-        public async void LoadDefaultConfig()
+        public async UniTask LoadDefaultConfig()
         {
             var targetFile = Path.Combine(_streamingAssetsPath, "config.json");
 
@@ -58,8 +60,20 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
                     var suikaAudioRelativePath = Path.Combine(_streamingAssetsPath, config.SuikaAudioPaths[i]);
                     config.SuikaAudioPaths[i] = suikaAudioRelativePath;
                 }
+                
+                if (config.TimeBeforeTimerTrigger < 0)
+                {
+                    Debug.LogError($"TimeBeforeTimerTrigger is less than 0. Setting from default config. Value: {_allConfigs[0].TimeBeforeTimerTrigger}");
+                }
+                
+                if (config.TimerStartTime < 0)
+                {
+                    Debug.LogError($"TimerStartTime is less than 0. Setting from default config. Value: {_allConfigs[0].TimeBeforeTimerTrigger}");
+                }
 
                 _allConfigs.Add(config);
+
+                await UniTask.Delay(100);
             }
         }
 
@@ -72,41 +86,58 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
                 modsFoldersDirectoryInfo.Create();
             }
 
-            var folders = modsFoldersDirectoryInfo.GetDirectories();
-
-            foreach (var directoryInfo in folders)
+            foreach (var directoryInfo in modsFoldersDirectoryInfo.GetDirectories())
             {
-                var files = directoryInfo.GetFiles("*.json");
-
-                foreach (var fileInfo in files)
+                foreach (var fileInfo in directoryInfo.GetFiles("*.json"))
                 {
                     using (StreamReader reader = new StreamReader(fileInfo.FullName))
                     {
                         var json = reader.ReadToEnd();
                         var config = JsonConvert.DeserializeObject<GameConfig>(json);
 
-                        var modIconRelativePath = Path.Combine(_modsPath, config.ModIconPath);
-                        config.ModIconPath = modIconRelativePath;
-
-                        var containerImageRelativePath = Path.Combine(_modsPath, config.ContainerImagePath);
-                        config.ContainerImagePath = containerImageRelativePath;
+                        config.ModIconPath = GetFilePath(config.ModIconPath, _allConfigs[0].ModIconPath, config.ModName);
+                        config.ContainerImagePath = GetFilePath(config.ContainerImagePath, _allConfigs[0].ContainerImagePath, config.ModName);
 
                         for (int i = 0; i < config.SuikaSkinsImagesPaths.Length; i++)
                         {
-                            var skinImageRelativePath = Path.Combine(_modsPath, config.SuikaSkinsImagesPaths[i]);
-                            config.SuikaSkinsImagesPaths[i] = skinImageRelativePath;
+                            config.SuikaSkinsImagesPaths[i] = GetFilePath(config.SuikaSkinsImagesPaths[i], _allConfigs[0].SuikaSkinsImagesPaths[i], config.ModName);
                         }
 
                         for (int i = 0; i < config.SuikaIconsPaths.Length; i++)
                         {
-                            var suikaIconsRelativePath = Path.Combine(_modsPath, config.SuikaIconsPaths[i]);
-                            config.SuikaIconsPaths[i] = suikaIconsRelativePath;
+                            config.SuikaIconsPaths[i] = GetFilePath(config.SuikaIconsPaths[i], _allConfigs[0].SuikaIconsPaths[i], config.ModName);
                         }
 
                         for (int i = 0; i < config.SuikaAudioPaths.Length; i++)
                         {
-                            var suikaAudioRelativePath = Path.Combine(_modsPath, config.SuikaAudioPaths[i]);
-                            config.SuikaAudioPaths[i] = suikaAudioRelativePath;
+                            config.SuikaAudioPaths[i] = GetFilePath(config.SuikaAudioPaths[i], _allConfigs[0].SuikaAudioPaths[i], config.ModName);
+                        }
+                        
+                        if (config.SuikaDropChances.Length < _allConfigs[0].SuikaDropChances.Length)
+                        {
+                            var originalLength = config.SuikaDropChances.Length;
+                            Array.Resize(ref config.SuikaDropChances, _allConfigs[0].SuikaDropChances.Length);
+    
+                            for (int i = originalLength; i < config.SuikaDropChances.Length; i++)
+                            {
+                                config.SuikaDropChances[i] = _allConfigs[0].SuikaDropChances[i];
+                                Debug.LogError($"Mod: {config.ModName} Missing drop chance at index {i}. Setting from default config. Value: {_allConfigs[0].SuikaDropChances[i]}");
+                            }
+                        }
+                        else
+                        {
+                            Debug.LogError($"Mod: {config.ModName} have {config.SuikaDropChances.Length} drop chances. But should have {_allConfigs[0].SuikaDropChances.Length}. Trimming");
+                            config.SuikaDropChances = config.SuikaDropChances.Take(_allConfigs[0].SuikaDropChances.Length).ToArray();
+                        }
+
+                        if (config.TimeBeforeTimerTrigger < 0)
+                        {
+                            Debug.LogError($"Mod: {config.ModName} TimeBeforeTimerTrigger is less than 0. Setting from default config. Value: {_allConfigs[0].TimeBeforeTimerTrigger}");
+                        }
+                
+                        if (config.TimerStartTime < 0)
+                        {
+                            Debug.LogError($"Mod: {config.ModName} TimerStartTime is less than 0. Setting from default config. Value: {_allConfigs[0].TimeBeforeTimerTrigger}");
                         }
 
                         _allConfigs.Add(config);
@@ -115,6 +146,17 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
             }
 
             _currentConfig = _allConfigs[0];
+        }
+
+        private string GetFilePath(string filePath, string defaultPath, string modName)
+        {
+            var fullPath = Path.Combine(_modsPath, filePath);
+            if (!File.Exists(fullPath))
+            {
+                Debug.LogError($"Mod: {modName} File not found. Setting from default config path: {fullPath}");
+                return defaultPath;
+            }
+            return fullPath;
         }
 
         public void SetCurrentConfig(int index) => _currentConfig = _allConfigs[index];
