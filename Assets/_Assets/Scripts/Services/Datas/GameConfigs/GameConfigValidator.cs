@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace _Assets.Scripts.Services.Datas.GameConfigs
@@ -19,6 +20,7 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
             ValidateSuikaDropChances(ref defaultConfig, ref config);
             ValidateTimeBeforeTimerTrigger(ref defaultConfig, ref config);
             ValidateTimerStartTime(ref defaultConfig, ref config);
+            //Save(ref config);
         }
 
         private void ValidateModIconPath(ref GameConfig defaultConfig, ref GameConfig config)
@@ -72,7 +74,7 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
                         $"Mod: {config.ModName} Missing drop chance at index {i}. Setting from default config. Value: {defaultConfig.SuikaDropChances[i]}");
                 }
             }
-            else
+            else if (config.SuikaDropChances.Length != defaultConfig.SuikaDropChances.Length)
             {
                 Debug.LogError($"Mod: {config.ModName} have {config.SuikaDropChances.Length} drop chances. But should have {defaultConfig.SuikaDropChances.Length}. Trimming");
                 config.SuikaDropChances = config.SuikaDropChances.Take(defaultConfig.SuikaDropChances.Length).ToArray();
@@ -99,7 +101,7 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
 
         private string GetFilePath(string filePath, string defaultPath, string modName)
         {
-            var fullPath = Path.Combine(_modsPath, filePath);
+            var fullPath = Path.Combine(_modsPath, modName, filePath);
             if (!File.Exists(fullPath))
             {
                 Debug.LogError($"Mod: {modName} File not found. Setting from default config path: {fullPath}");
@@ -107,6 +109,19 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
             }
 
             return fullPath;
+        }
+
+        private void Save(ref GameConfig gameConfig)
+        {
+            Debug.LogError($"SAVING MOD CONFIG {gameConfig.SuikaDropChances.Length}");
+            
+            var json = JsonConvert.SerializeObject(gameConfig);
+            var filePath = Path.Combine(gameConfig.ModName, "config.json");
+
+            using (StreamWriter streamWriter = new StreamWriter(filePath))
+            {
+                streamWriter.Write(json);
+            }
         }
     }
 }

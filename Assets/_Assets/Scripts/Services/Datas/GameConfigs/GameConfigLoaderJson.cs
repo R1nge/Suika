@@ -97,16 +97,16 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
             {
                 foreach (var fileInfo in directoryInfo.GetFiles("*.json"))
                 {
-                    using (StreamReader reader = new StreamReader(fileInfo.FullName))
-                    {
-                        var json = reader.ReadToEnd();
-                        var config = JsonConvert.DeserializeObject<GameConfig>(json);
+                    StreamReader reader = new StreamReader(fileInfo.FullName);
+                    var json = reader.ReadToEnd();
+                    reader.Close();
+                    reader.Dispose();
+                    var config = JsonConvert.DeserializeObject<GameConfig>(json);
 
-                        var defaultConfig = _allConfigs[0];
-                        _gameConfigValidator.Validate(ref defaultConfig, ref config);
+                    var defaultConfig = _allConfigs[0];
+                    _gameConfigValidator.Validate(ref defaultConfig, ref config);
 
-                        _allConfigs.Add(config);
-                    }
+                    _allConfigs.Add(config);
                 }
             }
 
