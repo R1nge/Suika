@@ -11,6 +11,7 @@ namespace _Assets.Scripts.Gameplay
         //TODO: when suikas collide, destroy them and spawn one at the middle of them (between) with almost zero scale and scale it up to the original size
         [SerializeField] private SpriteRenderer spriteRenderer;
         public bool HasLanded => _landed;
+        public SpriteRenderer SpriteRenderer => spriteRenderer;
         protected internal int Index;
         protected internal bool Collided;
         private bool _landed;
@@ -55,7 +56,7 @@ namespace _Assets.Scripts.Gameplay
             spriteRenderer.sprite = sprite;
             spriteRenderer.size = new Vector2(256, 256);
             //TODO: find a better solution
-            spriteRenderer.transform.localScale = new Vector3(0.4f, 0.4f, 1f);
+            //spriteRenderer.transform.localScale = new Vector3(0.4f, 0.4f, 1f);
         }
     }
 }

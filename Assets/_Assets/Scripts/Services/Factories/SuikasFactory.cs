@@ -39,12 +39,6 @@ namespace _Assets.Scripts.Services.Factories
         public async UniTask<Rigidbody2D> CreateKinematic(Vector3 position, Transform parent)
         {
             var index = _randomNumberGenerator.PickRandomSuika();
-            var chance = _configLoader.CurrentConfig.SuikaDropChances[index];
-
-            if (Random.Range(0, 1f) > chance)
-            {
-                return await CreateKinematic(position, parent);
-            }
 
             var suikaPrefab = _configProvider.SuikasConfig.GetPrefab(index);
             var suikaInstance = _objectResolver
@@ -59,7 +53,7 @@ namespace _Assets.Scripts.Services.Factories
             suikaInstance.SetSprite(sprite);
 
             AddToResetService(suikaInstance);
-            AddPolygonCollider(suikaInstance.gameObject);
+            AddPolygonCollider(suikaInstance);
 
             return rigidbody;
         }
@@ -85,7 +79,7 @@ namespace _Assets.Scripts.Services.Factories
 
             AddScore(index);
             AddToResetService(suikaInstance);
-            AddPolygonCollider(suikaInstance.gameObject);
+            AddPolygonCollider(suikaInstance);
             _audioService.PlaySong(index).Forget();
         }
 
@@ -100,7 +94,6 @@ namespace _Assets.Scripts.Services.Factories
 
         private void AddToResetService(Suika suika) => _resetService.AddSuika(suika);
 
-        private void AddPolygonCollider(GameObject gameObject) =>
-            gameObject.transform.GetChild(0).gameObject.AddComponent<PolygonCollider2D>();
+        private void AddPolygonCollider(Suika suika) => suika.SpriteRenderer.gameObject.AddComponent<PolygonCollider2D>();
     }
 }

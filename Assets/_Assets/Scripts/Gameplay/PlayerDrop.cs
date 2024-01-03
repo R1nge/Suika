@@ -13,18 +13,21 @@ namespace _Assets.Scripts.Gameplay
         [Inject] private SuikaUIDataProvider _suikaUIDataProvider;
         [Inject] private PlayerInput _playerInput;
         private readonly YieldInstruction _wait = new WaitForSeconds(1f);
-        private bool _canDrop = true;
         private Rigidbody2D _suikaRigidbody;
+        private bool _canDrop = true;
 
         public void SpawnSuika() => Spawn();
 
         private void Update()
         {
 #if UNITY_ANDROID
-            if (Input.GetMouseButtonUp(0) && _canDrop && _playerInput.Enabled)
+            if (Input.GetMouseButtonUp(0) && _playerInput.Enabled)
             {
-                Drop();
-                StartCoroutine(Cooldown());
+                if (_canDrop)
+                {
+                    Drop();
+                    StartCoroutine(Cooldown());
+                }
             }
 
 #else
@@ -43,21 +46,25 @@ namespace _Assets.Scripts.Gameplay
 
         private void Drop()
         {
-            _suikaRigidbody.transform.parent = null;
-            _suikaRigidbody.isKinematic = false;
-            _suikaRigidbody = null;
+            if (_suikaRigidbody != null)
+            {
+                _suikaRigidbody.transform.parent = null;
+                _suikaRigidbody.isKinematic = false;
+                _suikaRigidbody = null;
+            }
         }
 
         private IEnumerator Cooldown()
         {
             _canDrop = false;
             yield return _wait;
-            _canDrop = true;
 
             if (_suikaRigidbody == null)
             {
                 Spawn();
             }
+
+            _canDrop = true;
         }
     }
 }

@@ -18,12 +18,18 @@
 TODO:
 Shake? OR spin
 
+Save selected mod index
+Fix suika drop
+Change suikas scale/size
+
+
+Auto detect loading image size and create a sprite based of that using:
+You can just use Image.FromStream(Stream, bool, bool) with "false" 2nd and 3rd parameter to avoid loading file into memory.
+
 UI:
 Leader board (local)
 Evolution line (use suika icons)
-Show error message/error icon, when mods is invalid
-
-Save containers as a highscore/record, add ability to view them???
+Show error message/error icon, when mod is invalid
 
 
 ![img.png](img.png)
