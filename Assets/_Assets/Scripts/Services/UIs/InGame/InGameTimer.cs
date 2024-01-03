@@ -9,7 +9,7 @@ namespace _Assets.Scripts.Services.UIs.InGame
         [SerializeField] private TextMeshProUGUI timerText;
         [Inject] private GameOverTimer _gameOverTimer;
 
-        private void Start()
+        public void Init()
         {
             _gameOverTimer.OnTimerStarted += TimerStarted;
             _gameOverTimer.OnTimeChanged += TimeChanged;

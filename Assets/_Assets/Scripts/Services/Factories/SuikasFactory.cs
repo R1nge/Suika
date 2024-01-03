@@ -106,7 +106,7 @@ namespace _Assets.Scripts.Services.Factories
             AddScore(index);
             AddToResetService(suikaInstance);
             AddPolygonCollider(suikaInstance.gameObject);
-            _audioService.PlaySong(index);
+            _audioService.PlaySong(index).Forget();
         }
 
         private void AddScore(int index)

@@ -1,6 +1,9 @@
-﻿using _Assets.Scripts.Services.Audio;
+﻿using System;
+using _Assets.Scripts.Gameplay;
+using _Assets.Scripts.Services.Audio;
 using _Assets.Scripts.Services.Factories;
 using _Assets.Scripts.Services.UIs.StateMachine;
+using Cysharp.Threading.Tasks;
 
 namespace _Assets.Scripts.Services.StateMachine.States
 {
@@ -24,13 +27,16 @@ namespace _Assets.Scripts.Services.StateMachine.States
             _audioService = audioService;
         }
 
-        public void Enter()
+        public async void Enter()
         {
-            _uiStateMachine.SwitchState(UIStateType.Game);
-            _playerFactory.Create();
+            _uiStateMachine.SwitchState(UIStateType.Loading);
+            var player = _playerFactory.Create().GetComponent<PlayerDrop>();
             _playerInput.Enable();
-            _containerFactory.Create();
-            _audioService.PlaySong(0);
+            await _containerFactory.Create();
+            await _audioService.PlaySong(0);
+            await UniTask.Delay(500);
+            _uiStateMachine.SwitchState(UIStateType.Game);
+            player.SpawnSuika();
         }
 
         public void Exit()

@@ -1,4 +1,5 @@
 ﻿using _Assets.Scripts.Services.Configs;
+using _Assets.Scripts.Services.UIs.InGame;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -17,7 +18,13 @@ namespace _Assets.Scripts.Services.UIs.StateMachine.States
             _objectResolver = objectResolver;
         }
 
-        public void Enter() => _ui = _objectResolver.Instantiate(_configProvider.UIConfig.InGameMenu);
+        public void Enter()
+        {
+            _ui = _objectResolver.Instantiate(_configProvider.UIConfig.InGameMenu);
+            _ui.GetComponent<NextSuikaUI>().Init();
+            _ui.GetComponent<InGameTimer>().Init();
+            _ui.GetComponent<ScoreUI>().Init();
+        }
 
         public void Exit() => Object.Destroy(_ui);
     }

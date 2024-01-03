@@ -23,6 +23,6 @@ namespace _Assets.Scripts.Services.UIs.StateMachine.States
             _ui = _objectResolver.Instantiate(_configProvider.UIConfig.LoadingMenu);
         }
 
-        public void Exit() => Object.Destroy(_ui);
+        public void Exit() => _ui.GetComponent<LoadingCurtain>().Hide();
     }
 }

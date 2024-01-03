@@ -34,8 +34,6 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
             {
                 var json = www.downloadHandler.text;
                 var config = JsonConvert.DeserializeObject<GameConfig>(json);
-                
-                Debug.LogError($"DEFAULT CONFIG: {json}");
 
                 var modIconRelativePath = Path.Combine(_streamingAssetsPath, config.ModIconPath);
                 config.ModIconPath = modIconRelativePath;
@@ -67,8 +65,6 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
 
         public void LoadAllConfigs()
         {
-            Debug.LogError($"Path: {_modsPath}");
-
             var modsFoldersDirectoryInfo = new DirectoryInfo(_modsPath);
 
             if (!modsFoldersDirectoryInfo.Exists)
@@ -77,18 +73,13 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
             }
 
             var folders = modsFoldersDirectoryInfo.GetDirectories();
-            Debug.LogError($"Folders Count: {folders.Length}");
 
             foreach (var directoryInfo in folders)
             {
-                Debug.LogError($"Folder Name: {directoryInfo.Name}");
-
                 var files = directoryInfo.GetFiles("*.json");
 
                 foreach (var fileInfo in files)
                 {
-                    Debug.LogError($"File Name: {fileInfo.Name}");
-
                     using (StreamReader reader = new StreamReader(fileInfo.FullName))
                     {
                         var json = reader.ReadToEnd();

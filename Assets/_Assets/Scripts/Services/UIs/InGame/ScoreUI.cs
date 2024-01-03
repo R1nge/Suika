@@ -9,8 +9,7 @@ namespace _Assets.Scripts.Services.UIs.InGame
         [SerializeField] private TextMeshProUGUI scoreText;
         [Inject] private ScoreService _scoreService;
 
-        private void Start() => _scoreService.OnScoreChanged += ScoreChanged;
-
+        public void Init() => _scoreService.OnScoreChanged += ScoreChanged;
         private void ScoreChanged(int score) => scoreText.text = score.ToString();
 
         private void OnDestroy() => _scoreService.OnScoreChanged -= ScoreChanged;

@@ -16,7 +16,7 @@ namespace _Assets.Scripts.Gameplay
         private bool _canDrop = true;
         private Rigidbody2D _suikaRigidbody;
 
-        private void Start() => Spawn();
+        public void SpawnSuika() => Spawn();
 
         private void Update()
         {
@@ -39,7 +39,6 @@ namespace _Assets.Scripts.Gameplay
         private async void Spawn()
         {
             _suikaRigidbody = await _suikasFactory.CreateKinematic(transform.position, transform);
-            Debug.LogError("SPAWN");
         }
 
         private void Drop()

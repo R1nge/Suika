@@ -10,7 +10,7 @@ namespace _Assets.Scripts.Services.UIs.InGame
         [Inject] private RandomNumberGenerator _randomNumberGenerator;
         [Inject] private SuikaUIDataProvider _suikaUIDataProvider;
 
-        private void Start() => _randomNumberGenerator.OnSuikaPicked += NextSuikaPicked;
+        public void Init() => _randomNumberGenerator.OnSuikaPicked += NextSuikaPicked;
 
         private async void NextSuikaPicked(int previous, int current, int next)
         {

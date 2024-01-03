@@ -52,7 +52,6 @@ namespace _Assets.Scripts.Gameplay
         
         public void SetSprite(Sprite sprite)
         {
-            Debug.LogError($"Sprite is null: {sprite == null}");
             //float pixel2units = mySprite.rect.width / mySprite.bounds.size.x;
             spriteRenderer.sprite = sprite;
             spriteRenderer.size = new Vector2(256, 256);

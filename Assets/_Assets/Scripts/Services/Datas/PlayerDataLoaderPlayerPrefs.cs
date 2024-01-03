@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -32,7 +33,6 @@ namespace _Assets.Scripts.Services.Datas
             var dataJson = JsonConvert.SerializeObject(dataToSave);
             PlayerPrefs.SetString(DataKeyBase, dataJson);
             PlayerPrefs.Save();
-            Debug.LogError("Saved data");
         }
 
         public void LoadData()
@@ -59,8 +59,6 @@ namespace _Assets.Scripts.Services.Datas
             dataJson = JsonConvert.SerializeObject(_gameDatas);
             PlayerPrefs.SetString(DataKeyBase, dataJson);
             PlayerPrefs.Save();
-
-            Debug.LogWarning("Loaded data");
         }
     }
 }

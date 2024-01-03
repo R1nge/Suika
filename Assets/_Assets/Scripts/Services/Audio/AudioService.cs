@@ -12,13 +12,13 @@ namespace _Assets.Scripts.Services.Audio
         [Inject] private IConfigLoader _configLoader;
         private int _lastIndex;
 
-        public void PlaySong(int index)
+        public async UniTask PlaySong(int index)
         {
             if (_lastIndex < index)
             {
                 _lastIndex = index;
                 var path = _configLoader.CurrentConfig.SuikaAudioPaths[index];
-                DownloadAndPlay(path).Forget();
+                await DownloadAndPlay(path);
             }
             else
             {

@@ -1,6 +1,7 @@
 ﻿using _Assets.Scripts.Misc;
 using _Assets.Scripts.Services.Datas.GameConfigs;
 using _Assets.Scripts.Services.StateMachine;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -15,7 +16,7 @@ namespace _Assets.Scripts.Services.Factories
         [Inject] private ResetService _resetService;
         [Inject] private IConfigLoader _configLoader;
 
-        public async void Create()
+        public async UniTask Create()
         {
             var container = _objectResolver.Instantiate(containerPrefab, spawnPoint.position, Quaternion.identity);
             var imagePath = _configLoader.CurrentConfig.ContainerImagePath;
