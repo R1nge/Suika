@@ -6,23 +6,26 @@ Android: /storage/emulated/{userId}/Android/data/com.R1nge.Suika/files/Mods
 # Modding supports  
 Suika skins change  
 Suika icons change  
-Container skins change  
+Container skin change  
 Music change  
 Drop chances change  
-Auto image size detection  
+Auto image size detection   
+In game background image change  
 
 # Modding DOES NOT support  
 Loading screen icon change (soon)  
-Background image change (soon)  
-Points system change  
-Different suikas amount (!= 12)  
-Scripting
+Loading screen background change (soon)  
+Points system change (do I really need this?)  
+Different suikas amount (!= 12) (do I really need this?)  
+Scripting (do I really need this?)  
 
 # Modding guide
+The mod title should be the same as the folder name  
 The game supports image of any size in PNG JPEG formats  
 But, to avoid lag spikes while loading images, it's better to stick to recomended sizes  
 Suika skin sprite = 256-512  
 Suika ui icon sprite = 128-256  
 Container skin sprite = 256-512  
+In game background = phone screen resolution in 16:9, 18:9, 21:9 ratio
 
 Look at the example mod
