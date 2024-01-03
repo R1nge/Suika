@@ -18,15 +18,17 @@
 TODO:
 Shake? OR spin
 
-![img.png](img.png)
-
-![img_1.png](img_1.png)
-
-Since "Default" mod is always included in the build, I can assume, that it's always at 0 index
-
 UI:
 Leader board (local)
 Evolution line (use suika icons)
 Show error message/error icon, when mods is invalid
 
 Save containers as a highscore/record, add ability to view them???
+
+
+![img.png](img.png)
+
+![img_1.png](img_1.png)
+
+Since "Default" mod is always included in the build, I can assume, that it's always at 0 index
+

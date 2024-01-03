@@ -22,19 +22,42 @@ namespace _Assets.Scripts.Services.Audio
             }
             else
             {
-                Debug.LogWarning("Trying to play already played song");
+                Debug.LogWarning("The song index is smaller than the last played song index, nothing to do");
             }
         }
 
         private async UniTask DownloadAndPlay(string path)
         {
-            var webRequest = new UnityWebRequest(path, "GET", new DownloadHandlerAudioClip(path, AudioType.MPEG), null);
-            await webRequest.SendWebRequest();
-            ((DownloadHandlerAudioClip)webRequest.downloadHandler).streamAudio = true;
-            var song = DownloadHandlerAudioClip.GetContent(webRequest);
-            audioSource.clip = song;
-            audioSource.Play();
-            webRequest.Dispose();
+            if (audioSource.clip == null)
+            {
+                var webRequest = new UnityWebRequest(path, "GET", new DownloadHandlerAudioClip(path, AudioType.MPEG), null);
+                await webRequest.SendWebRequest();
+                ((DownloadHandlerAudioClip)webRequest.downloadHandler).streamAudio = true;
+                var song = DownloadHandlerAudioClip.GetContent(webRequest);
+                audioSource.clip = song;
+                audioSource.clip.name = path;
+                audioSource.Play();
+                webRequest.Dispose();
+            }
+            else
+            {
+                if (audioSource.clip.name == path)
+                {
+                    Debug.LogWarning("The same song is playing already, nothing to do");
+                }
+                else
+                {
+                    var webRequest = new UnityWebRequest(path, "GET", new DownloadHandlerAudioClip(path, AudioType.MPEG), null);
+                    await webRequest.SendWebRequest();
+                    ((DownloadHandlerAudioClip)webRequest.downloadHandler).streamAudio = true;
+                    var song = DownloadHandlerAudioClip.GetContent(webRequest);
+                    audioSource.clip = song;
+                    audioSource.clip.name = path;
+                    audioSource.Play();
+                    webRequest.Dispose();
+                }
+            }
+            
         }
     }
 }
