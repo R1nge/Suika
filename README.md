@@ -12,6 +12,8 @@ Drop chances change
 
 # Modding DOES NOT support  
 Loading screen icon change (soon)  
+Background image change (soon)  
+Auto image size detection (soon)  
 Points system change  
 Different suikas amount (!= 12)  
 Scripting
