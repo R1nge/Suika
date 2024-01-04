@@ -31,7 +31,8 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
 
         private void ValidateContainerImagePath(ref GameConfig defaultConfig, ref GameConfig config)
         {
-            config.ContainerImagePath = GetFilePath(config.ContainerImagePath, defaultConfig.ContainerImagePath, config.ModName);
+            config.ContainerImagePath =
+                GetFilePath(config.ContainerImagePath, defaultConfig.ContainerImagePath, config.ModName);
         }
 
         private void ValidateSuikaSkinsImages(ref GameConfig defaultConfig, ref GameConfig config)
@@ -63,6 +64,20 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
 
         private void ValidateSuikaDropChances(ref GameConfig defaultConfig, ref GameConfig config)
         {
+            if (config.SuikaDropChances == null)
+            {
+                Debug.LogError($"Mod: {config.ModName} Missing drop chance. Setting from default config");
+
+                config.SuikaDropChances = new float[defaultConfig.SuikaDropChances.Length];
+                
+                for (int i = 0; i < defaultConfig.SuikaDropChances.Length; i++)
+                {
+                    config.SuikaDropChances[i] = defaultConfig.SuikaDropChances[i];
+                }
+                
+                return;
+            }
+            
             if (config.SuikaDropChances.Length < defaultConfig.SuikaDropChances.Length)
             {
                 var originalLength = config.SuikaDropChances.Length;
@@ -77,7 +92,8 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
             }
             else if (config.SuikaDropChances.Length != defaultConfig.SuikaDropChances.Length)
             {
-                Debug.LogError($"Mod: {config.ModName} have {config.SuikaDropChances.Length} drop chances. But should have {defaultConfig.SuikaDropChances.Length}. Trimming");
+                Debug.LogError(
+                    $"Mod: {config.ModName} have {config.SuikaDropChances.Length} drop chances. But should have {defaultConfig.SuikaDropChances.Length}. Trimming");
                 config.SuikaDropChances = config.SuikaDropChances.Take(defaultConfig.SuikaDropChances.Length).ToArray();
             }
         }
@@ -86,7 +102,8 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
         {
             if (config.TimeBeforeTimerTrigger < 0)
             {
-                Debug.LogError($"Mod: {config.ModName} TimeBeforeTimerTrigger is less than 0. Setting from default config. Value: {defaultConfig.TimeBeforeTimerTrigger}");
+                Debug.LogError(
+                    $"Mod: {config.ModName} TimeBeforeTimerTrigger is less than 0. Setting from default config. Value: {defaultConfig.TimeBeforeTimerTrigger}");
                 config.TimeBeforeTimerTrigger = defaultConfig.TimeBeforeTimerTrigger;
             }
         }
@@ -95,18 +112,27 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
         {
             if (config.TimerStartTime < 0)
             {
-                Debug.LogError($"Mod: {config.ModName} TimerStartTime is less than 0. Setting from default config. Value: {defaultConfig.TimeBeforeTimerTrigger}");
+                Debug.LogError(
+                    $"Mod: {config.ModName} TimerStartTime is less than 0. Setting from default config. Value: {defaultConfig.TimeBeforeTimerTrigger}");
                 config.TimerStartTime = defaultConfig.TimerStartTime;
             }
         }
 
         private void ValidateInGameBackground(ref GameConfig defaultConfig, ref GameConfig config)
         {
-            config.InGameBackgroundPath = GetFilePath(config.InGameBackgroundPath, defaultConfig.InGameBackgroundPath, config.ModName);
+            config.InGameBackgroundPath = GetFilePath(config.InGameBackgroundPath, defaultConfig.InGameBackgroundPath,
+                config.ModName);
         }
 
         private string GetFilePath(string filePath, string defaultPath, string modName)
         {
+            if (string.IsNullOrEmpty(filePath) || string.IsNullOrEmpty(modName) ||
+                string.IsNullOrWhiteSpace(filePath) || string.IsNullOrWhiteSpace(modName))
+            {
+                Debug.LogError($"Mod: {modName} File not found. Setting from default config");
+                return defaultPath;
+            }
+
             var fullPath = Path.Combine(_modsPath, modName, filePath);
             if (!File.Exists(fullPath))
             {
@@ -120,7 +146,7 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
         private void Save(ref GameConfig gameConfig)
         {
             Debug.LogError($"SAVING MOD CONFIG {gameConfig.SuikaDropChances.Length}");
-            
+
             var json = JsonConvert.SerializeObject(gameConfig);
             var filePath = Path.Combine(gameConfig.ModName, "config.json");
 

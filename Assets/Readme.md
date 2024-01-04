@@ -24,6 +24,10 @@ Save selected mod index
 Loading screen icon mod support
 Loading screen background mod support
 
+Switch to asset bundles/addressables???
+Will require a Unity Engine to mod
+Still, no scripting support?
+IT WOULD BE OVERKILL for such simple project
 
 UI:
 Leader board (local)
