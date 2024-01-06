@@ -11,9 +11,9 @@ Music change
 Drop chances change  
 Auto image size detection   
 In game background image change  
+Loading screen icon change  
 
 # Modding DOES NOT support  
-Loading screen icon change (soon)  
 Loading screen background change (soon)  
 Points system change (do I really need this?)  
 Different suikas amount (!= 12) (do I really need this?)  
