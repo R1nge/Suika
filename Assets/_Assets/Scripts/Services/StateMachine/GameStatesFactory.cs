@@ -2,6 +2,7 @@
 using _Assets.Scripts.Services.Audio;
 using _Assets.Scripts.Services.Datas;
 using _Assets.Scripts.Services.Datas.GameConfigs;
+using _Assets.Scripts.Services.Datas.Mods;
 using _Assets.Scripts.Services.Factories;
 using _Assets.Scripts.Services.StateMachine.States;
 using _Assets.Scripts.Services.UIs.StateMachine;
@@ -19,8 +20,9 @@ namespace _Assets.Scripts.Services.StateMachine
         private readonly PlayerInput _playerInput;
         private readonly IConfigLoader _configLoader;
         private readonly AudioService _audioService;
+        private readonly IModDataLoader _modDataLoader;
 
-        private GameStatesFactory(IPlayerDataLoader playerDataLoader, UIStateMachine uiStateMachine, CoroutineRunner coroutineRunner, PlayerFactory playerFactory, ContainerFactory containerFactory, ResetService resetService, PlayerInput playerInput, IConfigLoader configLoader, AudioService audioService)
+        private GameStatesFactory(IPlayerDataLoader playerDataLoader, UIStateMachine uiStateMachine, CoroutineRunner coroutineRunner, PlayerFactory playerFactory, ContainerFactory containerFactory, ResetService resetService, PlayerInput playerInput, IConfigLoader configLoader, AudioService audioService, IModDataLoader modDataLoader)
         {
             _playerDataLoader = playerDataLoader;
             _uiStateMachine = uiStateMachine;
@@ -31,11 +33,12 @@ namespace _Assets.Scripts.Services.StateMachine
             _playerInput = playerInput;
             _configLoader = configLoader;
             _audioService = audioService;
+            _modDataLoader = modDataLoader;
         }
 
         public IGameState CreateLoadSaveDataState(GameStateMachine stateMachine)
         {
-            return new LoadSaveDataState(stateMachine, _playerDataLoader, _uiStateMachine, _configLoader);
+            return new LoadSaveDataState(stateMachine, _playerDataLoader, _uiStateMachine, _configLoader, _modDataLoader);
         }
 
         public IGameState CreateGameState(GameStateMachine stateMachine)

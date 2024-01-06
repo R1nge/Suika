@@ -1,16 +1,16 @@
 ﻿using System;
 
 [Serializable]
-public struct GameData : IComparable<GameData>
+public struct PlayerData : IComparable<PlayerData>
 {
     public int Score;
 
-    public GameData(int score)
+    public PlayerData(int score)
     {
         Score = score;
     }
 
-    public int CompareTo(GameData other)
+    public int CompareTo(PlayerData other)
     {
         return Score.CompareTo(other.Score);
     }

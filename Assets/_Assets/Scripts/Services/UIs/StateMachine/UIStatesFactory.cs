@@ -1,4 +1,5 @@
 ﻿using _Assets.Scripts.Services.Configs;
+using _Assets.Scripts.Services.Providers;
 using _Assets.Scripts.Services.UIs.StateMachine.States;
 using VContainer;
 
@@ -8,16 +9,18 @@ namespace _Assets.Scripts.Services.UIs.StateMachine
     {
         private readonly ConfigProvider _configProvider;
         private readonly IObjectResolver _objectResolver;
+        private readonly LoadingCurtainIconProvider _loadingCurtainIconProvider;
 
-        private UIStatesFactory(ConfigProvider configProvider, IObjectResolver objectResolver)
+        private UIStatesFactory(ConfigProvider configProvider, IObjectResolver objectResolver, LoadingCurtainIconProvider loadingCurtainIconProvider)
         {
             _configProvider = configProvider;
             _objectResolver = objectResolver;
+            _loadingCurtainIconProvider = loadingCurtainIconProvider;
         }
 
         public IUIState CreateLoadingState(UIStateMachine stateMachine)
         {
-            return new LoadingState(_configProvider, _objectResolver);
+            return new LoadingState(_configProvider, _objectResolver, _loadingCurtainIconProvider);
         }
 
         public IUIState CreateMainMenuState(UIStateMachine stateMachine)

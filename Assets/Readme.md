@@ -17,27 +17,21 @@
 
 TODO:
 Shake? OR spin
+Change default game assets to suikas original
 
 Save selected mod index
 
-(Separate start game loading screen from loading screen???)
-Loading screen icon mod support
 Loading screen background mod support
 
-Switch to asset bundles/addressables???
-Will require a Unity Engine to mod
-Still, no scripting support?
-IT WOULD BE OVERKILL for such simple project
+
+Move paths into a separate static class
+
 
 UI:
 Leader board (local)
 Evolution line (use suika icons)
 Show error message/error icon, when mod is invalid
 
-
 ![img.png](img.png)
 
 ![img_1.png](img_1.png)
-
-Since "Default" mod is always included in the build, I can assume, that it's always at 0 index
-

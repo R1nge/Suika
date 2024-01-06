@@ -8,21 +8,21 @@ namespace _Assets.Scripts.Services.Datas
     public class PlayerDataLoaderPlayerPrefs : IPlayerDataLoader
     {
         private readonly ScoreService _scoreService;
-        private List<GameData> _gameDatas = new(5);
+        private List<PlayerData> _gameDatas = new(5);
         private const string DataKeyBase = "Data";
 
-        public List<GameData> GameDatas => _gameDatas;
+        public List<PlayerData> GameDatas => _gameDatas;
 
         public PlayerDataLoaderPlayerPrefs(ScoreService scoreService) => _scoreService = scoreService;
 
         public void SaveData()
         {
-            var data = new GameData(_scoreService.Score);
+            var data = new PlayerData(_scoreService.Score);
             _gameDatas.Add(data);
 
             _gameDatas = _gameDatas.OrderByDescending(gameData => gameData).ToList();
 
-            var dataToSave = new List<GameData>(5);
+            var dataToSave = new List<PlayerData>(5);
 
             for (int i = 0; i < _gameDatas.Count; i++)
             {
@@ -44,7 +44,7 @@ namespace _Assets.Scripts.Services.Datas
                 return;
             }
 
-            var data = JsonConvert.DeserializeObject<List<GameData>>(dataJson);
+            var data = JsonConvert.DeserializeObject<List<PlayerData>>(dataJson);
 
             var dataSorted = data.OrderByDescending(gameData => gameData).ToArray();
 

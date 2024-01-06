@@ -59,5 +59,7 @@
   ],
   "timeBeforeTimerTrigger": 10,
   "timerStartTime": 7,
-  "inGameBackgroundPath": "default1Icon.png"
+  "inGameBackgroundPath": "default1Icon.png",
+  "LoadingScreenBackgroundPath": "default1Icon.png",
+  "LoadingScreenIconPath": "default1Icon.png"
 }

@@ -9,24 +9,21 @@ namespace _Assets.Scripts.Services.Datas
     public class PlayerDataLoaderJson : IPlayerDataLoader
     {
         private readonly ScoreService _scoreService;
-        private List<GameData> _gameDatas = new(5);
-        public List<GameData> GameDatas => _gameDatas;
+        private List<PlayerData> _gameDatas = new(5);
+        public List<PlayerData> GameDatas => _gameDatas;
         private const string DataFileName = "playerData.json";
         private readonly string _dataPath = Path.Combine(Application.persistentDataPath, "Data");
 
-        public PlayerDataLoaderJson(ScoreService scoreService)
-        {
-            _scoreService = scoreService;
-        }
+        public PlayerDataLoaderJson(ScoreService scoreService) => _scoreService = scoreService;
 
         public void SaveData()
         {
-            var data = new GameData(_scoreService.Score);
+            var data = new PlayerData(_scoreService.Score);
             _gameDatas.Add(data);
 
             _gameDatas = _gameDatas.OrderByDescending(gameData => gameData).ToList();
 
-            var dataToSave = new List<GameData>(5);
+            var dataToSave = new List<PlayerData>(5);
 
             for (int i = 0; i < _gameDatas.Count; i++)
             {
@@ -61,9 +58,8 @@ namespace _Assets.Scripts.Services.Datas
             using (StreamReader reader = new StreamReader(Path.Combine(_dataPath, DataFileName)))
             {
                 var json = reader.ReadToEnd();
-                var gameDatas = JsonConvert.DeserializeObject<List<GameData>>(json);
+                var gameDatas = JsonConvert.DeserializeObject<List<PlayerData>>(json);
                 _gameDatas = gameDatas;
-                _gameDatas.Capacity = 5;
             }
         }
     }

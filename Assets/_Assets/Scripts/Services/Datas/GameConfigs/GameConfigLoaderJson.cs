@@ -80,6 +80,12 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
                 var inGameBackground = Path.Combine(_streamingAssetsPath, config.InGameBackgroundPath);
                 config.InGameBackgroundPath = inGameBackground;
 
+                var loadingScreenBackground = Path.Combine(_streamingAssetsPath, config.LoadingScreenBackgroundPath);
+                config.LoadingScreenBackgroundPath = loadingScreenBackground;
+
+                var loadingScreenIcon = Path.Combine(_streamingAssetsPath, config.LoadingScreenIconPath);
+                config.LoadingScreenIconPath = loadingScreenIcon;
+
                 _allConfigs.Add(config);
 
                 await UniTask.Delay(100);
@@ -112,8 +118,6 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
                     _allConfigs.Add(config);
                 }
             }
-
-            _currentConfig = _allConfigs[0];
         }
 
        

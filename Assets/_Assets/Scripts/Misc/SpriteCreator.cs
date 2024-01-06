@@ -50,5 +50,11 @@ namespace _Assets.Scripts.Misc
             var path = _configLoader.CurrentConfig.InGameBackgroundPath;
             return await SpriteHelper.CreateSprite(path);
         }
+
+        public async UniTask<Sprite> CreateLoadingCurtainIcon()
+        {
+            var path = _configLoader.CurrentConfig.LoadingScreenBackgroundPath;
+            return await SpriteHelper.CreateSprite(path);
+        }
     }
 }

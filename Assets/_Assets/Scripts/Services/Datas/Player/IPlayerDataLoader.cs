@@ -4,7 +4,7 @@ namespace _Assets.Scripts.Services.Datas
 {
     public interface IPlayerDataLoader
     {
-        List<GameData> GameDatas { get; }
+        List<PlayerData> GameDatas { get; }
         void SaveData();
         void LoadData();
     }

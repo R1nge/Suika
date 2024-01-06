@@ -129,7 +129,7 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
             if (string.IsNullOrEmpty(filePath) || string.IsNullOrEmpty(modName) ||
                 string.IsNullOrWhiteSpace(filePath) || string.IsNullOrWhiteSpace(modName))
             {
-                Debug.LogError($"Mod: {modName} File not found. Setting from default config");
+                Debug.LogError($"Mod: {modName} File {filePath} not found. Setting from default config");
                 return defaultPath;
             }
 

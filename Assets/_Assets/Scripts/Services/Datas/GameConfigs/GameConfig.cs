@@ -15,6 +15,8 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
         public float TimeBeforeTimerTrigger;
         public float TimerStartTime;
         public string InGameBackgroundPath;
+        public string LoadingScreenBackgroundPath;
+        public string LoadingScreenIconPath;
 
         public int CompareTo(GameConfig other)
         {
@@ -28,7 +30,11 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
             if (timeBeforeTimerTriggerComparison != 0) return timeBeforeTimerTriggerComparison;
             var timerStartTimeComparison = TimerStartTime.CompareTo(other.TimerStartTime);
             if (timerStartTimeComparison != 0) return timerStartTimeComparison;
-            return string.Compare(InGameBackgroundPath, other.InGameBackgroundPath, StringComparison.Ordinal);
+            var inGameBackgroundPathComparison = string.Compare(InGameBackgroundPath, other.InGameBackgroundPath, StringComparison.Ordinal);
+            if (inGameBackgroundPathComparison != 0) return inGameBackgroundPathComparison;
+            var loadingScreenBackgroundPathComparison = string.Compare(LoadingScreenBackgroundPath, other.LoadingScreenBackgroundPath, StringComparison.Ordinal);
+            if (loadingScreenBackgroundPathComparison != 0) return loadingScreenBackgroundPathComparison;
+            return string.Compare(LoadingScreenIconPath, other.LoadingScreenIconPath, StringComparison.Ordinal);
         }
     }
 }
