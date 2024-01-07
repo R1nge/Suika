@@ -30,9 +30,8 @@ namespace _Assets.Scripts.Services.StateMachine.States
             await _configLoader.LoadDefaultConfig();
             _configLoader.LoadAllConfigs();
             _configLoader.SetCurrentConfig(_modDataLoader.ModData.SelectedModIndex);
-            _uiStateMachine.SwitchState(UIStateType.Loading);
-            await UniTask.Delay(500);
-            _uiStateMachine.SwitchState(UIStateType.MainMenu);
+            _uiStateMachine.SwitchState(UIStateType.Loading).Forget();
+            await _uiStateMachine.SwitchState(UIStateType.MainMenu, 1000);
         }
 
         public void Exit()

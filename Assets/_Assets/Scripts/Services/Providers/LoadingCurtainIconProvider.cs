@@ -6,9 +6,11 @@ namespace _Assets.Scripts.Services.Providers
 {
     public class LoadingCurtainIconProvider
     {
-        private Sprite _sprite;
+        private Sprite _backgroundSprite;
+        private Sprite _iconSprite;
         private readonly SpriteCreator _spriteCreator;
-        public Sprite Sprite => _sprite; 
+        public Sprite BackgroundSprite => _backgroundSprite;
+        public Sprite IconSprite => _iconSprite; 
         private LoadingCurtainIconProvider(SpriteCreator spriteCreator)
         {
             _spriteCreator = spriteCreator;
@@ -16,7 +18,8 @@ namespace _Assets.Scripts.Services.Providers
 
         public async UniTask Load()
         {
-            _sprite = await _spriteCreator.CreateLoadingCurtainIcon();
+            _backgroundSprite = await _spriteCreator.CreateLoadingCurtainBackground();
+            _iconSprite = await _spriteCreator.CreateLoadingCurtainIcon();
         }
     }
 }

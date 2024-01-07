@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace _Assets.Scripts.Services.UIs.StateMachine
@@ -21,13 +22,15 @@ namespace _Assets.Scripts.Services.UIs.StateMachine
             };
         }
 
-        public void SwitchState(UIStateType uiStateType)
+        public async UniTask SwitchState(UIStateType uiStateType, int delayInMilliseconds = 0)
         {
             if (_currentUIStateType == uiStateType)
             {
                 Debug.LogError($"Already in {_currentUIStateType} state");
                 return;
             }
+
+            await UniTask.Delay(delayInMilliseconds);
 
             _currentUIState?.Exit();
             _currentUIState = _states[uiStateType];

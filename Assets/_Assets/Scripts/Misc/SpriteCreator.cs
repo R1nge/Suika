@@ -80,5 +80,19 @@ namespace _Assets.Scripts.Misc
                 return await SpriteHelper.CreateSpriteFromStreamingAssests(path);
             }
         }
+
+        public async UniTask<Sprite> CreateLoadingCurtainBackground()
+        {
+            if (!_configLoader.IsDefault)
+            {
+                var path = _configLoader.CurrentConfig.LoadingScreenBackgroundPath;
+                return await SpriteHelper.CreateSprite(path);
+            }
+            else
+            {
+                var path = _configLoader.CurrentConfig.LoadingScreenBackgroundPath;
+                return await SpriteHelper.CreateSpriteFromStreamingAssests(path);
+            }
+        }
     }
 }

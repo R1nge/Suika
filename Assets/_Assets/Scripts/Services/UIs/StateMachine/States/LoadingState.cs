@@ -24,7 +24,7 @@ namespace _Assets.Scripts.Services.UIs.StateMachine.States
         {
             await _loadingCurtainIconProvider.Load();
             _ui = _objectResolver.Instantiate(_configProvider.UIConfig.LoadingMenu);
-            _ui.GetComponent<LoadingCurtain>().Init(_loadingCurtainIconProvider.Sprite);
+            _ui.GetComponent<LoadingCurtain>().Init(_loadingCurtainIconProvider.BackgroundSprite, _loadingCurtainIconProvider.IconSprite);
             _ui.GetComponent<LoadingCurtain>().Show();
         }
 
