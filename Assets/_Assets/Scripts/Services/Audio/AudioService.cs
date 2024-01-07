@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.IO;
+using System.Threading;
 using _Assets.Scripts.Services.Datas.GameConfigs;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -9,17 +10,30 @@ namespace _Assets.Scripts.Services.Audio
 {
     public class AudioService : MonoBehaviour
     {
-        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioSource songSource;
         [Inject] private IConfigLoader _configLoader;
-        private int _lastIndex;
+        private int _lastSongIndex;
 
         public async UniTask PlaySong(int index)
         {
-            if (_lastIndex < index)
+            if (_lastSongIndex < index)
             {
-                _lastIndex = index;
+                _lastSongIndex = index;
                 var path = _configLoader.CurrentConfig.SuikaAudioPaths[index];
-                await DownloadAndPlay(path, this.GetCancellationTokenOnDestroy());
+                var extension = Path.GetExtension(path);
+
+                switch (extension)
+                {
+                    case ".mp3":
+                        await DownloadAndPlaySong(path, AudioType.MPEG,this.GetCancellationTokenOnDestroy());
+                        break;
+                    case ".ogg":
+                        await DownloadAndPlaySong(path, AudioType.OGGVORBIS, this.GetCancellationTokenOnDestroy());
+                        break;
+                    case ".wav":
+                        await DownloadAndPlaySong(path, AudioType.WAV, this.GetCancellationTokenOnDestroy());
+                        break;
+                }
             }
             else
             {
@@ -27,38 +41,37 @@ namespace _Assets.Scripts.Services.Audio
             }
         }
 
-        private async UniTask DownloadAndPlay(string path, CancellationToken cancellationToken)
+        private async UniTask DownloadAndPlaySong(string path, AudioType audioType, CancellationToken cancellationToken)
         {
-            if (audioSource.clip == null)
+            if (songSource.clip == null)
             {
-                var webRequest = new UnityWebRequest(path, "GET", new DownloadHandlerAudioClip(path, AudioType.MPEG), null);
-                await webRequest.SendWebRequest().WithCancellation(new CancellationToken());
+                var webRequest = new UnityWebRequest(path, "GET", new DownloadHandlerAudioClip(path, audioType), null);
+                await webRequest.SendWebRequest().WithCancellation(cancellationToken);
                 ((DownloadHandlerAudioClip)webRequest.downloadHandler).streamAudio = true;
                 var song = DownloadHandlerAudioClip.GetContent(webRequest);
-                audioSource.clip = song;
-                audioSource.clip.name = path;
-                audioSource.Play();
+                songSource.clip = song;
+                songSource.clip.name = path;
+                songSource.Play();
                 webRequest.Dispose();
             }
             else
             {
-                if (audioSource.clip.name == path)
+                if (songSource.clip.name == path)
                 {
                     Debug.LogWarning("The same song is playing already, nothing to do");
                 }
                 else
                 {
-                    var webRequest = new UnityWebRequest(path, "GET", new DownloadHandlerAudioClip(path, AudioType.MPEG), null);
-                    await webRequest.SendWebRequest();
+                    var webRequest = new UnityWebRequest(path, "GET", new DownloadHandlerAudioClip(path, audioType), null);
+                    await webRequest.SendWebRequest().WithCancellation(cancellationToken);
                     ((DownloadHandlerAudioClip)webRequest.downloadHandler).streamAudio = true;
                     var song = DownloadHandlerAudioClip.GetContent(webRequest);
-                    audioSource.clip = song;
-                    audioSource.clip.name = path;
-                    audioSource.Play();
+                    songSource.clip = song;
+                    songSource.clip.name = path;
+                    songSource.Play();
                     webRequest.Dispose();
                 }
             }
-            
         }
     }
 }

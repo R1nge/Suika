@@ -15,12 +15,12 @@ namespace _Assets.Scripts.Misc
             if (!_configLoader.IsDefault)
             {
                 var path = _configLoader.CurrentConfig.ContainerImagePath;
-                return await SpriteHelper.CreateSprite(path, true);
+                return await SpriteHelper.CreateSprite(path, true, true);
             }
             else
             {
                 var path = _configLoader.CurrentConfig.ContainerImagePath;
-                return await SpriteHelper.CreateSpriteFromStreamingAssests(path, true);
+                return await SpriteHelper.CreateSpriteFromStreamingAssests(path, true, true);
             }
         }
 
@@ -29,12 +29,12 @@ namespace _Assets.Scripts.Misc
             if (!_configLoader.IsDefault)
             {
                 var path = _configLoader.CurrentConfig.InGameBackgroundPath;
-                return await SpriteHelper.CreateSprite(path, true);
+                return await SpriteHelper.CreateSprite(path, false);
             }
             else
             {
                 var path = _configLoader.CurrentConfig.InGameBackgroundPath;
-                return await SpriteHelper.CreateSpriteFromStreamingAssests(path, true);
+                return await SpriteHelper.CreateSpriteFromStreamingAssests(path, false);
             }
         }
 
@@ -57,12 +57,12 @@ namespace _Assets.Scripts.Misc
             if (!_configLoader.IsDefault)
             {
                 var path = _configLoader.CurrentConfig.LoadingScreenBackgroundPath;
-                return await SpriteHelper.CreateSprite(path, true);
+                return await SpriteHelper.CreateSprite(path, false);
             }
             else
             {
                 var path = _configLoader.CurrentConfig.LoadingScreenBackgroundPath;
-                return await SpriteHelper.CreateSpriteFromStreamingAssests(path, true);
+                return await SpriteHelper.CreateSpriteFromStreamingAssests(path, false);
             }
         }
 

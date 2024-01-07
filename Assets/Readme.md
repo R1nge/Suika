@@ -18,12 +18,12 @@
 TODO:
 Shake? OR spin
 
-Physics is taking lots of time
+Merge sounds, play sound on merge
 
-Detect the shape in the modding tool,
+Physics is taking lots of time
+Detect edge line (shape) in the modding tool
 
 Adjust container sprite and colliders to the screen size (orthographic camera size)
-OGG audio support
 
 Save selected mod index (Wrong! should save selected mod name, because mods index can change after adding a new one)
 Move paths into a separate static class
