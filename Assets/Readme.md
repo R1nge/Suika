@@ -16,17 +16,23 @@
             watermelon 260x260 3.25 scale
 
 TODO:
-Shake? OR spin
 
-Add audio source to each suika, for the sounds to be played
+Adjust container sprite and colliders to fit the screen size (orthographic camera size/screen bounds)
+
+Save selected mod index (Wrong! should save selected mod name, because mods index can change after adding a new one)
+Move paths into a separate static class
+
+
 
 Physics is taking lots of time
 Detect edge line (shape) in the modding tool
 
-Adjust container sprite and colliders to the screen size (orthographic camera size/screen bounds)
 
-Save selected mod index (Wrong! should save selected mod name, because mods index can change after adding a new one)
-Move paths into a separate static class
+Fix game config validator
+
+
+Add an audio source to each suika, for the sounds to be played???
+Shake? OR spin
 
 UI:
 Leader board (local)

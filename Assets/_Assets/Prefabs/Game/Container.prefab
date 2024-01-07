@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5173732287412834214}
   - component: {fileID: 5103418324036974917}
   - component: {fileID: 1823104953324249083}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,7 +181,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1860114565866375735}
   - component: {fileID: 7225478987485839141}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -266,7 +266,7 @@ GameObject:
   - component: {fileID: 2043986023594487844}
   - component: {fileID: 6322223301264699838}
   - component: {fileID: 9199644591812336770}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GameOverCollisionDetection
   m_TagString: Untagged
   m_Icon: {fileID: 0}

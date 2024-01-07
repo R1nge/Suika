@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1619039663742882924}
   - component: {fileID: 6243430202417607413}
   - component: {fileID: 5025640543551179847}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Suika
   m_TagString: Untagged
   m_Icon: {fileID: 0}

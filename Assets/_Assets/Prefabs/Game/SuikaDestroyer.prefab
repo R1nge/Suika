@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3720540386366080918}
   - component: {fileID: -7569481309259978130}
   - component: {fileID: -2897471063664506631}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SuikaDestroyer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2925790920137771901}
   - component: {fileID: 7754298195976050427}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
