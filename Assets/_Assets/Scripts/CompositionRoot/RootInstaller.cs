@@ -25,6 +25,7 @@ namespace _Assets.Scripts.CompositionRoot
             builder.Register<PlayerDataLoaderJson>(Lifetime.Singleton).As<IPlayerDataLoader>();
             builder.Register<RandomNumberGenerator>(Lifetime.Singleton);
             builder.Register<SpriteCreator>(Lifetime.Singleton);
+            builder.Register<SpritesCacheService>(Lifetime.Singleton);
             builder.Register<LoadingCurtainIconProvider>(Lifetime.Singleton);
         }
     }

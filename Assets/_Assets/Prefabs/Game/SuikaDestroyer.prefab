@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1306074494720984218}
   - component: {fileID: 3720540386366080918}
   - component: {fileID: -7569481309259978130}
+  - component: {fileID: -2897471063664506631}
   m_Layer: 0
   m_Name: SuikaDestroyer
   m_TagString: Untagged
@@ -74,6 +75,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 7754298195976050427}
+  polygonColliderOptimizer: {fileID: -2897471063664506631}
+--- !u!114 &-2897471063664506631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2846772492180938035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6876803ba35184bf9b6a393e33a2f264, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6400279818995664606
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,27 +7,26 @@ namespace _Assets.Scripts.Services.UIs
     public class SuikaUIDataProvider
     {
         private readonly RandomNumberGenerator _randomNumberGenerator;
-        private readonly SpriteCreator _spriteCreator;
+        private readonly SpritesCacheService _spritesCacheService;
 
 
-        private SuikaUIDataProvider(RandomNumberGenerator randomNumberGenerator, SpriteCreator spriteCreator)
+        private SuikaUIDataProvider(RandomNumberGenerator randomNumberGenerator, SpritesCacheService spritesCacheService)
         {
             _randomNumberGenerator = randomNumberGenerator;
-            _spriteCreator = spriteCreator;
+            _spritesCacheService = spritesCacheService;
         }
 
-        public async UniTask<Sprite> GetCurrentSuika()
+        public Sprite GetCurrentSuika()
         {
             var current = _randomNumberGenerator.Current;
-            var sprite = await _spriteCreator.CreateSuikaIconSprite(current);
+            var sprite = _spritesCacheService.GetSuikaIconSprite(current);
             return sprite;
         }
-
-
-        public async UniTask<Sprite> GetNextSuika()
+        
+        public Sprite GetNextSuika()
         {
             var next = _randomNumberGenerator.Next;
-            var sprite = await _spriteCreator.CreateSuikaIconSprite(next);
+            var sprite = _spritesCacheService.GetSuikaIconSprite(next);
             return sprite;
         }
     }

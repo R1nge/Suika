@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1714189555824604434}
   - component: {fileID: 1619039663742882924}
   - component: {fileID: 6243430202417607413}
+  - component: {fileID: 5025640543551179847}
   m_Layer: 0
   m_Name: Suika
   m_TagString: Untagged
@@ -126,3 +127,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 1619039663742882924}
+  polygonColliderOptimizer: {fileID: 5025640543551179847}
+--- !u!114 &5025640543551179847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2846772492180938035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6876803ba35184bf9b6a393e33a2f264, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

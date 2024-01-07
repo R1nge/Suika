@@ -18,7 +18,9 @@
 TODO:
 Shake? OR spin
 
-Cache suika sprites
+Physics is taking lots of time
+
+Detect the shape in the modding tool,
 
 Adjust container sprite and colliders to the screen size (orthographic camera size)
 OGG audio support
@@ -30,7 +32,3 @@ UI:
 Leader board (local)
 Evolution line (use suika icons)
 Show error message/error icon, when mod is invalid
-
-![img.png](img.png)
-
-![img_1.png](img_1.png)

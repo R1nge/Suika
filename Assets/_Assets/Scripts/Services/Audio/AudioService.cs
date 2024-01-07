@@ -1,4 +1,5 @@
-﻿using _Assets.Scripts.Services.Datas.GameConfigs;
+﻿using System.Threading;
+using _Assets.Scripts.Services.Datas.GameConfigs;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -18,7 +19,7 @@ namespace _Assets.Scripts.Services.Audio
             {
                 _lastIndex = index;
                 var path = _configLoader.CurrentConfig.SuikaAudioPaths[index];
-                await DownloadAndPlay(path);
+                await DownloadAndPlay(path, this.GetCancellationTokenOnDestroy());
             }
             else
             {
@@ -26,12 +27,12 @@ namespace _Assets.Scripts.Services.Audio
             }
         }
 
-        private async UniTask DownloadAndPlay(string path)
+        private async UniTask DownloadAndPlay(string path, CancellationToken cancellationToken)
         {
             if (audioSource.clip == null)
             {
                 var webRequest = new UnityWebRequest(path, "GET", new DownloadHandlerAudioClip(path, AudioType.MPEG), null);
-                await webRequest.SendWebRequest();
+                await webRequest.SendWebRequest().WithCancellation(new CancellationToken());
                 ((DownloadHandlerAudioClip)webRequest.downloadHandler).streamAudio = true;
                 var song = DownloadHandlerAudioClip.GetContent(webRequest);
                 audioSource.clip = song;

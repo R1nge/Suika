@@ -1,4 +1,5 @@
-﻿using _Assets.Scripts.Services;
+﻿using System.Collections;
+using _Assets.Scripts.Services;
 using _Assets.Scripts.Services.Factories;
 using _Assets.Scripts.Services.UIs;
 using Cysharp.Threading.Tasks;
@@ -14,8 +15,9 @@ namespace _Assets.Scripts.Gameplay
         [Inject] private PlayerInput _playerInput;
         private Rigidbody2D _suikaRigidbody;
         private bool _canDrop = true;
+        private YieldInstruction _wait = new WaitForSeconds(1f);
 
-        public void SpawnSuika() => Spawn().Forget();
+        public void SpawnSuika() => Spawn();
 
         private void Update()
         {
@@ -23,7 +25,7 @@ namespace _Assets.Scripts.Gameplay
             if (Input.GetMouseButtonUp(0) && _canDrop && _playerInput.Enabled)
             {
                 Drop();
-                Cooldown().Forget();
+                StartCoroutine(Cooldown());
             }
 
 #else
@@ -35,9 +37,9 @@ namespace _Assets.Scripts.Gameplay
 #endif
         }
 
-        private async UniTask Spawn()
+        private void Spawn()
         {
-            _suikaRigidbody = await _suikasFactory.CreateKinematic(transform.position, transform);
+            _suikaRigidbody = _suikasFactory.CreateKinematic(transform.position, transform);
         }
 
         private void Drop()
@@ -48,11 +50,11 @@ namespace _Assets.Scripts.Gameplay
             _suikaRigidbody = null;
         }
 
-        private async UniTask Cooldown()
+        private IEnumerator Cooldown()
         {
             _canDrop = false;
-            await UniTask.Delay(1000);
-            await Spawn();
+            yield return _wait;
+            Spawn();
             _canDrop = true;
         }
     }

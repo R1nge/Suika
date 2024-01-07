@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using _Assets.Scripts.Misc;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -12,18 +13,21 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
     public class GameConfigLoaderJson : IConfigLoader
     {
         private readonly GameConfigValidator _gameConfigValidator;
+        private readonly SpritesCacheService _spritesCacheService;
         private GameConfig _currentConfig;
         private readonly List<GameConfig> _allConfigs = new();
         private readonly string _modsPath = Path.Combine(Application.persistentDataPath, "Mods");
         private readonly string _streamingAssetsPath = Application.streamingAssetsPath;
 
+        public event Action<GameConfig> ConfigChanged;
         public List<GameConfig> AllConfigs => _allConfigs;
         public GameConfig CurrentConfig => _currentConfig;
         public bool IsDefault => _currentConfig.Equals(_allConfigs[0]);
 
-        public GameConfigLoaderJson(GameConfigValidator gameConfigValidator)
+        public GameConfigLoaderJson(GameConfigValidator gameConfigValidator, SpritesCacheService spritesCacheService)
         {
             _gameConfigValidator = gameConfigValidator;
+            _spritesCacheService = spritesCacheService;
         }
 
 
@@ -125,6 +129,11 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
 
        
 
-        public void SetCurrentConfig(int index) => _currentConfig = _allConfigs[index];
+        public void SetCurrentConfig(int index)
+        {
+            _spritesCacheService.Reset();
+            _currentConfig = _allConfigs[index];
+            _spritesCacheService.Preload(_currentConfig, IsDefault).Forget();
+        }
     }
 }

@@ -19,9 +19,9 @@ namespace _Assets.Scripts.Services.Factories
         private readonly ScoreService _scoreService;
         private readonly ResetService _resetService;
         private readonly AudioService _audioService;
-        private readonly SpriteCreator _spriteCreator;
+        private readonly SpritesCacheService _spritesCacheService;
 
-        private SuikasFactory(IObjectResolver objectResolver, ConfigProvider configProvider, RandomNumberGenerator randomNumberGenerator, ScoreService scoreService, ResetService resetService, AudioService audioService, SpriteCreator spriteCreator)
+        private SuikasFactory(IObjectResolver objectResolver, ConfigProvider configProvider, RandomNumberGenerator randomNumberGenerator, ScoreService scoreService, ResetService resetService, AudioService audioService, SpritesCacheService spritesCacheService)
         {
             _objectResolver = objectResolver;
             _configProvider = configProvider;
@@ -29,10 +29,10 @@ namespace _Assets.Scripts.Services.Factories
             _scoreService = scoreService;
             _resetService = resetService;
             _audioService = audioService;
-            _spriteCreator = spriteCreator;
+            _spritesCacheService = spritesCacheService;
         }
 
-        public async UniTask<Rigidbody2D> CreateKinematic(Vector3 position, Transform parent)
+        public Rigidbody2D CreateKinematic(Vector3 position, Transform parent)
         {
             var index = _randomNumberGenerator.PickRandomSuika();
 
@@ -44,7 +44,7 @@ namespace _Assets.Scripts.Services.Factories
             rigidbody.isKinematic = true;
 
 
-            var sprite = await _spriteCreator.CreateSuikaSprite(index);
+            var sprite = _spritesCacheService.GetSuikaSprite(index);
             suikaInstance.SetSprite(sprite);
 
             AddToResetService(suikaInstance);
@@ -53,7 +53,7 @@ namespace _Assets.Scripts.Services.Factories
             return rigidbody;
         }
 
-        public async void Create(int index, Vector3 position)
+        public void Create(int index, Vector3 position)
         {
             index++;
 
@@ -70,7 +70,7 @@ namespace _Assets.Scripts.Services.Factories
             suikaInstance.SetIndex(index);
             suikaInstance.Drop();
 
-            var sprite = await _spriteCreator.CreateSuikaSprite(index);
+            var sprite = _spritesCacheService.GetSuikaSprite(index);
             suikaInstance.SetSprite(sprite);
 
             AddScore(index);
@@ -90,6 +90,12 @@ namespace _Assets.Scripts.Services.Factories
 
         private void AddToResetService(Suika suika) => _resetService.AddSuika(suika);
 
-        private void AddPolygonCollider(Suika suika) => suika.SpriteRenderer.gameObject.AddComponent<PolygonCollider2D>();
+        private void AddPolygonCollider(Suika suika)
+        {
+            var collider = suika.SpriteRenderer.gameObject.AddComponent<PolygonCollider2D>();
+            var optimizer = suika.PolygonColliderOptimizer;
+            optimizer.GetInitPaths(collider);
+            optimizer.OptimizePolygonCollider(.01f);
+        }
     }
 }

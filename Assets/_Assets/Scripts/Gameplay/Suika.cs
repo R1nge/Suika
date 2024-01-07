@@ -10,6 +10,8 @@ namespace _Assets.Scripts.Gameplay
     {
         //TODO: when suikas collide, destroy them and spawn one at the middle of them (between) with almost zero scale and scale it up to the original size
         [SerializeField] private SpriteRenderer spriteRenderer;
+        [SerializeField] private PolygonColliderOptimizer polygonColliderOptimizer;
+        public PolygonColliderOptimizer PolygonColliderOptimizer => polygonColliderOptimizer;
         public bool HasLanded => _landed;
         public bool HasDropped => _dropped;
         public SpriteRenderer SpriteRenderer => spriteRenderer;
