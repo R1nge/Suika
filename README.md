@@ -15,6 +15,7 @@ Loading screen icon change
 Loading screen background change  
 Character skin change  
 Merge sounds change  
+Sound volume manupation  
 
 # Modding DOES NOT support  
 Points system change (do I really need this?)  
