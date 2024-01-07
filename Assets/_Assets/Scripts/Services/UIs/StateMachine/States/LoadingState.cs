@@ -1,5 +1,6 @@
 ﻿using _Assets.Scripts.Services.Configs;
 using _Assets.Scripts.Services.Providers;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -28,6 +29,10 @@ namespace _Assets.Scripts.Services.UIs.StateMachine.States
             _ui.GetComponent<LoadingCurtain>().Show();
         }
 
-        public void Exit() => _ui.GetComponent<LoadingCurtain>().Hide();
+        public async void Exit(int millisecondsDelay)
+        {
+            await UniTask.Delay(millisecondsDelay);
+            _ui.GetComponent<LoadingCurtain>().Hide();
+        }
     }
 }

@@ -28,6 +28,10 @@ namespace _Assets.Scripts.Services.UIs.StateMachine.States
             _ui.GetComponent<InGameBackground>().Init().Forget();
         }
 
-        public void Exit() => Object.Destroy(_ui);
+        public async void Exit(int millisecondsDelay)
+        {
+            await UniTask.Delay(millisecondsDelay);
+            Object.Destroy(_ui);
+        }
     }
 }

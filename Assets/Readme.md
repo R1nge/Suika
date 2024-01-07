@@ -18,6 +18,7 @@
 TODO:
 Shake? OR spin
 
+Cache sprites loading
 Adjust container sprite and colliders to the screen size (orthographic camera size)
 Character mod support
 Don't merge a player's suika (disable rigidbody and collider)

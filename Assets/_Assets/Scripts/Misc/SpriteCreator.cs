@@ -7,6 +7,7 @@ namespace _Assets.Scripts.Misc
     public class SpriteCreator
     {
         private readonly IConfigLoader _configLoader;
+        //TODO: Cache sprites
 
         public SpriteCreator(IConfigLoader configLoader) => _configLoader = configLoader;
 

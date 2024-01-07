@@ -22,7 +22,7 @@ namespace _Assets.Scripts.Services.UIs.StateMachine
             };
         }
 
-        public async UniTask SwitchState(UIStateType uiStateType, int delayInMilliseconds = 0)
+        public async UniTask SwitchState(UIStateType uiStateType, int switchDelayInMilliseconds = 0, int exitDelayInMilliseconds = 0)
         {
             if (_currentUIStateType == uiStateType)
             {
@@ -30,9 +30,9 @@ namespace _Assets.Scripts.Services.UIs.StateMachine
                 return;
             }
 
-            await UniTask.Delay(delayInMilliseconds);
+            await UniTask.Delay(switchDelayInMilliseconds);
 
-            _currentUIState?.Exit();
+            _currentUIState?.Exit(exitDelayInMilliseconds);
             _currentUIState = _states[uiStateType];
             _currentUIStateType = uiStateType;
             _currentUIState.Enter();

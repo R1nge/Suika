@@ -1,4 +1,5 @@
 ﻿using _Assets.Scripts.Services.Configs;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -19,6 +20,10 @@ namespace _Assets.Scripts.Services.UIs.StateMachine.States
 
         public void Enter() => _ui = _objectResolver.Instantiate(_configProvider.UIConfig.ModsMenu);
 
-        public void Exit() => Object.Destroy(_ui);
+        public async void Exit(int millisecondsDelay)
+        {
+            await UniTask.Delay(millisecondsDelay);
+            Object.Destroy(_ui);
+        }
     }
 }
