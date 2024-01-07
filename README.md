@@ -36,3 +36,6 @@ Character skin = 128-512
 Modding tool (soon)  
 
 Look at an example mod in `StreamingAssets` folder  
+
+# Useful links
+[Image resize](https://www.iloveimg.com/resize-image) 
