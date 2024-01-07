@@ -23,7 +23,7 @@ Scripting (do I really need this?)
 
 # Modding guide
 The mod title should be the same as the folder name  
-The game supports image of any size in PNG JPEG formats, should be power of 2 for the compression to work  
+The game supports image of any size in PNG JPEG formats, each dimension must be, independently, a power of two  
 But, to avoid lag spikes while loading images, it's better to stick to recomended sizes in px  
 Suika skin sprite = 256-512  
 Suika ui icon sprite = 128-256  
