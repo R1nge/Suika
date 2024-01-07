@@ -18,6 +18,8 @@
 TODO:
 Shake? OR spin
 
+Add audio source to each suika, for the sounds to be played
+
 Physics is taking lots of time
 Detect edge line (shape) in the modding tool
 
