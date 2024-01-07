@@ -14,9 +14,9 @@ In game background image change
 Loading screen icon change  
 Loading screen background change  
 Character skin change  
+Merge sounds change  
 
 # Modding DOES NOT support  
-OGG audio support (soon)  
 Points system change (do I really need this?)  
 Different suikas amount (!= 12) (do I really need this?)  
 Scripting (do I really need this?)  
