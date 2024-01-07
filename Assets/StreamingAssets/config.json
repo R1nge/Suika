@@ -61,5 +61,6 @@
   "timerStartTime": 5,
   "inGameBackgroundPath": "background.png",
   "LoadingScreenBackgroundPath": "background.png",
-  "LoadingScreenIconPath": "gura.png"
+  "LoadingScreenIconPath": "gura.png",
+  "PlayerSkinPath": "gura.png"
 }

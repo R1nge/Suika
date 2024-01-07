@@ -86,6 +86,9 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
                 var loadingScreenIcon = Path.Combine(_streamingAssetsPath, config.LoadingScreenIconPath);
                 config.LoadingScreenIconPath = loadingScreenIcon;
 
+                var playerSkin = Path.Combine(_streamingAssetsPath, config.PlayerSkinPath);
+                config.PlayerSkinPath = playerSkin;
+
                 _allConfigs.Add(config);
 
                 await UniTask.Delay(100);

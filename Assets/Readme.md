@@ -21,7 +21,6 @@ Shake? OR spin
 Cache suika sprites
 
 Adjust container sprite and colliders to the screen size (orthographic camera size)
-Character mod support
 OGG audio support
 
 Save selected mod index (Wrong! should save selected mod name, because mods index can change after adding a new one)

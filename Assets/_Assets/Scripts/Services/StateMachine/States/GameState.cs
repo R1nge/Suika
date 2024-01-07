@@ -32,9 +32,9 @@ namespace _Assets.Scripts.Services.StateMachine.States
             await _containerFactory.Create();
             await _audioService.PlaySong(0);
             await _uiStateMachine.SwitchState(UIStateType.Game, 1000);
-            var player = _playerFactory.Create().GetComponent<PlayerDrop>();
+            var player = await _playerFactory.Create();
             _playerInput.Enable();
-            player.SpawnSuika();
+            player.GetComponent<PlayerDrop>().SpawnSuika();
         }
 
         public void Exit()

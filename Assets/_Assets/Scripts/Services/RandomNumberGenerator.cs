@@ -30,16 +30,12 @@ namespace _Assets.Scripts.Services
 
             var chance = Random.Range(0f, 1f);
             var next = Random.Range(0, 5);
-            
-            Debug.LogError($"Current Chance: {chance}, Drop chance: {_configLoader.CurrentConfig.SuikaDropChances[next]}, Spawn: {chance <= _configLoader.CurrentConfig.SuikaDropChances[next]}");
 
             if (chance <= _configLoader.CurrentConfig.SuikaDropChances[next])
             {
                 _previous = _current;
                 _current = _next;
                 _next = next;
-
-                Debug.LogError("Picked Suika. Previous: " + _previous + ", Current: " + _current + ", Next: " + _next);
 
                 OnSuikaPicked?.Invoke(_previous, _current, _next);
             }
@@ -48,7 +44,6 @@ namespace _Assets.Scripts.Services
                 return PickRandomSuika();
             }
 
-           
 
             return _current;
         }

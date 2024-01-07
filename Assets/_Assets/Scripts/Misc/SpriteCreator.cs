@@ -95,5 +95,19 @@ namespace _Assets.Scripts.Misc
                 return await SpriteHelper.CreateSpriteFromStreamingAssests(path);
             }
         }
+
+        public async UniTask<Sprite> CreatePlayerSkin()
+        {
+            if (!_configLoader.IsDefault)
+            {
+                var path = _configLoader.CurrentConfig.PlayerSkinPath;
+                return await SpriteHelper.CreateSprite(path);
+            }
+            else
+            {
+                var path = _configLoader.CurrentConfig.PlayerSkinPath;
+                return await SpriteHelper.CreateSpriteFromStreamingAssests(path);
+            }
+        }
     }
 }

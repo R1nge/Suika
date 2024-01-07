@@ -17,6 +17,7 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
         public string InGameBackgroundPath;
         public string LoadingScreenBackgroundPath;
         public string LoadingScreenIconPath;
+        public string PlayerSkinPath;
 
         public int CompareTo(GameConfig other)
         {
@@ -34,7 +35,9 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
             if (inGameBackgroundPathComparison != 0) return inGameBackgroundPathComparison;
             var loadingScreenBackgroundPathComparison = string.Compare(LoadingScreenBackgroundPath, other.LoadingScreenBackgroundPath, StringComparison.Ordinal);
             if (loadingScreenBackgroundPathComparison != 0) return loadingScreenBackgroundPathComparison;
-            return string.Compare(LoadingScreenIconPath, other.LoadingScreenIconPath, StringComparison.Ordinal);
+            var loadingScreenIconPathComparison = string.Compare(LoadingScreenIconPath, other.LoadingScreenIconPath, StringComparison.Ordinal);
+            if (loadingScreenIconPathComparison != 0) return loadingScreenIconPathComparison;
+            return string.Compare(PlayerSkinPath, other.PlayerSkinPath, StringComparison.Ordinal);
         }
     }
 }
