@@ -41,20 +41,44 @@ namespace _Assets.Scripts.Misc
 
         public async UniTask<Sprite> CreateContainerSprite()
         {
-            var path = _configLoader.CurrentConfig.ContainerImagePath;
-            return await SpriteHelper.CreateSprite(path);
+            if (!_configLoader.IsDefault)
+            {
+                var path = _configLoader.CurrentConfig.ContainerImagePath;
+                return await SpriteHelper.CreateSprite(path);
+            }
+            else
+            {
+                var path = _configLoader.CurrentConfig.ContainerImagePath;
+                return await SpriteHelper.CreateSpriteFromStreamingAssests(path);
+            }
         }
 
         public async UniTask<Sprite> CreateInGameBackground()
         {
-            var path = _configLoader.CurrentConfig.InGameBackgroundPath;
-            return await SpriteHelper.CreateSprite(path);
+            if (!_configLoader.IsDefault)
+            {
+                var path = _configLoader.CurrentConfig.InGameBackgroundPath;
+                return await SpriteHelper.CreateSprite(path);
+            }
+            else
+            {
+                var path = _configLoader.CurrentConfig.InGameBackgroundPath;
+                return await SpriteHelper.CreateSpriteFromStreamingAssests(path);
+            }
         }
 
         public async UniTask<Sprite> CreateLoadingCurtainIcon()
         {
-            var path = _configLoader.CurrentConfig.LoadingScreenBackgroundPath;
-            return await SpriteHelper.CreateSprite(path);
+            if (!_configLoader.IsDefault)
+            {
+                var path = _configLoader.CurrentConfig.LoadingScreenIconPath;
+                return await SpriteHelper.CreateSprite(path);
+            }
+            else
+            {
+                var path = _configLoader.CurrentConfig.LoadingScreenIconPath;
+                return await SpriteHelper.CreateSpriteFromStreamingAssests(path);
+            }
         }
     }
 }

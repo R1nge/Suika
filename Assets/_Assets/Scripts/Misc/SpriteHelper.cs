@@ -13,7 +13,7 @@ namespace _Assets.Scripts.Misc
 
             var texture = new Texture2D(1, 1);
             texture.LoadImage(imageBytes);
-            return Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+            return Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f), 256);
         }
 
 
@@ -23,7 +23,7 @@ namespace _Assets.Scripts.Misc
             {
                 await webRequest.SendWebRequest();
                 var imageTexture = DownloadHandlerTexture.GetContent(webRequest);
-                return Sprite.Create(imageTexture, new Rect(0, 0, imageTexture.width, imageTexture.height), new Vector2(0.5f, 0.5f));
+                return Sprite.Create(imageTexture, new Rect(0, 0, imageTexture.width, imageTexture.height), new Vector2(0.5f, 0.5f), 256);
             }
         }
     }

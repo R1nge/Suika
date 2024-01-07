@@ -19,12 +19,15 @@ TODO:
 Shake? OR spin
 Change default game assets to suikas original
 
-Save selected mod index
+OGG audio support
 
+Save selected mod index (Wrong, should save selected mod name, because mods index can change after adding a new one)
+
+Adjust container sprite and colliders to the screen size (orthographic camera size)
 Loading screen background mod support
-
-
 Move paths into a separate static class
+Character mod support
+Don't merge a player's suika (disable rigidbody and collider)
 
 
 UI:
