@@ -15,6 +15,7 @@ Loading screen icon change
 
 # Modding DOES NOT support  
 Loading screen background change (soon)  
+Character skin change (soon)  
 Points system change (do I really need this?)  
 Different suikas amount (!= 12) (do I really need this?)  
 Scripting (do I really need this?)  
