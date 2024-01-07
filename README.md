@@ -13,23 +13,25 @@ Auto image size detection
 In game background image change  
 Loading screen icon change  
 Loading screen background change  
+Character skin change  
 
 # Modding DOES NOT support  
-Character skin change (soon)  
+OGG audio support (soon)  
 Points system change (do I really need this?)  
 Different suikas amount (!= 12) (do I really need this?)  
 Scripting (do I really need this?)  
 
 # Modding guide
 The mod title should be the same as the folder name  
-The game supports image of any size in PNG JPEG formats  
-But, to avoid lag spikes while loading images, it's better to stick to recomended sizes  
+The game supports image of any size in PNG JPEG formats, should be power of 2 for the compression to work  
+But, to avoid lag spikes while loading images, it's better to stick to recomended sizes in px  
 Suika skin sprite = 256-512  
 Suika ui icon sprite = 128-256  
 Container skin sprite = 256-512  
-In game background = phone screen resolution in 16:9, 18:9, 21:9 ratio
-Loading screen background = phone screen resolution in 16:9, 18:9, 21:9 ratio
-Loading icon = 128-256
+In game background = phone screen resolution in 16:9, 18:9, 21:9 ratio  
+Loading screen background = phone screen resolution in 16:9, 18:9, 21:9 ratio  
+Loading icon = 128-256  
+Character skin = 128-512  
 
 Modding tool (soon)  
 
