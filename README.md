@@ -32,6 +32,7 @@ In game background = phone screen resolution in 16:9, 18:9, 21:9 ratio
 Loading screen background = phone screen resolution in 16:9, 18:9, 21:9 ratio  
 Loading icon = 128-256  
 Character skin = 128-512  
+The game supports audio files in MP3 WAV OGG formats  
 
 Modding tool (soon)  
 
