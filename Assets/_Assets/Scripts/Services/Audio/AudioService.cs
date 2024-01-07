@@ -84,7 +84,7 @@ namespace _Assets.Scripts.Services.Audio
                 var song = DownloadHandlerAudioClip.GetContent(webRequest);
                 musicSource.clip = song;
                 musicSource.clip.name = path;
-                mergeSource.volume = volume;
+                musicSource.volume = volume;
                 musicSource.Play();
                 webRequest.Dispose();
             }
