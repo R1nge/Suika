@@ -12,9 +12,9 @@ Drop chances change
 Auto image size detection   
 In game background image change  
 Loading screen icon change  
+Loading screen background change  
 
 # Modding DOES NOT support  
-Loading screen background change (soon)  
 Character skin change (soon)  
 Points system change (do I really need this?)  
 Different suikas amount (!= 12) (do I really need this?)  
@@ -28,5 +28,9 @@ Suika skin sprite = 256-512
 Suika ui icon sprite = 128-256  
 Container skin sprite = 256-512  
 In game background = phone screen resolution in 16:9, 18:9, 21:9 ratio
+Loading screen background = phone screen resolution in 16:9, 18:9, 21:9 ratio
+Loading icon = 128-256
 
-Look at the example mod
+Modding tool (soon)  
+
+Look at an example mod in `StreamingAssets` folder  
