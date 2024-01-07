@@ -18,6 +18,8 @@
 TODO:
 Shake? OR spin
 
+Create an audio struct with the path and volume
+
 Physics is taking lots of time
 Detect edge line (shape) in the modding tool
 

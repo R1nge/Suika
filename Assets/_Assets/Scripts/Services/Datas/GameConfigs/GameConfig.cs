@@ -1,8 +1,8 @@
 ﻿using System;
+using _Assets.Scripts.Services.Audio;
 
 namespace _Assets.Scripts.Services.Datas.GameConfigs
 {
-    //If the data has changed: read json, get missing values from default config, save json
     public struct GameConfig : IComparable<GameConfig>
     {
         public string ModName;
@@ -10,7 +10,7 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
         public string ContainerImagePath;
         public string[] SuikaSkinsImagesPaths;
         public string[] SuikaIconsPaths;
-        public string[] SuikaAudioPaths;
+        public AudioData[] SuikaAudios;
         public float[] SuikaDropChances;
         public float TimeBeforeTimerTrigger;
         public float TimerStartTime;
@@ -18,7 +18,7 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
         public string LoadingScreenBackgroundPath;
         public string LoadingScreenIconPath;
         public string PlayerSkinPath;
-        public string[] MergeSoundsAudioPaths;
+        public AudioData[] MergeSoundsAudios;
 
         public int CompareTo(GameConfig other)
         {

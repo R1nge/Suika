@@ -65,10 +65,10 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
                     config.SuikaIconsPaths[i] = suikaIconsRelativePath;
                 }
 
-                for (int i = 0; i < config.SuikaAudioPaths.Length; i++)
+                for (int i = 0; i < config.SuikaAudios.Length; i++)
                 {
-                    var suikaAudioRelativePath = Path.Combine(_streamingAssetsPath, config.SuikaAudioPaths[i]);
-                    config.SuikaAudioPaths[i] = suikaAudioRelativePath;
+                    var suikaAudioRelativePath = Path.Combine(_streamingAssetsPath, config.SuikaAudios[i].Path);
+                    config.SuikaAudios[i].Path = suikaAudioRelativePath;
                 }
                 
                 if (config.TimeBeforeTimerTrigger < 0)
@@ -93,10 +93,10 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
                 var playerSkin = Path.Combine(_streamingAssetsPath, config.PlayerSkinPath);
                 config.PlayerSkinPath = playerSkin;
                 
-                for (int i = 0; i < config.MergeSoundsAudioPaths.Length; i++)
+                for (int i = 0; i < config.MergeSoundsAudios.Length; i++)
                 {
-                    var mergeSoundsAudioRelativePath = Path.Combine(_streamingAssetsPath, config.MergeSoundsAudioPaths[i]);
-                    config.MergeSoundsAudioPaths[i] = mergeSoundsAudioRelativePath;
+                    var mergeSoundsAudioRelativePath = Path.Combine(_streamingAssetsPath, config.MergeSoundsAudios[i].Path);
+                    config.MergeSoundsAudios[i].Path = mergeSoundsAudioRelativePath;
                 }
 
                 _allConfigs.Add(config);

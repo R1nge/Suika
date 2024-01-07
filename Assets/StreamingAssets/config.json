@@ -30,19 +30,19 @@
     "koyori.png",
     "towa.png"
   ],
-  "suikaAudioPaths": [
-    "silence.mp3",
-    "silence.mp3",
-    "song1.mp3",
-    "song1.mp3",
-    "song1.mp3",
-    "song1.mp3",
-    "silence.mp3",
-    "silence.mp3",
-    "silence.mp3",
-    "silence.mp3",
-    "silence.mp3",
-    "silence.mp3"
+  "suikaAudios": [
+    {"path": "silence.mp3", "volume": 1},
+    {"path": "silence.mp3", "volume": 1},
+    {"path": "song1.mp3", "volume": 0.5},
+    {"path": "song1.mp3", "volume": 0.5},
+    {"path": "song1.mp3", "volume": 0.5},
+    {"path": "song1.mp3", "volume": 0.5},
+    {"path": "silence.mp3", "volume": 1},
+    {"path": "silence.mp3", "volume": 1},
+    {"path": "silence.mp3", "volume": 1},
+    {"path": "silence.mp3", "volume": 1},
+    {"path": "silence.mp3", "volume": 1},
+    {"path": "silence.mp3", "volume": 1}
   ],
   "suikaDropChances": [
     0.1,
@@ -63,18 +63,18 @@
   "LoadingScreenBackgroundPath": "background.png",
   "LoadingScreenIconPath": "gura.png",
   "PlayerSkinPath": "gura.png",
-  "MergeSoundsAudioPaths": [
-    "yagoo.ogg",
-    "sana.ogg",
-    "ollie.ogg",
-    "aqua.ogg",
-    "ayame.ogg",
-    "fubuki.ogg",
-    "gura.ogg",
-    "hakos.ogg",
-    "mio.ogg",
-    "kobo.ogg",
-    "koyori.ogg",
-    "towa.ogg"
+  "MergeSoundsAudios": [
+    {"path": "yagoo.ogg", "volume": 0.5},
+    {"path": "sana.ogg", "volume": 0.5},
+    {"path": "ollie.ogg", "volume": 0.5},
+    {"path": "aqua.ogg", "volume": 0.5},
+    {"path": "ayame.ogg", "volume": 0.5},
+    {"path": "fubuki.ogg", "volume": 0.5},
+    {"path": "gura.ogg", "volume": 0.5},
+    {"path": "hakos.ogg", "volume": 0.5},
+    {"path": "mio.ogg", "volume": 0.5},
+    {"path": "kobo.ogg", "volume": 0.5},
+    {"path": "koyori.ogg", "volume": 0.5},
+    {"path": "towa.ogg", "volume": 0.5}
   ]
 }

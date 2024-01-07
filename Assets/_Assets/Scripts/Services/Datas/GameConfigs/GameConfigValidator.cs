@@ -55,11 +55,11 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
 
         private void ValidateSuikaAudio(ref GameConfig defaultConfig, ref GameConfig config)
         {
-            for (int i = 0; i < config.SuikaAudioPaths.Length; i++)
-            {
-                config.SuikaAudioPaths[i] = GetFilePath(config.SuikaAudioPaths[i], defaultConfig.SuikaAudioPaths[i],
-                    config.ModName);
-            }
+            // for (int i = 0; i < config.SuikaAudioPaths.Length; i++)
+            // {
+            //     config.SuikaAudioPaths[i] = GetFilePath(config.SuikaAudioPaths[i], defaultConfig.SuikaAudioPaths[i],
+            //         config.ModName);
+            // }
         }
 
         private void ValidateSuikaDropChances(ref GameConfig defaultConfig, ref GameConfig config)
