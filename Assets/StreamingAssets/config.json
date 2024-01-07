@@ -31,18 +31,18 @@
     "towa.png"
   ],
   "suikaAudioPaths": [
-    "aqua.ogg",
-    "aqua.ogg",
+    "silence.mp3",
+    "silence.mp3",
     "song1.mp3",
     "song1.mp3",
     "song1.mp3",
     "song1.mp3",
-    "aqua.ogg",
-    "aqua.ogg",
-    "aqua.ogg",
-    "aqua.ogg",
-    "aqua.ogg",
-    "aqua.ogg"
+    "silence.mp3",
+    "silence.mp3",
+    "silence.mp3",
+    "silence.mp3",
+    "silence.mp3",
+    "silence.mp3"
   ],
   "suikaDropChances": [
     0.1,
