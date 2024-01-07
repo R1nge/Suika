@@ -33,7 +33,10 @@ namespace _Assets.Scripts.Gameplay
                 _landed = true;
                 if (other.gameObject.TryGetComponent(out Suika suika))
                 {
-                    OnCollision(suika);
+                    if (suika.HasDropped)
+                    {
+                        OnCollision(suika);    
+                    }
                 }
             }
         }

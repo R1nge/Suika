@@ -18,20 +18,16 @@ namespace _Assets.Scripts.Services.Factories
         private readonly RandomNumberGenerator _randomNumberGenerator;
         private readonly ScoreService _scoreService;
         private readonly ResetService _resetService;
-        private readonly IConfigLoader _configLoader;
         private readonly AudioService _audioService;
         private readonly SpriteCreator _spriteCreator;
 
-        private SuikasFactory(IObjectResolver objectResolver, ConfigProvider configProvider,
-            RandomNumberGenerator randomNumberGenerator, ScoreService scoreService, ResetService resetService,
-            IConfigLoader configLoader, AudioService audioService, SpriteCreator spriteCreator)
+        private SuikasFactory(IObjectResolver objectResolver, ConfigProvider configProvider, RandomNumberGenerator randomNumberGenerator, ScoreService scoreService, ResetService resetService, AudioService audioService, SpriteCreator spriteCreator)
         {
             _objectResolver = objectResolver;
             _configProvider = configProvider;
             _randomNumberGenerator = randomNumberGenerator;
             _scoreService = scoreService;
             _resetService = resetService;
-            _configLoader = configLoader;
             _audioService = audioService;
             _spriteCreator = spriteCreator;
         }
@@ -41,8 +37,7 @@ namespace _Assets.Scripts.Services.Factories
             var index = _randomNumberGenerator.PickRandomSuika();
 
             var suikaPrefab = _configProvider.SuikasConfig.GetPrefab(index);
-            var suikaInstance = _objectResolver
-                .Instantiate(suikaPrefab.gameObject, position, Quaternion.identity, parent).GetComponent<Suika>();
+            var suikaInstance = _objectResolver.Instantiate(suikaPrefab.gameObject, position, Quaternion.identity, parent).GetComponent<Suika>();
             suikaInstance.SetIndex(index);
 
             var rigidbody = suikaInstance.GetComponent<Rigidbody2D>();
@@ -65,7 +60,7 @@ namespace _Assets.Scripts.Services.Factories
             if (!_configProvider.SuikasConfig.HasPrefab(index))
             {
                 AddScore(index--);
-                Debug.LogWarning($"SuikasFactory: Index is out of range {index}");
+                Debug.LogError($"SuikasFactory: Index is out of range {index}");
                 return;
             }
 
