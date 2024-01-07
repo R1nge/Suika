@@ -18,8 +18,6 @@
 TODO:
 Shake? OR spin
 
-Merge sounds, play sound on merge
-
 Physics is taking lots of time
 Detect edge line (shape) in the modding tool
 

@@ -76,6 +76,7 @@ namespace _Assets.Scripts.Services.Factories
             AddScore(index);
             AddToResetService(suikaInstance);
             AddPolygonCollider(suikaInstance);
+            _audioService.PlayMerge(index).Forget();
             _audioService.PlaySong(index).Forget();
         }
 

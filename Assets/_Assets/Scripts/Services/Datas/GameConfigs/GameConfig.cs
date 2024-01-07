@@ -18,6 +18,7 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
         public string LoadingScreenBackgroundPath;
         public string LoadingScreenIconPath;
         public string PlayerSkinPath;
+        public string[] MergeSoundsAudioPaths;
 
         public int CompareTo(GameConfig other)
         {

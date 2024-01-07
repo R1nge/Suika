@@ -92,6 +92,12 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
 
                 var playerSkin = Path.Combine(_streamingAssetsPath, config.PlayerSkinPath);
                 config.PlayerSkinPath = playerSkin;
+                
+                for (int i = 0; i < config.MergeSoundsAudioPaths.Length; i++)
+                {
+                    var mergeSoundsAudioRelativePath = Path.Combine(_streamingAssetsPath, config.MergeSoundsAudioPaths[i]);
+                    config.MergeSoundsAudioPaths[i] = mergeSoundsAudioRelativePath;
+                }
 
                 _allConfigs.Add(config);
 

@@ -10,7 +10,8 @@ namespace _Assets.Scripts.Services.Audio
 {
     public class AudioService : MonoBehaviour
     {
-        [SerializeField] private AudioSource songSource;
+        [SerializeField] private AudioSource musicSource;
+        [SerializeField] private AudioSource mergeSource;
         [Inject] private IConfigLoader _configLoader;
         private int _lastSongIndex;
 
@@ -41,22 +42,53 @@ namespace _Assets.Scripts.Services.Audio
             }
         }
 
+        public async UniTask PlayMerge(int index)
+        {
+            var path = _configLoader.CurrentConfig.MergeSoundsAudioPaths[index];
+            var extension = Path.GetExtension(path);
+
+            switch (extension)
+            {
+                case ".mp3":
+                    await DownloadAndPlayMergeSound(path, AudioType.MPEG, this.GetCancellationTokenOnDestroy());
+                    break;
+                case ".ogg":
+                    await DownloadAndPlayMergeSound(path, AudioType.OGGVORBIS, this.GetCancellationTokenOnDestroy());
+                    break;
+                case ".wav":
+                    await DownloadAndPlayMergeSound(path, AudioType.WAV, this.GetCancellationTokenOnDestroy());
+                    break;
+            }
+        }
+
+        private async UniTask DownloadAndPlayMergeSound(string path, AudioType audioType, CancellationToken cancellationToken)
+        {
+            var webRequest = new UnityWebRequest(path, "GET", new DownloadHandlerAudioClip(path, audioType), null);
+            await webRequest.SendWebRequest().WithCancellation(cancellationToken);
+            ((DownloadHandlerAudioClip)webRequest.downloadHandler).streamAudio = true;
+            var sound = DownloadHandlerAudioClip.GetContent(webRequest);
+            mergeSource.clip = sound;
+            mergeSource.clip.name = path;
+            mergeSource.Play();
+            webRequest.Dispose();
+        }
+
         private async UniTask DownloadAndPlaySong(string path, AudioType audioType, CancellationToken cancellationToken)
         {
-            if (songSource.clip == null)
+            if (musicSource.clip == null)
             {
                 var webRequest = new UnityWebRequest(path, "GET", new DownloadHandlerAudioClip(path, audioType), null);
                 await webRequest.SendWebRequest().WithCancellation(cancellationToken);
                 ((DownloadHandlerAudioClip)webRequest.downloadHandler).streamAudio = true;
                 var song = DownloadHandlerAudioClip.GetContent(webRequest);
-                songSource.clip = song;
-                songSource.clip.name = path;
-                songSource.Play();
+                musicSource.clip = song;
+                musicSource.clip.name = path;
+                musicSource.Play();
                 webRequest.Dispose();
             }
             else
             {
-                if (songSource.clip.name == path)
+                if (musicSource.clip.name == path)
                 {
                     Debug.LogWarning("The same song is playing already, nothing to do");
                 }
@@ -66,9 +98,9 @@ namespace _Assets.Scripts.Services.Audio
                     await webRequest.SendWebRequest().WithCancellation(cancellationToken);
                     ((DownloadHandlerAudioClip)webRequest.downloadHandler).streamAudio = true;
                     var song = DownloadHandlerAudioClip.GetContent(webRequest);
-                    songSource.clip = song;
-                    songSource.clip.name = path;
-                    songSource.Play();
+                    musicSource.clip = song;
+                    musicSource.clip.name = path;
+                    musicSource.Play();
                     webRequest.Dispose();
                 }
             }
