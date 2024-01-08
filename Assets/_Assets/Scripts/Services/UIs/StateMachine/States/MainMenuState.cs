@@ -1,4 +1,5 @@
 ﻿using _Assets.Scripts.Services.Configs;
+using _Assets.Scripts.Services.Providers;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
@@ -10,15 +11,24 @@ namespace _Assets.Scripts.Services.UIs.StateMachine.States
     {
         private readonly ConfigProvider _configProvider;
         private readonly IObjectResolver _objectResolver;
+        private readonly MainMenuProvider _mainMenuProvider;
         private GameObject _ui;
         
-        public MainMenuState(ConfigProvider configProvider, IObjectResolver objectResolver)
+        public MainMenuState(ConfigProvider configProvider, IObjectResolver objectResolver, MainMenuProvider mainMenuProvider)
         {
             _configProvider = configProvider;
             _objectResolver = objectResolver;
+            _mainMenuProvider = mainMenuProvider;
         }
 
-        public void Enter() => _ui = _objectResolver.Instantiate(_configProvider.UIConfig.MainMenu);
+        public async void Enter()
+        {
+            await _mainMenuProvider.Load();
+            _ui = _objectResolver.Instantiate(_configProvider.UIConfig.MainMenu);
+            _ui.GetComponent<MainMenu>().Init(_mainMenuProvider.BackgroundSprite);
+            _ui.GetComponent<MainMenu>().Show();
+            //Show
+        }
 
         public async void Exit(int millisecondsDelay)
         {

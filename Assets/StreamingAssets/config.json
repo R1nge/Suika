@@ -76,5 +76,6 @@
     {"path": "kobo.ogg", "volume": 0.25},
     {"path": "koyori.ogg", "volume": 0.25},
     {"path": "towa.ogg", "volume": 0.25}
-  ]
+  ],
+  "mainMenuBackgroundPath": "background.png"
 }

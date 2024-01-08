@@ -79,5 +79,20 @@ namespace _Assets.Scripts.Misc
                 return await SpriteHelper.CreateSpriteFromStreamingAssests(path);
             }
         }
+
+        public async UniTask<Sprite> CreateMainMenuBackground()
+        {
+            if (!_configLoader.IsDefault)
+            {
+                var path = _configLoader.CurrentConfig.MainMenuBackgroundPath;
+                return await SpriteHelper.CreateSprite(path, false);
+            }
+            else
+            {
+                var path = _configLoader.CurrentConfig.MainMenuBackgroundPath;
+                return await SpriteHelper.CreateSpriteFromStreamingAssests(path, false);
+                
+            }
+        }
     }
 }

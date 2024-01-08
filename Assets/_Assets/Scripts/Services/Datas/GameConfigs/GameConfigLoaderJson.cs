@@ -98,6 +98,9 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
                     var mergeSoundsAudioRelativePath = Path.Combine(_streamingAssetsPath, config.MergeSoundsAudios[i].Path);
                     config.MergeSoundsAudios[i].Path = mergeSoundsAudioRelativePath;
                 }
+                
+                var mainMenuBackground = Path.Combine(_streamingAssetsPath, config.MainMenuBackgroundPath);
+                config.MainMenuBackgroundPath = mainMenuBackground;
 
                 _allConfigs.Add(config);
 

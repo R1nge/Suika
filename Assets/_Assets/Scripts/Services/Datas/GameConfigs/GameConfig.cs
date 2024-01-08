@@ -19,6 +19,7 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
         public string LoadingScreenIconPath;
         public string PlayerSkinPath;
         public AudioData[] MergeSoundsAudios;
+        public string MainMenuBackgroundPath;
 
         public int CompareTo(GameConfig other)
         {
@@ -38,7 +39,9 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
             if (loadingScreenBackgroundPathComparison != 0) return loadingScreenBackgroundPathComparison;
             var loadingScreenIconPathComparison = string.Compare(LoadingScreenIconPath, other.LoadingScreenIconPath, StringComparison.Ordinal);
             if (loadingScreenIconPathComparison != 0) return loadingScreenIconPathComparison;
-            return string.Compare(PlayerSkinPath, other.PlayerSkinPath, StringComparison.Ordinal);
+            var playerSkinPathComparison = string.Compare(PlayerSkinPath, other.PlayerSkinPath, StringComparison.Ordinal);
+            if (playerSkinPathComparison != 0) return playerSkinPathComparison;
+            return string.Compare(MainMenuBackgroundPath, other.MainMenuBackgroundPath, StringComparison.Ordinal);
         }
     }
 }

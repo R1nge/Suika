@@ -10,12 +10,14 @@ namespace _Assets.Scripts.Services.UIs.StateMachine
         private readonly ConfigProvider _configProvider;
         private readonly IObjectResolver _objectResolver;
         private readonly LoadingCurtainIconProvider _loadingCurtainIconProvider;
+        private readonly MainMenuProvider _mainMenuProvider;
 
-        private UIStatesFactory(ConfigProvider configProvider, IObjectResolver objectResolver, LoadingCurtainIconProvider loadingCurtainIconProvider)
+        private UIStatesFactory(ConfigProvider configProvider, IObjectResolver objectResolver, LoadingCurtainIconProvider loadingCurtainIconProvider, MainMenuProvider mainMenuProvider)
         {
             _configProvider = configProvider;
             _objectResolver = objectResolver;
             _loadingCurtainIconProvider = loadingCurtainIconProvider;
+            _mainMenuProvider = mainMenuProvider;
         }
 
         public IUIState CreateLoadingState(UIStateMachine stateMachine)
@@ -25,7 +27,7 @@ namespace _Assets.Scripts.Services.UIs.StateMachine
 
         public IUIState CreateMainMenuState(UIStateMachine stateMachine)
         {
-            return new MainMenuState(_configProvider, _objectResolver);
+            return new MainMenuState(_configProvider, _objectResolver, _mainMenuProvider);
         }
 
         public IUIState CreateGameState(UIStateMachine stateMachine)

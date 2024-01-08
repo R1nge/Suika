@@ -27,6 +27,7 @@ namespace _Assets.Scripts.CompositionRoot
             builder.Register<SpriteCreator>(Lifetime.Singleton);
             builder.Register<SpritesCacheService>(Lifetime.Singleton);
             builder.Register<LoadingCurtainIconProvider>(Lifetime.Singleton);
+            builder.Register<MainMenuProvider>(Lifetime.Singleton);
         }
     }
 }

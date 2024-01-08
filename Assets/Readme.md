@@ -16,8 +16,6 @@
             watermelon 260x260 3.25 scale
 
 TODO:
-
-Main menu background mod
 Pause menu with settings (music, sound toggles)
 
 Adjust container sprite and colliders to fit the screen size (orthographic camera size/screen bounds)
