@@ -3,6 +3,7 @@ using _Assets.Scripts.Services.Audio;
 using _Assets.Scripts.Services.Datas;
 using _Assets.Scripts.Services.Datas.GameConfigs;
 using _Assets.Scripts.Services.Datas.Mods;
+using _Assets.Scripts.Services.Datas.Player;
 using _Assets.Scripts.Services.Factories;
 using _Assets.Scripts.Services.StateMachine.States;
 using _Assets.Scripts.Services.UIs.StateMachine;

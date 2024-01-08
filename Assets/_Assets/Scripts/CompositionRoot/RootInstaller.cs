@@ -5,6 +5,7 @@ using _Assets.Scripts.Services.Configs;
 using _Assets.Scripts.Services.Datas;
 using _Assets.Scripts.Services.Datas.GameConfigs;
 using _Assets.Scripts.Services.Datas.Mods;
+using _Assets.Scripts.Services.Datas.Player;
 using _Assets.Scripts.Services.Providers;
 using UnityEngine;
 using VContainer;

@@ -14,8 +14,6 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
         private readonly SpritesCacheService _spritesCacheService;
         private GameConfig _currentConfig;
         private readonly List<GameConfig> _allConfigs = new();
-        private readonly string _modsPath = Path.Combine(Application.persistentDataPath, "Mods");
-        private readonly string _streamingAssetsPath = Application.streamingAssetsPath;
 
         public List<GameConfig> AllConfigs => _allConfigs;
         public GameConfig CurrentConfig => _currentConfig;
@@ -29,7 +27,7 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
 
         public async UniTask LoadDefaultConfig()
         {
-            var targetFile = Path.Combine(_streamingAssetsPath, "config.json");
+            var targetFile = Path.Combine(PathsHelper.StreamingAssetsPath, "config.json");
 
             UnityWebRequest www = UnityWebRequest.Get(targetFile);
             await www.SendWebRequest();
@@ -43,27 +41,27 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
                 var json = www.downloadHandler.text;
                 var config = JsonConvert.DeserializeObject<GameConfig>(json);
 
-                var modIconRelativePath = Path.Combine(_streamingAssetsPath, config.ModIconPath);
+                var modIconRelativePath = Path.Combine(PathsHelper.StreamingAssetsPath, config.ModIconPath);
                 config.ModIconPath = modIconRelativePath;
 
-                var containerImageRelativePath = Path.Combine(_streamingAssetsPath, config.ContainerImagePath);
+                var containerImageRelativePath = Path.Combine(PathsHelper.StreamingAssetsPath, config.ContainerImagePath);
                 config.ContainerImagePath = containerImageRelativePath;
 
                 for (int i = 0; i < config.SuikaSkinsImagesPaths.Length; i++)
                 {
-                    var skinImageRelativePath = Path.Combine(_streamingAssetsPath, config.SuikaSkinsImagesPaths[i]);
+                    var skinImageRelativePath = Path.Combine(PathsHelper.StreamingAssetsPath, config.SuikaSkinsImagesPaths[i]);
                     config.SuikaSkinsImagesPaths[i] = skinImageRelativePath;
                 }
 
                 for (int i = 0; i < config.SuikaIconsPaths.Length; i++)
                 {
-                    var suikaIconsRelativePath = Path.Combine(_streamingAssetsPath, config.SuikaIconsPaths[i]);
+                    var suikaIconsRelativePath = Path.Combine(PathsHelper.StreamingAssetsPath, config.SuikaIconsPaths[i]);
                     config.SuikaIconsPaths[i] = suikaIconsRelativePath;
                 }
 
                 for (int i = 0; i < config.SuikaAudios.Length; i++)
                 {
-                    var suikaAudioRelativePath = Path.Combine(_streamingAssetsPath, config.SuikaAudios[i].Path);
+                    var suikaAudioRelativePath = Path.Combine(PathsHelper.StreamingAssetsPath, config.SuikaAudios[i].Path);
                     config.SuikaAudios[i].Path = suikaAudioRelativePath;
                 }
 
@@ -79,26 +77,25 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
                         $"TimerStartTime is less than 0. Setting from default config. Value: {_allConfigs[0].TimerStartTime}");
                 }
 
-                var inGameBackground = Path.Combine(_streamingAssetsPath, config.InGameBackgroundPath);
+                var inGameBackground = Path.Combine(PathsHelper.StreamingAssetsPath, config.InGameBackgroundPath);
                 config.InGameBackgroundPath = inGameBackground;
 
-                var loadingScreenBackground = Path.Combine(_streamingAssetsPath, config.LoadingScreenBackgroundPath);
+                var loadingScreenBackground = Path.Combine(PathsHelper.StreamingAssetsPath, config.LoadingScreenBackgroundPath);
                 config.LoadingScreenBackgroundPath = loadingScreenBackground;
 
-                var loadingScreenIcon = Path.Combine(_streamingAssetsPath, config.LoadingScreenIconPath);
+                var loadingScreenIcon = Path.Combine(PathsHelper.StreamingAssetsPath, config.LoadingScreenIconPath);
                 config.LoadingScreenIconPath = loadingScreenIcon;
 
-                var playerSkin = Path.Combine(_streamingAssetsPath, config.PlayerSkinPath);
+                var playerSkin = Path.Combine(PathsHelper.StreamingAssetsPath, config.PlayerSkinPath);
                 config.PlayerSkinPath = playerSkin;
 
                 for (int i = 0; i < config.MergeSoundsAudios.Length; i++)
                 {
-                    var mergeSoundsAudioRelativePath =
-                        Path.Combine(_streamingAssetsPath, config.MergeSoundsAudios[i].Path);
+                    var mergeSoundsAudioRelativePath = Path.Combine(PathsHelper.StreamingAssetsPath, config.MergeSoundsAudios[i].Path);
                     config.MergeSoundsAudios[i].Path = mergeSoundsAudioRelativePath;
                 }
 
-                var mainMenuBackground = Path.Combine(_streamingAssetsPath, config.MainMenuBackgroundPath);
+                var mainMenuBackground = Path.Combine(PathsHelper.StreamingAssetsPath, config.MainMenuBackgroundPath);
                 config.MainMenuBackgroundPath = mainMenuBackground;
 
                 _allConfigs.Add(config);
@@ -109,7 +106,7 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
 
         public void LoadAllConfigs()
         {
-            var modsFoldersDirectoryInfo = new DirectoryInfo(_modsPath);
+            var modsFoldersDirectoryInfo = new DirectoryInfo(PathsHelper.ModsPath);
 
             if (!modsFoldersDirectoryInfo.Exists)
             {

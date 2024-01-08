@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using _Assets.Scripts.Misc;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -17,13 +18,11 @@ namespace _Assets.Scripts.Services.Audio
 
         public void ToggleMusic(bool enable) => _audioSettingsData.IsMusicEnabled = enable;
 
-        private readonly string _path = Path.Combine(Application.persistentDataPath, "Data");
-
         public async UniTask Load()
         {
-            var dataFolderInfo = new DirectoryInfo(_path);
+            var dataFolderInfo = new DirectoryInfo(PathsHelper.DataPath);
             
-            if(!File.Exists(Path.Combine(_path, "settingsData.json")))
+            if(!File.Exists(Path.Combine(PathsHelper.DataPath, "settingsData.json")))
             {
                 Debug.LogWarning("Audio settings not found");
                 return;
@@ -41,7 +40,7 @@ namespace _Assets.Scripts.Services.Audio
 
         public void Save()
         {
-            var path = Path.Combine(_path, "settingsData.json");
+            var path = Path.Combine(PathsHelper.DataPath, "settingsData.json");
             var json = JsonConvert.SerializeObject(_audioSettingsData);
             File.WriteAllText(path, json);
         }

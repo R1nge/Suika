@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using _Assets.Scripts.Misc;
 using Newtonsoft.Json;
 using UnityEngine;
 
-namespace _Assets.Scripts.Services.Datas
+namespace _Assets.Scripts.Services.Datas.Player
 {
     public class PlayerDataLoaderJson : IPlayerDataLoader
     {
@@ -12,7 +13,6 @@ namespace _Assets.Scripts.Services.Datas
         private List<PlayerData> _gameDatas = new(5);
         public List<PlayerData> GameDatas => _gameDatas;
         private const string DataFileName = "playerData.json";
-        private readonly string _dataPath = Path.Combine(Application.persistentDataPath, "Data");
 
         public PlayerDataLoaderJson(ScoreService scoreService) => _scoreService = scoreService;
 
@@ -32,11 +32,11 @@ namespace _Assets.Scripts.Services.Datas
             
             var json = JsonConvert.SerializeObject(dataToSave);
 
-            var path = Path.Combine(_dataPath, DataFileName);
+            var path = Path.Combine(PathsHelper.DataPath, DataFileName);
             
-            if(!Directory.Exists(_dataPath))
+            if(!Directory.Exists(PathsHelper.DataPath))
             {
-                Directory.CreateDirectory(_dataPath);
+                Directory.CreateDirectory(PathsHelper.DataPath);
             }
             
             using (StreamWriter streamWriter = new StreamWriter(path))
@@ -47,7 +47,7 @@ namespace _Assets.Scripts.Services.Datas
 
         public void LoadData()
         {
-            var path = Path.Combine(_dataPath, DataFileName);
+            var path = Path.Combine(PathsHelper.DataPath, DataFileName);
             
             if (!File.Exists(path))
             {
@@ -55,7 +55,7 @@ namespace _Assets.Scripts.Services.Datas
                 return;
             }
 
-            using (StreamReader reader = new StreamReader(Path.Combine(_dataPath, DataFileName)))
+            using (StreamReader reader = new StreamReader(Path.Combine(PathsHelper.DataPath, DataFileName)))
             {
                 var json = reader.ReadToEnd();
                 var gameDatas = JsonConvert.DeserializeObject<List<PlayerData>>(json);

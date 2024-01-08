@@ -1,17 +1,20 @@
 ﻿using System;
 
-[Serializable]
-public struct PlayerData : IComparable<PlayerData>
+namespace _Assets.Scripts.Services.Datas.Player
 {
-    public int Score;
-
-    public PlayerData(int score)
+    [Serializable]
+    public struct PlayerData : IComparable<PlayerData>
     {
-        Score = score;
-    }
+        public int Score;
 
-    public int CompareTo(PlayerData other)
-    {
-        return Score.CompareTo(other.Score);
+        public PlayerData(int score)
+        {
+            Score = score;
+        }
+
+        public int CompareTo(PlayerData other)
+        {
+            return Score.CompareTo(other.Score);
+        }
     }
 }

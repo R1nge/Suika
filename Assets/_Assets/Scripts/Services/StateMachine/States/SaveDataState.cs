@@ -1,6 +1,7 @@
 ﻿using _Assets.Scripts.Services.Audio;
 using _Assets.Scripts.Services.Datas;
 using _Assets.Scripts.Services.Datas.Mods;
+using _Assets.Scripts.Services.Datas.Player;
 
 namespace _Assets.Scripts.Services.StateMachine.States
 {

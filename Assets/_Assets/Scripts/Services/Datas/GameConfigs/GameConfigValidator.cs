@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using _Assets.Scripts.Misc;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -8,8 +9,6 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
 {
     public class GameConfigValidator
     {
-        private readonly string _modsPath = Path.Combine(Application.persistentDataPath, "Mods");
-
         public void Validate(ref GameConfig defaultConfig, ref GameConfig config)
         {
             ValidateModIconPath(ref defaultConfig, ref config);
@@ -133,7 +132,7 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
                 return defaultPath;
             }
 
-            var fullPath = Path.Combine(_modsPath, modName, filePath);
+            var fullPath = Path.Combine(PathsHelper.ModsPath, modName, filePath);
             if (!File.Exists(fullPath))
             {
                 Debug.LogError($"Mod: {modName} File not found. Setting from default config path: {fullPath}");

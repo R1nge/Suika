@@ -21,9 +21,6 @@ Continue the game if using the same skin
 (Save current skin into json, encrypt it, check hashcode against current skin)
 (if the same - allow to continue, else disallow)
 
-
-Move paths into a separate static class
-
 Fix highscore/scores display UI
 Fix a lag spike when adding a polygon collider to a sprite renderer
 Fix game config validator

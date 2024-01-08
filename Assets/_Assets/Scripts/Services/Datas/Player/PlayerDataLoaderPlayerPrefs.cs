@@ -3,7 +3,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using UnityEngine;
 
-namespace _Assets.Scripts.Services.Datas
+namespace _Assets.Scripts.Services.Datas.Player
 {
     public class PlayerDataLoaderPlayerPrefs : IPlayerDataLoader
     {

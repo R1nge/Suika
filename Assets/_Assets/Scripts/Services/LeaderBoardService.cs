@@ -1,4 +1,5 @@
 ﻿using _Assets.Scripts.Services.Datas;
+using _Assets.Scripts.Services.Datas.Player;
 
 namespace _Assets.Scripts.Services
 {
