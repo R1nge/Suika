@@ -20,10 +20,6 @@ namespace _Assets.Scripts.Services.UIs.StateMachine.States
 
         public void Enter() => _ui = _objectResolver.Instantiate(_configProvider.UIConfig.ModsMenu);
 
-        public async void Exit(int millisecondsDelay)
-        {
-            await UniTask.Delay(millisecondsDelay);
-            Object.Destroy(_ui);
-        }
+        public void Exit() => Object.Destroy(_ui);
     }
 }

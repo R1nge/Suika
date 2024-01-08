@@ -1,4 +1,5 @@
 ﻿using _Assets.Scripts.Services.UIs.StateMachine;
+using Cysharp.Threading.Tasks;
 
 namespace _Assets.Scripts.Services.StateMachine.States
 {
@@ -18,7 +19,7 @@ namespace _Assets.Scripts.Services.StateMachine.States
         public void Enter()
         {
             _resetService.Reset();
-            _uiStateMachine.SwitchState(UIStateType.MainMenu);
+            _uiStateMachine.SwitchState(UIStateType.MainMenu).Forget();
         }
 
         public void Exit()

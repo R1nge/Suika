@@ -29,10 +29,6 @@ namespace _Assets.Scripts.Services.UIs.StateMachine.States
             _ui.GetComponent<LoadingCurtain>().Show();
         }
 
-        public async void Exit(int millisecondsDelay)
-        {
-            await UniTask.Delay(millisecondsDelay);
-            _ui.GetComponent<LoadingCurtain>().Hide();
-        }
+        public void Exit() => _ui.GetComponent<LoadingCurtain>().Hide();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using _Assets.Scripts.Services.UIs.StateMachine;
+using Cysharp.Threading.Tasks;
 
 namespace _Assets.Scripts.Services.StateMachine.States
 {
@@ -18,7 +19,7 @@ namespace _Assets.Scripts.Services.StateMachine.States
         public void Enter()
         {
             _playerInput.Disable();
-            _uiStateMachine.SwitchState(UIStateType.GameOver);
+            _uiStateMachine.SwitchState(UIStateType.GameOver).Forget();
             _gameStateMachine.SwitchState(GameStateType.SaveData);
         }
 

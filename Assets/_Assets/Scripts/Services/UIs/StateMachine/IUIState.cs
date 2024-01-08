@@ -3,6 +3,6 @@
     public interface IUIState
     {
         void Enter();
-        void Exit(int millisecondsDelay);
+        void Exit();
     }
 }

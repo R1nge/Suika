@@ -8,6 +8,7 @@ namespace _Assets.Scripts.Services.UIs.StateMachine
     {
         private readonly Dictionary<UIStateType, IUIState> _states;
         private IUIState _currentUIState;
+        private IUIState _previousUIState;
         private UIStateType _currentUIStateType;
 
         public UIStateMachine(UIStatesFactory uiStatesFactory)
@@ -22,7 +23,7 @@ namespace _Assets.Scripts.Services.UIs.StateMachine
             };
         }
 
-        public async UniTask SwitchState(UIStateType uiStateType, int switchDelayInMilliseconds = 0, int exitDelayInMilliseconds = 0)
+        public async UniTask SwitchState(UIStateType uiStateType, int switchDelayInMilliseconds = 0, int previousStateExitDelayInMilliseconds = 0)
         {
             if (_currentUIStateType == uiStateType)
             {
@@ -32,10 +33,25 @@ namespace _Assets.Scripts.Services.UIs.StateMachine
 
             await UniTask.Delay(switchDelayInMilliseconds);
 
-            _currentUIState?.Exit(exitDelayInMilliseconds);
+            _previousUIState = _currentUIState;
+            
             _currentUIState = _states[uiStateType];
             _currentUIStateType = uiStateType;
             _currentUIState.Enter();
+            
+            
+            if (previousStateExitDelayInMilliseconds != 0)
+            {
+                await UniTask.Delay(previousStateExitDelayInMilliseconds);
+                _previousUIState?.Exit();
+            }
+            else
+            {
+                _previousUIState?.Exit();
+            }
+            
+            //_currentUIState?.Exit();
+            
         }
     }
 }

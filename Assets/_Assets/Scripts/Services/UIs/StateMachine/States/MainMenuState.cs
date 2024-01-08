@@ -27,13 +27,8 @@ namespace _Assets.Scripts.Services.UIs.StateMachine.States
             _ui = _objectResolver.Instantiate(_configProvider.UIConfig.MainMenu);
             _ui.GetComponent<MainMenu>().Init(_mainMenuProvider.BackgroundSprite);
             _ui.GetComponent<MainMenu>().Show();
-            //Show
         }
 
-        public async void Exit(int millisecondsDelay)
-        {
-            await UniTask.Delay(millisecondsDelay);
-            Object.Destroy(_ui);
-        }
+        public void Exit() => Object.Destroy(_ui);
     }
 }
