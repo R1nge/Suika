@@ -21,7 +21,8 @@ namespace _Assets.Scripts.Services.UIs.StateMachine
                 { UIStateType.Mods, uiStatesFactory.CreateModsState(this) },
                 { UIStateType.Game, uiStatesFactory.CreateGameState(this) },
                 { UIStateType.GameOver, uiStatesFactory.CreateGameOverState(this) },
-                { UIStateType.Settings, uiStatesFactory.CreateSettingsState(this) }
+                { UIStateType.Settings, uiStatesFactory.CreateSettingsState(this) },
+                { UIStateType.Pause, uiStatesFactory.CreateGamePauseState(this) }
             };
         }
 

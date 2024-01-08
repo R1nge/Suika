@@ -16,7 +16,8 @@
             watermelon 260x260 3.25 scale
 
 TODO:
-Pause menu with settings (music, sound toggles)
+Settings menu UI
+Pause button in In game menu
 
 Save selected mod index (Wrong! save selected mod)
 Continue the game if using the same skin

@@ -18,3 +18,4 @@ MonoBehaviour:
   inGameMenu: {fileID: 4895176568063786644, guid: 5abd69c9cd1eab54694cd7f709c88db1, type: 3}
   gameOverMenu: {fileID: 6079994571766391290, guid: 137fe134b2e5a0c41936a2f9cb2f13bb, type: 3}
   settingsMenu: {fileID: 5053666993901337002, guid: 6a21598ecbac2a8409deea9e18591abb, type: 3}
+  pauseMenu: {fileID: 5053666993901337002, guid: 7206ac86e79136a40b380c1cccd39811, type: 3}

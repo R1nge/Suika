@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
 
@@ -11,6 +12,8 @@ namespace _Assets.Scripts.Services.UIs.InGame
         [Inject] private SuikaUIDataProvider _suikaUIDataProvider;
 
         public void Init() => _randomNumberGenerator.OnSuikaPicked += NextSuikaPicked;
+
+        private void Start() => nextSuikaImage.sprite = _suikaUIDataProvider.GetNextSuika();
 
         private void NextSuikaPicked(int previous, int current, int next)
         {

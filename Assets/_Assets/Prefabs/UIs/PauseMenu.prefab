@@ -496,9 +496,9 @@ GameObject:
   - component: {fileID: 7760756932070296634}
   - component: {fileID: 5755482732247451649}
   - component: {fileID: 6935125997310859000}
-  - component: {fileID: 8470924284138687345}
+  - component: {fileID: 4985672454900497752}
   m_Layer: 5
-  m_Name: SettingsMenu
+  m_Name: PauseMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -589,7 +589,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &8470924284138687345
+--- !u!114 &4985672454900497752
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -598,7 +598,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5053666993901337002}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae7e9f5207f7415493af25399da213cc, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c7586736114418b832abdbd916647b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   soundToggle: {fileID: 4480537679492073571}

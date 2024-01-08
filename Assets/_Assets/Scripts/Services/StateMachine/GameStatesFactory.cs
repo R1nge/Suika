@@ -23,7 +23,10 @@ namespace _Assets.Scripts.Services.StateMachine
         private readonly IModDataLoader _modDataLoader;
         private readonly IAudioSettingsLoader _audioSettingsLoader;
 
-        private GameStatesFactory(IPlayerDataLoader playerDataLoader, UIStateMachine uiStateMachine, CoroutineRunner coroutineRunner, PlayerFactory playerFactory, ContainerFactory containerFactory, ResetService resetService, PlayerInput playerInput, IConfigLoader configLoader, AudioService audioService, IModDataLoader modDataLoader, IAudioSettingsLoader audioSettingsLoader)
+        private GameStatesFactory(IPlayerDataLoader playerDataLoader, UIStateMachine uiStateMachine,
+            CoroutineRunner coroutineRunner, PlayerFactory playerFactory, ContainerFactory containerFactory,
+            ResetService resetService, PlayerInput playerInput, IConfigLoader configLoader, AudioService audioService,
+            IModDataLoader modDataLoader, IAudioSettingsLoader audioSettingsLoader)
         {
             _playerDataLoader = playerDataLoader;
             _uiStateMachine = uiStateMachine;
@@ -62,10 +65,20 @@ namespace _Assets.Scripts.Services.StateMachine
         {
             return new ResetAndRetry(stateMachine, _resetService);
         }
-        
+
         public IGameState CreateResetAndMainMenuState(GameStateMachine stateMachine)
         {
             return new ResetAndMainMenu(stateMachine, _resetService, _uiStateMachine);
+        }
+
+        public IGameState CreateGamePauseState(GameStateMachine stateMachine)
+        {
+            return new GamePauseState(_playerInput, _uiStateMachine);
+        }
+
+        public IGameState CreateGameResumeState(GameStateMachine stateMachine)
+        {
+            return new GameResumeState(_playerInput, _uiStateMachine);
         }
     }
 }

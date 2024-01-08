@@ -33,7 +33,6 @@ namespace _Assets.Scripts.Services.Audio
             {
                 StreamReader reader = new StreamReader(fileInfo.FullName);
                 var json = await reader.ReadToEndAsync();
-                Debug.LogError("JSON" + json);
                 _audioSettingsData = JsonConvert.DeserializeObject<AudioSettingsData>(json);
                 reader.Close();
                 reader.Dispose();

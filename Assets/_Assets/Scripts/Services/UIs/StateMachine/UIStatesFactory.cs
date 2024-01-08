@@ -49,5 +49,10 @@ namespace _Assets.Scripts.Services.UIs.StateMachine
         {
             return new SettingsState(_configProvider, _objectResolver);
         }
+
+        public IUIState CreateGamePauseState(UIStateMachine stateMachine)
+        {
+            return new PauseState(_configProvider, _objectResolver);
+        }
     }
 }

@@ -18,7 +18,9 @@ namespace _Assets.Scripts.Services.StateMachine
                 { GameStateType.GameOver, gameStatesFactory.CreateGameOverState(this) },
                 { GameStateType.SaveData, gameStatesFactory.CreateSaveDataState(this) },
                 { GameStateType.ResetAndRetry, gameStatesFactory.CreateResetAndRetryState(this) },
-                { GameStateType.ResetAndMainMenu, gameStatesFactory.CreateResetAndMainMenuState(this) }
+                { GameStateType.ResetAndMainMenu, gameStatesFactory.CreateResetAndMainMenuState(this) },
+                { GameStateType.GamePause, gameStatesFactory.CreateGamePauseState(this) },
+                { GameStateType.GameResume, gameStatesFactory.CreateGameResumeState(this) }
             };
         }
 

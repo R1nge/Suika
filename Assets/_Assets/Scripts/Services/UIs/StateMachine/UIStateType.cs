@@ -8,6 +8,7 @@
         Game = 3,
         GameOver = 4,
         Mods = 5,
-        Settings = 6
+        Settings = 6,
+        Pause = 7
     }
 }

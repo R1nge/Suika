@@ -8,6 +8,8 @@
         GameOver = 3,
         SaveData = 4,
         ResetAndRetry = 5,
-        ResetAndMainMenu = 6
+        ResetAndMainMenu = 6,
+        GamePause = 7,
+        GameResume = 8
     }
 }
