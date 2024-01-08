@@ -26,11 +26,11 @@ namespace _Assets.Scripts.Services.UIs
                 }
             }
 
-            list = list.OrderByDescending(i1 => i1).ToList();
+            var sortedList = list.OrderByDescending(i1 => i1).Distinct().ToList();
 
-            for (int i = 0; i < list.Count; i++)
+            for (int i = 0; i < sortedList.Count; i++)
             {
-                scores[i].text = list[i].ToString();
+                scores[i].text = sortedList[i].ToString();
             }
         }
     }

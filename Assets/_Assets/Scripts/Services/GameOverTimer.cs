@@ -23,7 +23,6 @@ namespace _Assets.Scripts.Services
             if (_isRunning) return;
             _isRunning = true;
             _time = _configLoader.CurrentConfig.TimerStartTime;
-            Debug.LogError("Start Timer");
             OnTimerStarted?.Invoke(_configLoader.CurrentConfig.TimerStartTime, _time);
         }
 
@@ -32,7 +31,6 @@ namespace _Assets.Scripts.Services
             if (!_isRunning) return;
             _isRunning = false;
             _time = _configLoader.CurrentConfig.TimerStartTime;
-            Debug.LogError("Stop Timer");
             OnTimerStopped?.Invoke(_time);
         }
 
@@ -48,7 +46,6 @@ namespace _Assets.Scripts.Services
                 {
                     _isRunning = false;
                     OnTimerEnded?.Invoke();
-                    Debug.LogError("Timer ended");
                 }
             }
         }

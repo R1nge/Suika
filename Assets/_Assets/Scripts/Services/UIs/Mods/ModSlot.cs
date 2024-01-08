@@ -23,11 +23,7 @@ namespace _Assets.Scripts.Services.UIs.Mods
             _index = index;
         }
 
-        private void Select()
-        {
-            _configLoader.SetCurrentConfig(_index);
-            Debug.LogError($"SELECTED {_index}");
-        }
+        private void Select() => _configLoader.SetCurrentConfig(_index);
 
         private void OnDestroy() => select.onClick.RemoveAllListeners();
     }
