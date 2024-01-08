@@ -9,6 +9,7 @@ namespace _Assets.Scripts.Services.Factories
 {
     public class ContainerFactory : MonoBehaviour
     {
+        [SerializeField] private Camera camera;
         [SerializeField] private GameObject containerPrefab;
         [SerializeField] private Transform spawnPoint;
         [Inject] private IObjectResolver _objectResolver;
@@ -21,6 +22,13 @@ namespace _Assets.Scripts.Services.Factories
 
             var sprite = await _spriteCreator.CreateContainerSprite();
             container.GetComponentInChildren<SpriteRenderer>().sprite = sprite;
+
+            float cameraHeight = camera.orthographicSize * 2;
+            float cameraWidth = cameraHeight * Screen.width / Screen.height;
+            var scalingFactorX = cameraWidth / sprite.bounds.size.x;
+            var scalingFactorY = cameraHeight / sprite.bounds.size.y;
+            var totalScale = new Vector3(scalingFactorX, scalingFactorY, 1);
+            container.GetComponentInChildren<SpriteRenderer>().transform.localScale = totalScale; 
 
             _resetService.SetContainer(container);
         }

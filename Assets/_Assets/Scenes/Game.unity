@@ -724,6 +724,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04908f3f8fe548ae82f094fbf3348b77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  camera: {fileID: 392918182}
   containerPrefab: {fileID: 4406057353122722133, guid: a01041006f6a11a47a1666cd918dea8f, type: 3}
   spawnPoint: {fileID: 1459662298}
 --- !u!4 &1306882070

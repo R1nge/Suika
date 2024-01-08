@@ -17,21 +17,23 @@
 
 TODO:
 
+Main menu background mod
+Pause menu with settings (music, sound toggles)
+
 Adjust container sprite and colliders to fit the screen size (orthographic camera size/screen bounds)
 
-Save selected mod index (Wrong! should save selected mod name, because mods index can change after adding a new one)
-Move paths into a separate static class
-
-Physics is taking lots of time
-Detect edge line (shape) in the modding tool
-
-Fix lag spike when adding a polygon collider to a sprite renderer
-Fix game config validator
-
-Continue the game if using the same skin 
+Save selected mod index (Wrong! save selected mod)
+Continue the game if using the same skin
 (Save current skin into json, encrypt it, check hashcode against current skin)
 (if the same - allow to continue, else disallow)
 
+
+Move paths into a separate static class
+
+Detect edge lines (shape) in the modding tool
+
+Fix a lag spike when adding a polygon collider to a sprite renderer
+Fix game config validator
 
 Add an audio source to each suika, for the sounds to be played???
 Shake? OR spin
