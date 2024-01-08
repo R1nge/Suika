@@ -41,3 +41,7 @@ Look at an example mod in `StreamingAssets` folder
 
 # Useful links
 [Image resize](https://www.iloveimg.com/resize-image) 
+
+# Thanks
+[aniketrajnish](https://github.com/aniketrajnish) for [Collider optimizer](https://github.com/aniketrajnish/Unity-Collider-Optimizer)  
+[ionxeph](https://github.com/ionxeph) and [Cover Corp](https://cover-corp.com/en/company) for hololive suika assets
