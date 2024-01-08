@@ -16,8 +16,7 @@
             watermelon 260x260 3.25 scale
 
 TODO:
-
-Fix player drop input detection (don't en)
+Scale up UI elements
 
 Save selected mod index (Wrong! save selected mod)
 Continue the game if using the same skin
@@ -27,7 +26,7 @@ Continue the game if using the same skin
 
 Move paths into a separate static class
 
-
+Fix highscore/scores display UI
 Fix a lag spike when adding a polygon collider to a sprite renderer
 Fix game config validator
 
