@@ -16,6 +16,22 @@ namespace _Assets.Scripts.Services.Audio
         [Inject] private IAudioSettingsLoader _audioSettingsLoader;
         private int _lastSongIndex;
 
+        public void ToggleMusic(bool enable)
+        {
+            _audioSettingsLoader.ToggleMusic(enable);
+            
+            if (enable)
+            {
+                musicSource.Play();
+            }
+            else
+            {
+                musicSource.Stop();
+            }
+        }
+
+        public void ToggleSound(bool enable) => _audioSettingsLoader.ToggleSound(enable);
+
         public async UniTask PlaySong(int index)
         {
             if (!_audioSettingsLoader.AudioData.IsMusicEnabled)

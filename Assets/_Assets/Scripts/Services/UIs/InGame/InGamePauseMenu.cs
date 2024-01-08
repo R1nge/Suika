@@ -12,6 +12,7 @@ namespace _Assets.Scripts.Services.UIs.InGame
         [SerializeField] private Button backButton;
         [Inject] private GameStateMachine _gameStateMachine;
         [Inject] private IAudioSettingsLoader _audioSettingsLoader;
+        [Inject] private AudioService _audioService;
 
         private void Awake()
         {
@@ -22,18 +23,13 @@ namespace _Assets.Scripts.Services.UIs.InGame
 
         private void Start()
         {
-            Debug.LogError("Sound enabled: " + _audioSettingsLoader.AudioData.IsSoundEnabled);
             soundToggle.isOn = _audioSettingsLoader.AudioData.IsSoundEnabled;
             musicToggle.isOn = _audioSettingsLoader.AudioData.IsMusicEnabled;
         }
 
-        private void ToggleSound(bool enable)
-        {
-            Debug.LogError("TOGGLE Sound" + enable);
-            _audioSettingsLoader.ToggleSound(enable);
-        }
+        private void ToggleSound(bool enable) => _audioService.ToggleSound(enable);
 
-        private void ToggleMusic(bool enable) => _audioSettingsLoader.ToggleMusic(enable);
+        private void ToggleMusic(bool enable) => _audioService.ToggleMusic(enable);
 
         private void Back()
         {
