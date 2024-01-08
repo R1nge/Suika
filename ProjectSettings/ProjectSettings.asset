@@ -696,7 +696,7 @@ PlayerSettings:
   il2cppCompilerConfiguration:
     Android: 1
   il2cppCodeGeneration:
-    Android: 1
+    Android: 0
   managedStrippingLevel:
     Android: 4
     EmbeddedLinux: 1

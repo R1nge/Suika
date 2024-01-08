@@ -22,13 +22,15 @@ Adjust container sprite and colliders to fit the screen size (orthographic camer
 Save selected mod index (Wrong! should save selected mod name, because mods index can change after adding a new one)
 Move paths into a separate static class
 
-
-
 Physics is taking lots of time
 Detect edge line (shape) in the modding tool
 
-
+Fix lag spike when adding a polygon collider to a sprite renderer
 Fix game config validator
+
+Continue the game if using the same skin 
+(Save current skin into json, encrypt it, check hashcode against current skin)
+(if the same - allow to continue, else disallow)
 
 
 Add an audio source to each suika, for the sounds to be played???

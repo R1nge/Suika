@@ -93,6 +93,8 @@ namespace _Assets.Scripts.Services.Factories
 
         private void AddPolygonCollider(Suika suika)
         {
+            //Causing lag spikes
+            //It's not a noticeable lag, so ignoring it for now
             var collider = suika.SpriteRenderer.gameObject.AddComponent<PolygonCollider2D>();
             var optimizer = suika.PolygonColliderOptimizer;
             optimizer.GetInitPaths(collider);

@@ -54,7 +54,7 @@ public class DouglasPeuckerReduction : MonoBehaviour
         }
     }
 
-    public static float PerpendicularDistance(Vector2 point1, Vector2 point2, Vector2 point)
+    private static float PerpendicularDistance(Vector2 point1, Vector2 point2, Vector2 point)
     {
         float area = Vector3.Cross(point1 - point, point2 - point).magnitude * 0.5f;
         float bottom = Vector3.Distance(point1, point2);
