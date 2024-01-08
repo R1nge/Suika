@@ -11,6 +11,7 @@ namespace _Assets.Scripts.Services.UIs
     {
         [SerializeField] private Button playButton;
         [SerializeField] private Button modsButton;
+        [SerializeField] private Button settingsButton;
         [SerializeField] private Button quitButton;
         [SerializeField] private Image background;
         [Inject] private GameStateMachine _gameStateMachine;
@@ -22,12 +23,15 @@ namespace _Assets.Scripts.Services.UIs
         {
             playButton.onClick.AddListener(Play);
             modsButton.onClick.AddListener(Mods);
+            settingsButton.onClick.AddListener(Settings);
             quitButton.onClick.AddListener(Quit);
         }
 
         private void Play() => _gameStateMachine.SwitchState(GameStateType.Game);
 
         private void Mods() => _uiStateMachine.SwitchState(UIStateType.Mods).Forget();
+
+        private void Settings() => _uiStateMachine.SwitchState(UIStateType.Settings).Forget();
 
         private void Quit() => Application.Quit();
     }

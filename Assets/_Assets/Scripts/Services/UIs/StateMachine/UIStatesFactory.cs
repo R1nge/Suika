@@ -44,5 +44,10 @@ namespace _Assets.Scripts.Services.UIs.StateMachine
         {
             return new ModsState(_configProvider, _objectResolver);
         }
+
+        public IUIState CreateSettingsState(UIStateMachine stateMachine)
+        {
+            return new SettingsState(_configProvider, _objectResolver);
+        }
     }
 }

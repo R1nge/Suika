@@ -7,6 +7,7 @@
         MainMenu = 2,
         Game = 3,
         GameOver = 4,
-        Mods = 5
+        Mods = 5,
+        Settings = 6
     }
 }

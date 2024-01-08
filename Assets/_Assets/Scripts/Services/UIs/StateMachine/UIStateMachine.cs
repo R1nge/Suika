@@ -10,6 +10,7 @@ namespace _Assets.Scripts.Services.UIs.StateMachine
         private IUIState _currentUIState;
         private IUIState _previousUIState;
         private UIStateType _currentUIStateType;
+        private UIStateType _previousUIStateType;
 
         public UIStateMachine(UIStatesFactory uiStatesFactory)
         {
@@ -19,7 +20,8 @@ namespace _Assets.Scripts.Services.UIs.StateMachine
                 { UIStateType.MainMenu, uiStatesFactory.CreateMainMenuState(this) },
                 { UIStateType.Mods, uiStatesFactory.CreateModsState(this) },
                 { UIStateType.Game, uiStatesFactory.CreateGameState(this) },
-                { UIStateType.GameOver, uiStatesFactory.CreateGameOverState(this) }
+                { UIStateType.GameOver, uiStatesFactory.CreateGameOverState(this) },
+                { UIStateType.Settings, uiStatesFactory.CreateSettingsState(this) }
             };
         }
 
@@ -33,13 +35,13 @@ namespace _Assets.Scripts.Services.UIs.StateMachine
 
             await UniTask.Delay(switchDelayInMilliseconds);
 
+            _previousUIStateType = _currentUIStateType;
             _previousUIState = _currentUIState;
             
             _currentUIState = _states[uiStateType];
             _currentUIStateType = uiStateType;
             _currentUIState.Enter();
-            
-            
+
             if (previousStateExitDelayInMilliseconds != 0)
             {
                 await UniTask.Delay(previousStateExitDelayInMilliseconds);
@@ -49,9 +51,11 @@ namespace _Assets.Scripts.Services.UIs.StateMachine
             {
                 _previousUIState?.Exit();
             }
-            
-            //_currentUIState?.Exit();
-            
+        }
+
+        public async UniTask SwitchToPreviousState(int switchDelayInMilliseconds = 0, int previousStateExitDelayInMilliseconds = 0)
+        {
+            await SwitchState(_previousUIStateType, switchDelayInMilliseconds, previousStateExitDelayInMilliseconds);
         }
     }
 }
