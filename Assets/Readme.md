@@ -16,8 +16,6 @@
             watermelon 260x260 3.25 scale
 
 TODO:
-Scale up UI elements
-
 Save selected mod index (Wrong! save selected mod)
 Continue the game if using the same skin
 (Save current skin into json, encrypt it, check hashcode against current skin)
