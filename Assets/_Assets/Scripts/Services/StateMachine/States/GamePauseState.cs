@@ -16,7 +16,6 @@ namespace _Assets.Scripts.Services.StateMachine.States
 
         public void Enter()
         {
-            //TODO: hide suikas (pause service)
             _uiStateMachine.SwitchState(UIStateType.Pause).Forget();
             _playerInput.Disable();
         }

@@ -16,8 +16,8 @@
             watermelon 260x260 3.25 scale
 
 TODO:
-Settings menu UI
-Pause button in In game menu
+
+Fix player drop input detection (don't en)
 
 Save selected mod index (Wrong! save selected mod)
 Continue the game if using the same skin

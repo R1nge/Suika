@@ -32,7 +32,7 @@ namespace _Assets.Scripts.Gameplay
              if (Input.GetMouseButtonDown(0) && _canDrop && _playerInput.Enabled)
             {
                 Drop();
-                Cooldown().Forget();
+                StartCoroutine(Cooldown());
             }
 #endif
         }

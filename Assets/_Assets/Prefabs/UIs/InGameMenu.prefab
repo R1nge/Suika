@@ -773,6 +773,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inGameCanvas: {fileID: 5121440166599057818}
+  sortingOrder: -998
 --- !u!114 &7039717398005300439
 MonoBehaviour:
   m_ObjectHideFlags: 0

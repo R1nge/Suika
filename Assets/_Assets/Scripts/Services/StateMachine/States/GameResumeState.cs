@@ -14,10 +14,10 @@ namespace _Assets.Scripts.Services.StateMachine.States
             _uiStateMachine = uiStateMachine;
         }
 
-        public void Enter()
+        public async void Enter()
         {
-            //TODO: show suikas (pause service)
             _uiStateMachine.SwitchState(UIStateType.Game).Forget();
+            await UniTask.DelayFrame(1);
             _playerInput.Enable();
         }
 
