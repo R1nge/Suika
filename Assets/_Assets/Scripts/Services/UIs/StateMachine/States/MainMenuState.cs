@@ -26,7 +26,6 @@ namespace _Assets.Scripts.Services.UIs.StateMachine.States
             await _mainMenuProvider.Load();
             _ui = _objectResolver.Instantiate(_configProvider.UIConfig.MainMenu);
             _ui.GetComponent<MainMenu>().Init(_mainMenuProvider.BackgroundSprite);
-            _ui.GetComponent<MainMenu>().Show();
         }
 
         public void Exit() => Object.Destroy(_ui);

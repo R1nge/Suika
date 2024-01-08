@@ -18,8 +18,6 @@ namespace _Assets.Scripts.Services.UIs
 
         public void Init(Sprite sprite) => background.sprite = sprite;
 
-        public void Show() => gameObject.SetActive(true);
-
         private void Awake()
         {
             playButton.onClick.AddListener(Play);
