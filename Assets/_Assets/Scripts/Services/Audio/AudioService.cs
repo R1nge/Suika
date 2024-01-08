@@ -13,10 +13,16 @@ namespace _Assets.Scripts.Services.Audio
         [SerializeField] private AudioSource musicSource;
         [SerializeField] private AudioSource mergeSource;
         [Inject] private IConfigLoader _configLoader;
+        [Inject] private IAudioSettingsLoader _audioSettingsLoader;
         private int _lastSongIndex;
 
         public async UniTask PlaySong(int index)
         {
+            if (!_audioSettingsLoader.AudioData.IsMusicEnabled)
+            {
+                return;
+            }
+
             if (_lastSongIndex < index)
             {
                 _lastSongIndex = index;
@@ -26,13 +32,16 @@ namespace _Assets.Scripts.Services.Audio
                 switch (extension)
                 {
                     case ".mp3":
-                        await DownloadAndPlaySong(audioData.Path, audioData.Volume, AudioType.MPEG,this.GetCancellationTokenOnDestroy());
+                        await DownloadAndPlaySong(audioData.Path, audioData.Volume, AudioType.MPEG,
+                            this.GetCancellationTokenOnDestroy());
                         break;
                     case ".ogg":
-                        await DownloadAndPlaySong(audioData.Path, audioData.Volume, AudioType.OGGVORBIS, this.GetCancellationTokenOnDestroy());
+                        await DownloadAndPlaySong(audioData.Path, audioData.Volume, AudioType.OGGVORBIS,
+                            this.GetCancellationTokenOnDestroy());
                         break;
                     case ".wav":
-                        await DownloadAndPlaySong(audioData.Path,audioData.Volume, AudioType.WAV, this.GetCancellationTokenOnDestroy());
+                        await DownloadAndPlaySong(audioData.Path, audioData.Volume, AudioType.WAV,
+                            this.GetCancellationTokenOnDestroy());
                         break;
                 }
             }
@@ -44,24 +53,33 @@ namespace _Assets.Scripts.Services.Audio
 
         public async UniTask PlayMerge(int index)
         {
+            if (!_audioSettingsLoader.AudioData.IsSoundEnabled)
+            {
+                return;
+            }
+
             var audioData = _configLoader.CurrentConfig.MergeSoundsAudios[index];
             var extension = Path.GetExtension(audioData.Path);
 
             switch (extension)
             {
                 case ".mp3":
-                    await DownloadAndPlayMergeSound(audioData.Path, audioData.Volume, AudioType.MPEG, this.GetCancellationTokenOnDestroy());
+                    await DownloadAndPlayMergeSound(audioData.Path, audioData.Volume, AudioType.MPEG,
+                        this.GetCancellationTokenOnDestroy());
                     break;
                 case ".ogg":
-                    await DownloadAndPlayMergeSound(audioData.Path, audioData.Volume, AudioType.OGGVORBIS, this.GetCancellationTokenOnDestroy());
+                    await DownloadAndPlayMergeSound(audioData.Path, audioData.Volume, AudioType.OGGVORBIS,
+                        this.GetCancellationTokenOnDestroy());
                     break;
                 case ".wav":
-                    await DownloadAndPlayMergeSound(audioData.Path, audioData.Volume, AudioType.WAV, this.GetCancellationTokenOnDestroy());
+                    await DownloadAndPlayMergeSound(audioData.Path, audioData.Volume, AudioType.WAV,
+                        this.GetCancellationTokenOnDestroy());
                     break;
             }
         }
 
-        private async UniTask DownloadAndPlayMergeSound(string path, float volume, AudioType audioType, CancellationToken cancellationToken)
+        private async UniTask DownloadAndPlayMergeSound(string path, float volume, AudioType audioType,
+            CancellationToken cancellationToken)
         {
             var webRequest = new UnityWebRequest(path, "GET", new DownloadHandlerAudioClip(path, audioType), null);
             await webRequest.SendWebRequest().WithCancellation(cancellationToken);
@@ -74,7 +92,8 @@ namespace _Assets.Scripts.Services.Audio
             webRequest.Dispose();
         }
 
-        private async UniTask DownloadAndPlaySong(string path, float volume, AudioType audioType, CancellationToken cancellationToken)
+        private async UniTask DownloadAndPlaySong(string path, float volume, AudioType audioType,
+            CancellationToken cancellationToken)
         {
             if (musicSource.clip == null)
             {
@@ -96,7 +115,8 @@ namespace _Assets.Scripts.Services.Audio
                 }
                 else
                 {
-                    var webRequest = new UnityWebRequest(path, "GET", new DownloadHandlerAudioClip(path, audioType), null);
+                    var webRequest =
+                        new UnityWebRequest(path, "GET", new DownloadHandlerAudioClip(path, audioType), null);
                     await webRequest.SendWebRequest().WithCancellation(cancellationToken);
                     ((DownloadHandlerAudioClip)webRequest.downloadHandler).streamAudio = true;
                     var song = DownloadHandlerAudioClip.GetContent(webRequest);

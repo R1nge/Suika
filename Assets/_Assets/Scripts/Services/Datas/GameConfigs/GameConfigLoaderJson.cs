@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using _Assets.Scripts.Misc;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
@@ -19,7 +17,6 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
         private readonly string _modsPath = Path.Combine(Application.persistentDataPath, "Mods");
         private readonly string _streamingAssetsPath = Application.streamingAssetsPath;
 
-        public event Action<GameConfig> ConfigChanged;
         public List<GameConfig> AllConfigs => _allConfigs;
         public GameConfig CurrentConfig => _currentConfig;
         public bool IsDefault => _currentConfig.Equals(_allConfigs[0]);
@@ -29,7 +26,6 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
             _gameConfigValidator = gameConfigValidator;
             _spritesCacheService = spritesCacheService;
         }
-
 
         public async UniTask LoadDefaultConfig()
         {
@@ -46,7 +42,7 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
             {
                 var json = www.downloadHandler.text;
                 var config = JsonConvert.DeserializeObject<GameConfig>(json);
-                
+
                 var modIconRelativePath = Path.Combine(_streamingAssetsPath, config.ModIconPath);
                 config.ModIconPath = modIconRelativePath;
 
@@ -70,17 +66,19 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
                     var suikaAudioRelativePath = Path.Combine(_streamingAssetsPath, config.SuikaAudios[i].Path);
                     config.SuikaAudios[i].Path = suikaAudioRelativePath;
                 }
-                
+
                 if (config.TimeBeforeTimerTrigger < 0)
                 {
-                    Debug.LogError($"TimeBeforeTimerTrigger is less than 0. Setting from default config. Value: {_allConfigs[0].TimeBeforeTimerTrigger}");
+                    Debug.LogError(
+                        $"TimeBeforeTimerTrigger is less than 0. Setting from default config. Value: {_allConfigs[0].TimeBeforeTimerTrigger}");
                 }
-                
+
                 if (config.TimerStartTime < 0)
                 {
-                    Debug.LogError($"TimerStartTime is less than 0. Setting from default config. Value: {_allConfigs[0].TimerStartTime}");
+                    Debug.LogError(
+                        $"TimerStartTime is less than 0. Setting from default config. Value: {_allConfigs[0].TimerStartTime}");
                 }
-                
+
                 var inGameBackground = Path.Combine(_streamingAssetsPath, config.InGameBackgroundPath);
                 config.InGameBackgroundPath = inGameBackground;
 
@@ -92,13 +90,14 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
 
                 var playerSkin = Path.Combine(_streamingAssetsPath, config.PlayerSkinPath);
                 config.PlayerSkinPath = playerSkin;
-                
+
                 for (int i = 0; i < config.MergeSoundsAudios.Length; i++)
                 {
-                    var mergeSoundsAudioRelativePath = Path.Combine(_streamingAssetsPath, config.MergeSoundsAudios[i].Path);
+                    var mergeSoundsAudioRelativePath =
+                        Path.Combine(_streamingAssetsPath, config.MergeSoundsAudios[i].Path);
                     config.MergeSoundsAudios[i].Path = mergeSoundsAudioRelativePath;
                 }
-                
+
                 var mainMenuBackground = Path.Combine(_streamingAssetsPath, config.MainMenuBackgroundPath);
                 config.MainMenuBackgroundPath = mainMenuBackground;
 
@@ -136,7 +135,6 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
             }
         }
 
-       
 
         public void SetCurrentConfig(int index)
         {

@@ -1,5 +1,6 @@
 ﻿using _Assets.Scripts.Misc;
 using _Assets.Scripts.Services;
+using _Assets.Scripts.Services.Audio;
 using _Assets.Scripts.Services.Configs;
 using _Assets.Scripts.Services.Datas;
 using _Assets.Scripts.Services.Datas.GameConfigs;
@@ -19,6 +20,7 @@ namespace _Assets.Scripts.CompositionRoot
         {
             builder.RegisterComponent(configProvider);
             builder.Register<ScoreService>(Lifetime.Singleton);
+            builder.Register<AudioSettingsDataLoaderJson>(Lifetime.Singleton).As<IAudioSettingsLoader>();
             builder.Register<ModDataLoaderJson>(Lifetime.Singleton).As<IModDataLoader>();
             builder.Register<GameConfigValidator>(Lifetime.Singleton);
             builder.Register<GameConfigLoaderJson>(Lifetime.Singleton).As<IConfigLoader>();

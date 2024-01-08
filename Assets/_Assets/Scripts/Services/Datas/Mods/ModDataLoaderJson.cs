@@ -13,15 +13,15 @@ namespace _Assets.Scripts.Services.Datas.Mods
 
         public async UniTask Load()
         {
-            var modsFoldersDirectoryInfo = new DirectoryInfo(_path);
+            var dataFolderInfo = new DirectoryInfo(_path);
 
-            if (!modsFoldersDirectoryInfo.Exists)
+            if (!dataFolderInfo.Exists)
             {
-                modsFoldersDirectoryInfo.Create();
+                dataFolderInfo.Create();
                 return;
             }
             
-            foreach (var directoryInfo in modsFoldersDirectoryInfo.GetDirectories())
+            foreach (var directoryInfo in dataFolderInfo.GetDirectories())
             {
                 foreach (var fileInfo in directoryInfo.GetFiles("modData.json"))
                 {

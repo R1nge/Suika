@@ -1,8 +1,8 @@
-﻿using _Assets.Scripts.Services.Datas;
+﻿using _Assets.Scripts.Services.Audio;
+using _Assets.Scripts.Services.Datas;
 using _Assets.Scripts.Services.Datas.GameConfigs;
 using _Assets.Scripts.Services.Datas.Mods;
 using _Assets.Scripts.Services.UIs.StateMachine;
-using Cysharp.Threading.Tasks;
 
 namespace _Assets.Scripts.Services.StateMachine.States
 {
@@ -13,18 +13,21 @@ namespace _Assets.Scripts.Services.StateMachine.States
         private readonly UIStateMachine _uiStateMachine;
         private readonly IConfigLoader _configLoader;
         private readonly IModDataLoader _modDataLoader;
+        private readonly IAudioSettingsLoader _audioSettingsLoader;
 
-        public LoadSaveDataState(GameStateMachine stateMachine, IPlayerDataLoader playerDataLoader, UIStateMachine uiStateMachine, IConfigLoader configLoader, IModDataLoader modDataLoader)
+        public LoadSaveDataState(GameStateMachine stateMachine, IPlayerDataLoader playerDataLoader, UIStateMachine uiStateMachine, IConfigLoader configLoader, IModDataLoader modDataLoader, IAudioSettingsLoader audioSettingsLoader)
         {
             _stateMachine = stateMachine;
             _playerDataLoader = playerDataLoader;
             _uiStateMachine = uiStateMachine;
             _configLoader = configLoader;
             _modDataLoader = modDataLoader;
+            _audioSettingsLoader = audioSettingsLoader;
         }
 
         public async void Enter()
         {
+            await _audioSettingsLoader.Load();
             await _modDataLoader.Load();
             _playerDataLoader.LoadData();
             await _configLoader.LoadDefaultConfig();

@@ -17,10 +17,7 @@ namespace _Assets.Scripts.Services.UIs.StateMachine.States
             _objectResolver = objectResolver;
         }
 
-        public void Enter()
-        {
-            _ui = _objectResolver.Instantiate(_configProvider.UIConfig.SettingMenu);
-        }
+        public void Enter() => _ui = _objectResolver.Instantiate(_configProvider.UIConfig.SettingMenu);
 
         public void Exit() => Object.Destroy(_ui);
     }
