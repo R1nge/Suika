@@ -12,6 +12,7 @@ namespace _Assets.Scripts.Services.UIs.Mods
         [SerializeField] private TextMeshProUGUI modNameText;
         [SerializeField] private Button select;
         [Inject] private IConfigLoader _configLoader;
+        [Inject] private ContinueGameService _continueGameService;
         private int _index;
 
         private void Start() => select.onClick.AddListener(Select);
@@ -23,7 +24,11 @@ namespace _Assets.Scripts.Services.UIs.Mods
             _index = index;
         }
 
-        private void Select() => _configLoader.SetCurrentConfig(_index);
+        private void Select()
+        {
+            _configLoader.SetCurrentConfig(_index);
+            _continueGameService.Reset();
+        }
 
         private void OnDestroy() => select.onClick.RemoveAllListeners();
     }

@@ -1,7 +1,15 @@
 ﻿TODO:
 Hide continue button if mod suika images have changed (are different)
+(Actually, there's a way of detection change in files, but it would be overkill???)
+((Use sha1 algo on files to get a hash, store it encrypted version on a disk, if current mod hash is different - reset continue))
+(Instead, I can reset the continue data, when another mod has been selected)
 
-Encrypt mod data?
+Save/load selected mod
+
+Encrypt saved data
+
+
+
 Fix a lag spike when adding a polygon collider to a sprite renderer
 
 Shake OR Spin ???

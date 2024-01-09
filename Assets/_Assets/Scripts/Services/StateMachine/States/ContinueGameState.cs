@@ -27,10 +27,10 @@ namespace _Assets.Scripts.Services.StateMachine.States
             _continueGameService.Continue();
             await _containerFactory.Create();
             var player = await _playerFactory.Create();
-            _playerInput.Enable();
             await _uiStateMachine.SwitchState(UIStateType.Game, 0, 2000);
             _continueGameService.UpdateScore();
             player.GetComponent<PlayerDrop>().SpawnContinue();
+            _playerInput.Enable();
         }
 
         public void Exit()

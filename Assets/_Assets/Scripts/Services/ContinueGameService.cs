@@ -20,7 +20,7 @@ namespace _Assets.Scripts.Services
         private readonly RandomNumberGenerator _randomNumberGenerator;
         private readonly ScoreService _scoreService;
 
-        public bool HasData => _continueData.SuikasContinueData != null;
+        public bool HasData => _continueData.SuikasContinueData != null && _continueData.Score != 0;
 
         private ContinueGameService(AudioService audioService, SuikasFactory suikasFactory,
             RandomNumberGenerator randomNumberGenerator, ScoreService scoreService)
@@ -107,5 +107,7 @@ namespace _Assets.Scripts.Services
             var json = JsonConvert.SerializeObject(_continueData);
             File.WriteAllText(path, json);
         }
+
+        public void Reset() => _continueData = new ContinueData();
     }
 }
