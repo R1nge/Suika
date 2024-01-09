@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using System.Text.RegularExpressions;
 using _Assets.Scripts.Gameplay;
 using _Assets.Scripts.Misc;
 using _Assets.Scripts.Services.Audio;
@@ -13,8 +12,6 @@ namespace _Assets.Scripts.Services
 {
     public class ContinueGameService
     {
-        //TODO: encrypt data
-        private int _hash;
         private ContinueData _continueData;
         private readonly List<Suika> _suikas = new();
         private readonly AudioService _audioService;
@@ -68,11 +65,6 @@ namespace _Assets.Scripts.Services
             {
                 var reader = new StreamReader(fileInfo.FullName);
                 var json = await reader.ReadToEndAsync();
-                _hash = int.Parse(json.Split('\n')[0]);
-
-                var firstLine = json.Substring(0, json.IndexOf('\n') + 1);
-                json = Regex.Replace(json, firstLine, "");
-
                 _continueData = JsonConvert.DeserializeObject<ContinueData>(json);
                 reader.Close();
                 reader.Dispose();

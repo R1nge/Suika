@@ -1,5 +1,4 @@
-﻿using System;
-using _Assets.Scripts.Services.Datas.Mods;
+﻿using _Assets.Scripts.Services.Datas.Mods;
 using _Assets.Scripts.Services.StateMachine;
 using _Assets.Scripts.Services.UIs.StateMachine;
 using Cysharp.Threading.Tasks;
@@ -34,7 +33,8 @@ namespace _Assets.Scripts.Services.UIs
 
         private void Start()
         {
-            var hasValidContinueData = _modDataLoader.IsTheSame && _continueGameService.HasData;
+            //TODO: check if mod config or selected mod has changed
+            var hasValidContinueData = _continueGameService.HasData;
             
             if (hasValidContinueData)
             {

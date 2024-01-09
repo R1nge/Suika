@@ -1,5 +1,5 @@
 ﻿TODO:
-Hide continue button if mod/mod data was changed
+Hide continue button if mod config or selected mod has changed
 
 Encrypt ContinueData, ModData  hash
 Fix a lag spike when adding a polygon collider to a sprite renderer
