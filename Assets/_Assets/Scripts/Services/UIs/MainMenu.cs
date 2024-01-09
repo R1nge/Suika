@@ -20,6 +20,7 @@ namespace _Assets.Scripts.Services.UIs
         [Inject] private GameStateMachine _gameStateMachine;
         [Inject] private UIStateMachine _uiStateMachine;
         [Inject] private IModDataLoader _modDataLoader;
+        [Inject] private ContinueGameService _continueGameService;
 
         public void Init(Sprite sprite) => background.sprite = sprite;
 
@@ -33,12 +34,14 @@ namespace _Assets.Scripts.Services.UIs
 
         private void Start()
         {
-            if (_modDataLoader.IsTheSame)
+            var hasValidContinueData = _modDataLoader.IsTheSame && _continueGameService.HasData;
+            
+            if (hasValidContinueData)
             {
                 continueButton.onClick.AddListener(Continue);
             }
 
-            continueButton.gameObject.SetActive(_modDataLoader.IsTheSame);
+            continueButton.gameObject.SetActive(hasValidContinueData);
         }
 
         private void Continue() => _gameStateMachine.SwitchState(GameStateType.ContinueGame);

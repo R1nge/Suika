@@ -20,13 +20,17 @@ namespace _Assets.Scripts.Services
         private readonly AudioService _audioService;
         private readonly SuikasFactory _suikasFactory;
         private readonly RandomNumberGenerator _randomNumberGenerator;
+        private readonly ScoreService _scoreService;
+
+        public bool HasData => _continueData.SuikasContinueData != null;
 
         private ContinueGameService(AudioService audioService, SuikasFactory suikasFactory,
-            RandomNumberGenerator randomNumberGenerator)
+            RandomNumberGenerator randomNumberGenerator, ScoreService scoreService)
         {
             _audioService = audioService;
             _suikasFactory = suikasFactory;
             _randomNumberGenerator = randomNumberGenerator;
+            _scoreService = scoreService;
         }
 
         public async void Continue()
@@ -43,6 +47,8 @@ namespace _Assets.Scripts.Services
 
             _randomNumberGenerator.SetCurrent(_continueData.CurrentSuikaIndex);
             _randomNumberGenerator.SetNext(_continueData.NextSuikaIndex);
+            
+            _scoreService.AddScore(_continueData.Score);
         }
 
         public async UniTask Load()
@@ -88,6 +94,8 @@ namespace _Assets.Scripts.Services
             
             _continueData.CurrentSuikaIndex = _randomNumberGenerator.Current;
             _continueData.NextSuikaIndex = _randomNumberGenerator.Next;
+
+            _continueData.Score = _scoreService.Score;
 
             var path = Path.Combine(PathsHelper.DataPath, "continueData.json");
             var json = $"{_continueData.GetHashCode()}\n" + JsonConvert.SerializeObject(_continueData);
