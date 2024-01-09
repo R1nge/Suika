@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using _Assets.Scripts.Gameplay;
 using _Assets.Scripts.Misc;
@@ -12,7 +13,7 @@ namespace _Assets.Scripts.Services
 {
     public class ContinueGameService
     {
-        private ContinueData _continueData;
+        private ContinueData _continueData = new();
         private readonly List<Suika> _suikas = new();
         private readonly AudioService _audioService;
         private readonly SuikasFactory _suikasFactory;
@@ -38,7 +39,8 @@ namespace _Assets.Scripts.Services
 
             for (int i = 0; i < _continueData.SuikasContinueData.Count; i++)
             {
-                var position = new Vector3(_continueData.SuikasContinueData[i].PositionX, _continueData.SuikasContinueData[i].PositionY, 0);
+                var position = new Vector3(_continueData.SuikasContinueData[i].PositionX,
+                    _continueData.SuikasContinueData[i].PositionY, 0);
                 _suikasFactory.CreateContinue(_continueData.SuikasContinueData[i].Index, position);
             }
 
@@ -64,10 +66,19 @@ namespace _Assets.Scripts.Services
             foreach (var fileInfo in dataFolderInfo.GetFiles("continueData.json"))
             {
                 var reader = new StreamReader(fileInfo.FullName);
-                var json = await reader.ReadToEndAsync();
-                _continueData = JsonConvert.DeserializeObject<ContinueData>(json);
-                reader.Close();
-                reader.Dispose();
+
+                try
+                {
+                    var json = await reader.ReadToEndAsync();
+                    _continueData = JsonConvert.DeserializeObject<ContinueData>(json);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    reader.Close();
+                    reader.Dispose();
+                    throw;
+                }
             }
         }
 
@@ -86,14 +97,14 @@ namespace _Assets.Scripts.Services
             }
 
             _continueData.SongIndex = _audioService.LastSongIndex;
-            
+
             _continueData.CurrentSuikaIndex = _randomNumberGenerator.Current;
             _continueData.NextSuikaIndex = _randomNumberGenerator.Next;
 
             _continueData.Score = _scoreService.Score;
 
             var path = Path.Combine(PathsHelper.DataPath, "continueData.json");
-            var json = $"{_continueData.GetHashCode()}\n" + JsonConvert.SerializeObject(_continueData);
+            var json = JsonConvert.SerializeObject(_continueData);
             File.WriteAllText(path, json);
         }
     }

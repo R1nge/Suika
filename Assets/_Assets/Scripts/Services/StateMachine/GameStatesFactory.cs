@@ -71,7 +71,7 @@ namespace _Assets.Scripts.Services.StateMachine
 
         public IGameState CreateResetAndMainMenuState(GameStateMachine stateMachine)
         {
-            return new ResetAndMainMenu(stateMachine, _resetService, _uiStateMachine);
+            return new ResetAndMainMenu(stateMachine, _resetService, _uiStateMachine, _audioService);
         }
 
         public IGameState CreateGamePauseState(GameStateMachine stateMachine)

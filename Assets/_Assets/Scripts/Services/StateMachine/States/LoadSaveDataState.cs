@@ -29,7 +29,7 @@ namespace _Assets.Scripts.Services.StateMachine.States
 
         public async void Enter()
         {
-            await _continueGameService.Load();
+            //await _continueGameService.Load();
             await _audioSettingsLoader.Load();
             await _modDataLoader.Load();
             _playerDataLoader.LoadData();

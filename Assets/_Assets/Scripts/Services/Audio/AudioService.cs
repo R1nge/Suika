@@ -34,6 +34,8 @@ namespace _Assets.Scripts.Services.Audio
 
         public void ToggleSound(bool enable) => _audioSettingsLoader.ToggleSound(enable);
 
+        public void StopMusic() => musicSource.Stop();
+
         public async UniTask PlaySong(int index)
         {
             if (!_audioSettingsLoader.AudioData.IsMusicEnabled)

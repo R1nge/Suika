@@ -1,7 +1,7 @@
 ﻿TODO:
-Hide continue button if mod config or selected mod has changed
+Hide continue button if mod suika images have changed (are different)
 
-Encrypt ContinueData, ModData  hash
+Encrypt mod data?
 Fix a lag spike when adding a polygon collider to a sprite renderer
 
 Shake OR Spin ???
