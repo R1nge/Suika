@@ -1,4 +1,5 @@
 ﻿using _Assets.Scripts.Services.Datas.GameConfigs;
+using _Assets.Scripts.Services.Datas.Mods;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,20 +14,22 @@ namespace _Assets.Scripts.Services.UIs.Mods
         [SerializeField] private Button select;
         [Inject] private IConfigLoader _configLoader;
         [Inject] private ContinueGameService _continueGameService;
-        private int _index;
+        [Inject] private IModDataLoader _modDataLoader;
+        private string _modName;
 
         private void Start() => select.onClick.AddListener(Select);
 
-        public void SetSlotData(Sprite modIcon, string modName, int index)
+        public void SetSlotData(Sprite modIcon, string modName)
         {
             this.modIcon.sprite = modIcon;
-            modNameText.text = modName;
-            _index = index;
+            _modName = modName;
+            modNameText.text = _modName;
         }
 
         private void Select()
         {
-            _configLoader.SetCurrentConfig(_index);
+            _configLoader.SetCurrentConfig(_modName);
+            _modDataLoader.SetModName(_modName);
             _continueGameService.Reset();
         }
 

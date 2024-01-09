@@ -35,7 +35,7 @@ namespace _Assets.Scripts.Services.StateMachine.States
             _playerDataLoader.LoadData();
             await _configLoader.LoadDefaultConfig();
             _configLoader.LoadAllConfigs();
-            _configLoader.SetCurrentConfig(_modDataLoader.ModData.SelectedModIndex);
+            _configLoader.SetCurrentConfig(_modDataLoader.ModData.SelectedModName);
             await _uiStateMachine.SwitchState(UIStateType.Loading);
             await _uiStateMachine.SwitchState(UIStateType.MainMenu, 1000, 1000);
         }

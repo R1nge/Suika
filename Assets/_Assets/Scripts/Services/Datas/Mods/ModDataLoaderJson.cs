@@ -2,13 +2,19 @@
 using _Assets.Scripts.Misc;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
+using UnityEngine;
 
 namespace _Assets.Scripts.Services.Datas.Mods
 {
     public class ModDataLoaderJson : IModDataLoader
     {
-        private ModData _modData = new(0);
+        private ModData _modData = new("Default");
         public ModData ModData => _modData;
+        public void SetModName(string modName)
+        {
+            _modData.SelectedModName = modName;
+            Debug.LogError("CURRENT MOD NAME: " + _modData.SelectedModName);
+        }
 
         public async UniTask Load()
         {
@@ -33,7 +39,7 @@ namespace _Assets.Scripts.Services.Datas.Mods
         public void Save()
         {
             var path = Path.Combine(PathsHelper.DataPath, "modData.json");
-            var json = $"{_modData.GetHashCode()}\n" + JsonConvert.SerializeObject(_modData);
+            var json = JsonConvert.SerializeObject(_modData);
             File.WriteAllText(path, json);
         }
     }

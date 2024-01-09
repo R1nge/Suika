@@ -133,11 +133,21 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
         }
 
 
-        public void SetCurrentConfig(int index)
+        public void SetCurrentConfig(string modName)
         {
             _spritesCacheService.Reset();
-            _currentConfig = _allConfigs[index];
-            _spritesCacheService.Preload(_currentConfig, IsDefault).Forget();
+
+            for (int i = 0; i < _allConfigs.Count; i++)
+            {
+                if (_allConfigs[i].ModName == modName)
+                {
+                    _currentConfig = _allConfigs[i];
+                    _spritesCacheService.Preload(_currentConfig, IsDefault).Forget();
+                    break;
+                }
+
+                Debug.LogError($"Mod not found: {modName}");
+            }
         }
     }
 }

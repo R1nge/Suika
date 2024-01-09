@@ -4,6 +4,7 @@ using _Assets.Scripts.Services.UIs.StateMachine;
 using UnityEngine;
 using UnityEngine.UI;
 using _Assets.Scripts.Misc;
+using _Assets.Scripts.Services.Datas.Mods;
 using Cysharp.Threading.Tasks;
 using VContainer;
 
@@ -16,6 +17,7 @@ namespace _Assets.Scripts.Services.UIs.Mods
         [Inject] private ModSlotFactory _modSlotFactory;
         [Inject] private IConfigLoader _configLoader;
         [Inject] private UIStateMachine _uiStateMachine;
+        [Inject] private IModDataLoader _modDataLoader;
 
         private void Start()
         {
@@ -27,7 +29,11 @@ namespace _Assets.Scripts.Services.UIs.Mods
             }
         }
 
-        private void SwitchToMainMenu() => _uiStateMachine.SwitchState(UIStateType.MainMenu).Forget();
+        private void SwitchToMainMenu()
+        {
+            _uiStateMachine.SwitchState(UIStateType.MainMenu).Forget();
+            _modDataLoader.Save();
+        }
 
         private async void CreateSlot(int index)
         {
@@ -47,7 +53,7 @@ namespace _Assets.Scripts.Services.UIs.Mods
             var slot = _modSlotFactory.CreateSlot();
             slot.transform.SetParent(slotParent);
             slot.transform.localScale = Vector3.one;
-            slot.SetSlotData(iconSprite, _configLoader.AllConfigs[index].ModName, index);
+            slot.SetSlotData(iconSprite, _configLoader.AllConfigs[index].ModName);
         }
     }
 }

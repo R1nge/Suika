@@ -2,11 +2,11 @@
 {
     public struct ModData
     {
-        public int SelectedModIndex;
+        public string SelectedModName;
 
-        public ModData(int selectedModIndex)
+        public ModData(string selectedModName)
         {
-            SelectedModIndex = selectedModIndex;
+            SelectedModName = selectedModName;
         }
     }
 }

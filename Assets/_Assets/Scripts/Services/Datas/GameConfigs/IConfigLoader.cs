@@ -10,7 +10,7 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
         public List<GameConfig> AllConfigs { get; }
         public UniTask LoadDefaultConfig();
         public void LoadAllConfigs();
-        public void SetCurrentConfig(int index);
+        public void SetCurrentConfig(string modName);
         public bool IsDefault { get; }
     }
 }
