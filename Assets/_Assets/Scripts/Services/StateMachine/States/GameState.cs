@@ -28,11 +28,11 @@ namespace _Assets.Scripts.Services.StateMachine.States
 
         public async void Enter()
         {
-            await _uiStateMachine.SwitchState(UIStateType.Loading, 0, 100);
+            await _uiStateMachine.SwitchState(UIStateType.Loading);
             await _containerFactory.Create();
             await _audioService.PlaySong(0);
             var player = await _playerFactory.Create();
-            await _uiStateMachine.SwitchState(UIStateType.Game, 0, 2000);
+            await _uiStateMachine.SwitchState(UIStateType.Game);
             player.GetComponent<PlayerDrop>().SpawnSuika();
             _playerInput.Enable();
         }

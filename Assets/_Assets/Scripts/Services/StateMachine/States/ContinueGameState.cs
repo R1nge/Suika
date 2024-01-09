@@ -23,11 +23,11 @@ namespace _Assets.Scripts.Services.StateMachine.States
 
         public async void Enter()
         {
-            await _uiStateMachine.SwitchState(UIStateType.Loading, 0, 100);
+            await _uiStateMachine.SwitchState(UIStateType.Loading);
             _continueGameService.Continue();
             await _containerFactory.Create();
             var player = await _playerFactory.Create();
-            await _uiStateMachine.SwitchState(UIStateType.Game, 0, 2000);
+            await _uiStateMachine.SwitchState(UIStateType.Game);
             _continueGameService.UpdateScore();
             player.GetComponent<PlayerDrop>().SpawnContinue();
             _playerInput.Enable();

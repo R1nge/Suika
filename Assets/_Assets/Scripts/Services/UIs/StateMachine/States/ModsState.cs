@@ -18,7 +18,7 @@ namespace _Assets.Scripts.Services.UIs.StateMachine.States
             _objectResolver = objectResolver;
         }
 
-        public void Enter() => _ui = _objectResolver.Instantiate(_configProvider.UIConfig.ModsMenu);
+        public async UniTask Enter() => _ui = _objectResolver.Instantiate(_configProvider.UIConfig.ModsMenu);
 
         public void Exit() => Object.Destroy(_ui);
     }

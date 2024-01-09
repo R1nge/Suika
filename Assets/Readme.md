@@ -1,15 +1,10 @@
-﻿TODO:
-
-Refactor
-(Use MVx for UI?)
-
-
-UI:
+﻿UI:
 Add animations
 Leader board (local)
 Evolution line (use suika icons)
-Show an error message/error icon, when mod is invalid??? Mod will use 'default' assets if some are missing
 
+Refactor
+(Use MVx for UI?)
 
 Shake OR Spin
 Fix a lag spike when adding a polygon collider to a sprite renderer

@@ -21,7 +21,7 @@ namespace _Assets.Scripts.Services.UIs.StateMachine.States
             _mainMenuProvider = mainMenuProvider;
         }
 
-        public async void Enter()
+        public async UniTask Enter()
         {
             await _mainMenuProvider.Load();
             _ui = _objectResolver.Instantiate(_configProvider.UIConfig.MainMenu);

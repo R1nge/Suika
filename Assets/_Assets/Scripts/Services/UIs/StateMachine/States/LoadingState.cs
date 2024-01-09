@@ -21,7 +21,7 @@ namespace _Assets.Scripts.Services.UIs.StateMachine.States
             _loadingCurtainIconProvider = loadingCurtainIconProvider;
         }
 
-        public async void Enter()
+        public async UniTask Enter()
         {
             await _loadingCurtainIconProvider.Load();
             _ui = _objectResolver.Instantiate(_configProvider.UIConfig.LoadingCurtain);
