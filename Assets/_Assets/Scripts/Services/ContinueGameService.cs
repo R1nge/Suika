@@ -20,7 +20,7 @@ namespace _Assets.Scripts.Services
         private readonly RandomNumberGenerator _randomNumberGenerator;
         private readonly ScoreService _scoreService;
 
-        public bool HasData => _continueData.SuikasContinueData != null && _continueData.Score != 0;
+        public bool HasData => _continueData != null;
 
         private ContinueGameService(AudioService audioService, SuikasFactory suikasFactory,
             RandomNumberGenerator randomNumberGenerator, ScoreService scoreService)
@@ -71,6 +71,8 @@ namespace _Assets.Scripts.Services
                 {
                     var json = await reader.ReadToEndAsync();
                     _continueData = JsonConvert.DeserializeObject<ContinueData>(json);
+                    reader.Close();
+                    reader.Dispose();
                 }
                 catch (Exception e)
                 {
@@ -88,6 +90,8 @@ namespace _Assets.Scripts.Services
 
         public void Save()
         {
+            _continueData = new ContinueData(_audioService.LastSongIndex, new List<ContinueData.SuikaContinueData>(), _randomNumberGenerator.Current, _randomNumberGenerator.Next, _scoreService.Score);
+            
             _continueData.SuikasContinueData = new List<ContinueData.SuikaContinueData>(_suikas.Count);
             for (int i = 0; i < _suikas.Count; i++)
             {
@@ -108,6 +112,11 @@ namespace _Assets.Scripts.Services
             File.WriteAllText(path, json);
         }
 
-        public void Reset() => _continueData = new ContinueData();
+        public void Reset()
+        {
+            _continueData = null;
+            var path = Path.Combine(PathsHelper.DataPath, "continueData.json");
+            File.Delete(path);
+        }
     }
 }

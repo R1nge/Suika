@@ -18,24 +18,26 @@ namespace _Assets.Scripts.Services.UIs.Mods
         [Inject] private IConfigLoader _configLoader;
         [Inject] private UIStateMachine _uiStateMachine;
         [Inject] private IModDataLoader _modDataLoader;
+        [Inject] private ContinueGameService _continueGameService;
 
-        private void Start()
+        private async void Start()
         {
             close.onClick.AddListener(SwitchToMainMenu);
 
             for (int i = 0; i < _configLoader.AllConfigs.Count; i++)
             {
-                CreateSlot(i);
+                await CreateSlot(i);
             }
         }
 
         private void SwitchToMainMenu()
         {
             _uiStateMachine.SwitchState(UIStateType.MainMenu).Forget();
+            _continueGameService.Reset();
             _modDataLoader.Save();
         }
 
-        private async void CreateSlot(int index)
+        private async UniTask CreateSlot(int index)
         {
             var iconPath = _configLoader.AllConfigs[index].ModIconPath;
 

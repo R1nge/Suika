@@ -13,7 +13,6 @@ namespace _Assets.Scripts.Services.UIs.Mods
         [SerializeField] private TextMeshProUGUI modNameText;
         [SerializeField] private Button select;
         [Inject] private IConfigLoader _configLoader;
-        [Inject] private ContinueGameService _continueGameService;
         [Inject] private IModDataLoader _modDataLoader;
         private string _modName;
 
@@ -30,7 +29,6 @@ namespace _Assets.Scripts.Services.UIs.Mods
         {
             _configLoader.SetCurrentConfig(_modName);
             _modDataLoader.SetModName(_modName);
-            _continueGameService.Reset();
         }
 
         private void OnDestroy() => select.onClick.RemoveAllListeners();

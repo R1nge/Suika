@@ -16,6 +16,7 @@ namespace _Assets.Scripts.Services.UIs.InGame
         [Inject] private IAudioSettingsLoader _audioSettingsLoader;
         [Inject] private AudioService _audioService;
         [Inject] private UIStateMachine _uiStateMachine;
+        [Inject] private ContinueGameService _continueGameService;
 
         private void Awake()
         {
@@ -27,6 +28,7 @@ namespace _Assets.Scripts.Services.UIs.InGame
 
         private void MainMenu()
         {
+            _continueGameService.Save();
             _gameStateMachine.SwitchState(GameStateType.ResetAndMainMenu);
         }
 

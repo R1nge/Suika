@@ -116,7 +116,7 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
 
             foreach (var directoryInfo in modsFoldersDirectoryInfo.GetDirectories())
             {
-                foreach (var fileInfo in directoryInfo.GetFiles("*.json"))
+                foreach (var fileInfo in directoryInfo.GetFiles("config.json"))
                 {
                     StreamReader reader = new StreamReader(fileInfo.FullName);
                     var json = reader.ReadToEnd();
@@ -139,6 +139,7 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
 
             for (int i = 0; i < _allConfigs.Count; i++)
             {
+                Debug.LogError($"Mod name {_allConfigs[i].ModName} {i}");
                 if (_allConfigs[i].ModName == modName)
                 {
                     _currentConfig = _allConfigs[i];

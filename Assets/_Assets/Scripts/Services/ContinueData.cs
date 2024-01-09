@@ -2,7 +2,7 @@
 
 namespace _Assets.Scripts.Services
 {
-    public struct ContinueData
+    public class ContinueData
     {
         public int SongIndex;
         public List<SuikaContinueData> SuikasContinueData;

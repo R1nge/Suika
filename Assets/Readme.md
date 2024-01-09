@@ -1,13 +1,5 @@
 ﻿TODO:
-Mod slot - use mod name to switch
-
-Hide continue button if mod suika images have changed (are different)
-
-(Actually, there's a way of detection change in files, but it would be overkill???)
-((Use sha1 algo on files to get a hash, store its encrypted version on a disk, if current config.json file hash is different - reset continue))
-(Instead, I can reset the continue data, when another mod has been selected)
-
-
+Move file name to PathHelper
 
 Shake OR Spin ???
 Detect edge lines (shape) in the modding tool ???
