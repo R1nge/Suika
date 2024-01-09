@@ -95,6 +95,25 @@ namespace _Assets.Scripts.Services.Factories
             AddPolygonCollider(suikaInstance);
         }
 
+        public Rigidbody2D CreatePlayerContinue(Vector3 position, Transform parent)
+        {
+            var index = _randomNumberGenerator.Current;
+            var suikaPrefab = _configProvider.SuikasConfig.GetPrefab(index);
+            var suikaInstance = _objectResolver.Instantiate(suikaPrefab.gameObject, position, Quaternion.identity, parent).GetComponent<Suika>();
+            suikaInstance.SetIndex(index);
+
+            var sprite = _spritesCacheService.GetSuikaSprite(index);
+            suikaInstance.SetSprite(sprite);
+            
+            AddToResetService(suikaInstance);
+            AddPolygonCollider(suikaInstance);
+            
+            var rigidbody2D = suikaInstance.GetComponent<Rigidbody2D>();
+            rigidbody2D.isKinematic = true;
+
+            return rigidbody2D;
+        }
+
         private void AddScore(int index)
         {
             //Previous + level (index) + points? 

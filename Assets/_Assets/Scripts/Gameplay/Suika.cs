@@ -25,12 +25,14 @@ namespace _Assets.Scripts.Gameplay
         [Inject] protected ResetService ResetService;
         [Inject] protected ContinueGameService ContinueGameService;
 
-        private void Start() => ContinueGameService.AddSuika(this);
-
         public void SetIndex(int index) => Index = index;
 
-        public void Drop() => _dropped = true;
-        
+        public void Drop()
+        {
+            _dropped = true;
+            ContinueGameService.AddSuika(this);
+        }
+
         public void Land() => _landed = true;
 
         private void OnCollisionEnter2D(Collision2D other)
@@ -74,5 +76,7 @@ namespace _Assets.Scripts.Gameplay
             spriteRenderer.sprite = sprite;
             spriteRenderer.size = new Vector2(256, 256);
         }
+
+        private void OnDestroy() => ContinueGameService.RemoveSuika(this);
     }
 }

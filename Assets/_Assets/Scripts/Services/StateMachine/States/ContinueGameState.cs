@@ -23,13 +23,13 @@ namespace _Assets.Scripts.Services.StateMachine.States
 
         public async void Enter()
         {
+            _continueGameService.Continue();
             await _uiStateMachine.SwitchState(UIStateType.Loading, 0, 100);
             await _containerFactory.Create();
-            _continueGameService.Continue();
             var player = await _playerFactory.Create();
             _playerInput.Enable();
             await _uiStateMachine.SwitchState(UIStateType.Game, 0, 2000);
-            player.GetComponent<PlayerDrop>().SpawnSuika();
+            player.GetComponent<PlayerDrop>().SpawnContinue();
         }
 
         public void Exit()

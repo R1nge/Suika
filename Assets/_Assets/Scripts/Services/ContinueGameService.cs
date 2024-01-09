@@ -29,8 +29,10 @@ namespace _Assets.Scripts.Services
             _randomNumberGenerator = randomNumberGenerator;
         }
 
-        public void Continue()
+        public async void Continue()
         {
+            await Load();
+
             _audioService.PlaySong(_continueData.SongIndex).Forget();
 
             for (int i = 0; i < _continueData.SuikasContinueData.Count; i++)
@@ -83,6 +85,9 @@ namespace _Assets.Scripts.Services
             }
 
             _continueData.SongIndex = _audioService.LastSongIndex;
+            
+            _continueData.CurrentSuikaIndex = _randomNumberGenerator.Current;
+            _continueData.NextSuikaIndex = _randomNumberGenerator.Next;
 
             var path = Path.Combine(PathsHelper.DataPath, "continueData.json");
             var json = $"{_continueData.GetHashCode()}\n" + JsonConvert.SerializeObject(_continueData);

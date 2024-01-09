@@ -19,6 +19,8 @@ namespace _Assets.Scripts.Gameplay
 
         public void SpawnSuika() => Spawn();
 
+        public void SpawnContinue() => _suikaRigidbody = _suikasFactory.CreatePlayerContinue(transform.position, transform);
+
         private void Update()
         {
 #if UNITY_ANDROID
