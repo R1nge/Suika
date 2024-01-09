@@ -20,7 +20,11 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
             ValidateTimeBeforeTimerTrigger(ref defaultConfig, ref config);
             ValidateTimerStartTime(ref defaultConfig, ref config);
             ValidateInGameBackground(ref defaultConfig, ref config);
-            //Save(ref config);
+            ValidateLoadingScreenBackground(ref defaultConfig, ref config);
+            ValidateLoadingScreenIcon(ref defaultConfig, ref config);
+            ValidatePlayerSkin(ref defaultConfig, ref config);
+            ValidateMergeSoundsAudios(ref defaultConfig, ref config);
+            ValidateMainMenuBackground(ref defaultConfig, ref config);
         }
 
         private void ValidateModIconPath(ref GameConfig defaultConfig, ref GameConfig config)
@@ -54,11 +58,10 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
 
         private void ValidateSuikaAudio(ref GameConfig defaultConfig, ref GameConfig config)
         {
-            // for (int i = 0; i < config.SuikaAudioPaths.Length; i++)
-            // {
-            //     config.SuikaAudioPaths[i] = GetFilePath(config.SuikaAudioPaths[i], defaultConfig.SuikaAudioPaths[i],
-            //         config.ModName);
-            // }
+            for (int i = 0; i < config.SuikaAudios.Length; i++)
+            {
+                config.SuikaAudios[i].Path = GetFilePath(config.SuikaAudios[i].Path, defaultConfig.SuikaAudios[i].Path, config.ModName);
+            }
         }
 
         private void ValidateSuikaDropChances(ref GameConfig defaultConfig, ref GameConfig config)
@@ -122,6 +125,39 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
             config.InGameBackgroundPath = GetFilePath(config.InGameBackgroundPath, defaultConfig.InGameBackgroundPath,
                 config.ModName);
         }
+        
+        private void ValidateLoadingScreenBackground(ref GameConfig defaultConfig, ref GameConfig config)
+        {
+            config.LoadingScreenBackgroundPath = GetFilePath(config.LoadingScreenBackgroundPath, defaultConfig.LoadingScreenBackgroundPath,
+                config.ModName);
+        }
+        
+        private void ValidateLoadingScreenIcon(ref GameConfig defaultConfig, ref GameConfig config)
+        {
+            config.LoadingScreenIconPath = GetFilePath(config.LoadingScreenIconPath, defaultConfig.LoadingScreenIconPath,
+                config.ModName);
+        }
+        
+        private void ValidatePlayerSkin(ref GameConfig defaultConfig, ref GameConfig config)
+        {
+            config.PlayerSkinPath = GetFilePath(config.PlayerSkinPath, defaultConfig.PlayerSkinPath,
+                config.ModName);
+        }
+        
+        private void ValidateMergeSoundsAudios(ref GameConfig defaultConfig, ref GameConfig config)
+        {
+            for (int i = 0; i < config.MergeSoundsAudios.Length; i++)
+            {
+                config.MergeSoundsAudios[i].Path = GetFilePath(config.MergeSoundsAudios[i].Path, defaultConfig.MergeSoundsAudios[i].Path,
+                    config.ModName);
+            }
+        }
+        
+        private void ValidateMainMenuBackground(ref GameConfig defaultConfig, ref GameConfig config)
+        {
+            config.MainMenuBackgroundPath = GetFilePath(config.MainMenuBackgroundPath, defaultConfig.MainMenuBackgroundPath,
+                config.ModName);
+        }
 
         private string GetFilePath(string filePath, string defaultPath, string modName)
         {
@@ -135,7 +171,7 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
             var fullPath = Path.Combine(PathsHelper.ModsPath, modName, filePath);
             if (!File.Exists(fullPath))
             {
-                Debug.LogError($"Mod: {modName} File not found. Setting from default config path: {fullPath}");
+                Debug.LogError($"Mod: {modName} File {fullPath} not found. Setting from default config");
                 return defaultPath;
             }
 

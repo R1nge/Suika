@@ -1,7 +1,8 @@
 ﻿TODO:
+Hide continue button if mod/mod data was changed
+
 Encrypt ContinueData, ModData  hash
 Fix a lag spike when adding a polygon collider to a sprite renderer
-Fix game config validator
 
 Shake OR Spin ???
 Detect edge lines (shape) in the modding tool ???
