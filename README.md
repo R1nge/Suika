@@ -1,30 +1,41 @@
+# About
+
+Suika-like with modding support, made to learn how to handle mods  
+I thought about using Addressables or AssetBundles, but chosen manual loading to enable modding without a need for Unity Engine  
+
+# Features  
+
+A game loop  
+An ability to continue the last game  
+A high score system with saving and loading  
+A modding support  
+An auto image size detection  
 
 # Mods paths    
 Windows: C:/Users/{userName}/AppData/LocalLow/R1nge/Suika/Mods  
 Android: /storage/emulated/{userId}/Android/data/com.R1nge.Suika/files/Mods  
 
 # Modding supports  
-Suika skins change  
-Suika icons change  
-Container skin change  
-Music change  
-Drop chances change  
-Auto image size detection   
-In game background image change  
-Loading screen icon change  
-Loading screen background change  
-Character skin change  
-Merge sounds change  
-Sound volume manupation  
+Suika skins  
+Suika icons  
+Container skin  
+Music  
+Drop chances    
+In game background image  
+Loading screen icon    
+Loading screen background    
+Character skin  
+Merge sounds    
+Sounds' volume
 
 # Modding DOES NOT support  
-Points system change (do I really need this?)  
-Different suikas amount (!= 12) (do I really need this?)  
-Scripting (do I really need this?)  
+Points system  
+Different suikas amount (!= 12)  
+Scripting    
 
 # Modding guide
 The mod title should be the same as the folder name  
-The game supports image of any size in PNG JPEG formats, each dimension must be, independently, a power of two  
+The game supports image of any size in PNG JPEG formats; each dimension must be, independently, a power of two  
 But, to avoid lag spikes while loading images, it's better to stick to recomended sizes in px  
 Suika skin sprite = 256-512  
 Suika ui icon sprite = 128-256  
