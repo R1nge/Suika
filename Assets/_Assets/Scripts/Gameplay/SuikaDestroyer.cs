@@ -6,6 +6,8 @@
         {
             ResetService.RemoveSuika(this);
             ResetService.RemoveSuika(suika);
+            ContinueGameService.RemoveSuika(this);
+            ContinueGameService.RemoveSuika(suika);
             Destroy(gameObject);
             Destroy(suika.gameObject);
         }

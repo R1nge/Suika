@@ -10,11 +10,7 @@ namespace _Assets.Scripts.Services.Audio
     {
         private AudioSettingsData _audioSettingsData;
         public AudioSettingsData AudioData => _audioSettingsData;
-        public void ToggleSound(bool enable)
-        {
-            _audioSettingsData.IsSoundEnabled = enable;
-            Debug.LogError($"Is sound enabled {_audioSettingsData.IsSoundEnabled}");
-        }
+        public void ToggleSound(bool enable) => _audioSettingsData.IsSoundEnabled = enable;
 
         public void ToggleMusic(bool enable) => _audioSettingsData.IsMusicEnabled = enable;
 

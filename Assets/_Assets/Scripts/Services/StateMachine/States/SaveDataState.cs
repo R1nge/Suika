@@ -10,12 +10,14 @@ namespace _Assets.Scripts.Services.StateMachine.States
         private readonly IPlayerDataLoader _playerDataLoader;
         private readonly IModDataLoader _modDataLoader;
         private readonly IAudioSettingsLoader _audioSettingsLoader;
+        private readonly ContinueGameService _continueGameService;
 
-        public SaveDataState(IPlayerDataLoader playerDataLoader, IModDataLoader modDataLoader, IAudioSettingsLoader audioSettingsLoader)
+        public SaveDataState(IPlayerDataLoader playerDataLoader, IModDataLoader modDataLoader, IAudioSettingsLoader audioSettingsLoader, ContinueGameService continueGameService)
         {
             _playerDataLoader = playerDataLoader;
             _modDataLoader = modDataLoader;
             _audioSettingsLoader = audioSettingsLoader;
+            _continueGameService = continueGameService;
         }
 
         public void Enter()
@@ -23,6 +25,7 @@ namespace _Assets.Scripts.Services.StateMachine.States
             _playerDataLoader.SaveData();
             _modDataLoader.Save();
             _audioSettingsLoader.Save();
+            _continueGameService.Save();
         }
 
         public void Exit()

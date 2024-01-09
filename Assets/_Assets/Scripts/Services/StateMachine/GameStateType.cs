@@ -10,6 +10,7 @@
         ResetAndRetry = 5,
         ResetAndMainMenu = 6,
         GamePause = 7,
-        GameResume = 8
+        GameResume = 8,
+        ContinueGame = 9
     }
 }

@@ -16,6 +16,8 @@ namespace _Assets.Scripts.Services.Audio
         [Inject] private IAudioSettingsLoader _audioSettingsLoader;
         private int _lastSongIndex;
 
+        public int LastSongIndex => _lastSongIndex;
+
         public void ToggleMusic(bool enable)
         {
             _audioSettingsLoader.ToggleMusic(enable);

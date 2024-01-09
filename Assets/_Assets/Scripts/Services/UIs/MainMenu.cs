@@ -1,4 +1,6 @@
-﻿using _Assets.Scripts.Services.StateMachine;
+﻿using System;
+using _Assets.Scripts.Services.Datas.Mods;
+using _Assets.Scripts.Services.StateMachine;
 using _Assets.Scripts.Services.UIs.StateMachine;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -9,6 +11,7 @@ namespace _Assets.Scripts.Services.UIs
 {
     public class MainMenu : MonoBehaviour
     {
+        [SerializeField] private Button continueButton;
         [SerializeField] private Button playButton;
         [SerializeField] private Button modsButton;
         [SerializeField] private Button settingsButton;
@@ -16,6 +19,7 @@ namespace _Assets.Scripts.Services.UIs
         [SerializeField] private Image background;
         [Inject] private GameStateMachine _gameStateMachine;
         [Inject] private UIStateMachine _uiStateMachine;
+        [Inject] private IModDataLoader _modDataLoader;
 
         public void Init(Sprite sprite) => background.sprite = sprite;
 
@@ -26,6 +30,18 @@ namespace _Assets.Scripts.Services.UIs
             settingsButton.onClick.AddListener(Settings);
             quitButton.onClick.AddListener(Quit);
         }
+
+        private void Start()
+        {
+            if (_modDataLoader.IsTheSame)
+            {
+                continueButton.onClick.AddListener(Continue);
+            }
+
+            continueButton.gameObject.SetActive(_modDataLoader.IsTheSame);
+        }
+
+        private void Continue() => _gameStateMachine.SwitchState(GameStateType.ContinueGame);
 
         private void Play() => _gameStateMachine.SwitchState(GameStateType.Game);
 

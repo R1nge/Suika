@@ -9,7 +9,7 @@ namespace _Assets.Scripts.Services.Factories
 {
     public class ContainerFactory : MonoBehaviour
     {
-        [SerializeField] private Camera camera;
+        [SerializeField] private new Camera camera;
         [SerializeField] private GameObject containerPrefab;
         [SerializeField] private Transform spawnPoint;
         [Inject] private IObjectResolver _objectResolver;

@@ -47,5 +47,9 @@ namespace _Assets.Scripts.Services
 
             return _current;
         }
+
+        public void SetCurrent(int currentIndex) => _current = currentIndex;
+
+        public void SetNext(int nextIndex) => _next = nextIndex;
     }
 }

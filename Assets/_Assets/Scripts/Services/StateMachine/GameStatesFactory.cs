@@ -23,11 +23,12 @@ namespace _Assets.Scripts.Services.StateMachine
         private readonly AudioService _audioService;
         private readonly IModDataLoader _modDataLoader;
         private readonly IAudioSettingsLoader _audioSettingsLoader;
+        private readonly ContinueGameService _continueGameService;
 
         private GameStatesFactory(IPlayerDataLoader playerDataLoader, UIStateMachine uiStateMachine,
             CoroutineRunner coroutineRunner, PlayerFactory playerFactory, ContainerFactory containerFactory,
             ResetService resetService, PlayerInput playerInput, IConfigLoader configLoader, AudioService audioService,
-            IModDataLoader modDataLoader, IAudioSettingsLoader audioSettingsLoader)
+            IModDataLoader modDataLoader, IAudioSettingsLoader audioSettingsLoader, ContinueGameService continueGameService)
         {
             _playerDataLoader = playerDataLoader;
             _uiStateMachine = uiStateMachine;
@@ -40,11 +41,12 @@ namespace _Assets.Scripts.Services.StateMachine
             _audioService = audioService;
             _modDataLoader = modDataLoader;
             _audioSettingsLoader = audioSettingsLoader;
+            _continueGameService = continueGameService;
         }
 
         public IGameState CreateLoadSaveDataState(GameStateMachine stateMachine)
         {
-            return new LoadSaveDataState(stateMachine, _playerDataLoader, _uiStateMachine, _configLoader, _modDataLoader, _audioSettingsLoader);
+            return new LoadSaveDataState(stateMachine, _playerDataLoader, _uiStateMachine, _configLoader, _modDataLoader, _audioSettingsLoader, _continueGameService);
         }
 
         public IGameState CreateGameState(GameStateMachine stateMachine)
@@ -59,7 +61,7 @@ namespace _Assets.Scripts.Services.StateMachine
 
         public IGameState CreateSaveDataState(GameStateMachine stateMachine)
         {
-            return new SaveDataState(_playerDataLoader, _modDataLoader, _audioSettingsLoader);
+            return new SaveDataState(_playerDataLoader, _modDataLoader, _audioSettingsLoader, _continueGameService);
         }
 
         public IGameState CreateResetAndRetryState(GameStateMachine stateMachine)
@@ -80,6 +82,11 @@ namespace _Assets.Scripts.Services.StateMachine
         public IGameState CreateGameResumeState(GameStateMachine stateMachine)
         {
             return new GameResumeState(_playerInput, _uiStateMachine);
+        }
+
+        public IGameState CreateContinueGameState(GameStateMachine stateMachine)
+        {
+            return new ContinueGameState(_uiStateMachine, _containerFactory, _playerFactory, _playerInput, _continueGameService);
         }
     }
 }

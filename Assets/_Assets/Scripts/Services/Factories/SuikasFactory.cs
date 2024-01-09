@@ -80,6 +80,21 @@ namespace _Assets.Scripts.Services.Factories
             _audioService.PlaySong(index).Forget();
         }
 
+        public void CreateContinue(int index, Vector3 position)
+        {
+            var suikaPrefab = _configProvider.SuikasConfig.GetPrefab(index);
+            var suikaInstance = _objectResolver.Instantiate(suikaPrefab.gameObject, position, Quaternion.identity).GetComponent<Suika>();
+            suikaInstance.SetIndex(index);
+            suikaInstance.Drop();
+            suikaInstance.Land();
+
+            var sprite = _spritesCacheService.GetSuikaSprite(index);
+            suikaInstance.SetSprite(sprite);
+            
+            AddToResetService(suikaInstance);
+            AddPolygonCollider(suikaInstance);
+        }
+
         private void AddScore(int index)
         {
             //Previous + level (index) + points? 

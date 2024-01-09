@@ -1,5 +1,7 @@
 ﻿using _Assets.Scripts.Services.Audio;
 using _Assets.Scripts.Services.StateMachine;
+using _Assets.Scripts.Services.UIs.StateMachine;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
@@ -9,16 +11,24 @@ namespace _Assets.Scripts.Services.UIs.InGame
     public class InGamePauseMenu : MonoBehaviour
     {
         [SerializeField] private Toggle soundToggle, musicToggle;
-        [SerializeField] private Button backButton;
+        [SerializeField] private Button backButton, mainMenuButton;
         [Inject] private GameStateMachine _gameStateMachine;
         [Inject] private IAudioSettingsLoader _audioSettingsLoader;
         [Inject] private AudioService _audioService;
+        [Inject] private UIStateMachine _uiStateMachine;
 
         private void Awake()
         {
             soundToggle.onValueChanged.AddListener(ToggleSound);
             musicToggle.onValueChanged.AddListener(ToggleMusic);
+            mainMenuButton.onClick.AddListener(MainMenu);
             backButton.onClick.AddListener(Back);
+        }
+
+        private void MainMenu()
+        {
+            _gameStateMachine.SwitchState(GameStateType.SaveData);
+            _uiStateMachine.SwitchState(UIStateType.MainMenu).Forget();
         }
 
         private void Start()

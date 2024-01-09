@@ -1,4 +1,5 @@
-﻿using _Assets.Scripts.Services;
+﻿using System;
+using _Assets.Scripts.Services;
 using _Assets.Scripts.Services.Factories;
 using _Assets.Scripts.Services.StateMachine;
 using UnityEngine;
@@ -22,11 +23,15 @@ namespace _Assets.Scripts.Gameplay
         [Inject] protected SuikasFactory SuikasFactory;
         [Inject] protected ScoreService ScoreService;
         [Inject] protected ResetService ResetService;
+        [Inject] protected ContinueGameService ContinueGameService;
 
+        private void Start() => ContinueGameService.AddSuika(this);
 
         public void SetIndex(int index) => Index = index;
 
         public void Drop() => _dropped = true;
+        
+        public void Land() => _landed = true;
 
         private void OnCollisionEnter2D(Collision2D other)
         {
@@ -57,6 +62,8 @@ namespace _Assets.Scripts.Gameplay
                 SuikasFactory.Create(Index, middle);
                 ResetService.RemoveSuika(this);
                 ResetService.RemoveSuika(suika);
+                ContinueGameService.RemoveSuika(this);
+                ContinueGameService.RemoveSuika(suika);
                 Destroy(gameObject);
                 Destroy(suika.gameObject);
             }

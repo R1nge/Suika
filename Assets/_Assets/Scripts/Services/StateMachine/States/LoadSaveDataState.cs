@@ -1,5 +1,4 @@
 ﻿using _Assets.Scripts.Services.Audio;
-using _Assets.Scripts.Services.Datas;
 using _Assets.Scripts.Services.Datas.GameConfigs;
 using _Assets.Scripts.Services.Datas.Mods;
 using _Assets.Scripts.Services.Datas.Player;
@@ -15,8 +14,9 @@ namespace _Assets.Scripts.Services.StateMachine.States
         private readonly IConfigLoader _configLoader;
         private readonly IModDataLoader _modDataLoader;
         private readonly IAudioSettingsLoader _audioSettingsLoader;
+        private readonly ContinueGameService _continueGameService;
 
-        public LoadSaveDataState(GameStateMachine stateMachine, IPlayerDataLoader playerDataLoader, UIStateMachine uiStateMachine, IConfigLoader configLoader, IModDataLoader modDataLoader, IAudioSettingsLoader audioSettingsLoader)
+        public LoadSaveDataState(GameStateMachine stateMachine, IPlayerDataLoader playerDataLoader, UIStateMachine uiStateMachine, IConfigLoader configLoader, IModDataLoader modDataLoader, IAudioSettingsLoader audioSettingsLoader, ContinueGameService continueGameService)
         {
             _stateMachine = stateMachine;
             _playerDataLoader = playerDataLoader;
@@ -24,10 +24,12 @@ namespace _Assets.Scripts.Services.StateMachine.States
             _configLoader = configLoader;
             _modDataLoader = modDataLoader;
             _audioSettingsLoader = audioSettingsLoader;
+            _continueGameService = continueGameService;
         }
 
         public async void Enter()
         {
+            await _continueGameService.Load();
             await _audioSettingsLoader.Load();
             await _modDataLoader.Load();
             _playerDataLoader.LoadData();

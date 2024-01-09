@@ -6,6 +6,7 @@ namespace _Assets.Scripts.Services.Datas.Mods
     {
         UniTask Load();
         void Save();
-        ModData ModData { get;}
+        ModData ModData { get; }
+        bool IsTheSame { get; }
     }
 }

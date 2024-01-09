@@ -32,6 +32,10 @@ namespace _Assets.Scripts.CompositionRoot
             builder.Register<SuikaUIDataProvider>(Lifetime.Singleton);
             builder.Register<SuikasFactory>(Lifetime.Singleton);
 
+
+            builder.Register<ContinueGameService>(Lifetime.Singleton);
+            
+            
             builder.RegisterEntryPoint<GameOverTimer>().AsSelf();
             builder.Register<ResetService>(Lifetime.Singleton);
 

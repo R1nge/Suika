@@ -20,7 +20,8 @@ namespace _Assets.Scripts.Services.StateMachine
                 { GameStateType.ResetAndRetry, gameStatesFactory.CreateResetAndRetryState(this) },
                 { GameStateType.ResetAndMainMenu, gameStatesFactory.CreateResetAndMainMenuState(this) },
                 { GameStateType.GamePause, gameStatesFactory.CreateGamePauseState(this) },
-                { GameStateType.GameResume, gameStatesFactory.CreateGameResumeState(this) }
+                { GameStateType.GameResume, gameStatesFactory.CreateGameResumeState(this) },
+                { GameStateType.ContinueGame, gameStatesFactory.CreateContinueGameState(this) }
             };
         }
 
