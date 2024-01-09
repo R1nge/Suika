@@ -13,7 +13,7 @@ namespace _Assets.Scripts.Services
 {
     public class ContinueGameService
     {
-        private ContinueData _continueData = new();
+        private ContinueData _continueData;
         private readonly List<Suika> _suikas = new();
         private readonly AudioService _audioService;
         private readonly SuikasFactory _suikasFactory;
