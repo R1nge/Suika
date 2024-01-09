@@ -24,6 +24,7 @@ namespace _Assets.Scripts.Services.StateMachine.States
             _resetService.Reset();
             _uiStateMachine.SwitchState(UIStateType.MainMenu).Forget();
             _audioService.StopMusic();
+            _audioService.ResetIndex();
         }
 
         public void Exit()

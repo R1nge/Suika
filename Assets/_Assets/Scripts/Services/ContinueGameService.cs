@@ -35,7 +35,9 @@ namespace _Assets.Scripts.Services
         {
             await Load();
 
-            _audioService.PlaySong(_continueData.SongIndex).Forget();
+            _audioService.PlaySongContinue(_continueData.SongIndex).Forget();
+            
+            Debug.LogError($"Song index: {_continueData.SongIndex}");
 
             for (int i = 0; i < _continueData.SuikasContinueData.Count; i++)
             {
@@ -63,7 +65,7 @@ namespace _Assets.Scripts.Services
                 return;
             }
 
-            foreach (var fileInfo in dataFolderInfo.GetFiles("continueData.json"))
+            foreach (var fileInfo in dataFolderInfo.GetFiles(PathsHelper.ContinueDataJson))
             {
                 var reader = new StreamReader(fileInfo.FullName);
 
@@ -107,7 +109,7 @@ namespace _Assets.Scripts.Services
 
             _continueData.Score = _scoreService.Score;
 
-            var path = Path.Combine(PathsHelper.DataPath, "continueData.json");
+            var path = Path.Combine(PathsHelper.DataPath, PathsHelper.ContinueDataJson);
             var json = JsonConvert.SerializeObject(_continueData);
             File.WriteAllText(path, json);
         }
@@ -115,7 +117,7 @@ namespace _Assets.Scripts.Services
         public void Reset()
         {
             _continueData = null;
-            var path = Path.Combine(PathsHelper.DataPath, "continueData.json");
+            var path = Path.Combine(PathsHelper.DataPath, PathsHelper.ContinueDataJson);
             File.Delete(path);
         }
     }

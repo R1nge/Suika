@@ -18,6 +18,8 @@ namespace _Assets.Scripts.Services.Audio
 
         public int LastSongIndex => _lastSongIndex;
 
+        public void ResetIndex() => _lastSongIndex = 0;
+
         public void ToggleMusic(bool enable)
         {
             _audioSettingsLoader.ToggleMusic(enable);
@@ -36,14 +38,46 @@ namespace _Assets.Scripts.Services.Audio
 
         public void StopMusic() => musicSource.Stop();
 
+        public async UniTask PlaySongContinue(int index)
+        {
+            _lastSongIndex = index;
+            
+            if (!_audioSettingsLoader.AudioData.IsMusicEnabled)
+            {
+                Debug.LogWarning("Music is disabled");
+                return;
+            }
+
+            var audioData = _configLoader.CurrentConfig.SuikaAudios[_lastSongIndex];
+            var extension = Path.GetExtension(audioData.Path);
+
+            switch (extension)
+            {
+                case ".mp3":
+                    await DownloadAndPlaySong(audioData.Path, audioData.Volume, AudioType.MPEG,
+                        this.GetCancellationTokenOnDestroy());
+                    break;
+                case ".ogg":
+                    await DownloadAndPlaySong(audioData.Path, audioData.Volume, AudioType.OGGVORBIS,
+                        this.GetCancellationTokenOnDestroy());
+                    break;
+                case ".wav":
+                    await DownloadAndPlaySong(audioData.Path, audioData.Volume, AudioType.WAV,
+                        this.GetCancellationTokenOnDestroy());
+                    break;
+            }
+                
+        }
+
         public async UniTask PlaySong(int index)
         {
             if (!_audioSettingsLoader.AudioData.IsMusicEnabled)
             {
+                Debug.LogWarning("Music is disabled");
                 return;
             }
 
-            if (_lastSongIndex < index)
+            if (index > _lastSongIndex)
             {
                 _lastSongIndex = index;
                 var audioData = _configLoader.CurrentConfig.SuikaAudios[index];
