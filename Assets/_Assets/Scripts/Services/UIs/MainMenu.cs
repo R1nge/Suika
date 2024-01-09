@@ -18,7 +18,6 @@ namespace _Assets.Scripts.Services.UIs
         [SerializeField] private Image background;
         [Inject] private GameStateMachine _gameStateMachine;
         [Inject] private UIStateMachine _uiStateMachine;
-        [Inject] private IModDataLoader _modDataLoader;
         [Inject] private ContinueGameService _continueGameService;
 
         public void Init(Sprite sprite) => background.sprite = sprite;
@@ -33,7 +32,6 @@ namespace _Assets.Scripts.Services.UIs
 
         private void Start()
         {
-            //TODO: check if mod config or selected mod has changed
             var hasValidContinueData = _continueGameService.HasData;
             
             if (hasValidContinueData)

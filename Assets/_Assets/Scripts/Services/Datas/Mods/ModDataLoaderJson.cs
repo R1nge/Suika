@@ -26,7 +26,7 @@ namespace _Assets.Scripts.Services.Datas.Mods
                 return;
             }
             
-            foreach (var fileInfo in dataFolderInfo.GetFiles("modData.json"))
+            foreach (var fileInfo in dataFolderInfo.GetFiles(PathsHelper.ModDataJson))
             {
                 var reader = new StreamReader(fileInfo.FullName);
                 var json = await reader.ReadToEndAsync();
@@ -38,7 +38,7 @@ namespace _Assets.Scripts.Services.Datas.Mods
 
         public void Save()
         {
-            var path = Path.Combine(PathsHelper.DataPath, "modData.json");
+            var path = Path.Combine(PathsHelper.DataPath, PathsHelper.ModDataJson);
             var json = JsonConvert.SerializeObject(_modData);
             File.WriteAllText(path, json);
         }

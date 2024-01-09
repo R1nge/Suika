@@ -27,7 +27,7 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
 
         public async UniTask LoadDefaultConfig()
         {
-            var targetFile = Path.Combine(PathsHelper.StreamingAssetsPath, "config.json");
+            var targetFile = Path.Combine(PathsHelper.StreamingAssetsPath, PathsHelper.ConfigJson);
 
             UnityWebRequest www = UnityWebRequest.Get(targetFile);
             await www.SendWebRequest();
@@ -116,7 +116,7 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
 
             foreach (var directoryInfo in modsFoldersDirectoryInfo.GetDirectories())
             {
-                foreach (var fileInfo in directoryInfo.GetFiles("config.json"))
+                foreach (var fileInfo in directoryInfo.GetFiles(PathsHelper.ConfigJson))
                 {
                     StreamReader reader = new StreamReader(fileInfo.FullName);
                     var json = reader.ReadToEnd();
@@ -146,9 +146,9 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
                     _spritesCacheService.Preload(_currentConfig, IsDefault).Forget();
                     break;
                 }
-
-                Debug.LogError($"Mod not found: {modName}");
             }
+            
+            Debug.LogError($"Mod not found: {modName}");
         }
     }
 }

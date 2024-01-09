@@ -12,7 +12,6 @@ namespace _Assets.Scripts.Services.Datas.Player
         private readonly ScoreService _scoreService;
         private List<PlayerData> _gameDatas = new(5);
         public List<PlayerData> GameDatas => _gameDatas;
-        private const string DataFileName = "playerData.json";
 
         public PlayerDataLoaderJson(ScoreService scoreService) => _scoreService = scoreService;
 
@@ -29,16 +28,16 @@ namespace _Assets.Scripts.Services.Datas.Player
             {
                 dataToSave.Add(_gameDatas[i]);
             }
-            
+
             var json = JsonConvert.SerializeObject(dataToSave);
 
-            var path = Path.Combine(PathsHelper.DataPath, DataFileName);
-            
-            if(!Directory.Exists(PathsHelper.DataPath))
+            var path = Path.Combine(PathsHelper.DataPath, PathsHelper.PlayerDataJson);
+
+            if (!Directory.Exists(PathsHelper.DataPath))
             {
                 Directory.CreateDirectory(PathsHelper.DataPath);
             }
-            
+
             using (StreamWriter streamWriter = new StreamWriter(path))
             {
                 streamWriter.Write(json);
@@ -47,15 +46,15 @@ namespace _Assets.Scripts.Services.Datas.Player
 
         public void LoadData()
         {
-            var path = Path.Combine(PathsHelper.DataPath, DataFileName);
-            
+            var path = Path.Combine(PathsHelper.DataPath, PathsHelper.PlayerDataJson);
+
             if (!File.Exists(path))
             {
                 Debug.LogWarning("Score data not found");
                 return;
             }
 
-            using (StreamReader reader = new StreamReader(Path.Combine(PathsHelper.DataPath, DataFileName)))
+            using (StreamReader reader = new StreamReader(Path.Combine(PathsHelper.DataPath, PathsHelper.PlayerDataJson)))
             {
                 var json = reader.ReadToEnd();
                 var gameDatas = JsonConvert.DeserializeObject<List<PlayerData>>(json);
