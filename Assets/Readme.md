@@ -1,6 +1,5 @@
 ﻿TODO:
 Encrypt ContinueData, ModData  hash
-
 Fix a lag spike when adding a polygon collider to a sprite renderer
 Fix game config validator
 

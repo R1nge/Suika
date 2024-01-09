@@ -47,7 +47,10 @@ namespace _Assets.Scripts.Services
 
             _randomNumberGenerator.SetCurrent(_continueData.CurrentSuikaIndex);
             _randomNumberGenerator.SetNext(_continueData.NextSuikaIndex);
-            
+        }
+
+        public void UpdateScore()
+        {
             _scoreService.AddScore(_continueData.Score);
         }
 
