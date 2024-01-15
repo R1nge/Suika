@@ -46,7 +46,7 @@ Loading icon = 128-256
 Character skin = 128-512  
 The game supports audio files in MP3 WAV OGG formats  
 
-Modding tool (soon)  
+[Modding tool](https://r1nge.github.io)  
 
 Look at an example mod in `StreamingAssets` folder  
 
