@@ -99,6 +99,8 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
                 config.MainMenuBackgroundPath = mainMenuBackground;
 
                 _allConfigs.Add(config);
+                
+                _currentConfig = config;
 
                 await UniTask.Delay(100);
             }
@@ -147,6 +149,8 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
                     break;
                 }
             }
+            
+            _spritesCacheService.Preload(_currentConfig, IsDefault).Forget();
             
             Debug.LogError($"Mod not found: {modName}");
         }
