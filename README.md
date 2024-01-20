@@ -36,12 +36,12 @@ Scripting
 # Modding guide
 The mod title should be the same as the folder name  
 The game supports image of any size in PNG JPEG formats; each dimension must be, independently, a power of two  
-But, to avoid lag spikes while loading images, it's better to stick to recomended sizes in px  
+But, to avoid lag spikes while loading images, it's better to stick to recommended sizes in px  
 Suika skin sprite = 256-512  
 Suika ui icon sprite = 128-256  
 Container skin sprite = 256-512  
-In game background = phone screen resolution in 16:9, 18:9, 21:9 ratio  
-Loading screen background = phone screen resolution in 16:9, 18:9, 21:9 ratio  
+In game background = screen resolution in 16:9, 18:9, 21:9 ratio  
+Loading screen background = screen resolution in 16:9, 18:9, 21:9 ratio  
 Loading icon = 128-256  
 Character skin = 128-512  
 The game supports audio files in MP3 WAV OGG formats  
