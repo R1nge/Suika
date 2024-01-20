@@ -1,8 +1,8 @@
 {
-  "modName": "Default",
-  "modIconPath": "gura.png",
-  "containerImagePath": "container.png",
-  "suikaSkinsImagesPaths": [
+  "ModName": "Default",
+  "ModIconPath": "gura.png",
+  "ContainerImagePath": "container.png",
+  "SuikaSkinsImagesPaths": [
     "yagoo.png",
     "sana.png",
     "ollie.png",
@@ -16,7 +16,7 @@
     "koyori.png",
     "towa.png"
   ],
-  "suikaIconsPaths": [
+  "SuikaIconsPaths": [
     "yagoo.png",
     "sana.png",
     "ollie.png",
@@ -30,7 +30,7 @@
     "koyori.png",
     "towa.png"
   ],
-  "suikaAudios": [
+  "SuikaAudios": [
     {"path": "silence.mp3", "volume": 1},
     {"path": "silence.mp3", "volume": 1},
     {"path": "song1.mp3", "volume": 0.1},
@@ -44,7 +44,7 @@
     {"path": "silence.mp3", "volume": 1},
     {"path": "silence.mp3", "volume": 1}
   ],
-  "suikaDropChances": [
+  "SuikaDropChances": [
     0.1,
     1,
     1,
@@ -57,9 +57,9 @@
     1,
     1
   ],
-  "timeBeforeTimerTrigger": 1,
-  "timerStartTime": 5,
-  "inGameBackgroundPath": "background.png",
+  "TimeBeforeTimerTrigger": 1,
+  "TimerStartTime": 5,
+  "InGameBackgroundPath": "background.png",
   "LoadingScreenBackgroundPath": "background.png",
   "LoadingScreenIconPath": "gura.png",
   "PlayerSkinPath": "gura.png",
@@ -77,5 +77,5 @@
     {"path": "koyori.ogg", "volume": 0.25},
     {"path": "towa.ogg", "volume": 0.25}
   ],
-  "mainMenuBackgroundPath": "background.png"
+  "MainMenuBackgroundPath": "background.png"
 }

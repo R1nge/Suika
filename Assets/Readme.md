@@ -8,4 +8,4 @@ Refactor
 
 Shake OR Spin
 Fix a lag spike when adding a polygon collider to a sprite renderer
-Detect edge lines (shape) in the modding tool ???
+(Generate collider path in the modding tool)
