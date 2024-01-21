@@ -74,12 +74,17 @@ namespace _Assets.Scripts.Services.UIs.StateMachine
             }
 
             await UniTask.Delay(switchDelayInMilliseconds);
-            
-            _notExitedStates.Add(_currentUIStateType, _currentUIState);
+
+            _notExitedStates.TryAdd(uiStateType, _currentUIState);
+
+            _previousUIStateType = _currentUIStateType;
+            _previousUIState = _states[_previousUIStateType];
             
             _currentUIState = _states[uiStateType];
             _currentUIStateType = uiStateType;
-            _notExitedStates.Add(uiStateType, _currentUIState);
+
+            _notExitedStates.TryAdd(_previousUIStateType, _previousUIState);
+
             await _currentUIState.Enter();
         }
     }
