@@ -23,14 +23,14 @@ namespace _Assets.Scripts.Services.Audio
         public void ChangeMusicVolume(float volume)
         {
             _audioSettingsLoader.ChangeMusicVolume(volume);
-            
+
             musicSource.volume = volume;
-            
-            if (volume > 0)
+
+            if (volume > 0 && !musicSource.isPlaying)
             {
                 musicSource.Play();
             }
-            else
+            else if (volume <= 0)
             {
                 musicSource.Stop();
             }
@@ -47,7 +47,7 @@ namespace _Assets.Scripts.Services.Audio
         public async UniTask PlaySongContinue(int index)
         {
             _lastSongIndex = index;
-            
+
             if (_audioSettingsLoader.AudioData.MusicVolume <= 0)
             {
                 Debug.LogWarning("Music is disabled");
@@ -72,7 +72,6 @@ namespace _Assets.Scripts.Services.Audio
                         this.GetCancellationTokenOnDestroy());
                     break;
             }
-                
         }
 
         public async UniTask PlaySong(int index)

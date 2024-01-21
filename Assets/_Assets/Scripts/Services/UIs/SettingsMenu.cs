@@ -20,8 +20,8 @@ namespace _Assets.Scripts.Services.UIs
 
         private void Awake()
         {
-            soundSlider.onValueChanged.AddListener(ToggleSound);
-            musicSlider.onValueChanged.AddListener(ToggleMusic);
+            soundSlider.onValueChanged.AddListener(ChangeSoundVolume);
+            musicSlider.onValueChanged.AddListener(ChangeMusicVolume);
             backButton.onClick.AddListener(Back);
         }
 
@@ -31,9 +31,9 @@ namespace _Assets.Scripts.Services.UIs
             musicSlider.value = _audioSettingsLoader.AudioData.MusicVolume;
         }
 
-        private void ToggleSound(float volume) => _audioService.ChangeSoundVolume(volume);
+        private void ChangeSoundVolume(float volume) => _audioService.ChangeSoundVolume(volume);
 
-        private void ToggleMusic(float volume) => _audioService.ChangeMusicVolume(volume);
+        private void ChangeMusicVolume(float volume) => _audioService.ChangeMusicVolume(volume);
 
         private void Back()
         {

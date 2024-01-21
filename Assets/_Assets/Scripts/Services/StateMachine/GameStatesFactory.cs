@@ -46,7 +46,7 @@ namespace _Assets.Scripts.Services.StateMachine
 
         public IGameState CreateLoadSaveDataState(GameStateMachine stateMachine)
         {
-            return new LoadSaveDataState(stateMachine, _playerDataLoader, _uiStateMachine, _configLoader, _modDataLoader, _audioSettingsLoader, _continueGameService);
+            return new LoadSaveDataState(stateMachine, _playerDataLoader, _uiStateMachine, _configLoader, _modDataLoader, _audioSettingsLoader, _continueGameService, _audioService);
         }
 
         public IGameState CreateGameState(GameStateMachine stateMachine)
