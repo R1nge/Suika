@@ -12,6 +12,8 @@ namespace _Assets.Scripts.Services.UIs.StateMachine
         private UIStateType _currentUIStateType;
         private UIStateType _previousUIStateType;
 
+        private readonly Dictionary<UIStateType, IUIState> _notExitedStates = new();
+
         public UIStateMachine(UIStatesFactory uiStatesFactory)
         {
             _states = new Dictionary<UIStateType, IUIState>
@@ -38,11 +40,24 @@ namespace _Assets.Scripts.Services.UIs.StateMachine
 
             _previousUIStateType = _currentUIStateType;
             _previousUIState = _currentUIState;
-            
+
             _currentUIState = _states[uiStateType];
             _currentUIStateType = uiStateType;
+            _notExitedStates.Remove(_previousUIStateType);
             await _currentUIState.Enter();
             _previousUIState?.Exit();
+        }
+
+        public async UniTask SwitchStateAndExitFromAllPrevious(UIStateType uiStateType, int switchDelayInMilliseconds = 0)
+        {
+            await SwitchState(uiStateType, switchDelayInMilliseconds);
+            
+            foreach (var uiState in _notExitedStates.Values)
+            {
+                uiState.Exit();
+            }
+            
+            _notExitedStates.Clear();
         }
 
         public async UniTask SwitchToPreviousState(int switchDelayInMilliseconds = 0)
@@ -57,8 +72,10 @@ namespace _Assets.Scripts.Services.UIs.StateMachine
                 Debug.LogError($"Already in {_currentUIStateType} state");
                 return;
             }
-            
+
             await UniTask.Delay(switchDelayInMilliseconds);
+
+            _notExitedStates.Add(uiStateType, _currentUIState);
 
             _currentUIState = _states[uiStateType];
             _currentUIStateType = uiStateType;

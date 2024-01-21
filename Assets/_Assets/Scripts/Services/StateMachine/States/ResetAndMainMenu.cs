@@ -22,7 +22,7 @@ namespace _Assets.Scripts.Services.StateMachine.States
         public void Enter()
         {
             _resetService.Reset();
-            _uiStateMachine.SwitchState(UIStateType.MainMenu).Forget();
+            _uiStateMachine.SwitchStateAndExitFromAllPrevious(UIStateType.MainMenu).Forget();
             _audioService.StopMusic();
             _audioService.ResetIndex();
         }
