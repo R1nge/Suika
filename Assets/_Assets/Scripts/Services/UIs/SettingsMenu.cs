@@ -12,9 +12,12 @@ namespace _Assets.Scripts.Services.UIs
     {
         [SerializeField] private Toggle soundToggle, musicToggle;
         [SerializeField] private Button backButton;
+        [SerializeField] private Image background;
         [Inject] private UIStateMachine _uiStateMachine;
         [Inject] private IAudioSettingsLoader _audioSettingsLoader;
         [Inject] private AudioService _audioService;
+        
+        public void Init(Sprite sprite) => background.sprite = sprite;
 
         private void Awake()
         {

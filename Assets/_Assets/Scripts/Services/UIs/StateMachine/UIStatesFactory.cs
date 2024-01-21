@@ -42,12 +42,12 @@ namespace _Assets.Scripts.Services.UIs.StateMachine
 
         public IUIState CreateModsState(UIStateMachine stateMachine)
         {
-            return new ModsState(_configProvider, _objectResolver);
+            return new ModsState(_configProvider, _objectResolver, _mainMenuProvider);
         }
 
         public IUIState CreateSettingsState(UIStateMachine stateMachine)
         {
-            return new SettingsState(_configProvider, _objectResolver);
+            return new SettingsState(_configProvider, _objectResolver, _mainMenuProvider);
         }
 
         public IUIState CreateGamePauseState(UIStateMachine stateMachine)

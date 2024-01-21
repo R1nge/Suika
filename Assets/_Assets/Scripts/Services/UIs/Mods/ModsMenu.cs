@@ -14,11 +14,14 @@ namespace _Assets.Scripts.Services.UIs.Mods
     {
         [SerializeField] private Transform slotParent;
         [SerializeField] private Button close;
+        [SerializeField] private Image background;
         [Inject] private ModSlotFactory _modSlotFactory;
         [Inject] private IConfigLoader _configLoader;
         [Inject] private UIStateMachine _uiStateMachine;
         [Inject] private IModDataLoader _modDataLoader;
         [Inject] private ContinueGameService _continueGameService;
+        
+        public void Init(Sprite sprite) => background.sprite = sprite;
 
         private async void Start()
         {
