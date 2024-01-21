@@ -114,7 +114,7 @@ namespace _Assets.Scripts.Services
             File.WriteAllText(path, json);
         }
 
-        public void Reset()
+        public void DeleteContinueData()
         {
             _continueData = null;
             var path = Path.Combine(PathsHelper.DataPath, PathsHelper.ContinueDataJson);

@@ -36,7 +36,7 @@ namespace _Assets.Scripts.Services.UIs.Mods
         private void SwitchToMainMenu()
         {
             _uiStateMachine.SwitchState(UIStateType.MainMenu).Forget();
-            _continueGameService.Reset();
+            _continueGameService.DeleteContinueData();
             _modDataLoader.Save();
         }
 
