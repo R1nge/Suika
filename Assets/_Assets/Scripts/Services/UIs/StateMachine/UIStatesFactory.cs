@@ -11,13 +11,15 @@ namespace _Assets.Scripts.Services.UIs.StateMachine
         private readonly IObjectResolver _objectResolver;
         private readonly LoadingCurtainIconProvider _loadingCurtainIconProvider;
         private readonly MainMenuProvider _mainMenuProvider;
+        private readonly UIFactory _uiFactory;
 
-        private UIStatesFactory(ConfigProvider configProvider, IObjectResolver objectResolver, LoadingCurtainIconProvider loadingCurtainIconProvider, MainMenuProvider mainMenuProvider)
+        private UIStatesFactory(ConfigProvider configProvider, IObjectResolver objectResolver, LoadingCurtainIconProvider loadingCurtainIconProvider, MainMenuProvider mainMenuProvider, UIFactory uiFactory)
         {
             _configProvider = configProvider;
             _objectResolver = objectResolver;
             _loadingCurtainIconProvider = loadingCurtainIconProvider;
             _mainMenuProvider = mainMenuProvider;
+            _uiFactory = uiFactory;
         }
 
         public IUIState CreateLoadingState(UIStateMachine stateMachine)
@@ -42,7 +44,7 @@ namespace _Assets.Scripts.Services.UIs.StateMachine
 
         public IUIState CreateModsState(UIStateMachine stateMachine)
         {
-            return new ModsState(_configProvider, _objectResolver, _mainMenuProvider);
+            return new ModsState(_uiFactory);
         }
 
         public IUIState CreateSettingsState(UIStateMachine stateMachine)

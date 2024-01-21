@@ -40,7 +40,8 @@ namespace _Assets.Scripts.CompositionRoot
             builder.Register<ResetService>(Lifetime.Singleton);
 
             builder.Register<LeaderBoardService>(Lifetime.Singleton);
-            
+
+            builder.Register<UIFactory>(Lifetime.Singleton);
             builder.Register<UIStatesFactory>(Lifetime.Singleton);
             builder.Register<UIStateMachine>(Lifetime.Singleton);
             
