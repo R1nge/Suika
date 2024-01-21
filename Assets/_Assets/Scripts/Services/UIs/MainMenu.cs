@@ -46,7 +46,7 @@ namespace _Assets.Scripts.Services.UIs
 
         private void Play() => _gameStateMachine.SwitchState(GameStateType.Game);
 
-        private void Mods() => _uiStateMachine.SwitchState(UIStateType.Mods).Forget();
+        private void Mods() => _uiStateMachine.SwitchStateAndExitFromAllPrevious(UIStateType.Mods).Forget();
 
         private void Settings() => _uiStateMachine.SwitchState(UIStateType.Settings).Forget();
 
