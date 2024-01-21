@@ -21,10 +21,11 @@ namespace _Assets.Scripts.Services.UIs.StateMachine.States
             _mainMenuProvider = mainMenuProvider;
         }
 
-        public async UniTask Enter()
+        public UniTask Enter()
         {
             _ui = _objectResolver.Instantiate(_configProvider.UIConfig.SettingMenu);
             _ui.GetComponent<SettingsMenu>().Init(_mainMenuProvider.BackgroundSprite);
+            return UniTask.CompletedTask;
         }
 
         public void Exit() => Object.Destroy(_ui);

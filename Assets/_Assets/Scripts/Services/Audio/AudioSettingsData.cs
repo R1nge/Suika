@@ -2,13 +2,13 @@
 {
     public struct AudioSettingsData
     {
-        public bool IsSoundEnabled;
-        public bool IsMusicEnabled;
+        public float VFXVolume;
+        public float MusicVolume;
 
-        public AudioSettingsData(bool isSoundEnabled, bool isMusicEnabled)
+        public AudioSettingsData(int vfxVolume, int musicVolume)
         {
-            IsSoundEnabled = isSoundEnabled;
-            IsMusicEnabled = isMusicEnabled;
+            VFXVolume = vfxVolume;
+            MusicVolume = musicVolume;
         }
     }
 }

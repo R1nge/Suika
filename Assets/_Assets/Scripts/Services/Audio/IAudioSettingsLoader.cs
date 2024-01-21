@@ -7,7 +7,7 @@ namespace _Assets.Scripts.Services.Audio
         UniTask Load();
         void Save();
         AudioSettingsData AudioData { get;}
-        void ToggleSound(bool enable);
-        void ToggleMusic(bool enable);
+        void ChangeSoundVolume(float volume);
+        void ChangeMusicVolume(float volume);
     }
 }

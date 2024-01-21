@@ -2,7 +2,8 @@
 Leader board (local)
 
 //TODO: Settings menu UI
-//TODO: Black/White theme
-//TODO: update mods background on mod change?
+//TODO: Dark/Light theme
+//TODO: Update mods background on mod change?
+//TODO: Vibration on merge
 
 Shake OR Spin

@@ -10,7 +10,7 @@ namespace _Assets.Scripts.Services.UIs.InGame
 {
     public class InGamePauseMenu : MonoBehaviour
     {
-        [SerializeField] private Toggle soundToggle, musicToggle;
+        [SerializeField] private Slider soundSlider, musicSlider;
         [SerializeField] private Button backButton, mainMenuButton;
         [Inject] private GameStateMachine _gameStateMachine;
         [Inject] private IAudioSettingsLoader _audioSettingsLoader;
@@ -20,10 +20,16 @@ namespace _Assets.Scripts.Services.UIs.InGame
 
         private void Awake()
         {
-            soundToggle.onValueChanged.AddListener(ToggleSound);
-            musicToggle.onValueChanged.AddListener(ToggleMusic);
+            soundSlider.onValueChanged.AddListener(ToggleSound);
+            musicSlider.onValueChanged.AddListener(ToggleMusic);
             mainMenuButton.onClick.AddListener(MainMenu);
             backButton.onClick.AddListener(Back);
+        }
+
+        private void Start()
+        {
+            soundSlider.value = _audioSettingsLoader.AudioData.VFXVolume;
+            musicSlider.value = _audioSettingsLoader.AudioData.MusicVolume;
         }
 
         private void MainMenu()
@@ -32,15 +38,9 @@ namespace _Assets.Scripts.Services.UIs.InGame
             _gameStateMachine.SwitchState(GameStateType.ResetAndMainMenu);
         }
 
-        private void Start()
-        {
-            soundToggle.isOn = _audioSettingsLoader.AudioData.IsSoundEnabled;
-            musicToggle.isOn = _audioSettingsLoader.AudioData.IsMusicEnabled;
-        }
+        private void ToggleSound(float volume) => _audioService.ChangeSoundVolume(volume);
 
-        private void ToggleSound(bool enable) => _audioService.ToggleSound(enable);
-
-        private void ToggleMusic(bool enable) => _audioService.ToggleMusic(enable);
+        private void ToggleMusic(float volume) => _audioService.ChangeMusicVolume(volume);
 
         private void Back()
         {
@@ -50,8 +50,8 @@ namespace _Assets.Scripts.Services.UIs.InGame
 
         private void OnDestroy()
         {
-            soundToggle.onValueChanged.RemoveAllListeners();
-            musicToggle.onValueChanged.RemoveAllListeners();
+            soundSlider.onValueChanged.RemoveAllListeners();
+            musicSlider.onValueChanged.RemoveAllListeners();
             backButton.onClick.RemoveAllListeners();
         }
     }

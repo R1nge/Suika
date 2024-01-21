@@ -20,11 +20,13 @@ namespace _Assets.Scripts.Services.Audio
 
         public void ResetIndex() => _lastSongIndex = 0;
 
-        public void ToggleMusic(bool enable)
+        public void ChangeMusicVolume(float volume)
         {
-            _audioSettingsLoader.ToggleMusic(enable);
+            _audioSettingsLoader.ChangeMusicVolume(volume);
             
-            if (enable)
+            musicSource.volume = volume;
+            
+            if (volume > 0)
             {
                 musicSource.Play();
             }
@@ -34,7 +36,11 @@ namespace _Assets.Scripts.Services.Audio
             }
         }
 
-        public void ToggleSound(bool enable) => _audioSettingsLoader.ToggleSound(enable);
+        public void ChangeSoundVolume(float volume)
+        {
+            _audioSettingsLoader.ChangeSoundVolume(volume);
+            mergeSource.volume = volume;
+        }
 
         public void StopMusic() => musicSource.Stop();
 
@@ -42,7 +48,7 @@ namespace _Assets.Scripts.Services.Audio
         {
             _lastSongIndex = index;
             
-            if (!_audioSettingsLoader.AudioData.IsMusicEnabled)
+            if (_audioSettingsLoader.AudioData.MusicVolume <= 0)
             {
                 Debug.LogWarning("Music is disabled");
                 return;
@@ -71,7 +77,7 @@ namespace _Assets.Scripts.Services.Audio
 
         public async UniTask PlaySong(int index)
         {
-            if (!_audioSettingsLoader.AudioData.IsMusicEnabled)
+            if (_audioSettingsLoader.AudioData.MusicVolume <= 0)
             {
                 Debug.LogWarning("Music is disabled");
                 return;
@@ -107,8 +113,9 @@ namespace _Assets.Scripts.Services.Audio
 
         public async UniTask PlayMerge(int index)
         {
-            if (!_audioSettingsLoader.AudioData.IsSoundEnabled)
+            if (_audioSettingsLoader.AudioData.VFXVolume <= 0)
             {
+                Debug.LogWarning("Sounds are disabled");
                 return;
             }
 

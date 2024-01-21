@@ -10,9 +10,9 @@ namespace _Assets.Scripts.Services.Audio
     {
         private AudioSettingsData _audioSettingsData;
         public AudioSettingsData AudioData => _audioSettingsData;
-        public void ToggleSound(bool enable) => _audioSettingsData.IsSoundEnabled = enable;
+        public void ChangeSoundVolume(float volume) => _audioSettingsData.VFXVolume = volume;
 
-        public void ToggleMusic(bool enable) => _audioSettingsData.IsMusicEnabled = enable;
+        public void ChangeMusicVolume(float volume) => _audioSettingsData.MusicVolume = volume;
 
         public async UniTask Load()
         {

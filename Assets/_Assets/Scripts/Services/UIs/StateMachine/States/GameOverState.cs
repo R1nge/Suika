@@ -18,7 +18,11 @@ namespace _Assets.Scripts.Services.UIs.StateMachine.States
             _objectResolver = objectResolver;
         }
 
-        public async UniTask Enter() => _ui = _objectResolver.Instantiate(_configProvider.UIConfig.GameOverMenu);
+        public UniTask Enter()
+        {
+            _ui = _objectResolver.Instantiate(_configProvider.UIConfig.GameOverMenu);
+            return UniTask.CompletedTask;
+        }
 
         public void Exit() => Object.Destroy(_ui);
     }
