@@ -49,5 +49,20 @@ namespace _Assets.Scripts.Services.UIs.StateMachine
         {
             await SwitchState(_previousUIStateType, switchDelayInMilliseconds);
         }
+
+        public async UniTask SwitchStateWithoutExitFromPrevious(UIStateType uiStateType, int switchDelayInMilliseconds = 0)
+        {
+            if (_currentUIStateType == uiStateType)
+            {
+                Debug.LogError($"Already in {_currentUIStateType} state");
+                return;
+            }
+            
+            await UniTask.Delay(switchDelayInMilliseconds);
+
+            _currentUIState = _states[uiStateType];
+            _currentUIStateType = uiStateType;
+            await _currentUIState.Enter();
+        }
     }
 }

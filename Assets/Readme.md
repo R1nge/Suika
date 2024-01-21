@@ -1,10 +1,10 @@
 ﻿UI:
-Add animations
 Leader board (local)
-Evolution line (use suika icons)
+Buttons
+Settings screen
+Pause menu change
 
-Refactor
-(Use MVx for UI?)
+Black/White theme
 
 Shake OR Spin
 Fix a lag spike when adding a polygon collider to a sprite renderer

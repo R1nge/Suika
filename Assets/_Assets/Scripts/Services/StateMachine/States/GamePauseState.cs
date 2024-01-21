@@ -16,7 +16,7 @@ namespace _Assets.Scripts.Services.StateMachine.States
 
         public void Enter()
         {
-            _uiStateMachine.SwitchState(UIStateType.Pause).Forget();
+            _uiStateMachine.SwitchStateWithoutExitFromPrevious(UIStateType.Pause).Forget();
             _playerInput.Disable();
         }
 
