@@ -5,7 +5,7 @@
         public float VFXVolume;
         public float MusicVolume;
 
-        public AudioSettingsData(int vfxVolume, int musicVolume)
+        public AudioSettingsData(float vfxVolume, float musicVolume)
         {
             VFXVolume = vfxVolume;
             MusicVolume = musicVolume;

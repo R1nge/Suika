@@ -20,6 +20,7 @@ namespace _Assets.Scripts.Services.Audio
             
             if(!File.Exists(Path.Combine(PathsHelper.DataPath, PathsHelper.SettingsDataJson)))
             {
+                _audioSettingsData = new AudioSettingsData(.5f, .5f);
                 Debug.LogWarning("Audio settings not found");
                 return;
             }
