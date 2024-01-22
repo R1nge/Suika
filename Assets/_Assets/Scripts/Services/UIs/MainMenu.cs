@@ -1,9 +1,11 @@
-﻿using _Assets.Scripts.Services.Datas.Mods;
+﻿using System;
+using _Assets.Scripts.Services.Datas.Mods;
 using _Assets.Scripts.Services.StateMachine;
 using _Assets.Scripts.Services.UIs.StateMachine;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using VContainer;
 
@@ -20,6 +22,7 @@ namespace _Assets.Scripts.Services.UIs
         [Inject] private GameStateMachine _gameStateMachine;
         [Inject] private UIStateMachine _uiStateMachine;
         [Inject] private ContinueGameService _continueGameService;
+        [Inject] private PlayerInput _playerInput;
 
         public void Init(Sprite sprite) => background.sprite = sprite;
 
@@ -33,8 +36,10 @@ namespace _Assets.Scripts.Services.UIs
 
         private void Start()
         {
+            _playerInput.OnDeviceChanged += SelectUIElement;
+
             var hasValidContinueData = _continueGameService.HasData;
-            
+
             if (hasValidContinueData)
             {
                 continueButton.onClick.AddListener(Continue);
@@ -48,15 +53,47 @@ namespace _Assets.Scripts.Services.UIs
                 quitButtonNavigation.selectOnUp = settingsButton;
                 quitButtonNavigation.selectOnDown = continueButton;
                 quitButton.navigation = quitButtonNavigation;
+            }
 
+            continueButton.gameObject.SetActive(hasValidContinueData);
+
+            SelectFirstButton();
+        }
+
+        private void SelectFirstButton()
+        {
+            var hasValidContinueData = _continueGameService.HasData;
+
+            if (hasValidContinueData)
+            {
                 EventSystem.current.SetSelectedGameObject(continueButton.gameObject);
             }
             else
             {
                 EventSystem.current.SetSelectedGameObject(playButton.gameObject);
             }
+        }
 
-            continueButton.gameObject.SetActive(hasValidContinueData);
+        private void Update()
+        {
+            //Could use InvokeRepeat
+            SelectFirstUIElementIfNotSelected();
+        }
+
+        private void SelectFirstUIElementIfNotSelected()
+        {
+            if (EventSystem.current.currentSelectedGameObject == null)
+            {
+                SelectFirstButton();
+            }
+        }
+
+        private void SelectUIElement(InputDevice device)
+        {
+            if (device.name == "Gamepad")
+            {
+                SelectFirstButton();
+            }
         }
 
         private void Continue() => _gameStateMachine.SwitchState(GameStateType.ContinueGame);

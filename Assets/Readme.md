@@ -1,5 +1,5 @@
 ﻿//TODO: Settings, Pause UI vibration control
-//TODO: UI navigation
+//TODO: Gamepad UI navigation
 
 //TODO: Dark/Light theme
 //TODO: Leader board (local)

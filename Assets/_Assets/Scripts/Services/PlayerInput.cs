@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
@@ -13,6 +14,8 @@ namespace _Assets.Scripts.Services
 
         private InputDevice _lastUsedDevice;
         public InputDevice LastUsedDevice => _lastUsedDevice;
+
+        public event Action<InputDevice> OnDeviceChanged; 
 
         public void Init()
         {
@@ -31,6 +34,7 @@ namespace _Assets.Scripts.Services
                 return;
 
             _lastUsedDevice = device;
+            OnDeviceChanged?.Invoke(_lastUsedDevice);
         }
 
 
@@ -52,6 +56,7 @@ namespace _Assets.Scripts.Services
 
 
             _lastUsedDevice = device;
+            OnDeviceChanged?.Invoke(_lastUsedDevice);
         }
     }
 }
