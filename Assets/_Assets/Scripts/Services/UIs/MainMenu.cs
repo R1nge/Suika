@@ -3,6 +3,7 @@ using _Assets.Scripts.Services.StateMachine;
 using _Assets.Scripts.Services.UIs.StateMachine;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using VContainer;
 
@@ -37,6 +38,22 @@ namespace _Assets.Scripts.Services.UIs
             if (hasValidContinueData)
             {
                 continueButton.onClick.AddListener(Continue);
+
+                var playButtonNavigation = playButton.navigation;
+                playButtonNavigation.selectOnUp = continueButton;
+                playButtonNavigation.selectOnDown = modsButton;
+                playButton.navigation = playButtonNavigation;
+
+                var quitButtonNavigation = quitButton.navigation;
+                quitButtonNavigation.selectOnUp = settingsButton;
+                quitButtonNavigation.selectOnDown = continueButton;
+                quitButton.navigation = quitButtonNavigation;
+
+                EventSystem.current.SetSelectedGameObject(continueButton.gameObject);
+            }
+            else
+            {
+                EventSystem.current.SetSelectedGameObject(playButton.gameObject);
             }
 
             continueButton.gameObject.SetActive(hasValidContinueData);

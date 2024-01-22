@@ -8,6 +8,7 @@ namespace _Assets.Scripts.Services
     public class PlayerInput
     {
         private bool _enabled;
+        //TODO: fix this doesn't work on mobile
         public bool Enabled => _enabled && !EventSystem.current.IsPointerOverGameObject();
 
         private InputDevice _lastUsedDevice;
