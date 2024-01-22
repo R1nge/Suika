@@ -53,7 +53,7 @@ namespace _Assets.Scripts.Services.StateMachine
         
         public IGameState CreateInitState(GameStateMachine stateMachine)
         {
-            return new InitState(stateMachine, _audioService, _audioSettingsLoader, _configLoader, _modDataLoader, _uiStateMachine, _vibrationService);
+            return new InitState(stateMachine, _audioService, _audioSettingsLoader, _configLoader, _modDataLoader, _uiStateMachine, _vibrationService, _playerInput);
         }
 
         public IGameState CreateGameState(GameStateMachine stateMachine)

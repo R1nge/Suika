@@ -2,6 +2,7 @@
 using _Assets.Scripts.Services.Factories;
 using _Assets.Scripts.Services.UIs;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using VContainer;
 using PlayerInput = _Assets.Scripts.Services.PlayerInput;
