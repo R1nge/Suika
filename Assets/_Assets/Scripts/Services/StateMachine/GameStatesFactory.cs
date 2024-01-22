@@ -24,11 +24,12 @@ namespace _Assets.Scripts.Services.StateMachine
         private readonly IModDataLoader _modDataLoader;
         private readonly IAudioSettingsLoader _audioSettingsLoader;
         private readonly ContinueGameService _continueGameService;
+        private readonly VibrationService _vibrationService;
 
         private GameStatesFactory(IPlayerDataLoader playerDataLoader, UIStateMachine uiStateMachine,
             CoroutineRunner coroutineRunner, PlayerFactory playerFactory, ContainerFactory containerFactory,
             ResetService resetService, PlayerInput playerInput, IConfigLoader configLoader, AudioService audioService,
-            IModDataLoader modDataLoader, IAudioSettingsLoader audioSettingsLoader, ContinueGameService continueGameService)
+            IModDataLoader modDataLoader, IAudioSettingsLoader audioSettingsLoader, ContinueGameService continueGameService, VibrationService vibrationService)
         {
             _playerDataLoader = playerDataLoader;
             _uiStateMachine = uiStateMachine;
@@ -42,11 +43,17 @@ namespace _Assets.Scripts.Services.StateMachine
             _modDataLoader = modDataLoader;
             _audioSettingsLoader = audioSettingsLoader;
             _continueGameService = continueGameService;
+            _vibrationService = vibrationService;
         }
 
         public IGameState CreateLoadSaveDataState(GameStateMachine stateMachine)
         {
-            return new LoadSaveDataState(stateMachine, _playerDataLoader, _uiStateMachine, _configLoader, _modDataLoader, _audioSettingsLoader, _continueGameService, _audioService);
+            return new LoadSaveDataState(stateMachine, _playerDataLoader, _uiStateMachine, _configLoader, _modDataLoader, _audioSettingsLoader, _continueGameService);
+        }
+        
+        public IGameState CreateInitState(GameStateMachine stateMachine)
+        {
+            return new InitState(stateMachine, _audioService, _audioSettingsLoader, _configLoader, _modDataLoader, _uiStateMachine, _vibrationService);
         }
 
         public IGameState CreateGameState(GameStateMachine stateMachine)

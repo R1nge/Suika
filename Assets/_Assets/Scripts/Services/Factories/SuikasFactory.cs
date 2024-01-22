@@ -20,8 +20,9 @@ namespace _Assets.Scripts.Services.Factories
         private readonly ResetService _resetService;
         private readonly AudioService _audioService;
         private readonly SpritesCacheService _spritesCacheService;
+        private readonly VibrationService _vibrationService;
 
-        private SuikasFactory(IObjectResolver objectResolver, ConfigProvider configProvider, RandomNumberGenerator randomNumberGenerator, ScoreService scoreService, ResetService resetService, AudioService audioService, SpritesCacheService spritesCacheService)
+        private SuikasFactory(IObjectResolver objectResolver, ConfigProvider configProvider, RandomNumberGenerator randomNumberGenerator, ScoreService scoreService, ResetService resetService, AudioService audioService, SpritesCacheService spritesCacheService, VibrationService vibrationService)
         {
             _objectResolver = objectResolver;
             _configProvider = configProvider;
@@ -30,6 +31,7 @@ namespace _Assets.Scripts.Services.Factories
             _resetService = resetService;
             _audioService = audioService;
             _spritesCacheService = spritesCacheService;
+            _vibrationService = vibrationService;
         }
 
         public Rigidbody2D CreateKinematic(Vector3 position, Transform parent)
@@ -78,6 +80,7 @@ namespace _Assets.Scripts.Services.Factories
             AddPolygonCollider(suikaInstance);
             _audioService.PlayMerge(index).Forget();
             _audioService.PlaySong(index).Forget();
+            _vibrationService.Vibrate();
         }
 
         public void CreateContinue(int index, Vector3 position)

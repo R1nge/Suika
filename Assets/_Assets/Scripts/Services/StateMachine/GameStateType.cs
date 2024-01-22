@@ -4,13 +4,14 @@
     {
         None = 0,
         LoadSavedData = 1,
-        Game = 2,
-        GameOver = 3,
-        SaveData = 4,
-        ResetAndRetry = 5,
-        ResetAndMainMenu = 6,
-        GamePause = 7,
-        GameResume = 8,
-        ContinueGame = 9
+        Init = 2,
+        Game = 3,
+        GameOver = 4,
+        SaveData = 5,
+        ResetAndRetry = 6,
+        ResetAndMainMenu = 7,
+        GamePause = 8,
+        GameResume = 9,
+        ContinueGame = 10
     }
 }

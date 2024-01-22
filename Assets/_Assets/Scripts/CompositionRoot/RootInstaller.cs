@@ -2,7 +2,6 @@
 using _Assets.Scripts.Services;
 using _Assets.Scripts.Services.Audio;
 using _Assets.Scripts.Services.Configs;
-using _Assets.Scripts.Services.Datas;
 using _Assets.Scripts.Services.Datas.GameConfigs;
 using _Assets.Scripts.Services.Datas.Mods;
 using _Assets.Scripts.Services.Datas.Player;
@@ -20,6 +19,7 @@ namespace _Assets.Scripts.CompositionRoot
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterComponent(configProvider);
+            builder.Register<VibrationService>(Lifetime.Singleton);
             builder.Register<ScoreService>(Lifetime.Singleton);
             builder.Register<AudioSettingsDataLoaderJson>(Lifetime.Singleton).As<IAudioSettingsLoader>();
             builder.Register<ModDataLoaderJson>(Lifetime.Singleton).As<IModDataLoader>();
