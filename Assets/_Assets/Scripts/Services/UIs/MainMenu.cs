@@ -1,6 +1,4 @@
-﻿using System;
-using _Assets.Scripts.Services.Datas.Mods;
-using _Assets.Scripts.Services.StateMachine;
+﻿using _Assets.Scripts.Services.StateMachine;
 using _Assets.Scripts.Services.UIs.StateMachine;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -71,20 +69,6 @@ namespace _Assets.Scripts.Services.UIs
             else
             {
                 EventSystem.current.SetSelectedGameObject(playButton.gameObject);
-            }
-        }
-
-        private void Update()
-        {
-            //Could use InvokeRepeat
-            SelectFirstUIElementIfNotSelected();
-        }
-
-        private void SelectFirstUIElementIfNotSelected()
-        {
-            if (EventSystem.current.currentSelectedGameObject == null)
-            {
-                SelectFirstButton();
             }
         }
 
