@@ -1,4 +1,5 @@
-﻿using _Assets.Scripts.Services.Datas.GameConfigs;
+﻿using System;
+using _Assets.Scripts.Services.Datas.GameConfigs;
 using _Assets.Scripts.Services.Factories;
 using _Assets.Scripts.Services.UIs.StateMachine;
 using UnityEngine;
@@ -20,17 +21,29 @@ namespace _Assets.Scripts.Services.UIs.Mods
         [Inject] private UIStateMachine _uiStateMachine;
         [Inject] private IModDataLoader _modDataLoader;
         [Inject] private ContinueGameService _continueGameService;
-        
+        [Inject] private SpriteCreator _spriteCreator;
+
         public void Init(Sprite sprite) => background.sprite = sprite;
 
         private async void Start()
         {
+            //Not the best solution, but it works.
+            _configLoader.ConfigChanged += ChangeBackground;
             close.onClick.AddListener(SwitchToMainMenu);
+            
+            var sprite = await _spriteCreator.CreateMainMenuBackground();
+            Init(sprite);
 
             for (int i = 0; i < _configLoader.AllConfigs.Count; i++)
             {
                 await CreateSlot(i);
             }
+        }
+
+        private async void ChangeBackground(GameConfig config)
+        {
+            var sprite = await _spriteCreator.CreateMainMenuBackground();
+            Init(sprite);
         }
 
         private void SwitchToMainMenu()
@@ -59,6 +72,11 @@ namespace _Assets.Scripts.Services.UIs.Mods
             slot.transform.SetParent(slotParent);
             slot.transform.localScale = Vector3.one;
             slot.SetSlotData(iconSprite, _configLoader.AllConfigs[index].ModName);
+        }
+
+        private void OnDestroy()
+        {
+            _configLoader.ConfigChanged -= ChangeBackground;
         }
     }
 }

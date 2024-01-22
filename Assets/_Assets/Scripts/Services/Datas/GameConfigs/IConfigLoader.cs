@@ -12,5 +12,6 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
         public void LoadAllConfigs();
         public void SetCurrentConfig(string modName);
         public bool IsDefault { get; }
+        event Action<GameConfig> ConfigChanged; 
     }
 }

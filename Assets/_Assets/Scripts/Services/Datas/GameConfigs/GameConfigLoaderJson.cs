@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using _Assets.Scripts.Misc;
 using Cysharp.Threading.Tasks;
@@ -18,6 +19,7 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
         public List<GameConfig> AllConfigs => _allConfigs;
         public GameConfig CurrentConfig => _currentConfig;
         public bool IsDefault => _currentConfig.Equals(_allConfigs[0]);
+        public event Action<GameConfig> ConfigChanged;
 
         public GameConfigLoaderJson(GameConfigValidator gameConfigValidator, SpritesCacheService spritesCacheService)
         {
@@ -144,6 +146,7 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
                 Debug.LogError($"Mod name {_allConfigs[i].ModName} {i}");
                 if (_allConfigs[i].ModName == modName)
                 {
+                    Debug.LogWarning($"Mod {modName} found");
                     _currentConfig = _allConfigs[i];
                     _spritesCacheService.Preload(_currentConfig, IsDefault).Forget();
                     break;
@@ -152,7 +155,7 @@ namespace _Assets.Scripts.Services.Datas.GameConfigs
             
             _spritesCacheService.Preload(_currentConfig, IsDefault).Forget();
             
-            Debug.LogError($"Mod not found: {modName}");
+            ConfigChanged?.Invoke(_currentConfig);
         }
     }
 }

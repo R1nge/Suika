@@ -91,7 +91,6 @@ namespace _Assets.Scripts.Misc
             {
                 var path = _configLoader.CurrentConfig.MainMenuBackgroundPath;
                 return await SpriteHelper.CreateSpriteFromStreamingAssests(path, false);
-                
             }
         }
     }
