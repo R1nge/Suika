@@ -18,14 +18,14 @@ namespace _Assets.Scripts.Services.Audio
         {
             var dataFolderInfo = new DirectoryInfo(PathsHelper.DataPath);
             
-            if(!File.Exists(Path.Combine(PathsHelper.DataPath, PathsHelper.SettingsDataJson)))
+            if(!File.Exists(Path.Combine(PathsHelper.DataPath, PathsHelper.AudioSettingsDataJson)))
             {
                 _audioSettingsData = new AudioSettingsData(.5f, .5f);
                 Debug.LogWarning("Audio settings not found");
                 return;
             }
 
-            foreach (var fileInfo in dataFolderInfo.GetFiles(PathsHelper.SettingsDataJson))
+            foreach (var fileInfo in dataFolderInfo.GetFiles(PathsHelper.AudioSettingsDataJson))
             {
                 StreamReader reader = new StreamReader(fileInfo.FullName);
                 var json = await reader.ReadToEndAsync();
@@ -37,7 +37,7 @@ namespace _Assets.Scripts.Services.Audio
 
         public void Save()
         {
-            var path = Path.Combine(PathsHelper.DataPath, PathsHelper.SettingsDataJson);
+            var path = Path.Combine(PathsHelper.DataPath, PathsHelper.AudioSettingsDataJson);
             var json = JsonConvert.SerializeObject(_audioSettingsData);
             File.WriteAllText(path, json);
         }

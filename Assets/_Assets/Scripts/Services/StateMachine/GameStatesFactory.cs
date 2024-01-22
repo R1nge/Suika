@@ -7,6 +7,7 @@ using _Assets.Scripts.Services.Datas.Player;
 using _Assets.Scripts.Services.Factories;
 using _Assets.Scripts.Services.StateMachine.States;
 using _Assets.Scripts.Services.UIs.StateMachine;
+using _Assets.Scripts.Services.Vibrations;
 
 namespace _Assets.Scripts.Services.StateMachine
 {
@@ -25,11 +26,12 @@ namespace _Assets.Scripts.Services.StateMachine
         private readonly IAudioSettingsLoader _audioSettingsLoader;
         private readonly ContinueGameService _continueGameService;
         private readonly VibrationService _vibrationService;
+        private readonly IVibrationSettingLoader _vibrationSettingLoader;
 
         private GameStatesFactory(IPlayerDataLoader playerDataLoader, UIStateMachine uiStateMachine,
             CoroutineRunner coroutineRunner, PlayerFactory playerFactory, ContainerFactory containerFactory,
             ResetService resetService, PlayerInput playerInput, IConfigLoader configLoader, AudioService audioService,
-            IModDataLoader modDataLoader, IAudioSettingsLoader audioSettingsLoader, ContinueGameService continueGameService, VibrationService vibrationService)
+            IModDataLoader modDataLoader, IAudioSettingsLoader audioSettingsLoader, ContinueGameService continueGameService, VibrationService vibrationService, IVibrationSettingLoader vibrationSettingLoader)
         {
             _playerDataLoader = playerDataLoader;
             _uiStateMachine = uiStateMachine;
@@ -44,11 +46,12 @@ namespace _Assets.Scripts.Services.StateMachine
             _audioSettingsLoader = audioSettingsLoader;
             _continueGameService = continueGameService;
             _vibrationService = vibrationService;
+            _vibrationSettingLoader = vibrationSettingLoader;
         }
 
         public IGameState CreateLoadSaveDataState(GameStateMachine stateMachine)
         {
-            return new LoadSaveDataState(stateMachine, _playerDataLoader, _uiStateMachine, _configLoader, _modDataLoader, _audioSettingsLoader, _continueGameService);
+            return new LoadSaveDataState(stateMachine, _playerDataLoader, _uiStateMachine, _configLoader, _modDataLoader, _audioSettingsLoader, _continueGameService, _vibrationSettingLoader);
         }
         
         public IGameState CreateInitState(GameStateMachine stateMachine)
@@ -68,7 +71,7 @@ namespace _Assets.Scripts.Services.StateMachine
 
         public IGameState CreateSaveDataState(GameStateMachine stateMachine)
         {
-            return new SaveDataState(_playerDataLoader, _modDataLoader, _audioSettingsLoader, _continueGameService);
+            return new SaveDataState(_playerDataLoader, _modDataLoader, _audioSettingsLoader, _continueGameService, _vibrationSettingLoader);
         }
 
         public IGameState CreateResetAndRetryState(GameStateMachine stateMachine)

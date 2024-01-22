@@ -2,6 +2,7 @@
 using _Assets.Scripts.Services.Datas;
 using _Assets.Scripts.Services.Datas.Mods;
 using _Assets.Scripts.Services.Datas.Player;
+using _Assets.Scripts.Services.Vibrations;
 
 namespace _Assets.Scripts.Services.StateMachine.States
 {
@@ -11,13 +12,15 @@ namespace _Assets.Scripts.Services.StateMachine.States
         private readonly IModDataLoader _modDataLoader;
         private readonly IAudioSettingsLoader _audioSettingsLoader;
         private readonly ContinueGameService _continueGameService;
+        private readonly IVibrationSettingLoader _vibrationSettingLoader;
 
-        public SaveDataState(IPlayerDataLoader playerDataLoader, IModDataLoader modDataLoader, IAudioSettingsLoader audioSettingsLoader, ContinueGameService continueGameService)
+        public SaveDataState(IPlayerDataLoader playerDataLoader, IModDataLoader modDataLoader, IAudioSettingsLoader audioSettingsLoader, ContinueGameService continueGameService, IVibrationSettingLoader vibrationSettingLoader)
         {
             _playerDataLoader = playerDataLoader;
             _modDataLoader = modDataLoader;
             _audioSettingsLoader = audioSettingsLoader;
             _continueGameService = continueGameService;
+            _vibrationSettingLoader = vibrationSettingLoader;
         }
 
         public void Enter()
@@ -26,6 +29,7 @@ namespace _Assets.Scripts.Services.StateMachine.States
             _modDataLoader.Save();
             _audioSettingsLoader.Save();
             _continueGameService.Save();
+            _vibrationSettingLoader.Save();
         }
 
         public void Exit()

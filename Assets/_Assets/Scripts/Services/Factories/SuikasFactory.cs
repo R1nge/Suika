@@ -4,6 +4,7 @@ using _Assets.Scripts.Services.Audio;
 using _Assets.Scripts.Services.Configs;
 using _Assets.Scripts.Services.Datas.GameConfigs;
 using _Assets.Scripts.Services.StateMachine;
+using _Assets.Scripts.Services.Vibrations;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;

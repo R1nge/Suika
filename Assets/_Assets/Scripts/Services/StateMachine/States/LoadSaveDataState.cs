@@ -3,6 +3,7 @@ using _Assets.Scripts.Services.Datas.GameConfigs;
 using _Assets.Scripts.Services.Datas.Mods;
 using _Assets.Scripts.Services.Datas.Player;
 using _Assets.Scripts.Services.UIs.StateMachine;
+using _Assets.Scripts.Services.Vibrations;
 
 namespace _Assets.Scripts.Services.StateMachine.States
 {
@@ -15,9 +16,9 @@ namespace _Assets.Scripts.Services.StateMachine.States
         private readonly IModDataLoader _modDataLoader;
         private readonly IAudioSettingsLoader _audioSettingsLoader;
         private readonly ContinueGameService _continueGameService;
-        
+        private readonly IVibrationSettingLoader _vibrationSettingLoader;
 
-        public LoadSaveDataState(GameStateMachine stateMachine, IPlayerDataLoader playerDataLoader, UIStateMachine uiStateMachine, IConfigLoader configLoader, IModDataLoader modDataLoader, IAudioSettingsLoader audioSettingsLoader, ContinueGameService continueGameService)
+        public LoadSaveDataState(GameStateMachine stateMachine, IPlayerDataLoader playerDataLoader, UIStateMachine uiStateMachine, IConfigLoader configLoader, IModDataLoader modDataLoader, IAudioSettingsLoader audioSettingsLoader, ContinueGameService continueGameService, IVibrationSettingLoader vibrationSettingLoader)
         {
             _stateMachine = stateMachine;
             _playerDataLoader = playerDataLoader;
@@ -26,12 +27,14 @@ namespace _Assets.Scripts.Services.StateMachine.States
             _modDataLoader = modDataLoader;
             _audioSettingsLoader = audioSettingsLoader;
             _continueGameService = continueGameService;
+            _vibrationSettingLoader = vibrationSettingLoader;
         }
 
         public async void Enter()
         {
             await _continueGameService.Load();
             await _audioSettingsLoader.Load();
+            await _vibrationSettingLoader.Load();
             await _modDataLoader.Load();
             _playerDataLoader.LoadData();
             await _configLoader.LoadDefaultConfig();

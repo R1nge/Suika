@@ -6,7 +6,7 @@ namespace _Assets.Scripts.Services.Audio
     {
         UniTask Load();
         void Save();
-        AudioSettingsData AudioData { get;}
+        AudioSettingsData AudioData { get; }
         void ChangeSoundVolume(float volume);
         void ChangeMusicVolume(float volume);
     }
