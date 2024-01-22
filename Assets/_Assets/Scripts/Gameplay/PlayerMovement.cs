@@ -27,6 +27,10 @@ namespace _Assets.Scripts.Gameplay
             var input = Mathf.Clamp(_moveVector.ReadValue<Vector2>().x, -horizontalLimit, horizontalLimit);
             var newPosition = transform.position + new Vector3(input, 0, 0);
 
+            
+            //Probably, should be in the input class and
+            //return a vector3 depending on the device being used
+            //but I don't care
             if (_playerInput.LastUsedDevice.name == "Mouse")
             {
                 Debug.LogError("Mouse");

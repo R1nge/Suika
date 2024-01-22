@@ -30,7 +30,6 @@ namespace _Assets.Scripts.Services
                 return;
 
             _lastUsedDevice = device;
-            //LastUsedDeviceChanged?.Invoke(0);
         }
 
 
@@ -52,7 +51,6 @@ namespace _Assets.Scripts.Services
 
 
             _lastUsedDevice = device;
-            //LastUsedDeviceChanged?.Invoke(0);
         }
     }
 }
