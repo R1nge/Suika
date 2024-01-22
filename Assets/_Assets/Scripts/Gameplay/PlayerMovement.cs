@@ -26,7 +26,7 @@ namespace _Assets.Scripts.Gameplay
         {
             if (m_LastUsedDevice == device)
                 return;
- 
+
             m_LastUsedDevice = device;
             //LastUsedDeviceChanged?.Invoke(0);
         }
@@ -36,18 +36,19 @@ namespace _Assets.Scripts.Gameplay
         {
             if (m_LastUsedDevice == device)
                 return;
- 
+
             // Some devices like to spam events like crazy.
             // Example: PS4 controller on PC keeps triggering events without meaningful change.
             var eventType = eventPtr.type;
-            if (eventType == StateEvent.Type) {
+            if (eventType == StateEvent.Type)
+            {
                 // Go through the changed controls in the event and look for ones actuated
                 // above a magnitude of a little above zero.
                 if (!eventPtr.EnumerateChangedControls(device: device, magnitudeThreshold: 0.0001f).Any())
                     return;
             }
- 
- 
+
+
             m_LastUsedDevice = device;
             //LastUsedDeviceChanged?.Invoke(0);
         }
@@ -57,18 +58,26 @@ namespace _Assets.Scripts.Gameplay
         private void Update()
         {
             if (!_playerInput.Enabled) return;
-            
+
             var input = Mathf.Clamp(_moveVector.ReadValue<Vector2>().x, -horizontalLimit, horizontalLimit);
             var newPosition = transform.position + new Vector3(input, 0, 0);
-            
+
             if (m_LastUsedDevice.name == "Mouse")
             {
                 Debug.LogError("Mouse");
-                input = Mathf.Clamp(Camera.main.ScreenToWorldPoint(Mouse.current.position.value).x, -horizontalLimit, horizontalLimit);
+                input = Mathf.Clamp(Camera.main.ScreenToWorldPoint(Mouse.current.position.value).x, -horizontalLimit,
+                    horizontalLimit);
                 newPosition = new Vector3(input, transform.position.y, transform.position.z);
             }
-            
-            
+            else if (m_LastUsedDevice.name == "Touchscreen")
+            {
+                Debug.LogError("Touch");
+                input = Mathf.Clamp(Camera.main.ScreenToWorldPoint(Touchscreen.current.primaryTouch.position.value).x,
+                    -horizontalLimit, horizontalLimit);
+                newPosition = new Vector3(input, transform.position.y, transform.position.z);
+            }
+
+
             var clamped = Mathf.Clamp(newPosition.x, -horizontalLimit, horizontalLimit);
             transform.position = new Vector3(clamped, transform.position.y, transform.position.z);
         }
