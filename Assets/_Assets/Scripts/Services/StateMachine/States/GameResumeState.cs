@@ -1,4 +1,5 @@
-﻿using _Assets.Scripts.Services.UIs.StateMachine;
+﻿using _Assets.Scripts.Services.Audio;
+using _Assets.Scripts.Services.UIs.StateMachine;
 using Cysharp.Threading.Tasks;
 
 namespace _Assets.Scripts.Services.StateMachine.States
@@ -7,11 +8,13 @@ namespace _Assets.Scripts.Services.StateMachine.States
     {
         private readonly PlayerInput _playerInput;
         private readonly UIStateMachine _uiStateMachine;
+        private readonly IAudioSettingsLoader _audioSettingsLoader;
 
-        public GameResumeState(PlayerInput playerInput, UIStateMachine uiStateMachine)
+        public GameResumeState(PlayerInput playerInput, UIStateMachine uiStateMachine, IAudioSettingsLoader audioSettingsLoader)
         {
             _playerInput = playerInput;
             _uiStateMachine = uiStateMachine;
+            _audioSettingsLoader = audioSettingsLoader;
         }
 
         public async void Enter()
@@ -23,6 +26,7 @@ namespace _Assets.Scripts.Services.StateMachine.States
 
         public void Exit()
         {
+            _audioSettingsLoader.Save();
         }
     }
 }

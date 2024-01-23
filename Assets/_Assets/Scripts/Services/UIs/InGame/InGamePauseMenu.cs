@@ -1,6 +1,5 @@
 ﻿using _Assets.Scripts.Services.Audio;
 using _Assets.Scripts.Services.StateMachine;
-using _Assets.Scripts.Services.UIs.StateMachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -15,8 +14,6 @@ namespace _Assets.Scripts.Services.UIs.InGame
         [Inject] private GameStateMachine _gameStateMachine;
         [Inject] private IAudioSettingsLoader _audioSettingsLoader;
         [Inject] private AudioService _audioService;
-        [Inject] private UIStateMachine _uiStateMachine;
-        [Inject] private ContinueGameService _continueGameService;
         [Inject] private PlayerInput _playerInput;
 
         private void Awake()
@@ -36,23 +33,13 @@ namespace _Assets.Scripts.Services.UIs.InGame
             musicSlider.value = _audioSettingsLoader.AudioData.MusicVolume;
         }
 
-        private void MainMenu()
-        {
-            //TODO: move it to a state
-            _continueGameService.Save();
-            _gameStateMachine.SwitchState(GameStateType.ResetAndMainMenu);
-        }
+        private void MainMenu() => _gameStateMachine.SwitchState(GameStateType.ResetAndMainMenu);
 
         private void ToggleSound(float volume) => _audioService.ChangeSoundVolume(volume);
 
         private void ToggleMusic(float volume) => _audioService.ChangeMusicVolume(volume);
 
-        private void Back()
-        {
-            //TODO: move it to a state
-            _audioSettingsLoader.Save();
-            _gameStateMachine.SwitchState(GameStateType.GameResume);
-        }
+        private void Back() => _gameStateMachine.SwitchState(GameStateType.GameResume);
 
         private void OnDestroy()
         {

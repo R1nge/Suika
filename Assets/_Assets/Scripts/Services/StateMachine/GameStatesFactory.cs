@@ -81,7 +81,7 @@ namespace _Assets.Scripts.Services.StateMachine
 
         public IGameState CreateResetAndMainMenuState(GameStateMachine stateMachine)
         {
-            return new ResetAndMainMenu(stateMachine, _resetService, _uiStateMachine, _audioService);
+            return new ResetAndMainMenu(stateMachine, _resetService, _uiStateMachine, _audioService, _continueGameService);
         }
 
         public IGameState CreateGamePauseState(GameStateMachine stateMachine)
@@ -91,7 +91,7 @@ namespace _Assets.Scripts.Services.StateMachine
 
         public IGameState CreateGameResumeState(GameStateMachine stateMachine)
         {
-            return new GameResumeState(_playerInput, _uiStateMachine);
+            return new GameResumeState(_playerInput, _uiStateMachine, _audioSettingsLoader);
         }
 
         public IGameState CreateContinueGameState(GameStateMachine stateMachine)

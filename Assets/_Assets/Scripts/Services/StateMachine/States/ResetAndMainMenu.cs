@@ -10,13 +10,15 @@ namespace _Assets.Scripts.Services.StateMachine.States
         private readonly ResetService _resetService;
         private readonly UIStateMachine _uiStateMachine;
         private readonly AudioService _audioService;
+        private readonly ContinueGameService _continueGameService;
 
-        public ResetAndMainMenu(GameStateMachine gameStateMachine, ResetService resetService, UIStateMachine uiStateMachine, AudioService audioService)
+        public ResetAndMainMenu(GameStateMachine gameStateMachine, ResetService resetService, UIStateMachine uiStateMachine, AudioService audioService, ContinueGameService continueGameService)
         {
             _gameStateMachine = gameStateMachine;
             _resetService = resetService;
             _uiStateMachine = uiStateMachine;
             _audioService = audioService;
+            _continueGameService = continueGameService;
         }
         
         public void Enter()
@@ -25,6 +27,7 @@ namespace _Assets.Scripts.Services.StateMachine.States
             _uiStateMachine.SwitchStateAndExitFromAllPrevious(UIStateType.MainMenu).Forget();
             _audioService.StopMusic();
             _audioService.ResetIndex();
+            _continueGameService.Save();
         }
 
         public void Exit()
