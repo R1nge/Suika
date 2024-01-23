@@ -14,7 +14,7 @@ namespace _Assets.Scripts.Misc
 
         [SerializeField] protected bool useDynamicWidth;
         [SerializeField] protected bool useDynamicHeight;
-        
+
         private int _lastWidth;
         private int _lastHeight;
         private float _orthoSize;
@@ -23,12 +23,14 @@ namespace _Assets.Scripts.Misc
 
         protected void Update()
         {
+#if !UNITY_ANDROID
             if (Screen.width != _lastWidth || Screen.height != _lastHeight)
             {
                 UpdateCamSize();
                 _lastWidth = Screen.width;
                 _lastHeight = Screen.height;
             }
+#endif
         }
 
         private void UpdateCamSize()
