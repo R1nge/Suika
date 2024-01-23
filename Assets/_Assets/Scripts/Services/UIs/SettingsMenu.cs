@@ -8,6 +8,8 @@ using VContainer;
 
 namespace _Assets.Scripts.Services.UIs
 {
+    //SettingsMenu and InGamePauseMenu are similar
+    //Could create an abstract base class for them
     public class SettingsMenu : MonoBehaviour
     {
         [SerializeField] private Slider soundSlider, musicSlider;
@@ -50,11 +52,15 @@ namespace _Assets.Scripts.Services.UIs
         {
             if (_vibrationSettingLoader.VibrationSettingsData.Enabled)
             {
-                vibrationButton.GetComponent<Image>().color = Color.green;
+                var colorBlock = vibrationButton.GetComponent<Button>().colors;
+                colorBlock.normalColor = Color.green;
+                vibrationButton.GetComponent<Button>().colors = colorBlock;
             }
             else
             {
-                vibrationButton.GetComponent<Image>().color = Color.red;
+                var colorBlock = vibrationButton.GetComponent<Button>().colors;
+                colorBlock.normalColor = Color.red;
+                vibrationButton.GetComponent<Button>().colors = colorBlock;
             }
         }
 

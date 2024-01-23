@@ -2,15 +2,11 @@
 ////Mods menu
 
 UI:
-////Change selected button color
+////Redo UI
 
 Other:
 ////Change songs
 ////Change container image
-////
-////Adapt for pc or drop pc support?
-////Can just lock screen resolution
-////Use this mb? https://github.com/wmjoers/CameraScaler/blob/main/Assets/Scripts/CameraScaler.cs
 
 ////Optional
 ////

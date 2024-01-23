@@ -572,6 +572,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5473465586700217306}
+  - component: {fileID: 375562161023049944}
   m_Layer: 5
   m_Name: Vibration
   m_TagString: Untagged
@@ -599,6 +600,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 600, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &375562161023049944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2458388833749887738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf31354fa2064451b22c6f76f04b696c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  element: {fileID: 2012636399434764747}
 --- !u!1 &2830591374616832224
 GameObject:
   m_ObjectHideFlags: 0
@@ -611,6 +625,7 @@ GameObject:
   - component: {fileID: 1063854756468604499}
   - component: {fileID: 2489201617509814796}
   - component: {fileID: 6396185168502383848}
+  - component: {fileID: 6353062947832415}
   m_Layer: 5
   m_Name: Main Menu
   m_TagString: Untagged
@@ -720,6 +735,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6353062947832415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2830591374616832224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf31354fa2064451b22c6f76f04b696c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  element: {fileID: 6396185168502383848}
 --- !u!1 &3335655392599380634
 GameObject:
   m_ObjectHideFlags: 0
@@ -732,6 +760,7 @@ GameObject:
   - component: {fileID: 9160711779362319343}
   - component: {fileID: 5226380380400039581}
   - component: {fileID: 437805665570998544}
+  - component: {fileID: 3152604446352661226}
   m_Layer: 5
   m_Name: Back
   m_TagString: Untagged
@@ -841,6 +870,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3152604446352661226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3335655392599380634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf31354fa2064451b22c6f76f04b696c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  element: {fileID: 437805665570998544}
 --- !u!1 &4325194705664706021
 GameObject:
   m_ObjectHideFlags: 0
@@ -1663,6 +1705,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 63564751082680117}
+  - component: {fileID: 4704621533966157580}
   m_Layer: 5
   m_Name: Music
   m_TagString: Untagged
@@ -1691,6 +1734,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 600, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &4704621533966157580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6940385961031967372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf31354fa2064451b22c6f76f04b696c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  element: {fileID: 5343990505685496805}
 --- !u!1 &7086862457585927072
 GameObject:
   m_ObjectHideFlags: 0
@@ -2072,6 +2128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3164876289420092464}
+  - component: {fileID: 2099976182646217221}
   m_Layer: 5
   m_Name: Sound
   m_TagString: Untagged
@@ -2100,3 +2157,16 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 600, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2099976182646217221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8471385076951387416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf31354fa2064451b22c6f76f04b696c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  element: {fileID: 7904742397787409881}

@@ -10,6 +10,8 @@ namespace _Assets.Scripts.Services.UIs.InGame
 {
     public class InGamePauseMenu : MonoBehaviour
     {
+        //InGamePauseMenu and SettingsMenu are similar
+        //Could create an abstract base class for them
         [SerializeField] private Slider soundSlider, musicSlider;
         [SerializeField] private Button backButton, mainMenuButton;
         [SerializeField] private Button vibrationButton;
@@ -25,7 +27,17 @@ namespace _Assets.Scripts.Services.UIs.InGame
             backButton.onClick.AddListener(Back);
             vibrationButton.onClick.AddListener(ToggleVibration);
         }
-        
+
+        private void Start()
+        {
+            ChangeButton();
+            _playerInput.OnPause += Resume;
+            soundSlider.value = _audioSettingsLoader.AudioData.VFXVolume;
+            musicSlider.value = _audioSettingsLoader.AudioData.MusicVolume;
+            soundSlider.onValueChanged.AddListener(ChangeSoundVolume);
+            musicSlider.onValueChanged.AddListener(ChangeMusicVolume);
+        }
+
         private void ToggleVibration()
         {
             _vibrationSettingLoader.Toggle(!_vibrationSettingLoader.VibrationSettingsData.Enabled);
@@ -36,24 +48,19 @@ namespace _Assets.Scripts.Services.UIs.InGame
         {
             if (_vibrationSettingLoader.VibrationSettingsData.Enabled)
             {
-                vibrationButton.GetComponent<Image>().color = Color.green;
+                var colorBlock = vibrationButton.GetComponent<Button>().colors;
+                colorBlock.normalColor = Color.green;
+                vibrationButton.GetComponent<Button>().colors = colorBlock;
             }
             else
             {
-                vibrationButton.GetComponent<Image>().color = Color.red;
+                var colorBlock = vibrationButton.GetComponent<Button>().colors;
+                colorBlock.normalColor = Color.red;
+                vibrationButton.GetComponent<Button>().colors = colorBlock;
             }
         }
 
         private void Resume(InputAction.CallbackContext callback) => Back();
-
-        private void Start()
-        {
-            _playerInput.OnPause += Resume;
-            soundSlider.value = _audioSettingsLoader.AudioData.VFXVolume;
-            musicSlider.value = _audioSettingsLoader.AudioData.MusicVolume;
-            soundSlider.onValueChanged.AddListener(ChangeSoundVolume);
-            musicSlider.onValueChanged.AddListener(ChangeMusicVolume);
-        }
 
         private void MainMenu() => _gameStateMachine.SwitchState(GameStateType.ResetAndMainMenu);
 

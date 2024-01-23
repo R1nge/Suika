@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4443659291086280486}
   - component: {fileID: 7630103580905089391}
   - component: {fileID: 460165676209178419}
+  - component: {fileID: 5870774711493766970}
   m_Layer: 5
   m_Name: Settings
   m_TagString: Untagged
@@ -121,6 +122,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5870774711493766970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90026133969226046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf31354fa2064451b22c6f76f04b696c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  element: {fileID: 460165676209178419}
 --- !u!1 &158281430883601936
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,6 +281,7 @@ GameObject:
   - component: {fileID: 2069282180137750102}
   - component: {fileID: 5220259954772647078}
   - component: {fileID: 8031416356702829465}
+  - component: {fileID: 3451030667342490934}
   m_Layer: 5
   m_Name: Mods
   m_TagString: Untagged
@@ -376,6 +391,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3451030667342490934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563672244411187333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf31354fa2064451b22c6f76f04b696c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  element: {fileID: 8031416356702829465}
 --- !u!1 &1194677052155459691
 GameObject:
   m_ObjectHideFlags: 0
@@ -522,6 +550,7 @@ GameObject:
   - component: {fileID: 4113866338457521559}
   - component: {fileID: 3760315166914867094}
   - component: {fileID: 2697949339665724845}
+  - component: {fileID: 8872466844815427013}
   m_Layer: 5
   m_Name: Quit
   m_TagString: Untagged
@@ -631,6 +660,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8872466844815427013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1220475605580081166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf31354fa2064451b22c6f76f04b696c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  element: {fileID: 2697949339665724845}
 --- !u!1 &3155329748857069812
 GameObject:
   m_ObjectHideFlags: 0
@@ -991,6 +1033,7 @@ GameObject:
   - component: {fileID: 8722478312259234551}
   - component: {fileID: 8656407312872935557}
   - component: {fileID: 8703805622689806821}
+  - component: {fileID: 4012511220292499079}
   m_Layer: 5
   m_Name: Play
   m_TagString: Untagged
@@ -1100,6 +1143,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4012511220292499079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5457111327442091743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf31354fa2064451b22c6f76f04b696c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  element: {fileID: 8703805622689806821}
 --- !u!1 &7045400953396368464
 GameObject:
   m_ObjectHideFlags: 0
@@ -1367,6 +1423,7 @@ GameObject:
   - component: {fileID: 4984191191972836903}
   - component: {fileID: 5148829612359788940}
   - component: {fileID: 3150568100218163552}
+  - component: {fileID: 4873483542044646034}
   m_Layer: 5
   m_Name: Continue
   m_TagString: Untagged
@@ -1476,3 +1533,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4873483542044646034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7747671495918499447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf31354fa2064451b22c6f76f04b696c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  element: {fileID: 3150568100218163552}
