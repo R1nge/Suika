@@ -1,5 +1,4 @@
 ﻿
-
 //TODO: Gamepad UI navigation
 ////Settings menu Pause menu Game over menu
 ////Create a separate script for

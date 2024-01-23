@@ -18,8 +18,6 @@ namespace _Assets.Scripts.Services.UIs.InGame
 
         private void Awake()
         {
-            soundSlider.onValueChanged.AddListener(ToggleSound);
-            musicSlider.onValueChanged.AddListener(ToggleMusic);
             mainMenuButton.onClick.AddListener(MainMenu);
             backButton.onClick.AddListener(Back);
         }
@@ -31,13 +29,15 @@ namespace _Assets.Scripts.Services.UIs.InGame
             _playerInput.OnPause += Resume;
             soundSlider.value = _audioSettingsLoader.AudioData.VFXVolume;
             musicSlider.value = _audioSettingsLoader.AudioData.MusicVolume;
+            soundSlider.onValueChanged.AddListener(ChangeSoundVolume);
+            musicSlider.onValueChanged.AddListener(ChangeMusicVolume);
         }
 
         private void MainMenu() => _gameStateMachine.SwitchState(GameStateType.ResetAndMainMenu);
 
-        private void ToggleSound(float volume) => _audioService.ChangeSoundVolume(volume);
+        private void ChangeSoundVolume(float volume) => _audioService.ChangeSoundVolume(volume);
 
-        private void ToggleMusic(float volume) => _audioService.ChangeMusicVolume(volume);
+        private void ChangeMusicVolume(float volume) => _audioService.ChangeMusicVolume(volume);
 
         private void Back() => _gameStateMachine.SwitchState(GameStateType.GameResume);
 

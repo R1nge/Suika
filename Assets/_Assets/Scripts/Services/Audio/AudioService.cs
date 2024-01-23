@@ -19,7 +19,7 @@ namespace _Assets.Scripts.Services.Audio
         public int LastSongIndex => _lastSongIndex;
 
         public void ResetIndex() => _lastSongIndex = 0;
-
+        
         public void ChangeMusicVolume(float volume)
         {
             _audioSettingsLoader.ChangeMusicVolume(volume);
@@ -147,7 +147,7 @@ namespace _Assets.Scripts.Services.Audio
             var sound = DownloadHandlerAudioClip.GetContent(webRequest);
             mergeSource.clip = sound;
             mergeSource.clip.name = path;
-            mergeSource.volume = volume;
+            mergeSource.volume = volume * _audioSettingsLoader.AudioData.VFXVolume;
             mergeSource.Play();
             webRequest.Dispose();
         }
@@ -163,7 +163,7 @@ namespace _Assets.Scripts.Services.Audio
                 var song = DownloadHandlerAudioClip.GetContent(webRequest);
                 musicSource.clip = song;
                 musicSource.clip.name = path;
-                musicSource.volume = volume;
+                musicSource.volume = volume * _audioSettingsLoader.AudioData.MusicVolume;
                 musicSource.Play();
                 webRequest.Dispose();
             }
