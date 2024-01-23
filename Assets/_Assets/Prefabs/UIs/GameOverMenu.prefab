@@ -467,6 +467,7 @@ GameObject:
   - component: {fileID: 4542749736789180082}
   - component: {fileID: 1389268148101905299}
   - component: {fileID: 7985491608588764080}
+  - component: {fileID: 2786990336421514874}
   m_Layer: 5
   m_Name: GameOverMenu
   m_TagString: Untagged
@@ -585,6 +586,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inGameCanvas: {fileID: 6524118539576051236}
   sortingOrder: 999
+--- !u!114 &2786990336421514874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6079994571766391290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eb73691bee04cbeb283c1facdc6ae7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selected: {fileID: 1227051859631670729}
 --- !u!1 &8515010634815073778
 GameObject:
   m_ObjectHideFlags: 0

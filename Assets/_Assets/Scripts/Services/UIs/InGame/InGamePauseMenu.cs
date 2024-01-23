@@ -1,8 +1,8 @@
 ﻿using _Assets.Scripts.Services.Audio;
 using _Assets.Scripts.Services.StateMachine;
 using _Assets.Scripts.Services.UIs.StateMachine;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using VContainer;
 
@@ -12,6 +12,7 @@ namespace _Assets.Scripts.Services.UIs.InGame
     {
         [SerializeField] private Slider soundSlider, musicSlider;
         [SerializeField] private Button backButton, mainMenuButton;
+        [SerializeField] private InputActionAsset controls;
         [Inject] private GameStateMachine _gameStateMachine;
         [Inject] private IAudioSettingsLoader _audioSettingsLoader;
         [Inject] private AudioService _audioService;
@@ -24,6 +25,12 @@ namespace _Assets.Scripts.Services.UIs.InGame
             musicSlider.onValueChanged.AddListener(ToggleMusic);
             mainMenuButton.onClick.AddListener(MainMenu);
             backButton.onClick.AddListener(Back);
+            controls.FindActionMap("Game").FindAction("Pause").performed += Resume;
+        }
+
+        private void Resume(InputAction.CallbackContext callback)
+        {
+            Back();
         }
 
         private void Start()

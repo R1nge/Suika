@@ -8,6 +8,8 @@ namespace _Assets.Scripts.Services
 {
     public class PlayerInput
     {
+        //TODO: make it mb and pass the input controls???
+        
         private bool _enabled;
         public bool Enabled(int fingerId = 0)
         {
