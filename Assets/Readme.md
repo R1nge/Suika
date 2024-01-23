@@ -1,6 +1,5 @@
 ﻿Gamepad navigation:
 ////Mods menu
-////In game menu (esc/b - open pause menu)
 Gamepad:
 ////Game pad vibration
 
