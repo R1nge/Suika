@@ -1,11 +1,19 @@
-﻿
+﻿Gamepad navigation:
 ////Mods menu
 ////In game menu (esc/b - open pause menu)
+Gamepad:
+////Game pad vibration
 
-//TODO: show leader board on game over, not in game
-//TODO: show only current score in game at the top of the screen
+UI:
+////Show leader board on game over, not in game
+////Show only current score in game at the top of the screen
+////Change selected button color
+////Add pause on start/back gamepad buttons
+////UI Factory
 
-//TODO: Settings, Pause UI vibration control make it pretty
-//TODO: UI Factory
-
-//TODO: game pad vibration
+Other:
+////Change songs
+////Change container image
+////Adapt for pc?
+////Implement merge sounds priority?
+////Like, if multiple suikas have merged play the sound of the biggest one
