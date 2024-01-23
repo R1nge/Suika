@@ -1,7 +1,5 @@
 ﻿Gamepad navigation:
 ////Mods menu
-Gamepad:
-////Game pad vibration
 
 UI:
 ////Change selected button color

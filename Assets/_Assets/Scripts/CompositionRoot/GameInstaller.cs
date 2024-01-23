@@ -5,6 +5,7 @@ using _Assets.Scripts.Services.Factories;
 using _Assets.Scripts.Services.StateMachine;
 using _Assets.Scripts.Services.UIs;
 using _Assets.Scripts.Services.UIs.StateMachine;
+using _Assets.Scripts.Services.Vibrations;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -19,6 +20,7 @@ namespace _Assets.Scripts.CompositionRoot
         [SerializeField] private ModSlotFactory modSlotFactory;
         [SerializeField] private AudioService audioService;
         [SerializeField] private PlayerInput playerInput;
+        [SerializeField] private GamepadRumbleService gamepadRumbleService;
         
         protected override void Configure(IContainerBuilder builder)
         {
@@ -28,6 +30,10 @@ namespace _Assets.Scripts.CompositionRoot
             builder.RegisterComponent(modSlotFactory);
             builder.RegisterComponent(audioService);
             builder.RegisterComponent(playerInput);
+            
+            builder.RegisterComponent(gamepadRumbleService);
+            builder.Register<VibrationSettingsDataLoaderJson>(Lifetime.Singleton).As<IVibrationSettingLoader>();
+            builder.Register<VibrationService>(Lifetime.Singleton);
 
             builder.Register<SuikaUIDataProvider>(Lifetime.Singleton);
             builder.Register<SuikasFactory>(Lifetime.Singleton);

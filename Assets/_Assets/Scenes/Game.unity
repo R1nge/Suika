@@ -355,6 +355,7 @@ GameObject:
   - component: {fileID: 478377310}
   - component: {fileID: 478377311}
   - component: {fileID: 478377312}
+  - component: {fileID: 478377313}
   m_Layer: 0
   m_Name: GameInstaller
   m_TagString: Untagged
@@ -400,6 +401,7 @@ MonoBehaviour:
   modSlotFactory: {fileID: 1214002237}
   audioService: {fileID: 2026381725}
   playerInput: {fileID: 478377312}
+  gamepadRumbleService: {fileID: 478377313}
 --- !u!114 &478377311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -425,6 +427,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controls: {fileID: -944628639613478452, guid: 1a33723d6386a334092ebcfd520afce1, type: 3}
+--- !u!114 &478377313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 478377308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a390142b6a64749a45f01571fbb2e37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &600831342
 GameObject:
   m_ObjectHideFlags: 0

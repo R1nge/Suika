@@ -6,7 +6,6 @@ using _Assets.Scripts.Services.Datas.GameConfigs;
 using _Assets.Scripts.Services.Datas.Mods;
 using _Assets.Scripts.Services.Datas.Player;
 using _Assets.Scripts.Services.Providers;
-using _Assets.Scripts.Services.Vibrations;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -20,8 +19,6 @@ namespace _Assets.Scripts.CompositionRoot
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterComponent(configProvider);
-            builder.Register<VibrationSettingsDataLoaderJson>(Lifetime.Singleton).As<IVibrationSettingLoader>();
-            builder.Register<VibrationService>(Lifetime.Singleton);
             builder.Register<ScoreService>(Lifetime.Singleton);
             builder.Register<AudioSettingsDataLoaderJson>(Lifetime.Singleton).As<IAudioSettingsLoader>();
             builder.Register<ModDataLoaderJson>(Lifetime.Singleton).As<IModDataLoader>();

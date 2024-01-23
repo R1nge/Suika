@@ -3,10 +3,12 @@
     public class VibrationService
     {
         private readonly IVibrationSettingLoader _vibrationSettingLoader;
+        private readonly GamepadRumbleService _gamepadRumbleService;
 
-        private VibrationService(IVibrationSettingLoader vibrationSettingLoader)
+        private VibrationService(IVibrationSettingLoader vibrationSettingLoader, GamepadRumbleService gamepadRumbleService)
         {
             _vibrationSettingLoader = vibrationSettingLoader;
+            _gamepadRumbleService = gamepadRumbleService;
         }
 
         public void Init()
@@ -24,6 +26,10 @@
                 Vibration.Vibrate();
             }
 #endif
+            if (_vibrationSettingLoader.VibrationSettingsData.Enabled)
+            {
+                _gamepadRumbleService.RumblePulse(0, 5, 0.25f, 0.5f);
+            }
         }
     }
 }
