@@ -1,15 +1,14 @@
 ﻿
 //TODO: Gamepad UI navigation
-////Settings menu Pause menu Game over menu
-////Create a separate script for
-////Setting the current selected UI element 
+////Game over menu
 
 ////Mods menu
 ////In game menu (esc/b - open pause menu)
 
-//TODO: refactor audio, vibration settings (create new states remove it from the UI)
-//TODO: disable input in the UI state, not UI itself
+//TODO: show leader board on game over, not in game
+//TODO: show only current score in game at the top of the screen
 
 //TODO: Leader board (local)
-//TODO: Settings, Pause UI vibration control
+
+//TODO: Settings, Pause UI vibration control make it pretty
 //TODO: UI Factory

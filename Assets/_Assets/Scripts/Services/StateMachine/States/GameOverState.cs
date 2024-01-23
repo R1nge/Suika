@@ -1,5 +1,4 @@
 ﻿using _Assets.Scripts.Services.UIs.StateMachine;
-using Cysharp.Threading.Tasks;
 
 namespace _Assets.Scripts.Services.StateMachine.States
 {
@@ -18,12 +17,17 @@ namespace _Assets.Scripts.Services.StateMachine.States
             _continueGameService = continueGameService;
         }
 
-        public void Enter()
+        public async void Enter()
         {
             _playerInput.Disable();
+            //Race condition, need to await
+            //I don't want to rewrite the state machine
+            //even with an IDE and AI it would take some time
+            //so will make this the hacky way
+            //Don't repeat at home
             _gameStateMachine.SwitchState(GameStateType.SaveData);
+            await _uiStateMachine.SwitchStateWithoutExitFromPrevious(UIStateType.GameOver);
             _continueGameService.DeleteContinueData();
-            _uiStateMachine.SwitchStateWithoutExitFromPrevious(UIStateType.GameOver).Forget();
         }
 
         public void Exit()
