@@ -23,13 +23,11 @@ namespace _Assets.Scripts.Gameplay
             //but I don't care
             if (_playerInput.LastUsedDevice.name == "Mouse")
             {
-                Debug.LogError("Mouse");
                 input = Mathf.Clamp(Camera.main.ScreenToWorldPoint(Mouse.current.position.value).x, -horizontalLimit, horizontalLimit);
                 newPosition = new Vector3(input, transform.position.y, transform.position.z);
             }
             else if (_playerInput.LastUsedDevice.name == "Touchscreen")
             {
-                Debug.LogError("Touch");
                 input = Mathf.Clamp(Camera.main.ScreenToWorldPoint(Touchscreen.current.primaryTouch.position.value).x, -horizontalLimit, horizontalLimit);
                 newPosition = new Vector3(input, transform.position.y, transform.position.z);
             }
