@@ -12,12 +12,12 @@ namespace _Assets.Scripts.Services.UIs.InGame
     {
         [SerializeField] private Slider soundSlider, musicSlider;
         [SerializeField] private Button backButton, mainMenuButton;
-        [SerializeField] private InputActionAsset controls;
         [Inject] private GameStateMachine _gameStateMachine;
         [Inject] private IAudioSettingsLoader _audioSettingsLoader;
         [Inject] private AudioService _audioService;
         [Inject] private UIStateMachine _uiStateMachine;
         [Inject] private ContinueGameService _continueGameService;
+        [Inject] private PlayerInput _playerInput;
 
         private void Awake()
         {
@@ -25,22 +25,20 @@ namespace _Assets.Scripts.Services.UIs.InGame
             musicSlider.onValueChanged.AddListener(ToggleMusic);
             mainMenuButton.onClick.AddListener(MainMenu);
             backButton.onClick.AddListener(Back);
-            controls.FindActionMap("Game").FindAction("Pause").performed += Resume;
         }
 
-        private void Resume(InputAction.CallbackContext callback)
-        {
-            Back();
-        }
+        private void Resume(InputAction.CallbackContext callback) => Back();
 
         private void Start()
         {
+            _playerInput.OnPause += Resume;
             soundSlider.value = _audioSettingsLoader.AudioData.VFXVolume;
             musicSlider.value = _audioSettingsLoader.AudioData.MusicVolume;
         }
 
         private void MainMenu()
         {
+            //TODO: move it to a state
             _continueGameService.Save();
             _gameStateMachine.SwitchState(GameStateType.ResetAndMainMenu);
         }
@@ -51,6 +49,7 @@ namespace _Assets.Scripts.Services.UIs.InGame
 
         private void Back()
         {
+            //TODO: move it to a state
             _audioSettingsLoader.Save();
             _gameStateMachine.SwitchState(GameStateType.GameResume);
         }
@@ -60,6 +59,7 @@ namespace _Assets.Scripts.Services.UIs.InGame
             soundSlider.onValueChanged.RemoveAllListeners();
             musicSlider.onValueChanged.RemoveAllListeners();
             backButton.onClick.RemoveAllListeners();
+            _playerInput.OnPause -= Resume;
         }
     }
 }

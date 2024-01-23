@@ -9,14 +9,12 @@ namespace _Assets.Scripts.Services.UIs.InGame
     public class InGamePause : MonoBehaviour
     {
         [SerializeField] private Button pause;
-        [SerializeField] private InputActionAsset controls;
         [Inject] private GameStateMachine _gameStateMachine;
+        [Inject] private PlayerInput _playerInput;
 
-        private void Awake()
-        {
-            pause.onClick.AddListener(Pause);
-            controls.FindActionMap("Game").FindAction("Pause").performed += PauseInputCallback;
-        }
+        private void Awake() => pause.onClick.AddListener(Pause);
+
+        private void Start() => _playerInput.OnPause += PauseInputCallback;
 
         private void PauseInputCallback(InputAction.CallbackContext context) => Pause();
 
@@ -25,7 +23,7 @@ namespace _Assets.Scripts.Services.UIs.InGame
         private void OnDestroy()
         {
             pause.onClick.RemoveAllListeners();
-            controls.FindActionMap("Game").FindAction("Pause").performed -= PauseInputCallback;
+            _playerInput.OnPause -= PauseInputCallback;
         }
     }
 }

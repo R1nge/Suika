@@ -10,7 +10,6 @@ namespace _Assets.Scripts.Gameplay
 {
     public class PlayerDrop : MonoBehaviour
     {
-        [SerializeField] private InputActionAsset controls;
         [Inject] private SuikasFactory _suikasFactory;
         [Inject] private SuikaUIDataProvider _suikaUIDataProvider;
         [Inject] private PlayerInput _playerInput;
@@ -18,11 +17,7 @@ namespace _Assets.Scripts.Gameplay
         private bool _canDrop = true;
         private readonly YieldInstruction _wait = new WaitForSeconds(1f);
 
-        private void OnEnable()
-        {
-            controls.Enable();
-            controls.FindActionMap("Game").FindAction("Drop").performed += Drop;
-        }
+        private void Start() => _playerInput.OnDrop += Drop;
 
         private void Drop(InputAction.CallbackContext callback)
         {
@@ -58,6 +53,6 @@ namespace _Assets.Scripts.Gameplay
             _canDrop = true;
         }
 
-        private void OnDisable() => controls.FindActionMap("Game").FindAction("Drop").performed -= Drop;
+        private void OnDestroy() => _playerInput.OnDrop -= Drop;
     }
 }

@@ -1,8 +1,5 @@
-﻿using System.Linq;
-using UnityEngine;
-using UnityEngine.EventSystems;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.LowLevel;
 using VContainer;
 using PlayerInput = _Assets.Scripts.Services.PlayerInput;
 
@@ -10,21 +7,14 @@ namespace _Assets.Scripts.Gameplay
 {
     public class PlayerMovement : MonoBehaviour
     {
-        [SerializeField] private InputActionAsset controls;
         [SerializeField] private float horizontalLimit = 2.65f;
         [Inject] private PlayerInput _playerInput;
-        private InputAction _moveVector;
-        
-
-        private void OnEnable() => controls.Enable();
-
-        private void Awake() => _moveVector = controls.FindActionMap("Game").FindAction("Move");
 
         private void Update()
         {
             if (!_playerInput.Enabled()) return;
 
-            var input = Mathf.Clamp(_moveVector.ReadValue<Vector2>().x, -horizontalLimit, horizontalLimit);
+            var input = Mathf.Clamp(_playerInput.MoveVector.x, -horizontalLimit, horizontalLimit);
             var newPosition = transform.position + new Vector3(input, 0, 0);
 
             
@@ -48,7 +38,5 @@ namespace _Assets.Scripts.Gameplay
             var clamped = Mathf.Clamp(newPosition.x, -horizontalLimit, horizontalLimit);
             transform.position = new Vector3(clamped, transform.position.y, transform.position.z);
         }
-
-        private void OnDisable() => controls.Disable();
     }
 }

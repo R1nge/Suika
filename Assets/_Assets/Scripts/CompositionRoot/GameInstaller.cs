@@ -18,16 +18,16 @@ namespace _Assets.Scripts.CompositionRoot
         [SerializeField] private ContainerFactory containerFactory;
         [SerializeField] private ModSlotFactory modSlotFactory;
         [SerializeField] private AudioService audioService;
+        [SerializeField] private PlayerInput playerInput;
         
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.Register<PlayerInput>(Lifetime.Singleton);
-            
             builder.RegisterComponent(coroutineRunner);
             builder.RegisterComponent(playerFactory);
             builder.RegisterComponent(containerFactory);
             builder.RegisterComponent(modSlotFactory);
             builder.RegisterComponent(audioService);
+            builder.RegisterComponent(playerInput);
 
             builder.Register<SuikaUIDataProvider>(Lifetime.Singleton);
             builder.Register<SuikasFactory>(Lifetime.Singleton);

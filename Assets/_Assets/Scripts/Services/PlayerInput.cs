@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Linq;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 
 namespace _Assets.Scripts.Services
 {
-    public class PlayerInput
+    public class PlayerInput : MonoBehaviour
     {
-        //TODO: make it mb and pass the input controls???
-        
+        [SerializeField] private InputActionAsset controls;
         private bool _enabled;
+        private InputAction _moveAction;
         public bool Enabled(int fingerId = 0)
         {
             bool enabled = _enabled && !EventSystem.current.IsPointerOverGameObject();
@@ -23,14 +24,25 @@ namespace _Assets.Scripts.Services
         private InputDevice _lastUsedDevice;
         public InputDevice LastUsedDevice => _lastUsedDevice;
 
-        public event Action<InputDevice> OnDeviceChanged; 
+        public event Action<InputDevice> OnDeviceChanged;
+        public event Action<InputAction.CallbackContext> OnPause;
+        public event Action<InputAction.CallbackContext> OnDrop;
+        public Vector2 MoveVector => _moveAction.ReadValue<Vector2>();
 
         public void Init()
         {
             //Since it's a singleton and init is called only once the game starts, we can forget about unsubscribing.
             InputSystem.onEvent += OnInputSystemEvent;
             InputSystem.onDeviceChange += OnDeviceChange;
+            controls.FindActionMap("Game").FindAction("Pause").performed += PauseInputCallback;
+            controls.FindActionMap("Game").FindAction("Drop").performed += DropCallback;
+            _moveAction = controls.FindActionMap("Game").FindAction("Move");
+            controls.Enable();
         }
+
+        private void DropCallback(InputAction.CallbackContext callback) => OnDrop?.Invoke(callback);
+
+        private void PauseInputCallback(InputAction.CallbackContext callback) => OnPause?.Invoke(callback);
 
         public void Enable() => _enabled = true;
 
