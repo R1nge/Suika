@@ -5,8 +5,6 @@ Gamepad:
 ////Game pad vibration
 
 UI:
-////Show leader board on game over, not in game
-////Show only current score in game at the top of the screen
 ////Change selected button color
 ////UI Factory
 
