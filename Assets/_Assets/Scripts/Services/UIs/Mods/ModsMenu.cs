@@ -1,12 +1,10 @@
-﻿using System;
+﻿using _Assets.Scripts.Misc;
 using _Assets.Scripts.Services.Datas.GameConfigs;
 using _Assets.Scripts.Services.Factories;
 using _Assets.Scripts.Services.UIs.StateMachine;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
-using _Assets.Scripts.Misc;
-using _Assets.Scripts.Services.Datas.Mods;
-using Cysharp.Threading.Tasks;
 using VContainer;
 
 namespace _Assets.Scripts.Services.UIs.Mods
@@ -19,8 +17,6 @@ namespace _Assets.Scripts.Services.UIs.Mods
         [Inject] private ModSlotFactory _modSlotFactory;
         [Inject] private IConfigLoader _configLoader;
         [Inject] private UIStateMachine _uiStateMachine;
-        [Inject] private IModDataLoader _modDataLoader;
-        [Inject] private ContinueGameService _continueGameService;
         [Inject] private SpriteCreator _spriteCreator;
 
         public void Init(Sprite sprite) => background.sprite = sprite;
@@ -46,12 +42,7 @@ namespace _Assets.Scripts.Services.UIs.Mods
             Init(sprite);
         }
 
-        private void SwitchToMainMenu()
-        {
-            _uiStateMachine.SwitchState(UIStateType.MainMenu).Forget();
-            _continueGameService.DeleteContinueData();
-            _modDataLoader.Save();
-        }
+        private void SwitchToMainMenu() => _uiStateMachine.SwitchState(UIStateType.MainMenu).Forget();
 
         private async UniTask CreateSlot(int index)
         {
@@ -74,9 +65,6 @@ namespace _Assets.Scripts.Services.UIs.Mods
             slot.SetSlotData(iconSprite, _configLoader.AllConfigs[index].ModName);
         }
 
-        private void OnDestroy()
-        {
-            _configLoader.ConfigChanged -= ChangeBackground;
-        }
+        private void OnDestroy() => _configLoader.ConfigChanged -= ChangeBackground;
     }
 }

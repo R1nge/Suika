@@ -21,14 +21,8 @@ namespace _Assets.Scripts.Services.UIs
 
         private void Update() => suikaTransform.Rotate(Vector3.forward * (suikaRotationSpeed * Time.deltaTime));
 
-        public void Show()
-        {
-            gameObject.SetActive(true);
-        }
+        public void Show() => gameObject.SetActive(true);
 
-        public void Hide()
-        {
-            Destroy(gameObject);
-        }
+        public void Hide() => Destroy(gameObject);
     }
 }

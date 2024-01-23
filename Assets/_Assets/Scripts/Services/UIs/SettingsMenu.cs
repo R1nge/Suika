@@ -58,13 +58,7 @@ namespace _Assets.Scripts.Services.UIs
             }
         }
 
-        private void Back()
-        {
-            //TODO: move to a state
-            _audioSettingsLoader.Save();
-            _vibrationSettingLoader.Save();
-            _uiStateMachine.SwitchToPreviousState().Forget();
-        }
+        private void Back() => _uiStateMachine.SwitchToPreviousState().Forget();
 
         private void OnDestroy()
         {

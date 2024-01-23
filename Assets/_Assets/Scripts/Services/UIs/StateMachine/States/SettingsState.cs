@@ -1,4 +1,6 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using _Assets.Scripts.Services.Audio;
+using _Assets.Scripts.Services.Vibrations;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace _Assets.Scripts.Services.UIs.StateMachine.States
@@ -7,8 +9,15 @@ namespace _Assets.Scripts.Services.UIs.StateMachine.States
     {
         private readonly UIFactory _uiFactory;
         private GameObject _ui;
+        private readonly IAudioSettingsLoader _audioSettingsLoader;
+        private readonly IVibrationSettingLoader _vibrationSettingLoader;
 
-        public SettingsState(UIFactory uiFactory) => _uiFactory = uiFactory;
+        public SettingsState(UIFactory uiFactory, IAudioSettingsLoader audioSettingsLoader, IVibrationSettingLoader vibrationSettingLoader)
+        {
+            _uiFactory = uiFactory;
+            _audioSettingsLoader = audioSettingsLoader;
+            _vibrationSettingLoader = vibrationSettingLoader;
+        }
 
         public UniTask Enter()
         {
@@ -16,6 +25,11 @@ namespace _Assets.Scripts.Services.UIs.StateMachine.States
             return UniTask.CompletedTask;
         }
 
-        public void Exit() => Object.Destroy(_ui);
+        public void Exit()
+        {
+            _audioSettingsLoader.Save();
+            _vibrationSettingLoader.Save();
+            Object.Destroy(_ui);
+        }
     }
 }
