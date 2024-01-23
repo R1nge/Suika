@@ -1,60 +1,25 @@
-﻿using _Assets.Scripts.Services.Configs;
-using _Assets.Scripts.Services.Providers;
-using _Assets.Scripts.Services.UIs.StateMachine.States;
-using VContainer;
+﻿using _Assets.Scripts.Services.UIs.StateMachine.States;
 
 namespace _Assets.Scripts.Services.UIs.StateMachine
 {
     public class UIStatesFactory
     {
-        private readonly ConfigProvider _configProvider;
-        private readonly IObjectResolver _objectResolver;
-        private readonly LoadingCurtainIconProvider _loadingCurtainIconProvider;
-        private readonly MainMenuProvider _mainMenuProvider;
         private readonly UIFactory _uiFactory;
 
-        private UIStatesFactory(ConfigProvider configProvider, IObjectResolver objectResolver, LoadingCurtainIconProvider loadingCurtainIconProvider, MainMenuProvider mainMenuProvider, UIFactory uiFactory)
-        {
-            _configProvider = configProvider;
-            _objectResolver = objectResolver;
-            _loadingCurtainIconProvider = loadingCurtainIconProvider;
-            _mainMenuProvider = mainMenuProvider;
-            _uiFactory = uiFactory;
-        }
+        private UIStatesFactory(UIFactory uiFactory) => _uiFactory = uiFactory;
 
-        public IUIState CreateLoadingState(UIStateMachine stateMachine)
-        {
-            return new LoadingState(_configProvider, _objectResolver, _loadingCurtainIconProvider);
-        }
+        public IUIState CreateLoadingState(UIStateMachine stateMachine) => new LoadingState(_uiFactory);
 
-        public IUIState CreateMainMenuState(UIStateMachine stateMachine)
-        {
-            return new MainMenuState(_configProvider, _objectResolver, _mainMenuProvider);
-        }
+        public IUIState CreateMainMenuState(UIStateMachine stateMachine) => new MainMenuState(_uiFactory);
 
-        public IUIState CreateGameState(UIStateMachine stateMachine)
-        {
-            return new GameState(_configProvider, _objectResolver);
-        }
+        public IUIState CreateGameState(UIStateMachine stateMachine) => new GameState(_uiFactory);
 
-        public IUIState CreateGameOverState(UIStateMachine stateMachine)
-        {
-            return new GameOverState(_configProvider, _objectResolver);
-        }
+        public IUIState CreateGameOverState(UIStateMachine stateMachine) => new GameOverState(_uiFactory);
 
-        public IUIState CreateModsState(UIStateMachine stateMachine)
-        {
-            return new ModsState(_uiFactory);
-        }
+        public IUIState CreateModsState(UIStateMachine stateMachine) => new ModsState(_uiFactory);
 
-        public IUIState CreateSettingsState(UIStateMachine stateMachine)
-        {
-            return new SettingsState(_configProvider, _objectResolver, _mainMenuProvider);
-        }
+        public IUIState CreateSettingsState(UIStateMachine stateMachine) => new SettingsState(_uiFactory);
 
-        public IUIState CreateGamePauseState(UIStateMachine stateMachine)
-        {
-            return new PauseState(_configProvider, _objectResolver);
-        }
+        public IUIState CreateGamePauseState(UIStateMachine stateMachine) => new PauseState(_uiFactory);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace _Assets.Scripts
+namespace _Assets.Scripts.Services.UIs
 {
     public class SetSelectedUIElement : MonoBehaviour
     {
