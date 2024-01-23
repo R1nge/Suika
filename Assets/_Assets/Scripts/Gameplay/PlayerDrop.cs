@@ -2,7 +2,6 @@
 using _Assets.Scripts.Services.Factories;
 using _Assets.Scripts.Services.UIs;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using VContainer;
 using PlayerInput = _Assets.Scripts.Services.PlayerInput;
@@ -27,7 +26,7 @@ namespace _Assets.Scripts.Gameplay
 
         private void Drop(InputAction.CallbackContext callback)
         {
-            if (_canDrop && _playerInput.Enabled)
+            if (_canDrop && _playerInput.Enabled())
             {
                 Drop();
                 StartCoroutine(Cooldown());

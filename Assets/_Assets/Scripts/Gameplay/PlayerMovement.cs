@@ -22,7 +22,7 @@ namespace _Assets.Scripts.Gameplay
 
         private void Update()
         {
-            if (!_playerInput.Enabled) return;
+            if (!_playerInput.Enabled()) return;
 
             var input = Mathf.Clamp(_moveVector.ReadValue<Vector2>().x, -horizontalLimit, horizontalLimit);
             var newPosition = transform.position + new Vector3(input, 0, 0);

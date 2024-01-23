@@ -9,8 +9,14 @@ namespace _Assets.Scripts.Services
     public class PlayerInput
     {
         private bool _enabled;
-        //TODO: fix this doesn't work on mobile
-        public bool Enabled => _enabled && !EventSystem.current.IsPointerOverGameObject();
+        public bool Enabled(int fingerId = 0)
+        {
+            bool enabled = _enabled && !EventSystem.current.IsPointerOverGameObject();
+            #if UNITY_ANDROID
+                enabled = _enabled && !EventSystem.current.IsPointerOverGameObject() && !EventSystem.current.IsPointerOverGameObject(fingerId);
+            #endif
+            return enabled;
+        }
 
         private InputDevice _lastUsedDevice;
         public InputDevice LastUsedDevice => _lastUsedDevice;
