@@ -3,7 +3,10 @@
 
 UI:
 ////Redo UI
-////Change selected button color 
+////Change selected button color
+
+////Android move then drop
+////FIX can't continue game
 
 Other:
 ////Change songs

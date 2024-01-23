@@ -9,22 +9,20 @@ namespace _Assets.Scripts.Services.UIs.StateMachine
     {
         private readonly UIFactory _uiFactory;
         private readonly IModDataLoader _modDataLoader;
-        private readonly ContinueGameService _continueGameService;
         private readonly IAudioSettingsLoader _audioSettingsLoader;
         private readonly IVibrationSettingLoader _vibrationSettingLoader;
 
-        private UIStatesFactory(UIFactory uiFactory, IModDataLoader modDataLoader, ContinueGameService continueGameService, IAudioSettingsLoader audioSettingsLoader, IVibrationSettingLoader vibrationSettingLoader)
+        private UIStatesFactory(UIFactory uiFactory, IModDataLoader modDataLoader, IAudioSettingsLoader audioSettingsLoader, IVibrationSettingLoader vibrationSettingLoader)
         {
             _uiFactory = uiFactory;
             _modDataLoader = modDataLoader;
-            _continueGameService = continueGameService;
             _audioSettingsLoader = audioSettingsLoader;
             _vibrationSettingLoader = vibrationSettingLoader;
         }
 
         public IUIState CreateLoadingState(UIStateMachine stateMachine) => new LoadingState(_uiFactory);
 
-        public IUIState CreateMainMenuState(UIStateMachine stateMachine) => new MainMenuState(_uiFactory, _continueGameService, _modDataLoader);
+        public IUIState CreateMainMenuState(UIStateMachine stateMachine) => new MainMenuState(_uiFactory, _modDataLoader);
 
         public IUIState CreateGameState(UIStateMachine stateMachine) => new GameState(_uiFactory);
 
