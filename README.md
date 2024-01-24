@@ -51,7 +51,8 @@ The game supports audio files in MP3 WAV OGG formats
 Look at an example mod in `StreamingAssets` folder  
 
 # Useful links
-[Image resize](https://www.iloveimg.com/resize-image) 
+[Image resize](https://www.iloveimg.com/resize-image)  
+[Itch.io](https://r1nge.itch.io/moddable-suika)
 
 # Thanks
 [aniketrajnish](https://github.com/aniketrajnish) for [Collider optimizer](https://github.com/aniketrajnish/Unity-Collider-Optimizer)  
