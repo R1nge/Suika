@@ -31,7 +31,6 @@ namespace _Assets.Scripts.Services.StateMachine.States
             _modDataLoader.Save();
             _audioSettingsLoader.Save();
             await _continueGameService.Save();
-            Debug.Log("SAVED CONTINUE DATA");
             _vibrationSettingLoader.Save();
         }
 

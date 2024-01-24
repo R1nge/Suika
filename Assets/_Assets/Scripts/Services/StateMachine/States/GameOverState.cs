@@ -1,6 +1,5 @@
 ﻿using _Assets.Scripts.Services.UIs.StateMachine;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 
 namespace _Assets.Scripts.Services.StateMachine.States
 {

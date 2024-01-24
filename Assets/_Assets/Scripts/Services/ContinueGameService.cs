@@ -119,7 +119,6 @@ namespace _Assets.Scripts.Services
             _continueData = null;
             var path = Path.Combine(PathsHelper.DataPath, PathsHelper.ContinueDataJson);
             File.Delete(path);
-            Debug.Log("DELETED CONTINUE DATA");
         }
     }
 }

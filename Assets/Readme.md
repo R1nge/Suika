@@ -5,9 +5,7 @@ UI:
 ////Redo UI
 ////Change selected button color
 
-////Android move then drop (Is it even persists?)
-////Game over deletes the save
-////But return to main menu save the data again
+////Android move then drop (Is it even occurs?)
 
 Other:
 ////Change songs
