@@ -69,6 +69,11 @@ namespace _Assets.Scripts.Services.StateMachine
             return new GameOverState(stateMachine, _uiStateMachine, _playerInput, _continueGameService);
         }
 
+        public IGameState CreateGameOverAndMainMenuState(GameStateMachine stateMachine)
+        {
+            return new GameOverAndMainMenu(_resetService, _uiStateMachine, _audioService);
+        }
+
         public IGameState CreateSaveDataState(GameStateMachine stateMachine)
         {
             return new SaveDataState(_playerDataLoader, _modDataLoader, _audioSettingsLoader, _continueGameService, _vibrationSettingLoader);

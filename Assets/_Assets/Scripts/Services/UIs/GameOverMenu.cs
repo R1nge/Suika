@@ -18,7 +18,7 @@ namespace _Assets.Scripts.Services.UIs
             restart.onClick.AddListener(Restart);
         }
 
-        private void ShowMainMenu() => _stateMachine.SwitchState(GameStateType.ResetAndMainMenu).Forget();
+        private void ShowMainMenu() => _stateMachine.SwitchState(GameStateType.GameOverAndMainMenu).Forget();
 
         private void Restart() => _stateMachine.SwitchState(GameStateType.ResetAndRetry).Forget();
     }

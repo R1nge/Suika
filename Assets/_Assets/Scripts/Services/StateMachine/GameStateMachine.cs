@@ -19,6 +19,7 @@ namespace _Assets.Scripts.Services.StateMachine
                 { GameStateType.Game, gameStatesFactory.CreateGameState(this) },
                 { GameStateType.GameOver, gameStatesFactory.CreateGameOverState(this) },
                 { GameStateType.SaveData, gameStatesFactory.CreateSaveDataState(this) },
+                { GameStateType.GameOverAndMainMenu, gameStatesFactory.CreateGameOverAndMainMenuState(this) },
                 { GameStateType.ResetAndRetry, gameStatesFactory.CreateResetAndRetryState(this) },
                 { GameStateType.ResetAndMainMenu, gameStatesFactory.CreateResetAndMainMenuState(this) },
                 { GameStateType.GamePause, gameStatesFactory.CreateGamePauseState(this) },
@@ -29,12 +30,12 @@ namespace _Assets.Scripts.Services.StateMachine
 
         public async UniTask SwitchState(GameStateType gameStateType)
         {
-            if(_currentGameStateType == gameStateType)
+            if (_currentGameStateType == gameStateType)
             {
                 Debug.LogError($"Already in {_currentGameStateType} state");
                 return;
             }
-            
+
             _currentGameState?.Exit();
             _currentGameState = _states[gameStateType];
             _currentGameStateType = gameStateType;

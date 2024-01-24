@@ -7,6 +7,7 @@
         Init = 2,
         Game = 3,
         GameOver = 4,
+        GameOverAndMainMenu = 11,
         SaveData = 5,
         ResetAndRetry = 6,
         ResetAndMainMenu = 7,

@@ -4,21 +4,17 @@ using Cysharp.Threading.Tasks;
 
 namespace _Assets.Scripts.Services.StateMachine.States
 {
-    public class ResetAndMainMenu : IGameState
+    public class GameOverAndMainMenu : IGameState
     {
-        private readonly GameStateMachine _gameStateMachine;
         private readonly ResetService _resetService;
         private readonly UIStateMachine _uiStateMachine;
         private readonly AudioService _audioService;
-        private readonly ContinueGameService _continueGameService;
 
-        public ResetAndMainMenu(GameStateMachine gameStateMachine, ResetService resetService, UIStateMachine uiStateMachine, AudioService audioService, ContinueGameService continueGameService)
+        public GameOverAndMainMenu(ResetService resetService, UIStateMachine uiStateMachine, AudioService audioService)
         {
-            _gameStateMachine = gameStateMachine;
             _resetService = resetService;
             _uiStateMachine = uiStateMachine;
             _audioService = audioService;
-            _continueGameService = continueGameService;
         }
         
         public async UniTask Enter()
@@ -26,7 +22,6 @@ namespace _Assets.Scripts.Services.StateMachine.States
             _resetService.Reset();
             _audioService.StopMusic();
             _audioService.ResetIndex();
-            await _continueGameService.Save();
             await _uiStateMachine.SwitchStateAndExitFromAllPrevious(UIStateType.MainMenu);
         }
 
