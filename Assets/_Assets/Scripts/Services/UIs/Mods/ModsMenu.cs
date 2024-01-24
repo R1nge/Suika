@@ -14,6 +14,7 @@ namespace _Assets.Scripts.Services.UIs.Mods
         [SerializeField] private Transform slotParent;
         [SerializeField] private Button close;
         [SerializeField] private Image background;
+        private ModSlot[] _slots;
         [Inject] private ModSlotFactory _modSlotFactory;
         [Inject] private IConfigLoader _configLoader;
         [Inject] private UIStateMachine _uiStateMachine;
@@ -30,10 +31,40 @@ namespace _Assets.Scripts.Services.UIs.Mods
             var sprite = await _spriteCreator.CreateMainMenuBackground();
             Init(sprite);
 
+            _slots = new ModSlot[_configLoader.AllConfigs.Count];
+
             for (int i = 0; i < _configLoader.AllConfigs.Count; i++)
             {
                 await CreateSlot(i);
             }
+
+            for (int i = 0; i < _slots.Length; i++)
+            {
+                if(_slots.Length == 1)
+                {
+                    _slots[0].SetNavigation(null, null, close);
+                    continue;
+                }
+                
+                if (i == 0)
+                {
+                    _slots[0].SetNavigation(_slots[^1].Selectable, _slots[1].Selectable, close);
+                }
+                else if (i == _slots.Length - 1)
+                {
+                    _slots[i].SetNavigation(_slots[i - 1].Selectable, _slots[0].Selectable, close);    
+                }
+                else
+                {
+                    _slots[i].SetNavigation(_slots[i - 1].Selectable, _slots[i + 1].Selectable, close);
+                }
+            }
+
+            var navigation = close.navigation;
+            navigation.mode = Navigation.Mode.Explicit;
+            navigation.selectOnUp = _slots[0].Selectable;
+            navigation.selectOnDown = _slots[0].Selectable;
+            close.navigation = navigation;
         }
 
         private async void ChangeBackground(GameConfig config)
@@ -63,6 +94,7 @@ namespace _Assets.Scripts.Services.UIs.Mods
             slot.transform.SetParent(slotParent);
             slot.transform.localScale = Vector3.one;
             slot.SetSlotData(iconSprite, _configLoader.AllConfigs[index].ModName);
+            _slots[index] = slot;
         }
 
         private void OnDestroy() => _configLoader.ConfigChanged -= ChangeBackground;

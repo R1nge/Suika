@@ -12,11 +12,21 @@ namespace _Assets.Scripts.Services.UIs.Mods
         [SerializeField] private Image modIcon;
         [SerializeField] private TextMeshProUGUI modNameText;
         [SerializeField] private Button select;
+        public Selectable Selectable => select;
         [Inject] private IConfigLoader _configLoader;
         [Inject] private IModDataLoader _modDataLoader;
         private string _modName;
 
         private void Start() => select.onClick.AddListener(Select);
+
+        public void SetNavigation(Selectable previous, Selectable next, Selectable down)
+        {
+            var selectNavigation = select.navigation;
+            selectNavigation.selectOnDown = down;
+            selectNavigation.selectOnLeft = previous;
+            selectNavigation.selectOnRight = next;
+            select.navigation = selectNavigation;
+        }
 
         public void SetSlotData(Sprite modIcon, string modName)
         {
