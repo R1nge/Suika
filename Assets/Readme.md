@@ -6,8 +6,6 @@ UI:
 ////Redo UI
 ////Change selected button color
 
-////Fix timer text is not empty on restart
-
 ////Optional
 ////
 ////Combo system?

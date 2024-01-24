@@ -14,6 +14,7 @@ namespace _Assets.Scripts.Services.UIs.InGame
             _gameOverTimer.OnTimerStarted += TimerStarted;
             _gameOverTimer.OnTimeChanged += TimeChanged;
             _gameOverTimer.OnTimerStopped += TimerStopped;
+            _gameOverTimer.OnTimerEnded += TimerEnded;
         }
 
         private void TimerStarted(float startTime, float currentTime) => timerText.text = currentTime.ToString("0.0");
@@ -22,11 +23,14 @@ namespace _Assets.Scripts.Services.UIs.InGame
 
         private void TimerStopped(float startTime) => timerText.text = string.Empty;
 
+        private void TimerEnded() => timerText.text = string.Empty;
+
         private void OnDestroy()
         {
             _gameOverTimer.OnTimerStarted -= TimerStarted;
             _gameOverTimer.OnTimeChanged -= TimeChanged;
             _gameOverTimer.OnTimerStopped -= TimerStopped;
+            _gameOverTimer.OnTimerEnded -= TimerEnded;
         }
     }
 }
