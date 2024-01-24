@@ -10,7 +10,7 @@ namespace _Assets.Scripts.Gameplay
         [SerializeField] private float horizontalLimit = 2.65f;
         [Inject] private PlayerInput _playerInput;
 
-        private void Update()
+        private void LateUpdate()
         {
             if (!_playerInput.Enabled()) return;
 

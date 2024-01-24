@@ -12,7 +12,7 @@ namespace _Assets.Scripts.Services
         [SerializeField] private InputActionAsset controls;
         private bool _enabled;
         private InputAction _moveAction;
-        public bool Enabled(int fingerId = 0)
+        public bool Enabled(int fingerId = -1)
         {
             bool enabled = _enabled && !EventSystem.current.IsPointerOverGameObject();
             #if UNITY_ANDROID

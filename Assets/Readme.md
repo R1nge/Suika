@@ -1,15 +1,12 @@
-﻿Gamepad navigation:
-////Mods menu
+﻿Other:
+////Change songs
+////Change container image
 
 UI:
 ////Redo UI
 ////Change selected button color
 
-////Android move then drop (Is it even occurs?)
-
-Other:
-////Change songs
-////Change container image
+////Fix timer text is not empty on restart
 
 ////Optional
 ////

@@ -38,11 +38,12 @@ namespace _Assets.Scripts.Services
         {
             if (_isRunning)
             {
-                _time = Mathf.Clamp(_time - UnityEngine.Time.deltaTime, 0, _configLoader.CurrentConfig.TimerStartTime);
-
-                OnTimeChanged?.Invoke(_time);
-
-                if (_time == 0)
+                if (_time > 0)
+                {
+                    _time = Mathf.Clamp(_time - UnityEngine.Time.deltaTime, 0, _configLoader.CurrentConfig.TimerStartTime);
+                    OnTimeChanged?.Invoke(_time);
+                }
+                else if (_time == 0)
                 {
                     _isRunning = false;
                     OnTimerEnded?.Invoke();

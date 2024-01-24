@@ -15,7 +15,7 @@ namespace _Assets.Scripts.Services.UIs.InGame
             _gameOverTimer.OnTimeChanged += TimeChanged;
             _gameOverTimer.OnTimerStopped += TimerStopped;
         }
-        
+
         private void TimerStarted(float startTime, float currentTime) => timerText.text = currentTime.ToString("0.0");
 
         private void TimeChanged(float currentTime) => timerText.text = currentTime.ToString("0.0");
