@@ -10,12 +10,17 @@ namespace _Assets.Scripts.Gameplay
     {
         private float _time;
         private List<Suika> _collidedSuikas = new(10);
+        private bool _ended;
         [Inject] private GameOverTimer _gameOverTimer;
         [Inject] private IConfigLoader _configLoader;
 
+        private void Start() => _gameOverTimer.OnTimerEnded += TimerEnded;
+
+        private void TimerEnded() => _ended = true;
+
         private void Update()
         {
-            if (_collidedSuikas.Count > 0)
+            if (_collidedSuikas.Count > 0 && !_ended)
             {
                 _time += Time.deltaTime;
 
@@ -55,5 +60,7 @@ namespace _Assets.Scripts.Gameplay
                 }
             }
         }
+
+        private void OnDestroy() => _gameOverTimer.OnTimerEnded -= TimerEnded;
     }
 }

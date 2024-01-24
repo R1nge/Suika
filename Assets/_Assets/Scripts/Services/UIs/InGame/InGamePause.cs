@@ -1,4 +1,5 @@
 ﻿using _Assets.Scripts.Services.StateMachine;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -18,7 +19,7 @@ namespace _Assets.Scripts.Services.UIs.InGame
 
         private void PauseInputCallback(InputAction.CallbackContext context) => Pause();
 
-        private void Pause() => _gameStateMachine.SwitchState(GameStateType.GamePause);
+        private void Pause() => _gameStateMachine.SwitchState(GameStateType.GamePause).Forget();
 
         private void OnDestroy()
         {

@@ -4,6 +4,7 @@ using _Assets.Scripts.Services.Datas.Mods;
 using _Assets.Scripts.Services.Datas.Player;
 using _Assets.Scripts.Services.UIs.StateMachine;
 using _Assets.Scripts.Services.Vibrations;
+using Cysharp.Threading.Tasks;
 
 namespace _Assets.Scripts.Services.StateMachine.States
 {
@@ -30,7 +31,7 @@ namespace _Assets.Scripts.Services.StateMachine.States
             _vibrationSettingLoader = vibrationSettingLoader;
         }
 
-        public async void Enter()
+        public async UniTask Enter()
         {
             await _continueGameService.Load();
             await _audioSettingsLoader.Load();
@@ -40,7 +41,7 @@ namespace _Assets.Scripts.Services.StateMachine.States
             await _configLoader.LoadDefaultConfig();
             _configLoader.LoadAllConfigs();
             await _uiStateMachine.SwitchState(UIStateType.Loading);
-            _stateMachine.SwitchState(GameStateType.Init);
+            await _stateMachine.SwitchState(GameStateType.Init);
         }
 
         public void Exit()

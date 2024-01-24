@@ -1,6 +1,7 @@
 ﻿using _Assets.Scripts.Services.Audio;
 using _Assets.Scripts.Services.StateMachine;
 using _Assets.Scripts.Services.Vibrations;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -62,13 +63,13 @@ namespace _Assets.Scripts.Services.UIs.InGame
 
         private void Resume(InputAction.CallbackContext callback) => Back();
 
-        private void MainMenu() => _gameStateMachine.SwitchState(GameStateType.ResetAndMainMenu);
+        private void MainMenu() => _gameStateMachine.SwitchState(GameStateType.ResetAndMainMenu).Forget();
 
         private void ChangeSoundVolume(float volume) => _audioService.ChangeSoundVolume(volume);
 
         private void ChangeMusicVolume(float volume) => _audioService.ChangeMusicVolume(volume);
 
-        private void Back() => _gameStateMachine.SwitchState(GameStateType.GameResume);
+        private void Back() => _gameStateMachine.SwitchState(GameStateType.GameResume).Forget();
 
         private void OnDestroy()
         {

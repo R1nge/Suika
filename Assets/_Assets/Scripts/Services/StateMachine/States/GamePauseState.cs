@@ -14,10 +14,11 @@ namespace _Assets.Scripts.Services.StateMachine.States
             _uiStateMachine = uiStateMachine;
         }
 
-        public void Enter()
+        public UniTask Enter()
         {
             _uiStateMachine.SwitchStateWithoutExitFromPrevious(UIStateType.Pause).Forget();
             _playerInput.Disable();
+            return UniTask.CompletedTask;
         }
 
         public void Exit()

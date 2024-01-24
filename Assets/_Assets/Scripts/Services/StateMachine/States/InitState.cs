@@ -3,6 +3,7 @@ using _Assets.Scripts.Services.Datas.GameConfigs;
 using _Assets.Scripts.Services.Datas.Mods;
 using _Assets.Scripts.Services.UIs.StateMachine;
 using _Assets.Scripts.Services.Vibrations;
+using Cysharp.Threading.Tasks;
 
 namespace _Assets.Scripts.Services.StateMachine.States
 {
@@ -29,7 +30,7 @@ namespace _Assets.Scripts.Services.StateMachine.States
             _playerInput = playerInput;
         }
 
-        public async void Enter()
+        public async UniTask Enter()
         {
             _audioService.ChangeSoundVolume(_audioSettingsLoader.AudioData.VFXVolume);
             _audioService.ChangeMusicVolume(_audioSettingsLoader.AudioData.MusicVolume);

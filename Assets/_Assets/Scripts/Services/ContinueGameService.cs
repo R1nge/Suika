@@ -90,7 +90,7 @@ namespace _Assets.Scripts.Services
 
         public void RemoveSuika(Suika suika) => _suikas.Remove(suika);
 
-        public void Save()
+        public async UniTask Save()
         {
             _continueData = new ContinueData(_audioService.LastSongIndex, new List<ContinueData.SuikaContinueData>(), _randomNumberGenerator.Current, _randomNumberGenerator.Next, _scoreService.Score);
             
@@ -111,7 +111,7 @@ namespace _Assets.Scripts.Services
 
             var path = Path.Combine(PathsHelper.DataPath, PathsHelper.ContinueDataJson);
             var json = JsonConvert.SerializeObject(_continueData);
-            File.WriteAllText(path, json);
+            await File.WriteAllTextAsync(path, json);
         }
 
         public void DeleteContinueData()
@@ -119,6 +119,7 @@ namespace _Assets.Scripts.Services
             _continueData = null;
             var path = Path.Combine(PathsHelper.DataPath, PathsHelper.ContinueDataJson);
             File.Delete(path);
+            Debug.Log("DELETED CONTINUE DATA");
         }
     }
 }

@@ -80,9 +80,9 @@ namespace _Assets.Scripts.Services.UIs
             }
         }
 
-        private void Continue() => _gameStateMachine.SwitchState(GameStateType.ContinueGame);
+        private void Continue() => _gameStateMachine.SwitchState(GameStateType.ContinueGame).Forget();
 
-        private void Play() => _gameStateMachine.SwitchState(GameStateType.Game);
+        private void Play() => _gameStateMachine.SwitchState(GameStateType.Game).Forget();
 
         private void Mods() => _uiStateMachine.SwitchStateAndExitFromAllPrevious(UIStateType.Mods).Forget();
 

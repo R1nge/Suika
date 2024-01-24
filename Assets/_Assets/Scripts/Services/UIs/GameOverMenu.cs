@@ -1,4 +1,5 @@
 ﻿using _Assets.Scripts.Services.StateMachine;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
@@ -17,8 +18,8 @@ namespace _Assets.Scripts.Services.UIs
             restart.onClick.AddListener(Restart);
         }
 
-        private void ShowMainMenu() => _stateMachine.SwitchState(GameStateType.ResetAndMainMenu);
+        private void ShowMainMenu() => _stateMachine.SwitchState(GameStateType.ResetAndMainMenu).Forget();
 
-        private void Restart() => _stateMachine.SwitchState(GameStateType.ResetAndRetry);
+        private void Restart() => _stateMachine.SwitchState(GameStateType.ResetAndRetry).Forget();
     }
 }

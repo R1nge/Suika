@@ -26,7 +26,7 @@ namespace _Assets.Scripts.Services.StateMachine.States
             _audioService = audioService;
         }
 
-        public async void Enter()
+        public async UniTask Enter()
         {
             await _uiStateMachine.SwitchState(UIStateType.Loading);
             await _containerFactory.Create();

@@ -3,6 +3,8 @@ using _Assets.Scripts.Services.Datas;
 using _Assets.Scripts.Services.Datas.Mods;
 using _Assets.Scripts.Services.Datas.Player;
 using _Assets.Scripts.Services.Vibrations;
+using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace _Assets.Scripts.Services.StateMachine.States
 {
@@ -23,12 +25,13 @@ namespace _Assets.Scripts.Services.StateMachine.States
             _vibrationSettingLoader = vibrationSettingLoader;
         }
 
-        public void Enter()
+        public async UniTask Enter()
         {
             _playerDataLoader.SaveData();
             _modDataLoader.Save();
             _audioSettingsLoader.Save();
-            _continueGameService.Save();
+            await _continueGameService.Save();
+            Debug.Log("SAVED CONTINUE DATA");
             _vibrationSettingLoader.Save();
         }
 

@@ -1,6 +1,7 @@
 ﻿using _Assets.Scripts.Gameplay;
 using _Assets.Scripts.Services.Factories;
 using _Assets.Scripts.Services.UIs.StateMachine;
+using Cysharp.Threading.Tasks;
 
 namespace _Assets.Scripts.Services.StateMachine.States
 {
@@ -21,7 +22,7 @@ namespace _Assets.Scripts.Services.StateMachine.States
             _continueGameService = continueGameService;
         }
 
-        public async void Enter()
+        public async UniTask Enter()
         {
             await _uiStateMachine.SwitchState(UIStateType.Loading);
             _continueGameService.Continue();

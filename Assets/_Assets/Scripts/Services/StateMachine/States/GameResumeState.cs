@@ -17,7 +17,7 @@ namespace _Assets.Scripts.Services.StateMachine.States
             _audioSettingsLoader = audioSettingsLoader;
         }
 
-        public async void Enter()
+        public async UniTask Enter()
         {
             _uiStateMachine.SwitchState(UIStateType.Game).Forget();
             await UniTask.DelayFrame(1);

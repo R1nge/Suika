@@ -21,13 +21,14 @@ namespace _Assets.Scripts.Services.StateMachine.States
             _continueGameService = continueGameService;
         }
         
-        public void Enter()
+        public async UniTask Enter()
         {
             _resetService.Reset();
-            _uiStateMachine.SwitchStateAndExitFromAllPrevious(UIStateType.MainMenu).Forget();
             _audioService.StopMusic();
             _audioService.ResetIndex();
-            _continueGameService.Save();
+            //I get it
+            await _continueGameService.Save();
+            await _uiStateMachine.SwitchStateAndExitFromAllPrevious(UIStateType.MainMenu);
         }
 
         public void Exit()

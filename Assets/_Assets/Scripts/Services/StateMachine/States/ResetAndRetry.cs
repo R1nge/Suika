@@ -1,4 +1,6 @@
-﻿namespace _Assets.Scripts.Services.StateMachine.States
+﻿using Cysharp.Threading.Tasks;
+
+namespace _Assets.Scripts.Services.StateMachine.States
 {
     public class ResetAndRetry : IGameState
     {
@@ -11,10 +13,10 @@
             _resetService = resetService;
         }
 
-        public void Enter()
+        public async UniTask Enter()
         {
             _resetService.Reset();
-            _gameStateMachine.SwitchState(GameStateType.Game);
+            await _gameStateMachine.SwitchState(GameStateType.Game);
         }
 
         public void Exit()

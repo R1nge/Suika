@@ -1,8 +1,10 @@
-﻿namespace _Assets.Scripts.Services.StateMachine
+﻿using Cysharp.Threading.Tasks;
+
+namespace _Assets.Scripts.Services.StateMachine
 {
     public interface IGameState : IExitState
     {
-        void Enter();
+        UniTask Enter();
     }
 
     public interface IExitState

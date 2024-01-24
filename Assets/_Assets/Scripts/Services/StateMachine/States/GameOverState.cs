@@ -1,4 +1,6 @@
 ﻿using _Assets.Scripts.Services.UIs.StateMachine;
+using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace _Assets.Scripts.Services.StateMachine.States
 {
@@ -17,17 +19,12 @@ namespace _Assets.Scripts.Services.StateMachine.States
             _continueGameService = continueGameService;
         }
 
-        public async void Enter()
+        public async UniTask Enter()
         {
             _playerInput.Disable();
-            //Race condition, need to await
-            //I don't want to rewrite the state machine
-            //even with an IDE and AI it would take some time
-            //so will make this the hacky way
-            //Don't repeat at home
-            _gameStateMachine.SwitchState(GameStateType.SaveData);
-            await _uiStateMachine.SwitchStateWithoutExitFromPrevious(UIStateType.GameOver);
+            await _gameStateMachine.SwitchState(GameStateType.SaveData);
             _continueGameService.DeleteContinueData();
+            await _uiStateMachine.SwitchStateWithoutExitFromPrevious(UIStateType.GameOver);
         }
 
         public void Exit()

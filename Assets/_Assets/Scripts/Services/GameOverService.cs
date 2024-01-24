@@ -1,5 +1,6 @@
 ﻿using System;
 using _Assets.Scripts.Services.StateMachine;
+using Cysharp.Threading.Tasks;
 using VContainer.Unity;
 
 namespace _Assets.Scripts.Services
@@ -17,7 +18,7 @@ namespace _Assets.Scripts.Services
 
         public void Initialize() => _gameOverTimer.OnTimerEnded += GameOver;
 
-        private void GameOver() => _gameStateMachine.SwitchState(GameStateType.GameOver);
+        private void GameOver() => _gameStateMachine.SwitchState(GameStateType.GameOver).Forget();
 
         public void Dispose() => _gameOverTimer.OnTimerEnded -= GameOver;
     }

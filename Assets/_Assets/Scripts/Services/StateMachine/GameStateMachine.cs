@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace _Assets.Scripts.Services.StateMachine
@@ -26,7 +27,7 @@ namespace _Assets.Scripts.Services.StateMachine
             };
         }
 
-        public void SwitchState(GameStateType gameStateType)
+        public async UniTask SwitchState(GameStateType gameStateType)
         {
             if(_currentGameStateType == gameStateType)
             {
@@ -37,7 +38,7 @@ namespace _Assets.Scripts.Services.StateMachine
             _currentGameState?.Exit();
             _currentGameState = _states[gameStateType];
             _currentGameStateType = gameStateType;
-            _currentGameState.Enter();
+            await _currentGameState.Enter();
         }
     }
 }
