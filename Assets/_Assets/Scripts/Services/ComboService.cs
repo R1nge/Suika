@@ -21,13 +21,11 @@ namespace _Assets.Scripts.Services
             _isComboActive = true;
             _combo++;
             OnComboChanged?.Invoke(_combo);
-            Debug.Log("Add");
         }
 
         public void Tick()
         {
             if (!_isComboActive) return;
-            Debug.Log("Tick");
 
             if (_currentTime > 0)
             {
@@ -45,7 +43,6 @@ namespace _Assets.Scripts.Services
             _isComboActive = false;
             _combo = 0;
             OnComboChanged?.Invoke(_combo);
-            Debug.Log("Reset");
         }
     }
 }
