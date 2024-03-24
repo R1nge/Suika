@@ -72,6 +72,7 @@ namespace _Assets.Scripts.Services.Factories
                 .GetComponent<Suika>();
             suikaInstance.SetIndex(index);
             suikaInstance.Drop();
+            suikaInstance.Scale(1f);
 
             var sprite = _spritesCacheService.GetSuikaSprite(index);
             suikaInstance.SetSprite(sprite);

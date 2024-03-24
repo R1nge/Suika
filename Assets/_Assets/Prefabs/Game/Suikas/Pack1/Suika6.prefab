@@ -60,6 +60,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Suika6
       objectReference: {fileID: 0}
+    - target: {fileID: 6243430202417607413, guid: e067147a1160be848807e082a671272d, type: 3}
+      propertyPath: originalScale
+      value: 1.12
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

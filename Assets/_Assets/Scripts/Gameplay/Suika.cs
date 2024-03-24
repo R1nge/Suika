@@ -1,4 +1,5 @@
-﻿using _Assets.Scripts.Services;
+﻿using System.Collections;
+using _Assets.Scripts.Services;
 using UnityEngine;
 using VContainer;
 
@@ -8,6 +9,7 @@ namespace _Assets.Scripts.Gameplay
     {
         [SerializeField] private SpriteRenderer spriteRenderer;
         [SerializeField] private PolygonColliderOptimizer polygonColliderOptimizer;
+        [SerializeField] private float originalScale;
         public PolygonColliderOptimizer PolygonColliderOptimizer => polygonColliderOptimizer;
         public bool HasLanded => _landed;
         public bool HasDropped => _dropped;
@@ -63,6 +65,29 @@ namespace _Assets.Scripts.Gameplay
         {
             spriteRenderer.sprite = sprite;
             spriteRenderer.size = new Vector2(256, 256);
+        }
+
+        private IEnumerator ScaleCoroutine(float duration)
+        {
+            var time = 0f;
+            var startLocalScale = new Vector3(0, 0, 0);
+            var endLocalScale = new Vector3(originalScale, originalScale, originalScale);
+
+            while (time < duration)
+            {
+                var t = time / duration;
+                transform.localScale = Vector3.Lerp(startLocalScale, endLocalScale, t);
+                time += Time.deltaTime;
+                yield return null;
+            }
+
+            transform.localScale = endLocalScale;
+            polygonColliderOptimizer.OptimizePolygonCollider(.01f);
+        }
+
+        public void Scale(float duration)
+        {
+            StartCoroutine(ScaleCoroutine(duration));
         }
     }
 }
