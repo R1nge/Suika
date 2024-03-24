@@ -2,7 +2,6 @@
 using _Assets.Scripts.Misc;
 using _Assets.Scripts.Services.Audio;
 using _Assets.Scripts.Services.Configs;
-using _Assets.Scripts.Services.Datas.GameConfigs;
 using _Assets.Scripts.Services.StateMachine;
 using _Assets.Scripts.Services.Vibrations;
 using Cysharp.Threading.Tasks;
@@ -22,8 +21,9 @@ namespace _Assets.Scripts.Services.Factories
         private readonly AudioService _audioService;
         private readonly SpritesCacheService _spritesCacheService;
         private readonly VibrationService _vibrationService;
+        private readonly ComboService _comboService;
 
-        private SuikasFactory(IObjectResolver objectResolver, ConfigProvider configProvider, RandomNumberGenerator randomNumberGenerator, ScoreService scoreService, ResetService resetService, AudioService audioService, SpritesCacheService spritesCacheService, VibrationService vibrationService)
+        private SuikasFactory(IObjectResolver objectResolver, ConfigProvider configProvider, RandomNumberGenerator randomNumberGenerator, ScoreService scoreService, ResetService resetService, AudioService audioService, SpritesCacheService spritesCacheService, VibrationService vibrationService, ComboService comboService)
         {
             _objectResolver = objectResolver;
             _configProvider = configProvider;
@@ -33,6 +33,7 @@ namespace _Assets.Scripts.Services.Factories
             _audioService = audioService;
             _spritesCacheService = spritesCacheService;
             _vibrationService = vibrationService;
+            _comboService = comboService;
         }
 
         public Rigidbody2D CreateKinematic(Vector3 position, Transform parent)
@@ -80,6 +81,7 @@ namespace _Assets.Scripts.Services.Factories
             AddScore(index);
             AddToResetService(suikaInstance);
             AddPolygonCollider(suikaInstance);
+            _comboService.AddCombo();
             _audioService.AddToMergeSoundsQueue(index);
             _audioService.PlaySong(index).Forget();
             _vibrationService.Vibrate();
@@ -125,6 +127,12 @@ namespace _Assets.Scripts.Services.Factories
             var currentLevel = index;
             var previousPoints = _configProvider.SuikasConfig.GetPoints(Mathf.Clamp(index - 1, 0, 1000));
             var totalPoints = currentLevel + previousPoints;
+
+            if (_comboService.IsComboActive)
+            {
+                totalPoints *= _comboService.Combo;
+            }
+            
             _scoreService.AddScore(totalPoints);
         }
 

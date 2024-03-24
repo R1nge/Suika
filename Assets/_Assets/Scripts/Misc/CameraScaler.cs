@@ -19,9 +19,9 @@ namespace _Assets.Scripts.Misc
         private int _lastHeight;
         private float _orthoSize;
 
-        protected void Awake() => _orthoSize = camera.orthographicSize;
+        private void Awake() => _orthoSize = camera.orthographicSize;
 
-        protected void Update()
+        private void Update()
         {
 #if !UNITY_ANDROID
             if (Screen.width != _lastWidth || Screen.height != _lastHeight)
