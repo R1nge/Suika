@@ -23,10 +23,10 @@ namespace _Assets.Scripts.Services.StateMachine.States
         
         public async UniTask Enter()
         {
+            await _continueGameService.Save();
             _resetService.Reset();
             _audioService.StopMusic();
             _audioService.ResetIndex();
-            await _continueGameService.Save();
             await _uiStateMachine.SwitchStateAndExitFromAllPrevious(UIStateType.MainMenu);
         }
 
