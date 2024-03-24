@@ -1,7 +1,4 @@
-﻿using System;
-using _Assets.Scripts.Services;
-using _Assets.Scripts.Services.Factories;
-using _Assets.Scripts.Services.StateMachine;
+﻿using _Assets.Scripts.Services;
 using UnityEngine;
 using VContainer;
 
@@ -9,21 +6,25 @@ namespace _Assets.Scripts.Gameplay
 {
     public class Suika : MonoBehaviour
     {
-        //TODO: when suikas collide, destroy them and spawn one at the middle of them (between) with almost zero scale and scale it up to the original size
         [SerializeField] private SpriteRenderer spriteRenderer;
         [SerializeField] private PolygonColliderOptimizer polygonColliderOptimizer;
         public PolygonColliderOptimizer PolygonColliderOptimizer => polygonColliderOptimizer;
         public bool HasLanded => _landed;
         public bool HasDropped => _dropped;
+
+        public bool HasCollided
+        {
+            get => _collided;
+            set => _collided = value;
+        }
+
         public SpriteRenderer SpriteRenderer => spriteRenderer;
         protected internal int Index;
-        protected internal bool Collided;
         private bool _landed;
         private bool _dropped;
-        [Inject] protected SuikasFactory SuikasFactory;
-        [Inject] protected ScoreService ScoreService;
-        [Inject] protected ResetService ResetService;
+        private bool _collided;
         [Inject] protected ContinueGameService ContinueGameService;
+        [Inject] protected CollisionService CollisionService;
 
         public void SetIndex(int index) => Index = index;
 
@@ -37,38 +38,25 @@ namespace _Assets.Scripts.Gameplay
 
         private void OnCollisionEnter2D(Collision2D other)
         {
-            if (_dropped)
-            {
-                _landed = true;
-                if (other.gameObject.TryGetComponent(out Suika suika))
-                {
-                    if (suika.HasDropped)
-                    {
-                        OnCollision(suika);    
-                    }
-                }
-            }
+            if (!_dropped) return;
+
+            if (_collided) return;
+
+            _landed = true;
+
+            if (!other.gameObject.TryGetComponent(out Suika suika)) return;
+
+            if (!suika.HasDropped) return;
+
+            OnCollision(suika);
         }
 
-        protected virtual void OnCollision(Suika suika)
+        protected virtual void OnCollision(Suika other)
         {
-            if (suika.Index == Index)
-            {
-                if (Collided || suika.Collided) return;
-                Collided = true;
-                suika.Collided = true;
-                var middle = (transform.position + suika.transform.position) / 2f;
-                //Or move it to the another suika position
-                //var suikaPosition = suika.transform.position;
-                //newSuikaInstance.transform.position = suikaPosition;
-                SuikasFactory.Create(Index, middle);
-                ResetService.RemoveSuika(this);
-                ResetService.RemoveSuika(suika);
-                ContinueGameService.RemoveSuika(this);
-                ContinueGameService.RemoveSuika(suika);
-                Destroy(gameObject);
-                Destroy(suika.gameObject);
-            }
+            if (other.Index != Index) return;
+            other.HasCollided = true;
+            _collided = true;
+            CollisionService.OnCollision(this, other);
         }
 
         public void SetSprite(Sprite sprite)
@@ -76,7 +64,5 @@ namespace _Assets.Scripts.Gameplay
             spriteRenderer.sprite = sprite;
             spriteRenderer.size = new Vector2(256, 256);
         }
-
-        private void OnDestroy() => ContinueGameService.RemoveSuika(this);
     }
 }

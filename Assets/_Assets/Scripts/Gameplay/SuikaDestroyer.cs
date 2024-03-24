@@ -2,14 +2,9 @@
 {
     public class SuikaDestroyer : Suika
     {
-        protected override void OnCollision(Suika suika)
+        protected override void OnCollision(Suika other)
         {
-            ResetService.RemoveSuika(this);
-            ResetService.RemoveSuika(suika);
-            ContinueGameService.RemoveSuika(this);
-            ContinueGameService.RemoveSuika(suika);
-            Destroy(gameObject);
-            Destroy(suika.gameObject);
+            CollisionService.OnCollisionDestroy(this, other);
         }
     }
 }

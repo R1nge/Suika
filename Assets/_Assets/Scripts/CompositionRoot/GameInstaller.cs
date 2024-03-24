@@ -35,6 +35,8 @@ namespace _Assets.Scripts.CompositionRoot
             builder.Register<VibrationSettingsDataLoaderJson>(Lifetime.Singleton).As<IVibrationSettingLoader>();
             builder.Register<VibrationService>(Lifetime.Singleton);
 
+            builder.Register<CollisionService>(Lifetime.Singleton);
+            
             builder.Register<SuikaUIDataProvider>(Lifetime.Singleton);
             builder.Register<SuikasFactory>(Lifetime.Singleton);
 
