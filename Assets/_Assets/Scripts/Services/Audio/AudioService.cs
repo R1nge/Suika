@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Threading;
 using _Assets.Scripts.Services.Datas.GameConfigs;
 using Cysharp.Threading.Tasks;
@@ -15,11 +17,13 @@ namespace _Assets.Scripts.Services.Audio
         [Inject] private IConfigLoader _configLoader;
         [Inject] private IAudioSettingsLoader _audioSettingsLoader;
         private int _lastSongIndex;
+        private readonly List<int> _mergeSoundsQueue = new(10);
+        private bool _queueIsPlaying;
 
         public int LastSongIndex => _lastSongIndex;
 
         public void ResetIndex() => _lastSongIndex = 0;
-        
+
         public void ChangeMusicVolume(float volume)
         {
             _audioSettingsLoader.ChangeMusicVolume(volume);
@@ -110,13 +114,43 @@ namespace _Assets.Scripts.Services.Audio
             }
         }
 
-        public async UniTask PlayMerge(int index)
+        public void AddToMergeSoundsQueue(int index)
         {
             if (_audioSettingsLoader.AudioData.VFXVolume <= 0)
             {
                 Debug.LogWarning("Sounds are disabled");
                 return;
             }
+
+            _mergeSoundsQueue.Add(index);
+
+            PlayMergeFromQueue().Forget();
+        }
+
+        private async UniTask PlayMergeFromQueue()
+        {
+            if (_queueIsPlaying)
+            {
+                Debug.LogWarning("The queue is already playing, nothing to do");
+                return;
+            }
+            _queueIsPlaying = true;
+            
+            if (_audioSettingsLoader.AudioData.VFXVolume <= 0)
+            {
+                Debug.LogWarning("Sounds are disabled");
+                return;
+            }
+
+            if (_mergeSoundsQueue.Count == 0)
+            {
+                Debug.LogWarning("The queue is empty, nothing to do");
+                return;
+            }
+
+            await UniTask.WaitForSeconds(0.2f);
+
+            var index = _mergeSoundsQueue.Max();
 
             var audioData = _configLoader.CurrentConfig.MergeSoundsAudios[index];
             var extension = Path.GetExtension(audioData.Path);
@@ -136,6 +170,9 @@ namespace _Assets.Scripts.Services.Audio
                         this.GetCancellationTokenOnDestroy());
                     break;
             }
+
+            _queueIsPlaying = false;
+            _mergeSoundsQueue.Clear();
         }
 
         private async UniTask DownloadAndPlayMergeSound(string path, float volume, AudioType audioType,

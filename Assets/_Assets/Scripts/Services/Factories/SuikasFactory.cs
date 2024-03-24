@@ -80,7 +80,7 @@ namespace _Assets.Scripts.Services.Factories
             AddScore(index);
             AddToResetService(suikaInstance);
             AddPolygonCollider(suikaInstance);
-            _audioService.PlayMerge(index).Forget();
+            _audioService.AddToMergeSoundsQueue(index);
             _audioService.PlaySong(index).Forget();
             _vibrationService.Vibrate();
         }
