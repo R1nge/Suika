@@ -20,6 +20,13 @@ namespace _Assets.Scripts.Services.Audio
         private readonly List<int> _mergeSoundsQueue = new(10);
         private bool _queueIsPlaying;
         
+        public string GetSongName()
+        {
+            //TODO: get only file name without extension
+            var fileName = Path.GetFileNameWithoutExtension(_configLoader.CurrentConfig.SuikaAudios[_lastSongIndex].Path); 
+            return  fileName;
+        }
+        
         public bool IsMusicPlaying => musicSource.isPlaying;
 
         public int LastSongIndex => _lastSongIndex;

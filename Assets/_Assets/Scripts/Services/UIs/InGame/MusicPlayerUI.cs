@@ -9,6 +9,7 @@ namespace _Assets.Scripts.Services.UIs.InGame
 {
     public class MusicPlayerUI : MonoBehaviour
     {
+        [SerializeField] private TextMeshProUGUI songNameText;
         [SerializeField] private Button playButton;
         [SerializeField] private TextMeshProUGUI playButtonText;
         [SerializeField] private Button nextButton;
@@ -51,11 +52,20 @@ namespace _Assets.Scripts.Services.UIs.InGame
                 playButtonText.text = "Play";
             }
         }
+        
+        private void UpdateSongName()
+        {
+            songNameText.text = _audioService.GetSongName();
+        }
 
         private void Next() => _audioService.PlayNextSong().Forget();
 
         private void Previous() => _audioService.PlayPreviousSong().Forget();
 
-        private void Shuffle() => _audioService.PlayRandomSong().Forget();
+        private void Shuffle()
+        {
+            _audioService.PlayRandomSong().Forget();
+            UpdateSongName();
+        }
     }
 }
