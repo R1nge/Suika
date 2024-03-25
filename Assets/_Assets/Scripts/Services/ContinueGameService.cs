@@ -35,8 +35,6 @@ namespace _Assets.Scripts.Services
         {
             await Load();
 
-            _audioService.PlaySongContinue(_continueData.SongIndex).Forget();
-            
             Debug.LogError($"Song index: {_continueData.SongIndex}");
 
             for (int i = 0; i < _continueData.SuikasContinueData.Count; i++)

@@ -20,7 +20,7 @@ namespace _Assets.Scripts.Services.StateMachine.States
         public async UniTask Enter()
         {
             _resetService.Reset();
-            _audioService.StopMusic();
+            _audioService.PauseMusic();
             _audioService.ResetIndex();
             await _uiStateMachine.SwitchStateAndExitFromAllPrevious(UIStateType.MainMenu);
         }

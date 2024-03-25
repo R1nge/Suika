@@ -19,6 +19,8 @@ namespace _Assets.Scripts.Services.Audio
         private int _lastSongIndex;
         private readonly List<int> _mergeSoundsQueue = new(10);
         private bool _queueIsPlaying;
+        
+        public bool IsMusicPlaying => musicSource.isPlaying;
 
         public int LastSongIndex => _lastSongIndex;
 
@@ -46,19 +48,18 @@ namespace _Assets.Scripts.Services.Audio
             mergeSource.volume = volume;
         }
 
-        public void StopMusic() => musicSource.Stop();
+        public void PauseMusic() => musicSource.Stop();
 
-        public async UniTask PlaySongContinue(int index)
+        public async UniTask PlaySong(int index)
         {
-            _lastSongIndex = index;
-
             if (_audioSettingsLoader.AudioData.MusicVolume <= 0)
             {
                 Debug.LogWarning("Music is disabled");
                 return;
             }
 
-            var audioData = _configLoader.CurrentConfig.SuikaAudios[_lastSongIndex];
+            _lastSongIndex = index;
+            var audioData = _configLoader.CurrentConfig.SuikaAudios[index];
             var extension = Path.GetExtension(audioData.Path);
 
             switch (extension)
@@ -78,7 +79,7 @@ namespace _Assets.Scripts.Services.Audio
             }
         }
 
-        public async UniTask PlaySong(int index)
+        public async UniTask PlayRandomSong()
         {
             if (_audioSettingsLoader.AudioData.MusicVolume <= 0)
             {
@@ -86,32 +87,31 @@ namespace _Assets.Scripts.Services.Audio
                 return;
             }
 
-            if (index > _lastSongIndex)
-            {
-                _lastSongIndex = index;
-                var audioData = _configLoader.CurrentConfig.SuikaAudios[index];
-                var extension = Path.GetExtension(audioData.Path);
+            var index = Random.Range(0, _configLoader.CurrentConfig.SuikaAudios.Length);
+            await PlaySong(index);
+        }
 
-                switch (extension)
-                {
-                    case ".mp3":
-                        await DownloadAndPlaySong(audioData.Path, audioData.Volume, AudioType.MPEG,
-                            this.GetCancellationTokenOnDestroy());
-                        break;
-                    case ".ogg":
-                        await DownloadAndPlaySong(audioData.Path, audioData.Volume, AudioType.OGGVORBIS,
-                            this.GetCancellationTokenOnDestroy());
-                        break;
-                    case ".wav":
-                        await DownloadAndPlaySong(audioData.Path, audioData.Volume, AudioType.WAV,
-                            this.GetCancellationTokenOnDestroy());
-                        break;
-                }
-            }
-            else
+        public async UniTask PlaySelectedSong()
+        {
+            if (_audioSettingsLoader.AudioData.MusicVolume <= 0)
             {
-                Debug.LogWarning("The song index is smaller than the last played song index, nothing to do");
+                Debug.LogWarning("Music is disabled");
+                return;
             }
+
+            await PlaySong(_lastSongIndex);
+        }
+
+        public async UniTask PlayNextSong()
+        {
+            _lastSongIndex = (LastSongIndex + 1) % _configLoader.CurrentConfig.SuikaAudios.Length;
+            await PlaySong(_lastSongIndex);
+        }
+        
+        public async UniTask PlayPreviousSong()
+        {
+            _lastSongIndex = (LastSongIndex - 1 + _configLoader.CurrentConfig.SuikaAudios.Length) % _configLoader.CurrentConfig.SuikaAudios.Length;
+            await PlaySong(_lastSongIndex);
         }
 
         public void AddToMergeSoundsQueue(int index)
@@ -134,8 +134,9 @@ namespace _Assets.Scripts.Services.Audio
                 Debug.LogWarning("The queue is already playing, nothing to do");
                 return;
             }
+
             _queueIsPlaying = true;
-            
+
             if (_audioSettingsLoader.AudioData.VFXVolume <= 0)
             {
                 Debug.LogWarning("Sounds are disabled");
@@ -206,7 +207,7 @@ namespace _Assets.Scripts.Services.Audio
             }
             else
             {
-                if (musicSource.clip.name == path)
+                if (musicSource.clip.name == path && musicSource.isPlaying)
                 {
                     Debug.LogWarning("The same song is playing already, nothing to do");
                 }
