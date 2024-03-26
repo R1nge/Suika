@@ -22,7 +22,6 @@ namespace _Assets.Scripts.Services.Audio
         
         public string GetSongName()
         {
-            //TODO: get only file name without extension
             var fileName = Path.GetFileNameWithoutExtension(_configLoader.CurrentConfig.SuikaAudios[_lastSongIndex].Path); 
             return  fileName;
         }
