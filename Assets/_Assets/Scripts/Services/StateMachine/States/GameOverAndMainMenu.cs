@@ -1,5 +1,4 @@
-﻿using _Assets.Scripts.Services.Audio;
-using _Assets.Scripts.Services.UIs.StateMachine;
+﻿using _Assets.Scripts.Services.UIs.StateMachine;
 using Cysharp.Threading.Tasks;
 
 namespace _Assets.Scripts.Services.StateMachine.States
@@ -8,20 +7,16 @@ namespace _Assets.Scripts.Services.StateMachine.States
     {
         private readonly ResetService _resetService;
         private readonly UIStateMachine _uiStateMachine;
-        private readonly AudioService _audioService;
 
-        public GameOverAndMainMenu(ResetService resetService, UIStateMachine uiStateMachine, AudioService audioService)
+        public GameOverAndMainMenu(ResetService resetService, UIStateMachine uiStateMachine)
         {
             _resetService = resetService;
             _uiStateMachine = uiStateMachine;
-            _audioService = audioService;
         }
-        
+
         public async UniTask Enter()
         {
             _resetService.Reset();
-            _audioService.PauseMusic();
-            _audioService.ResetIndex();
             await _uiStateMachine.SwitchStateAndExitFromAllPrevious(UIStateType.MainMenu);
         }
 

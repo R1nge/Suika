@@ -11,12 +11,13 @@ namespace _Assets.Scripts.Services.UIs
         [SerializeField] private Image image;
         [Inject] private UIThemeService _uiThemeService;
 
-        private void Start() => _uiThemeService.OnThemeChanged += OnThemeChanged;
-
-        private void OnThemeChanged(UITheme theme)
+        private void Start()
         {
-            image.sprite = theme.GetSprite(type);
+            OnThemeChanged(_uiThemeService.CurrentTheme);
+            _uiThemeService.OnThemeChanged += OnThemeChanged;
         }
+
+        private void OnThemeChanged(UITheme theme) => image.sprite = theme.GetSprite(type);
 
         private void OnDestroy() => _uiThemeService.OnThemeChanged -= OnThemeChanged;
     }

@@ -16,7 +16,8 @@ MonoBehaviour:
   music: {fileID: 21300000, guid: cfeb52c1158468445be82e5c877e4f1a, type: 3}
   musicPlayerNext: {fileID: 21300000, guid: 8605b55097f7a714890d18cd140fc598, type: 3}
   musicPlayerPlay: {fileID: 21300000, guid: 66410881c89628d479d1e3aab8b33b1b, type: 3}
+  musicPlayerPause: {fileID: 21300000, guid: 91b766aa596a5424eac832e2426c9573, type: 3}
   musicPlayerShuffle: {fileID: 21300000, guid: 51db63aa31d92c040806299c809a6abf, type: 3}
   vibrate: {fileID: 21300000, guid: 554b7d9f57d81084aae2a6c337d91b34, type: 3}
-  selected: {r: 0, g: 0, b: 0, a: 0}
-  unselected: {r: 1, g: 1, b: 1, a: 0}
+  selected: {r: 0, g: 0, b: 0, a: 1}
+  unselected: {r: 1, g: 1, b: 1, a: 1}

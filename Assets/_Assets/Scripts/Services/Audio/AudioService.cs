@@ -30,22 +30,11 @@ namespace _Assets.Scripts.Services.Audio
 
         public int LastSongIndex => _lastSongIndex;
 
-        public void ResetIndex() => _lastSongIndex = 0;
-
         public void ChangeMusicVolume(float volume)
         {
             _audioSettingsLoader.ChangeMusicVolume(volume);
 
             musicSource.volume = volume;
-
-            if (volume > 0 && !musicSource.isPlaying)
-            {
-                musicSource.Play();
-            }
-            else if (volume <= 0)
-            {
-                musicSource.Stop();
-            }
         }
 
         public void ChangeSoundVolume(float volume)

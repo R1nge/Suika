@@ -9,15 +9,14 @@ namespace _Assets.Scripts.Services.StateMachine.States
         private readonly GameStateMachine _gameStateMachine;
         private readonly ResetService _resetService;
         private readonly UIStateMachine _uiStateMachine;
-        private readonly AudioService _audioService;
+     
         private readonly ContinueGameService _continueGameService;
 
-        public ResetAndMainMenu(GameStateMachine gameStateMachine, ResetService resetService, UIStateMachine uiStateMachine, AudioService audioService, ContinueGameService continueGameService)
+        public ResetAndMainMenu(GameStateMachine gameStateMachine, ResetService resetService, UIStateMachine uiStateMachine, ContinueGameService continueGameService)
         {
             _gameStateMachine = gameStateMachine;
             _resetService = resetService;
             _uiStateMachine = uiStateMachine;
-            _audioService = audioService;
             _continueGameService = continueGameService;
         }
         
@@ -25,8 +24,6 @@ namespace _Assets.Scripts.Services.StateMachine.States
         {
             await _continueGameService.Save();
             _resetService.Reset();
-            _audioService.PauseMusic();
-            _audioService.ResetIndex();
             await _uiStateMachine.SwitchStateAndExitFromAllPrevious(UIStateType.MainMenu);
         }
 
