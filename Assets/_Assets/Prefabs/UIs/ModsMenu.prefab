@@ -146,7 +146,8 @@ GameObject:
   - component: {fileID: 2170588268929988148}
   - component: {fileID: 3186903410342717903}
   - component: {fileID: 3448606490712565901}
-  - component: {fileID: 5466381994504272846}
+  - component: {fileID: 1165841680093426451}
+  - component: {fileID: 9139067730757947010}
   m_Layer: 5
   m_Name: Close
   m_TagString: Untagged
@@ -236,7 +237,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.41776347, g: 1, b: 0.16509432, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -256,7 +257,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &5466381994504272846
+--- !u!114 &1165841680093426451
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -265,10 +266,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1258685562949422670}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf31354fa2064451b22c6f76f04b696c, type: 3}
+  m_Script: {fileID: 11500000, guid: 31261f4e9a7c4f2db3b743abe64ffb61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  element: {fileID: 3448606490712565901}
+  button: {fileID: 3448606490712565901}
+--- !u!114 &9139067730757947010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1258685562949422670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f76dda85f9714f62b7b3ec7c6ed46611, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 1165841680093426451}
 --- !u!1 &2003813931955515709
 GameObject:
   m_ObjectHideFlags: 0
@@ -554,7 +568,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 221997593067533192}
   m_HandleRect: {fileID: 833389504547477102}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

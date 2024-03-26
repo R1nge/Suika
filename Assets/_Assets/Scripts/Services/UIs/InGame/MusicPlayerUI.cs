@@ -11,7 +11,6 @@ namespace _Assets.Scripts.Services.UIs.InGame
     {
         [SerializeField] private TextMeshProUGUI songNameText;
         [SerializeField] private Button playButton;
-        [SerializeField] private TextMeshProUGUI playButtonText;
         [SerializeField] private Button nextButton;
         [SerializeField] private Button previousButton;
         [SerializeField] private Button shuffleButton;
@@ -45,11 +44,11 @@ namespace _Assets.Scripts.Services.UIs.InGame
         {
             if (_audioService.IsMusicPlaying)
             {
-                playButtonText.text = "Pause";
+             
             }
             else
             {
-                playButtonText.text = "Play";
+                
             }
         }
         

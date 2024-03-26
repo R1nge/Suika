@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71c14c7c584149b69f69340c2fbb2a01, type: 3}
+  m_Name: DarkTheme
+  m_EditorClassIdentifier: 
+  volume: {fileID: 21300000, guid: 40c44a290c1158e4e9892d7be9161260, type: 3}
+  music: {fileID: 21300000, guid: 717306df7e55e9c44a875250830842ba, type: 3}
+  musicPlayerNext: {fileID: 21300000, guid: 8755fb096d024c7408c1f2f7398c9c4f, type: 3}
+  musicPlayerPlay: {fileID: 21300000, guid: e8a10002354f6a64f86795e85e21a2ee, type: 3}
+  musicPlayerShuffle: {fileID: 21300000, guid: ea6506dd62da38d4d8e5031309346b6b, type: 3}
+  vibrate: {fileID: 21300000, guid: 234409cd37819804fa92e235f8200ec2, type: 3}
+  selected: {r: 1, g: 1, b: 1, a: 0}
+  unselected: {r: 0, g: 0, b: 0, a: 0}

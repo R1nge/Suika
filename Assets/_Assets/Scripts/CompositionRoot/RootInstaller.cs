@@ -6,6 +6,7 @@ using _Assets.Scripts.Services.Datas.GameConfigs;
 using _Assets.Scripts.Services.Datas.Mods;
 using _Assets.Scripts.Services.Datas.Player;
 using _Assets.Scripts.Services.Providers;
+using _Assets.Scripts.Services.UIs;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -19,6 +20,7 @@ namespace _Assets.Scripts.CompositionRoot
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterComponent(configProvider);
+            builder.Register<UIThemeService>(Lifetime.Singleton);
             builder.Register<ComboService>(Lifetime.Singleton).As<ITickable>().AsSelf();
             builder.Register<ScoreService>(Lifetime.Singleton);
             builder.Register<AudioSettingsDataLoaderJson>(Lifetime.Singleton).As<IAudioSettingsLoader>();
