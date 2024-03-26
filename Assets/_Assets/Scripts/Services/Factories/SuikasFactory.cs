@@ -83,7 +83,6 @@ namespace _Assets.Scripts.Services.Factories
             AddPolygonCollider(suikaInstance);
             _comboService.AddCombo();
             _audioService.AddToMergeSoundsQueue(index);
-            _audioService.PlaySong(index).Forget();
             _vibrationService.Vibrate();
         }
 
@@ -121,20 +120,7 @@ namespace _Assets.Scripts.Services.Factories
             return rigidbody2D;
         }
 
-        private void AddScore(int index)
-        {
-            //Previous + level (index) + points? 
-            var currentLevel = index;
-            var previousPoints = _configProvider.SuikasConfig.GetPoints(Mathf.Clamp(index - 1, 0, 1000));
-            var totalPoints = currentLevel + previousPoints;
-
-            if (_comboService.IsComboActive)
-            {
-                totalPoints *= _comboService.Combo;
-            }
-            
-            _scoreService.AddScore(totalPoints);
-        }
+        private void AddScore(int index) => _scoreService.AddScore(index);
 
         private void AddToResetService(Suika suika) => _resetService.AddSuika(suika);
 

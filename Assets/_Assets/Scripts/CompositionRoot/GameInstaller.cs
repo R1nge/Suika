@@ -36,7 +36,6 @@ namespace _Assets.Scripts.CompositionRoot
             builder.Register<VibrationService>(Lifetime.Singleton);
 
             builder.Register<CollisionService>(Lifetime.Singleton);
-            builder.Register<ComboService>(Lifetime.Singleton).As<ITickable>().AsSelf();
             
             builder.Register<SuikaUIDataProvider>(Lifetime.Singleton);
             builder.Register<SuikasFactory>(Lifetime.Singleton);

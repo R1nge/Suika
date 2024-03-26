@@ -1,10 +1,20 @@
 ﻿using System;
+using _Assets.Scripts.Services.Configs;
 using UnityEngine;
 
 namespace _Assets.Scripts.Services
 {
     public class ScoreService
     {
+        private readonly ComboService _comboService;
+        private readonly ConfigProvider _configProvider;
+
+        private ScoreService(ComboService comboService, ConfigProvider configProvider)
+        {
+            _comboService = comboService;
+            _configProvider = configProvider;
+        }
+
         public event Action<int> OnScoreChanged;
 
         public int Score
@@ -19,15 +29,26 @@ namespace _Assets.Scripts.Services
 
         private int _score;
 
-        public void AddScore(int score)
+        public void AddScore(int index)
         {
-            if (score <= 0)
+            //Previous + level (index) + points? 
+            var currentLevel = index;
+            var previousPoints = _configProvider.SuikasConfig.GetPoints(Mathf.Clamp(index - 1, 0, 1000));
+            var totalPoints = currentLevel + previousPoints;
+
+            if (_comboService.IsComboActive)
+            {
+                totalPoints *= _comboService.Combo;
+            }
+
+
+            if (totalPoints <= 0)
             {
                 Debug.LogError("SCORE SERVICE: Score must be positive");
                 return;
             }
 
-            Score += score;
+            Score += totalPoints;
         }
 
         public void ResetScore() => Score = 0;
