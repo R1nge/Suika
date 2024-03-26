@@ -16,9 +16,6 @@ namespace _Assets.Scripts.Services.UIs
             if (Time.frameCount % 10 != 0)
                 return;
 
-            Debug.Log("Event sys" + EventSystem.current.currentSelectedGameObject.GetInstanceID());
-            Debug.Log("button" + button.gameObject.GetInstanceID());
-
             if (EventSystem.current.currentSelectedGameObject.GetInstanceID() == button.gameObject.GetInstanceID())
             {
                 Select();
