@@ -23,6 +23,7 @@ namespace _Assets.Scripts.Services.UIs
 
         private void StateChanged(bool selected)
         {
+#if !UNITY_ANDROID
             if (selected)
             {
                 StartAnimation();
@@ -31,6 +32,7 @@ namespace _Assets.Scripts.Services.UIs
             {
                 StopAnimation();
             }
+#endif
         }
 
         private void StartAnimation()
