@@ -49,6 +49,8 @@ namespace _Assets.Scripts.Gameplay
             if (!other.gameObject.TryGetComponent(out Suika suika)) return;
 
             if (!suika.HasDropped) return;
+            
+            if (suika.HasCollided) return;
 
             OnCollision(suika);
         }
