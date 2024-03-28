@@ -1,5 +1,6 @@
 ﻿using _Assets.Scripts.Services.UIs.StateMachine;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace _Assets.Scripts.Services.StateMachine.States
 {
@@ -16,8 +17,8 @@ namespace _Assets.Scripts.Services.StateMachine.States
 
         public UniTask Enter()
         {
-            _uiStateMachine.SwitchStateWithoutExitFromPrevious(UIStateType.Pause).Forget();
             _playerInput.Disable();
+            _uiStateMachine.SwitchStateWithoutExitFromPrevious(UIStateType.Pause).Forget();
             return UniTask.CompletedTask;
         }
 

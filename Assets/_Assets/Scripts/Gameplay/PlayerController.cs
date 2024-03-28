@@ -31,12 +31,15 @@ namespace _Assets.Scripts.Gameplay
 
         private void LateUpdate()
         {
-            _playerMovement.Tick();
-
-            if (_dropQueued)
+            if (_playerInput.Enabled())
             {
-                _playerDrop.TryDrop();
-                _dropQueued = false;
+                _playerMovement.Tick();
+
+                if (_dropQueued)
+                {
+                    _playerDrop.TryDrop();
+                    _dropQueued = false;
+                }
             }
         }
 
