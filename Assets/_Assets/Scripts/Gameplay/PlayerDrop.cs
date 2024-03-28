@@ -1,40 +1,42 @@
 ﻿using System.Collections;
+using _Assets.Scripts.Misc;
 using _Assets.Scripts.Services.Factories;
-using _Assets.Scripts.Services.UIs;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using VContainer;
-using PlayerInput = _Assets.Scripts.Services.PlayerInput;
 
 namespace _Assets.Scripts.Gameplay
 {
-    public class PlayerDrop : MonoBehaviour
+    public class PlayerDrop
     {
-        [Inject] private SuikasFactory _suikasFactory;
-        [Inject] private SuikaUIDataProvider _suikaUIDataProvider;
-        [Inject] private PlayerInput _playerInput;
+        private readonly CoroutineRunner _coroutineRunner;
+        private SuikasFactory _suikasFactory;
+        private readonly Transform _transform;
         private Rigidbody2D _suikaRigidbody;
         private bool _canDrop = true;
         private readonly YieldInstruction _wait = new WaitForSeconds(1f);
-
-        private void Start() => _playerInput.OnDrop += Drop;
-
-        private void Drop(InputAction.CallbackContext callback)
+        
+        public PlayerDrop(CoroutineRunner coroutineRunner, SuikasFactory suikasFactory, Transform transform)
         {
-            if (_canDrop && _playerInput.Enabled())
+            _coroutineRunner = coroutineRunner;
+            _suikasFactory = suikasFactory;
+            _transform = transform;
+        }
+
+        public void TryDrop()
+        {
+            if (_canDrop)
             {
                 Drop();
-                StartCoroutine(Cooldown());
+                _coroutineRunner.StartCoroutine(Cooldown());
             }
         }
 
         public void SpawnSuika() => Spawn();
 
-        public void SpawnContinue() => _suikaRigidbody = _suikasFactory.CreatePlayerContinue(transform.position, transform);
+        public void SpawnContinue() => _suikaRigidbody = _suikasFactory.CreatePlayerContinue(_transform.position, _transform);
 
         private void Spawn()
         {
-            _suikaRigidbody = _suikasFactory.CreateKinematic(transform.position, transform);
+            _suikaRigidbody = _suikasFactory.CreateKinematic(_transform.position, _transform);
         }
 
         private void Drop()
@@ -52,7 +54,5 @@ namespace _Assets.Scripts.Gameplay
             Spawn();
             _canDrop = true;
         }
-
-        private void OnDestroy() => _playerInput.OnDrop -= Drop;
     }
 }
