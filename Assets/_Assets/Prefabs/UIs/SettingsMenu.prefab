@@ -1497,7 +1497,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 25}
   m_SizeDelta: {x: 600, y: 950}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1128330841561474287
@@ -1527,7 +1527,7 @@ MonoBehaviour:
     m_Bottom: 0
   m_ChildAlignment: 1
   m_Spacing: 0
-  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
@@ -1810,6 +1810,7 @@ GameObject:
   - component: {fileID: 8470924284138687345}
   - component: {fileID: 4932005527544369124}
   - component: {fileID: 2323400546991618570}
+  - component: {fileID: 1565105213490855537}
   m_Layer: 5
   m_Name: SettingsMenu
   m_TagString: Untagged
@@ -1948,6 +1949,20 @@ MonoBehaviour:
   nextButton: {fileID: 6990657677687409156}
   previousButton: {fileID: 8087731322995866865}
   shuffleButton: {fileID: 8465871478280344735}
+--- !u!114 &1565105213490855537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5053666993901337002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5a7cf1833c04a1daa109db55e4d3f7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inGameCanvas: {fileID: 7760756932070296634}
+  sortingOrder: 999
 --- !u!1 &5424621585132204596
 GameObject:
   m_ObjectHideFlags: 0

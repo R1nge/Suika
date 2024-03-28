@@ -7,7 +7,7 @@ namespace _Assets.Scripts.Services.UIs.InGame
         [SerializeField] private Canvas inGameCanvas;
         [SerializeField] private int sortingOrder;
 
-        private void Awake()
+        private void Start()
         {
             inGameCanvas.renderMode = RenderMode.ScreenSpaceCamera;
             inGameCanvas.worldCamera = Camera.main;

@@ -569,7 +569,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 833389504547477102}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.6168584
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -846,7 +846,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000049755876}
+  m_AnchoredPosition: {x: 0, y: 0.000061035156}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1656709688173255277
@@ -887,6 +887,7 @@ GameObject:
   - component: {fileID: 639716959619654075}
   - component: {fileID: 4363394270163654263}
   - component: {fileID: 151317448619964357}
+  - component: {fileID: 5584346200408825723}
   m_Layer: 5
   m_Name: ModsMenu
   m_TagString: Untagged
@@ -1005,6 +1006,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selected: {fileID: 1258685562949422670}
+--- !u!114 &5584346200408825723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7456967041930300135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5a7cf1833c04a1daa109db55e4d3f7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inGameCanvas: {fileID: 7880055315209515505}
+  sortingOrder: 999
 --- !u!1 &7778716888632779857
 GameObject:
   m_ObjectHideFlags: 0
