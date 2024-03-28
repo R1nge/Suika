@@ -29,7 +29,7 @@ namespace _Assets.Scripts.Services.StateMachine.States
         public async UniTask Enter()
         {
             await _uiStateMachine.SwitchState(UIStateType.Loading);
-            await _containerFactory.Create();
+            _containerFactory.Create();
             await _audioService.PlaySong(0);
             var player = await _playerFactory.Create();
             await _uiStateMachine.SwitchState(UIStateType.Game);

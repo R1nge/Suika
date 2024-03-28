@@ -26,7 +26,7 @@ namespace _Assets.Scripts.Services.StateMachine.States
         {
             await _uiStateMachine.SwitchState(UIStateType.Loading);
             _continueGameService.Continue();
-            await _containerFactory.Create();
+            _containerFactory.Create();
             var player = await _playerFactory.Create();
             await _uiStateMachine.SwitchState(UIStateType.Game);
             _continueGameService.UpdateScore();
