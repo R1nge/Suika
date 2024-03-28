@@ -28,6 +28,7 @@ namespace _Assets.Scripts.Services.UIs.InGame
             shuffleButton.onClick.AddListener(Shuffle);
 
             UpdatePlayButton();
+            UpdateSongName();
         }
 
         private async void Toggle()
