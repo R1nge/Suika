@@ -95,6 +95,10 @@ namespace _Assets.Scripts.Services
             _continueData.SuikasContinueData = new List<ContinueData.SuikaContinueData>(_suikas.Count);
             for (int i = 0; i < _suikas.Count; i++)
             {
+                if (_suikas[i] == null)
+                {
+                    continue;
+                }
                 var index = _suikas[i].Index;
                 var position = _suikas[i].transform.position;
                 _continueData.SuikasContinueData.Add(new ContinueData.SuikaContinueData(index, position.x, position.y));

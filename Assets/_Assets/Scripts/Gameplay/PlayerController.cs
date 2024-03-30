@@ -48,6 +48,8 @@ namespace _Assets.Scripts.Gameplay
         }
 
         public void SpawnSuika() => _playerDrop.SpawnSuika();
+        
+        public void SpawnContinue() => _playerDrop.SpawnContinue();
 
         private void OnDestroy() => _playerInput.OnDrop -= Drop;
     }
