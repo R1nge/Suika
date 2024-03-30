@@ -11,12 +11,17 @@ namespace _Assets.Scripts.Services.UIs.StateMachine.States
 
         public ModsState(UIFactory uiFactory) => _uiFactory = uiFactory;
 
-        public UniTask Enter()
+        public async UniTask Enter()
         {
             _ui = _uiFactory.CreateModUI();
-            return UniTask.CompletedTask;
+            await _ui.GetComponent<UICanvasAnimation>().Play(AnimationType.FadeIn);
         }
 
-        public void Exit() => Object.Destroy(_ui.gameObject);
+        public async UniTask Exit()
+        {
+            await _ui.GetComponent<UICanvasAnimation>().Play(AnimationType.FadeOut);
+            await UniTask.DelayFrame(1);
+            Object.Destroy(_ui.gameObject);
+        }
     }
 }

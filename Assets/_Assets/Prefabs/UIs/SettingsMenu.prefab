@@ -1811,6 +1811,8 @@ GameObject:
   - component: {fileID: 4932005527544369124}
   - component: {fileID: 2323400546991618570}
   - component: {fileID: 1565105213490855537}
+  - component: {fileID: -4794587772028891165}
+  - component: {fileID: -6813169234679630277}
   m_Layer: 5
   m_Name: SettingsMenu
   m_TagString: Untagged
@@ -1963,6 +1965,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inGameCanvas: {fileID: 7760756932070296634}
   sortingOrder: 999
+--- !u!225 &-4794587772028891165
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5053666993901337002}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &-6813169234679630277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5053666993901337002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1831e14798c42b1ab928832dff9b104, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0.5
+  canvasGroup: {fileID: -4794587772028891165}
 --- !u!1 &5424621585132204596
 GameObject:
   m_ObjectHideFlags: 0

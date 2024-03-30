@@ -6,16 +6,21 @@ namespace _Assets.Scripts.Services.UIs.StateMachine.States
     public class GameOverState : IUIState
     {
         private readonly UIFactory _uiFactory;
-        private GameObject _ui;
+        private GameOverMenu _ui;
 
         public GameOverState(UIFactory uiFactory) => _uiFactory = uiFactory;
 
-        public UniTask Enter()
+        public async UniTask Enter()
         {
-            _ui = _uiFactory.CreateGameOverUI().gameObject;
-            return UniTask.CompletedTask;
+            _ui = _uiFactory.CreateGameOverUI();
+            await _ui.GetComponent<UICanvasAnimation>().Play(AnimationType.FadeIn);
         }
 
-        public void Exit() => Object.Destroy(_ui);
+        public async UniTask Exit()
+        {
+            await _ui.GetComponent<UICanvasAnimation>().Play(AnimationType.FadeOut);
+            await UniTask.DelayFrame(1);
+            Object.Destroy(_ui.gameObject);
+        }
     }
 }

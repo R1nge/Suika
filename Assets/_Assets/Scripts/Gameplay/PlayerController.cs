@@ -41,6 +41,10 @@ namespace _Assets.Scripts.Gameplay
                     _dropQueued = false;
                 }
             }
+            else
+            {
+                _dropQueued = false;
+            }
         }
 
         public void SpawnSuika() => _playerDrop.SpawnSuika();

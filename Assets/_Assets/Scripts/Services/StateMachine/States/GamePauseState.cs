@@ -15,11 +15,10 @@ namespace _Assets.Scripts.Services.StateMachine.States
             _uiStateMachine = uiStateMachine;
         }
 
-        public UniTask Enter()
+        public async UniTask Enter()
         {
             _playerInput.Disable();
-            _uiStateMachine.SwitchStateWithoutExitFromPrevious(UIStateType.Pause).Forget();
-            return UniTask.CompletedTask;
+            await _uiStateMachine.SwitchStateWithoutExitFromPrevious(UIStateType.Pause);
         }
 
         public void Exit()

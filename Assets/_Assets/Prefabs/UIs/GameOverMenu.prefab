@@ -1009,6 +1009,8 @@ GameObject:
   - component: {fileID: 7985491608588764080}
   - component: {fileID: 2786990336421514874}
   - component: {fileID: 5898959227775636987}
+  - component: {fileID: 7222822319541012940}
+  - component: {fileID: 8146574838592186049}
   m_Layer: 5
   m_Name: GameOverMenu
   m_TagString: Untagged
@@ -1159,6 +1161,32 @@ MonoBehaviour:
   - {fileID: 2912639626213485398}
   - {fileID: 937854994929527290}
   - {fileID: 446977374275822050}
+--- !u!225 &7222822319541012940
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6079994571766391290}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &8146574838592186049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6079994571766391290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1831e14798c42b1ab928832dff9b104, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0.5
+  canvasGroup: {fileID: 7222822319541012940}
 --- !u!1 &6292553601465152287
 GameObject:
   m_ObjectHideFlags: 0

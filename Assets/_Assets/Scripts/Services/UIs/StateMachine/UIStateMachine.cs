@@ -44,17 +44,18 @@ namespace _Assets.Scripts.Services.UIs.StateMachine
             _currentUIState = _states[uiStateType];
             _currentUIStateType = uiStateType;
             _notExitedStates.Remove(_previousUIStateType);
-            await _currentUIState.Enter();
+            _currentUIState.Enter();
             _previousUIState?.Exit();
         }
 
-        public async UniTask SwitchStateAndExitFromAllPrevious(UIStateType uiStateType, int switchDelayInMilliseconds = 0)
+        public async UniTask SwitchStateAndExitFromAllPrevious(UIStateType uiStateType,
+            int switchDelayInMilliseconds = 0)
         {
             await SwitchState(uiStateType, switchDelayInMilliseconds);
-
+            
             foreach (var uiState in _notExitedStates.Values)
             {
-                uiState.Exit();
+                await uiState.Exit();
             }
 
             _notExitedStates.Clear();
@@ -65,7 +66,8 @@ namespace _Assets.Scripts.Services.UIs.StateMachine
             await SwitchState(_previousUIStateType, switchDelayInMilliseconds);
         }
 
-        public async UniTask SwitchStateWithoutExitFromPrevious(UIStateType uiStateType, int switchDelayInMilliseconds = 0)
+        public async UniTask SwitchStateWithoutExitFromPrevious(UIStateType uiStateType,
+            int switchDelayInMilliseconds = 0)
         {
             if (_currentUIStateType == uiStateType)
             {
@@ -79,7 +81,7 @@ namespace _Assets.Scripts.Services.UIs.StateMachine
 
             _previousUIStateType = _currentUIStateType;
             _previousUIState = _states[_previousUIStateType];
-            
+
             _currentUIState = _states[uiStateType];
             _currentUIStateType = uiStateType;
 

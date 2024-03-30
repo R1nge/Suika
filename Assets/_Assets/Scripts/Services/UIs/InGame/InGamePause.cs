@@ -19,7 +19,7 @@ namespace _Assets.Scripts.Services.UIs.InGame
 
         private void PauseInputCallback(InputAction.CallbackContext context) => Pause();
 
-        private void Pause() => _gameStateMachine.SwitchState(GameStateType.GamePause).Forget();
+        private async void Pause() => await _gameStateMachine.SwitchState(GameStateType.GamePause);
 
         private void OnDestroy()
         {

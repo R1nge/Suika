@@ -8,7 +8,7 @@ namespace _Assets.Scripts.Services.UIs.StateMachine.States
     {
         private readonly UIFactory _uiFactory;
         private readonly IModDataLoader _modDataLoader;
-        private GameObject _ui;
+        private MainMenu _ui;
         
         public MainMenuState(UIFactory uiFactory, IModDataLoader modDataLoader)
         {
@@ -19,10 +19,15 @@ namespace _Assets.Scripts.Services.UIs.StateMachine.States
         public async UniTask Enter()
         {
             _modDataLoader.Save();
-            var ui = await _uiFactory.CreateMainMenuUI();
-            _ui = ui.gameObject;
+            _ui = await _uiFactory.CreateMainMenuUI();
+            await _ui.GetComponent<UICanvasAnimation>().Play(AnimationType.FadeIn);
         }
 
-        public void Exit() => Object.Destroy(_ui);
+        public async UniTask Exit()
+        {
+            await _ui.GetComponent<UICanvasAnimation>().Play(AnimationType.FadeOut);
+            await UniTask.DelayFrame(1);
+            Object.Destroy(_ui.gameObject);
+        }
     }
 }

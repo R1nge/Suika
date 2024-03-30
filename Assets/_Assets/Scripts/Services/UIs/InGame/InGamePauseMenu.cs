@@ -63,13 +63,13 @@ namespace _Assets.Scripts.Services.UIs.InGame
 
         private void Resume(InputAction.CallbackContext callback) => Back();
 
-        private void MainMenu() => _gameStateMachine.SwitchState(GameStateType.ResetAndMainMenu).Forget();
+        private async void MainMenu() => await _gameStateMachine.SwitchState(GameStateType.ResetAndMainMenu);
 
         private void ChangeSoundVolume(float volume) => _audioService.ChangeSoundVolume(volume);
 
         private void ChangeMusicVolume(float volume) => _audioService.ChangeMusicVolume(volume);
 
-        private void Back() => _gameStateMachine.SwitchState(GameStateType.GameResume).Forget();
+        private async void Back() => await _gameStateMachine.SwitchState(GameStateType.GameResume);
 
         private void OnDestroy()
         {

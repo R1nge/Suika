@@ -9,8 +9,17 @@ namespace _Assets.Scripts.Services.UIs.StateMachine.States
         
         public LoadingState(UIFactory uiFactory) => _uiFactory = uiFactory;
 
-        public async UniTask Enter() => _ui = await _uiFactory.CreateLoadingCurtain();
+        public async UniTask Enter()
+        {
+            _ui = await _uiFactory.CreateLoadingCurtain();
+            await _ui.GetComponent<UICanvasAnimation>().Play(AnimationType.FadeIn);
+        }
 
-        public void Exit() => _ui.Hide();
+        public async UniTask Exit()
+        {
+            await _ui.GetComponent<UICanvasAnimation>().Play(AnimationType.FadeOut);
+            await UniTask.DelayFrame(1);
+            _ui.Hide();
+        }
     }
 }

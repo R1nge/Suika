@@ -19,14 +19,11 @@ namespace _Assets.Scripts.Services.StateMachine.States
 
         public async UniTask Enter()
         {
-            _uiStateMachine.SwitchState(UIStateType.Game).Forget();
+            await _uiStateMachine.SwitchState(UIStateType.Game);
             await UniTask.DelayFrame(1);
             _playerInput.Enable();
         }
 
-        public void Exit()
-        {
-            _audioSettingsLoader.Save();
-        }
+        public void Exit() => _audioSettingsLoader.Save();
     }
 }

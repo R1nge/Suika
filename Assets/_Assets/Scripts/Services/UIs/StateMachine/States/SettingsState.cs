@@ -8,7 +8,7 @@ namespace _Assets.Scripts.Services.UIs.StateMachine.States
     public class SettingsState : IUIState
     {
         private readonly UIFactory _uiFactory;
-        private GameObject _ui;
+        private SettingsMenu _ui;
         private readonly IAudioSettingsLoader _audioSettingsLoader;
         private readonly IVibrationSettingLoader _vibrationSettingLoader;
 
@@ -19,17 +19,19 @@ namespace _Assets.Scripts.Services.UIs.StateMachine.States
             _vibrationSettingLoader = vibrationSettingLoader;
         }
 
-        public UniTask Enter()
+        public async UniTask Enter()
         {
-            _ui = _uiFactory.CreateSettingsMenu().gameObject;
-            return UniTask.CompletedTask;
+            _ui = _uiFactory.CreateSettingsMenu();
+            await _ui.GetComponent<UICanvasAnimation>().Play(AnimationType.FadeIn);
         }
 
-        public void Exit()
+        public async UniTask Exit()
         {
             _audioSettingsLoader.Save();
             _vibrationSettingLoader.Save();
-            Object.Destroy(_ui);
+            await _ui.GetComponent<UICanvasAnimation>().Play(AnimationType.FadeOut);
+            await UniTask.DelayFrame(1);
+            Object.Destroy(_ui.gameObject);
         }
     }
 }

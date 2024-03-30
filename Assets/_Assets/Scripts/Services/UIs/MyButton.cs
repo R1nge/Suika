@@ -16,13 +16,16 @@ namespace _Assets.Scripts.Services.UIs
             if (Time.frameCount % 10 != 0)
                 return;
 
-            if (EventSystem.current.currentSelectedGameObject.GetInstanceID() == button.gameObject.GetInstanceID())
+            if (EventSystem.current.currentSelectedGameObject != null)
             {
-                Select();
-            }
-            else
-            {
-                Deselect();
+                if (EventSystem.current.currentSelectedGameObject.GetInstanceID() == button.gameObject.GetInstanceID())
+                {
+                    Select();
+                }
+                else
+                {
+                    Deselect();
+                }
             }
         }
 
