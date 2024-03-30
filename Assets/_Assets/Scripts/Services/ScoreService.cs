@@ -33,7 +33,7 @@ namespace _Assets.Scripts.Services
         {
             //Previous + level (index) + points? 
             var currentLevel = index;
-            var previousPoints = _configProvider.SuikasConfig.GetPoints(Mathf.Clamp(index - 1, 0, 1000));
+            var previousPoints = _configProvider.SuikasConfig.GetPoints(index - 1);
             var totalPoints = currentLevel + previousPoints;
 
             if (_comboService.IsComboActive)
