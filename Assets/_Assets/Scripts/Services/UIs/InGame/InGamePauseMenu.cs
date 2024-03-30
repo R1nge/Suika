@@ -1,7 +1,6 @@
 ﻿using _Assets.Scripts.Services.Audio;
 using _Assets.Scripts.Services.StateMachine;
 using _Assets.Scripts.Services.Vibrations;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -11,11 +10,10 @@ namespace _Assets.Scripts.Services.UIs.InGame
 {
     public class InGamePauseMenu : MonoBehaviour
     {
-        //InGamePauseMenu and SettingsMenu are similar
-        //Could create an abstract base class for them
         [SerializeField] private Slider soundSlider, musicSlider;
         [SerializeField] private Button backButton, mainMenuButton;
         [SerializeField] private Button vibrationButton;
+        [SerializeField] private Image vibrationButtonImage;
         [Inject] private GameStateMachine _gameStateMachine;
         [Inject] private IAudioSettingsLoader _audioSettingsLoader;
         [Inject] private AudioService _audioService;
@@ -31,12 +29,12 @@ namespace _Assets.Scripts.Services.UIs.InGame
 
         private void Start()
         {
-            ChangeButton();
             _playerInput.OnPause += Resume;
             soundSlider.value = _audioSettingsLoader.AudioData.VFXVolume;
             musicSlider.value = _audioSettingsLoader.AudioData.MusicVolume;
             soundSlider.onValueChanged.AddListener(ChangeSoundVolume);
             musicSlider.onValueChanged.AddListener(ChangeMusicVolume);
+            ChangeButton();
         }
 
         private void ToggleVibration()
@@ -47,18 +45,8 @@ namespace _Assets.Scripts.Services.UIs.InGame
 
         private void ChangeButton()
         {
-            if (_vibrationSettingLoader.VibrationSettingsData.Enabled)
-            {
-                var colorBlock = vibrationButton.GetComponent<Button>().colors;
-                colorBlock.normalColor = Color.green;
-                vibrationButton.GetComponent<Button>().colors = colorBlock;
-            }
-            else
-            {
-                var colorBlock = vibrationButton.GetComponent<Button>().colors;
-                colorBlock.normalColor = Color.red;
-                vibrationButton.GetComponent<Button>().colors = colorBlock;
-            }
+            vibrationButtonImage.color =
+                _vibrationSettingLoader.VibrationSettingsData.Enabled ? Color.green : Color.red;
         }
 
         private void Resume(InputAction.CallbackContext callback) => Back();

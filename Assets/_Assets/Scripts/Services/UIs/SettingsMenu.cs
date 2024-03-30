@@ -1,19 +1,17 @@
 ﻿using _Assets.Scripts.Services.Audio;
 using _Assets.Scripts.Services.UIs.StateMachine;
 using _Assets.Scripts.Services.Vibrations;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
 
 namespace _Assets.Scripts.Services.UIs
 {
-    //SettingsMenu and InGamePauseMenu are similar
-    //Could create an abstract base class for them
     public class SettingsMenu : MonoBehaviour
     {
         [SerializeField] private Slider soundSlider, musicSlider;
         [SerializeField] private Button vibrationButton;
+        [SerializeField] private Image vibrationButtonImage;
         [SerializeField] private Button backButton;
         [SerializeField] private Image background;
         [Inject] private UIStateMachine _uiStateMachine;
@@ -50,21 +48,10 @@ namespace _Assets.Scripts.Services.UIs
 
         private void ChangeButton()
         {
-            if (_vibrationSettingLoader.VibrationSettingsData.Enabled)
-            {
-                var colorBlock = vibrationButton.GetComponent<Button>().colors;
-                colorBlock.normalColor = Color.green;
-                vibrationButton.GetComponent<Button>().colors = colorBlock;
-            }
-            else
-            {
-                var colorBlock = vibrationButton.GetComponent<Button>().colors;
-                colorBlock.normalColor = Color.red;
-                vibrationButton.GetComponent<Button>().colors = colorBlock;
-            }
+            vibrationButtonImage.color = _vibrationSettingLoader.VibrationSettingsData.Enabled ? Color.green : Color.red;
         }
 
-        private void Back() => _uiStateMachine.SwitchToPreviousState().Forget();
+        private async void Back() => await _uiStateMachine.SwitchToPreviousState();
 
         private void OnDestroy()
         {
