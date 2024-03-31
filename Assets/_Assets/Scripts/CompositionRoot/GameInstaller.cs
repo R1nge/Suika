@@ -2,6 +2,7 @@
 using _Assets.Scripts.Services;
 using _Assets.Scripts.Services.Audio;
 using _Assets.Scripts.Services.Factories;
+using _Assets.Scripts.Services.GameModes;
 using _Assets.Scripts.Services.StateMachine;
 using _Assets.Scripts.Services.UIs;
 using _Assets.Scripts.Services.UIs.StateMachine;
@@ -30,6 +31,8 @@ namespace _Assets.Scripts.CompositionRoot
             builder.RegisterComponent(modSlotFactory);
             builder.RegisterComponent(audioService);
             builder.RegisterComponent(playerInput);
+
+            builder.Register<GameModeService>(Lifetime.Singleton);
             
             builder.RegisterComponent(gamepadRumbleService);
             builder.Register<VibrationSettingsDataLoaderJson>(Lifetime.Singleton).As<IVibrationSettingLoader>();

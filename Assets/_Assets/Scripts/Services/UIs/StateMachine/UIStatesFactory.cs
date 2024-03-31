@@ -33,5 +33,7 @@ namespace _Assets.Scripts.Services.UIs.StateMachine
         public IUIState CreateSettingsState(UIStateMachine stateMachine) => new SettingsState(_uiFactory, _audioSettingsLoader, _vibrationSettingLoader);
 
         public IUIState CreateGamePauseState(UIStateMachine stateMachine) => new PauseState(_uiFactory);
+
+        public IUIState CreateSelectGameModeState(UIStateMachine uiStateMachine) => new SelectGameModeState(_uiFactory);
     }
 }

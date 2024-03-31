@@ -74,5 +74,11 @@ namespace _Assets.Scripts.Services.UIs
             modUI.Init(_mainMenuProvider.BackgroundSprite);
             return modUI;
         }
+
+        public SelectGameModeUI CreateSelectGameModeUI()
+        {
+            var ui = _objectResolver.Instantiate(_configProvider.UIConfig.SelectGameModeMenu).GetComponent<SelectGameModeUI>();
+            return ui;
+        }
     }
 }

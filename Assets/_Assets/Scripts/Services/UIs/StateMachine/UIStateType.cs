@@ -5,6 +5,7 @@
         None = 0,
         Loading = 1,
         MainMenu = 2,
+        SelectGameMode = 8,
         Game = 3,
         GameOver = 4,
         Mods = 5,
