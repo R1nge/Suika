@@ -27,11 +27,12 @@ namespace _Assets.Scripts.Services.StateMachine
         private readonly ContinueGameService _continueGameService;
         private readonly VibrationService _vibrationService;
         private readonly IVibrationSettingLoader _vibrationSettingLoader;
+        private readonly TimeRushTimer _timeRushTimer;
 
         private GameStatesFactory(IPlayerDataLoader playerDataLoader, UIStateMachine uiStateMachine,
             CoroutineRunner coroutineRunner, PlayerFactory playerFactory, ContainerFactory containerFactory,
             ResetService resetService, PlayerInput playerInput, IConfigLoader configLoader, AudioService audioService,
-            IModDataLoader modDataLoader, IAudioSettingsLoader audioSettingsLoader, ContinueGameService continueGameService, VibrationService vibrationService, IVibrationSettingLoader vibrationSettingLoader)
+            IModDataLoader modDataLoader, IAudioSettingsLoader audioSettingsLoader, ContinueGameService continueGameService, VibrationService vibrationService, IVibrationSettingLoader vibrationSettingLoader, TimeRushTimer timeRushTimer)
         {
             _playerDataLoader = playerDataLoader;
             _uiStateMachine = uiStateMachine;
@@ -47,6 +48,7 @@ namespace _Assets.Scripts.Services.StateMachine
             _continueGameService = continueGameService;
             _vibrationService = vibrationService;
             _vibrationSettingLoader = vibrationSettingLoader;
+            _timeRushTimer = timeRushTimer;
         }
 
         public IGameState CreateLoadSaveDataState(GameStateMachine stateMachine)
@@ -59,9 +61,9 @@ namespace _Assets.Scripts.Services.StateMachine
             return new InitState(stateMachine, _audioService, _audioSettingsLoader, _configLoader, _modDataLoader, _uiStateMachine, _vibrationService, _playerInput);
         }
 
-        public IGameState CreateGameState(GameStateMachine stateMachine)
+        public IGameState CreateClassicGameState(GameStateMachine stateMachine)
         {
-            return new GameState(stateMachine, _uiStateMachine, _playerFactory, _containerFactory, _playerInput, _audioService);
+            return new ClassicGameState(stateMachine, _uiStateMachine, _playerFactory, _containerFactory, _playerInput);
         }
 
         public IGameState CreateGameOverState(GameStateMachine stateMachine)
@@ -91,17 +93,22 @@ namespace _Assets.Scripts.Services.StateMachine
 
         public IGameState CreateGamePauseState(GameStateMachine stateMachine)
         {
-            return new GamePauseState(_playerInput, _uiStateMachine);
+            return new GamePauseState(_playerInput, _uiStateMachine, _timeRushTimer);
         }
 
         public IGameState CreateGameResumeState(GameStateMachine stateMachine)
         {
-            return new GameResumeState(_playerInput, _uiStateMachine, _audioSettingsLoader);
+            return new GameResumeState(_playerInput, _uiStateMachine, _audioSettingsLoader, _timeRushTimer);
         }
 
         public IGameState CreateContinueGameState(GameStateMachine stateMachine)
         {
             return new ContinueGameState(_uiStateMachine, _containerFactory, _playerFactory, _playerInput, _continueGameService);
+        }
+
+        public IGameState CreateTimeRushGameState(GameStateMachine stateMachine)
+        {
+            return new TimeRushGameState(stateMachine, _uiStateMachine, _playerInput, _containerFactory, _playerFactory, _timeRushTimer);
         }
     }
 }

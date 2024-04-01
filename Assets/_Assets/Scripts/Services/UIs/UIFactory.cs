@@ -78,6 +78,7 @@ namespace _Assets.Scripts.Services.UIs
         public SelectGameModeUI CreateSelectGameModeUI()
         {
             var ui = _objectResolver.Instantiate(_configProvider.UIConfig.SelectGameModeMenu).GetComponent<SelectGameModeUI>();
+            ui.Init(_mainMenuProvider.BackgroundSprite);
             return ui;
         }
     }

@@ -23,7 +23,7 @@ namespace _Assets.Scripts.Misc
 
         private void Update()
         {
-#if !UNITY_ANDROID
+#if !UNITY_ANDROID && !UNITY_EDITOR
             if (Screen.width != _lastWidth || Screen.height != _lastHeight)
             {
                 UpdateCamSize();

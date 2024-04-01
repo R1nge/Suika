@@ -1,44 +1,44 @@
 ﻿using _Assets.Scripts.Gameplay;
-using _Assets.Scripts.Services.Audio;
 using _Assets.Scripts.Services.Factories;
 using _Assets.Scripts.Services.UIs.StateMachine;
 using Cysharp.Threading.Tasks;
 
 namespace _Assets.Scripts.Services.StateMachine.States
 {
-    public class GameState : IGameState
+    public class TimeRushGameState : IGameState
     {
-        private readonly GameStateMachine _stateMachine;
+        private readonly GameStateMachine _gameStateMachine;
         private readonly UIStateMachine _uiStateMachine;
-        private readonly PlayerFactory _playerFactory;
-        private readonly ContainerFactory _containerFactory;
         private readonly PlayerInput _playerInput;
-        private readonly AudioService _audioService;
+        private readonly ContainerFactory _containerFactory;
+        private readonly PlayerFactory _playerFactory;
+        private readonly TimeRushTimer _timeRushTimer;
 
-        public GameState(GameStateMachine stateMachine, UIStateMachine uiStateMachine, PlayerFactory playerFactory,
-            ContainerFactory containerFactory, PlayerInput playerInput, AudioService audioService)
+        public TimeRushGameState(GameStateMachine gameStateMachine, UIStateMachine uiStateMachine,
+            PlayerInput playerInput, ContainerFactory containerFactory, PlayerFactory playerFactory, TimeRushTimer timeRushTimer)
         {
-            _stateMachine = stateMachine;
+            _gameStateMachine = gameStateMachine;
             _uiStateMachine = uiStateMachine;
-            _playerFactory = playerFactory;
-            _containerFactory = containerFactory;
             _playerInput = playerInput;
-            _audioService = audioService;
+            _containerFactory = containerFactory;
+            _playerFactory = playerFactory;
+            _timeRushTimer = timeRushTimer;
         }
 
         public async UniTask Enter()
         {
             await _uiStateMachine.SwitchState(UIStateType.Loading);
             _containerFactory.Create();
-            await _audioService.PlaySong(0);
             var player = await _playerFactory.Create();
             await _uiStateMachine.SwitchState(UIStateType.Game);
             player.GetComponent<PlayerController>().SpawnSuika();
             _playerInput.Enable();
+            _timeRushTimer.Start();
         }
 
         public void Exit()
         {
+            _timeRushTimer.Stop();
         }
     }
 }

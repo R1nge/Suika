@@ -66,3 +66,6 @@ MonoBehaviour:
   suikasConfig: {fileID: 11400000, guid: db60164c6124bf14da1c68665a7c730f, type: 2}
   lightTheme: {fileID: 11400000, guid: 4ead18cdb1d65a9428d5e982ef4c770d, type: 2}
   darkTheme: {fileID: 11400000, guid: 065978a464d9bb944ad68ec24b522d1f, type: 2}
+  gameModeConfigs:
+  - {fileID: 11400000, guid: 065fda4ba3b0b6440976ee82687059a3, type: 2}
+  - {fileID: 11400000, guid: 87e8b994d17ffb142b5d12feb5f7fb00, type: 2}

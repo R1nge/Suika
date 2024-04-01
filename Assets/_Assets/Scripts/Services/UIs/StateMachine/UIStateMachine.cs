@@ -45,7 +45,7 @@ namespace _Assets.Scripts.Services.UIs.StateMachine
             _currentUIState = _states[uiStateType];
             _currentUIStateType = uiStateType;
             _notExitedStates.Remove(_previousUIStateType);
-            _currentUIState.Enter();
+            _currentUIState.Enter().Forget();
             _previousUIState?.Exit();
         }
 

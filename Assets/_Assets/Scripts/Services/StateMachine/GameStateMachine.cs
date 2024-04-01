@@ -16,7 +16,7 @@ namespace _Assets.Scripts.Services.StateMachine
             {
                 { GameStateType.LoadSavedData, gameStatesFactory.CreateLoadSaveDataState(this) },
                 { GameStateType.Init, gameStatesFactory.CreateInitState(this) },
-                { GameStateType.Game, gameStatesFactory.CreateGameState(this) },
+                { GameStateType.Classic, gameStatesFactory.CreateClassicGameState(this) },
                 { GameStateType.GameOver, gameStatesFactory.CreateGameOverState(this) },
                 { GameStateType.SaveData, gameStatesFactory.CreateSaveDataState(this) },
                 { GameStateType.GameOverAndMainMenu, gameStatesFactory.CreateGameOverAndMainMenuState(this) },
@@ -24,7 +24,8 @@ namespace _Assets.Scripts.Services.StateMachine
                 { GameStateType.ResetAndMainMenu, gameStatesFactory.CreateResetAndMainMenuState(this) },
                 { GameStateType.GamePause, gameStatesFactory.CreateGamePauseState(this) },
                 { GameStateType.GameResume, gameStatesFactory.CreateGameResumeState(this) },
-                { GameStateType.ContinueGame, gameStatesFactory.CreateContinueGameState(this) }
+                { GameStateType.ContinueGame, gameStatesFactory.CreateContinueGameState(this) },
+                { GameStateType.TimeRush, gameStatesFactory.CreateTimeRushGameState(this) }
             };
         }
 

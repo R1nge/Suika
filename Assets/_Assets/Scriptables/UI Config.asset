@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: UI Config
   m_EditorClassIdentifier: 
   loadingCurtain: {fileID: 3032346258083289967, guid: 65f150163cf495c49b5f3da5d1677266, type: 3}
-  mainMenu: {fileID: 7134135243074798241, guid: 8f2821dadc0fe5248803f4ad6320baca, type: 3}
   modsMenu: {fileID: 7456967041930300135, guid: 425095c376b62794583bd145468553be, type: 3}
+  mainMenu: {fileID: 7134135243074798241, guid: 8f2821dadc0fe5248803f4ad6320baca, type: 3}
+  selectGameModeMenu: {fileID: 5053666993901337002, guid: 7d410ec2de7e6f5449f08367c6657583, type: 3}
   inGameMenu: {fileID: 4895176568063786644, guid: 5abd69c9cd1eab54694cd7f709c88db1, type: 3}
   gameOverMenu: {fileID: 6079994571766391290, guid: 137fe134b2e5a0c41936a2f9cb2f13bb, type: 3}
   settingsMenu: {fileID: 5053666993901337002, guid: 6a21598ecbac2a8409deea9e18591abb, type: 3}

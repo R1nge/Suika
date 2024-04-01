@@ -12,12 +12,14 @@ namespace _Assets.Scripts.Services
         [SerializeField] private InputActionAsset controls;
         private bool _enabled;
         private InputAction _moveAction;
+
         public bool Enabled(int fingerId = -1)
         {
             bool enabled = _enabled && !EventSystem.current.IsPointerOverGameObject();
-            #if UNITY_ANDROID
-                enabled = _enabled && !EventSystem.current.IsPointerOverGameObject() && !EventSystem.current.IsPointerOverGameObject(fingerId);
-            #endif
+#if UNITY_ANDROID
+            enabled = _enabled && !EventSystem.current.IsPointerOverGameObject() &&
+                      !EventSystem.current.IsPointerOverGameObject(fingerId);
+#endif
             return enabled;
         }
 
@@ -40,9 +42,25 @@ namespace _Assets.Scripts.Services
             controls.Enable();
         }
 
-        private void DropCallback(InputAction.CallbackContext callback) => OnDrop?.Invoke(callback);
+        private void DropCallback(InputAction.CallbackContext callback)
+        {
+            if (!Enabled())
+            {
+                return;
+            }
 
-        private void PauseInputCallback(InputAction.CallbackContext callback) => OnPause?.Invoke(callback);
+            OnDrop?.Invoke(callback);
+        }
+
+        private void PauseInputCallback(InputAction.CallbackContext callback)
+        {
+            if (!Enabled())
+            {
+                return;
+            }
+
+            OnPause?.Invoke(callback);
+        }
 
         public void Enable() => _enabled = true;
 

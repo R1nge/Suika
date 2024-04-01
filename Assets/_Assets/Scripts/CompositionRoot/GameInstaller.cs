@@ -32,6 +32,7 @@ namespace _Assets.Scripts.CompositionRoot
             builder.RegisterComponent(audioService);
             builder.RegisterComponent(playerInput);
 
+            builder.Register<TimeRushTimer>(Lifetime.Singleton).As<ITickable>().AsSelf();
             builder.Register<GameModeService>(Lifetime.Singleton);
             
             builder.RegisterComponent(gamepadRumbleService);
@@ -60,6 +61,7 @@ namespace _Assets.Scripts.CompositionRoot
             builder.Register<GameStateMachine>(Lifetime.Singleton);
 
             builder.RegisterEntryPoint<GameOverService>();
+            builder.RegisterEntryPoint<TimerRushGameOver>();
         }
     }
 }
