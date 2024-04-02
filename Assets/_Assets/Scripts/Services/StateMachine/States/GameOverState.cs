@@ -21,8 +21,8 @@ namespace _Assets.Scripts.Services.StateMachine.States
         public async UniTask Enter()
         {
             _playerInput.Disable();
-            await _gameStateMachine.SwitchState(GameStateType.SaveData);
-            _continueGameService.DeleteContinueData();
+            //await _gameStateMachine.SwitchState(GameStateType.SaveData);
+            //_continueGameService.DeleteContinueData();
             await _uiStateMachine.SwitchStateWithoutExitFromPrevious(UIStateType.GameOver);
         }
 
