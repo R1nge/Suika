@@ -6,8 +6,7 @@ namespace _Assets.Scripts.Services.GameModes
     public class GameModeService
     {
         private readonly ConfigProvider _configProvider;
-        private GameMode _selectedGameMode;
-        public GameMode SelectedGameMode => _selectedGameMode;
+        public GameMode SelectedGameMode { get; set; }
         private GameModeConfig _gameModeConfig;
         public GameModeConfig GameModeConfig => _gameModeConfig;
 
@@ -18,8 +17,8 @@ namespace _Assets.Scripts.Services.GameModes
 
         public void SelectGameMode(GameMode gameMode)
         {
-            _selectedGameMode = gameMode;
-            _gameModeConfig = _configProvider.GameModeConfigs.First(config => config.GameMode == _selectedGameMode);
+            SelectedGameMode = gameMode;
+            _gameModeConfig = _configProvider.GameModeConfigs.First(config => config.GameMode == SelectedGameMode);
         }
 
         public enum GameMode

@@ -5,6 +5,7 @@ using _Assets.Scripts.Gameplay;
 using _Assets.Scripts.Misc;
 using _Assets.Scripts.Services.Audio;
 using _Assets.Scripts.Services.Factories;
+using _Assets.Scripts.Services.GameModes;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -19,16 +20,20 @@ namespace _Assets.Scripts.Services
         private readonly SuikasFactory _suikasFactory;
         private readonly RandomNumberGenerator _randomNumberGenerator;
         private readonly ScoreService _scoreService;
+        private readonly TimeRushTimer _timeRushTimer;
+        private readonly GameModeService _gameModeService;
 
         public bool HasData => _continueData != null;
 
         private ContinueGameService(AudioService audioService, SuikasFactory suikasFactory,
-            RandomNumberGenerator randomNumberGenerator, ScoreService scoreService)
+            RandomNumberGenerator randomNumberGenerator, ScoreService scoreService, TimeRushTimer timeRushTimer, GameModeService gameModeService)
         {
             _audioService = audioService;
             _suikasFactory = suikasFactory;
             _randomNumberGenerator = randomNumberGenerator;
             _scoreService = scoreService;
+            _timeRushTimer = timeRushTimer;
+            _gameModeService = gameModeService;
         }
 
         public async void Continue()
@@ -46,6 +51,9 @@ namespace _Assets.Scripts.Services
 
             _randomNumberGenerator.SetCurrent(_continueData.CurrentSuikaIndex);
             _randomNumberGenerator.SetNext(_continueData.NextSuikaIndex);
+
+            _timeRushTimer.CurrentTime = _continueData.TimeRushTime;
+            _gameModeService.SelectedGameMode = _continueData.GameMode;
         }
 
         public void UpdateScore()
@@ -90,8 +98,10 @@ namespace _Assets.Scripts.Services
 
         public async UniTask Save()
         {
-            _continueData = new ContinueData(_audioService.LastSongIndex, new List<ContinueData.SuikaContinueData>(), _randomNumberGenerator.Current, _randomNumberGenerator.Next, _scoreService.Score);
-            
+            _continueData = new ContinueData(_audioService.LastSongIndex, new List<ContinueData.SuikaContinueData>(),
+                _randomNumberGenerator.Current, _randomNumberGenerator.Next, _scoreService.Score,
+                _timeRushTimer.CurrentTime,_gameModeService.SelectedGameMode);
+
             _continueData.SuikasContinueData = new List<ContinueData.SuikaContinueData>(_suikas.Count);
             for (int i = 0; i < _suikas.Count; i++)
             {
@@ -99,6 +109,7 @@ namespace _Assets.Scripts.Services
                 {
                     continue;
                 }
+
                 var index = _suikas[i].Index;
                 var position = _suikas[i].transform.position;
                 _continueData.SuikasContinueData.Add(new ContinueData.SuikaContinueData(index, position.x, position.y));
@@ -110,6 +121,10 @@ namespace _Assets.Scripts.Services
             _continueData.NextSuikaIndex = _randomNumberGenerator.Next;
 
             _continueData.Score = _scoreService.Score;
+
+            _continueData.TimeRushTime = _timeRushTimer.CurrentTime;
+            
+            _continueData.GameMode = _gameModeService.SelectedGameMode;
 
             var path = Path.Combine(PathsHelper.DataPath, PathsHelper.ContinueDataJson);
             var json = JsonConvert.SerializeObject(_continueData);
