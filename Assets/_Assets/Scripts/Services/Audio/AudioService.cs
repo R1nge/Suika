@@ -20,6 +20,7 @@ namespace _Assets.Scripts.Services.Audio
         private readonly List<int> _mergeSoundsQueue = new(10);
         private bool _queueIsPlaying;
         private readonly CancellationTokenSource _cancellationSource = new();
+        private bool _alreadyLoading;
 
         public string GetSongName()
         {
@@ -59,6 +60,13 @@ namespace _Assets.Scripts.Services.Audio
             var audioData = _configLoader.CurrentConfig.SuikaAudios[index];
             var extension = Path.GetExtension(audioData.Path);
 
+            if (_alreadyLoading)
+            {
+                _cancellationSource.Cancel();
+            }
+            
+            _alreadyLoading = true;
+
             switch (extension)
             {
                 case ".mp3":
@@ -74,6 +82,8 @@ namespace _Assets.Scripts.Services.Audio
                         _cancellationSource.Token).SuppressCancellationThrow();
                     break;
             }
+
+            _alreadyLoading = false;
         }
 
         public async UniTask PlayRandomSong()
