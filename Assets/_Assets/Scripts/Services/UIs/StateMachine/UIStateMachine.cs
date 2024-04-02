@@ -39,12 +39,12 @@ namespace _Assets.Scripts.Services.UIs.StateMachine
 
             await UniTask.Delay(switchDelayInMilliseconds);
 
+            _notExitedStates.Remove(_previousUIStateType);
             _previousUIStateType = _currentUIStateType;
             _previousUIState = _currentUIState;
 
             _currentUIState = _states[uiStateType];
             _currentUIStateType = uiStateType;
-            _notExitedStates.Remove(_previousUIStateType);
             _currentUIState.Enter().Forget();
             _previousUIState?.Exit();
         }
@@ -53,10 +53,13 @@ namespace _Assets.Scripts.Services.UIs.StateMachine
             int switchDelayInMilliseconds = 0)
         {
             await SwitchState(uiStateType, switchDelayInMilliseconds);
-            
+
             foreach (var uiState in _notExitedStates.Values)
             {
-                await uiState.Exit();
+                if (uiState != null)
+                {
+                    await uiState.Exit();
+                }
             }
 
             _notExitedStates.Clear();
