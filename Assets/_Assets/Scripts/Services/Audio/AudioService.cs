@@ -19,13 +19,15 @@ namespace _Assets.Scripts.Services.Audio
         private int _lastSongIndex;
         private readonly List<int> _mergeSoundsQueue = new(10);
         private bool _queueIsPlaying;
-        
+        private readonly CancellationTokenSource _cancellationSource = new();
+
         public string GetSongName()
         {
-            var fileName = Path.GetFileNameWithoutExtension(_configLoader.CurrentConfig.SuikaAudios[_lastSongIndex].Path); 
-            return  fileName;
+            var fileName =
+                Path.GetFileNameWithoutExtension(_configLoader.CurrentConfig.SuikaAudios[_lastSongIndex].Path);
+            return fileName;
         }
-        
+
         public bool IsMusicPlaying => musicSource.isPlaying;
 
         public int LastSongIndex => _lastSongIndex;
@@ -61,15 +63,15 @@ namespace _Assets.Scripts.Services.Audio
             {
                 case ".mp3":
                     await DownloadAndPlaySong(audioData.Path, audioData.Volume, AudioType.MPEG,
-                        this.GetCancellationTokenOnDestroy());
+                        _cancellationSource.Token).SuppressCancellationThrow();
                     break;
                 case ".ogg":
                     await DownloadAndPlaySong(audioData.Path, audioData.Volume, AudioType.OGGVORBIS,
-                        this.GetCancellationTokenOnDestroy());
+                        _cancellationSource.Token).SuppressCancellationThrow();
                     break;
                 case ".wav":
                     await DownloadAndPlaySong(audioData.Path, audioData.Volume, AudioType.WAV,
-                        this.GetCancellationTokenOnDestroy());
+                        _cancellationSource.Token).SuppressCancellationThrow();
                     break;
             }
         }
@@ -102,10 +104,11 @@ namespace _Assets.Scripts.Services.Audio
             _lastSongIndex = (LastSongIndex + 1) % _configLoader.CurrentConfig.SuikaAudios.Length;
             await PlaySong(_lastSongIndex);
         }
-        
+
         public async UniTask PlayPreviousSong()
         {
-            _lastSongIndex = (LastSongIndex - 1 + _configLoader.CurrentConfig.SuikaAudios.Length) % _configLoader.CurrentConfig.SuikaAudios.Length;
+            _lastSongIndex = (LastSongIndex - 1 + _configLoader.CurrentConfig.SuikaAudios.Length) %
+                             _configLoader.CurrentConfig.SuikaAudios.Length;
             await PlaySong(_lastSongIndex);
         }
 

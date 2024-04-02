@@ -86,12 +86,12 @@ namespace _Assets.Scripts.Services.StateMachine
 
         public IGameState CreateResetAndRetryState(GameStateMachine stateMachine)
         {
-            return new ResetAndRetry(stateMachine, _resetService);
+            return new ResetAndRetry(stateMachine, _resetService, _timeRushTimer);
         }
 
         public IGameState CreateResetAndMainMenuState(GameStateMachine stateMachine)
         {
-            return new ResetAndMainMenu(stateMachine, _resetService, _uiStateMachine, _continueGameService);
+            return new ResetAndMainMenu(stateMachine, _resetService, _uiStateMachine, _continueGameService, _timeRushTimer);
         }
 
         public IGameState CreateGamePauseState(GameStateMachine stateMachine)

@@ -56,6 +56,7 @@ namespace _Assets.Scripts.Services
 
         public void Stop()
         {
+            _currentTime = _maxTime;
             _enabled = false;
             OnTimerEnded?.Invoke(0f);
         }

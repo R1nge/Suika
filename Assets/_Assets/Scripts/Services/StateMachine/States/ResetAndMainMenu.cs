@@ -11,18 +11,21 @@ namespace _Assets.Scripts.Services.StateMachine.States
         private readonly UIStateMachine _uiStateMachine;
      
         private readonly ContinueGameService _continueGameService;
+        private readonly TimeRushTimer _timeRushTimer;
 
-        public ResetAndMainMenu(GameStateMachine gameStateMachine, ResetService resetService, UIStateMachine uiStateMachine, ContinueGameService continueGameService)
+        public ResetAndMainMenu(GameStateMachine gameStateMachine, ResetService resetService, UIStateMachine uiStateMachine, ContinueGameService continueGameService, TimeRushTimer timeRushTimer)
         {
             _gameStateMachine = gameStateMachine;
             _resetService = resetService;
             _uiStateMachine = uiStateMachine;
             _continueGameService = continueGameService;
+            _timeRushTimer = timeRushTimer;
         }
         
         public async UniTask Enter()
         {
             //await _continueGameService.Save();
+            _timeRushTimer.Stop();
             _resetService.Reset();
             await _uiStateMachine.SwitchStateAndExitFromAllPrevious(UIStateType.MainMenu);
         }
