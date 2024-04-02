@@ -6,7 +6,7 @@ namespace _Assets.Scripts.Services
 {
     public class TimeRushTimer : ITickable
     {
-        private readonly float _maxTime = 60f * 1f;
+        private readonly float _maxTime = 60f * 5f;
         private float _currentTime;
         private bool _enabled;
         public float CurrentTime
