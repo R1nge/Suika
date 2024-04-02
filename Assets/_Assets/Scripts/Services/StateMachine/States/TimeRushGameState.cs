@@ -38,7 +38,7 @@ namespace _Assets.Scripts.Services.StateMachine.States
 
         public void Exit()
         {
-            _timeRushTimer.Stop();
+            _timeRushTimer.Pause();
         }
     }
 }

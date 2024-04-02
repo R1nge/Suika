@@ -6,7 +6,7 @@ namespace _Assets.Scripts.Services
 {
     public class TimeRushTimer : ITickable
     {
-        private readonly float _maxTime = 60f * 5f;
+        private readonly float _maxTime = 60f * 1f;
         private float _currentTime;
         private bool _enabled;
         public float CurrentTime
@@ -19,12 +19,15 @@ namespace _Assets.Scripts.Services
             }
         }
 
+        public event Action<float> OnTimerStarted; 
         public event Action<float> OnTimerChanged;
-        
+        public event Action<float> OnTimerEnded; 
+
         public void Start()
         {
-            _currentTime = _maxTime;
+            CurrentTime = _maxTime;
             _enabled = true;
+            OnTimerStarted?.Invoke(CurrentTime);
         }
 
         public void Tick()
@@ -32,6 +35,12 @@ namespace _Assets.Scripts.Services
             if (_enabled)
             {
                 CurrentTime -= Time.deltaTime;
+
+                if (CurrentTime <= 1)
+                {
+                    Stop();
+                    OnTimerChanged?.Invoke(0f);
+                }
             }    
         }
 
@@ -48,6 +57,7 @@ namespace _Assets.Scripts.Services
         public void Stop()
         {
             _enabled = false;
+            OnTimerEnded?.Invoke(0f);
         }
     }
 }

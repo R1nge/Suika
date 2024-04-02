@@ -17,15 +17,12 @@ namespace _Assets.Scripts.Services
         
         public void Start()
         {
-            _timeRushTimer.OnTimerChanged += OnTimerChanged;
+            _timeRushTimer.OnTimerEnded += GameOver;
         }
 
-        private void OnTimerChanged(float time)
+        private void GameOver(float time)
         {
-            if (time <= 0)
-            {
-                _gameStateMachine.SwitchState(GameStateType.GameOver).Forget();
-            }
+            _gameStateMachine.SwitchState(GameStateType.GameOver).Forget();
         }
     }
 }

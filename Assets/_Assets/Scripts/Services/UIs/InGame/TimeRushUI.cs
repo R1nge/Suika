@@ -9,7 +9,16 @@ namespace _Assets.Scripts.Services.UIs.InGame
         [SerializeField] private TextMeshProUGUI timer;
         [Inject] private TimeRushTimer _timeRushTimer;
 
-        private void Start() => _timeRushTimer.OnTimerChanged += OnTimerChanged;
+        private void Start()
+        {
+            _timeRushTimer.OnTimerStarted += TimerStarted;
+            _timeRushTimer.OnTimerChanged += OnTimerChanged;
+        }
+
+        private void TimerStarted(float time)
+        {
+            OnTimerChanged(time);
+        }
 
         private void OnTimerChanged(float time)
         {
