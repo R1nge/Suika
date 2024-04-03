@@ -38,16 +38,23 @@ namespace _Assets.Scripts.Services.UIs.StateMachine
                 return;
             }
 
-            await UniTask.Delay(switchDelayInMilliseconds);
+            if (switchDelayInMilliseconds > 0)
+            {
+                await UniTask.Delay(switchDelayInMilliseconds);
+            }
 
-            _notExitedStates.Remove(_previousUIStateType);
             _previousUIStateType = _currentUIStateType;
             _previousUIState = _currentUIState;
+            
+            if (_previousUIState != null)
+            {
+                _previousUIState.Exit();
+                _notExitedStates.Remove(_previousUIStateType);
+            }
 
             _currentUIState = _states[uiStateType];
             _currentUIStateType = uiStateType;
-            _currentUIState.Enter().Forget();
-            _previousUIState?.Exit();
+            await _currentUIState.Enter();
         }
 
         public async UniTask SwitchStateAndExitFromAllPrevious(UIStateType uiStateType,
@@ -55,13 +62,13 @@ namespace _Assets.Scripts.Services.UIs.StateMachine
         {
             await SwitchState(uiStateType, switchDelayInMilliseconds);
 
-            var values = _notExitedStates.Values.ToArray();
+            var values = _notExitedStates.ToArray();
             
             foreach (var uiState in values)
             {
-                if (uiState != null)
+                if (uiState.Value != null)
                 {
-                    await uiState.Exit();
+                    await uiState.Value.Exit();
                 }
             }
 
