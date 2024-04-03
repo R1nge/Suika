@@ -34,7 +34,7 @@ namespace _Assets.Scripts.Services.StateMachine.States
         public async UniTask Enter()
         {
             //await _continueGameService.Load();
-            //await _audioSettingsLoader.Load();
+            await _audioSettingsLoader.Load();
             //await _vibrationSettingLoader.Load();
             await _modDataLoader.Load();
             //_playerDataLoader.LoadData();
