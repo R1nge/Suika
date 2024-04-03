@@ -1,4 +1,5 @@
-﻿using _Assets.Scripts.Services.Audio;
+﻿using System;
+using _Assets.Scripts.Services.Audio;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using TMPro;
@@ -21,6 +22,8 @@ namespace _Assets.Scripts.Services.UIs.InGame
 
         private void Start()
         {
+            _audioService.OnSongChanged += SongChanged;
+            
             playButton.onClick.AddListener(Toggle);
             pauseButton.onClick.AddListener(Toggle);
             nextButton.onClick.AddListener(Next);
@@ -29,6 +32,11 @@ namespace _Assets.Scripts.Services.UIs.InGame
 
             UpdatePlayButton();
             UpdateSongName();
+        }
+
+        private void SongChanged()
+        {
+            UpdatePlayButton();
         }
 
         private async void Toggle()
@@ -97,5 +105,7 @@ namespace _Assets.Scripts.Services.UIs.InGame
             _audioService.PlayRandomSong().Forget();
             UpdateSongName();
         }
+
+        private void OnDestroy() => _audioService.OnSongChanged -= SongChanged;
     }
 }
