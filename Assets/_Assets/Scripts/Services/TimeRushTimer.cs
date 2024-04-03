@@ -38,8 +38,9 @@ namespace _Assets.Scripts.Services
 
                 if (CurrentTime <= 1)
                 {
-                    Stop();
+                    Reset();
                     OnTimerChanged?.Invoke(0f);
+                    OnTimerEnded?.Invoke(0f);
                 }
             }    
         }
@@ -54,11 +55,10 @@ namespace _Assets.Scripts.Services
             _enabled = true;
         }
 
-        public void Stop()
+        public void Reset()
         {
             _currentTime = _maxTime;
             _enabled = false;
-            OnTimerEnded?.Invoke(0f);
         }
     }
 }

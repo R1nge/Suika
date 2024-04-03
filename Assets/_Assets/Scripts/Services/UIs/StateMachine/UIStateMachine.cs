@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -54,7 +55,9 @@ namespace _Assets.Scripts.Services.UIs.StateMachine
         {
             await SwitchState(uiStateType, switchDelayInMilliseconds);
             
-            foreach (var uiState in _notExitedStates.Values)
+            var statesToExit = _notExitedStates.Values;
+
+            foreach (var uiState in statesToExit)
             {
                 await uiState.Exit();
             }
