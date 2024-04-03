@@ -32,8 +32,8 @@ namespace _Assets.Scripts.Services.StateMachine.States
 
         public async UniTask Enter()
         {
-            //_audioService.ChangeSoundVolume(_audioSettingsLoader.AudioData.VFXVolume);
-            //_audioService.ChangeMusicVolume(_audioSettingsLoader.AudioData.MusicVolume);
+            _audioService.ChangeSoundVolume(_audioSettingsLoader.AudioData.VFXVolume);
+            _audioService.ChangeMusicVolume(_audioSettingsLoader.AudioData.MusicVolume);
             _configLoader.SetCurrentConfig(_modDataLoader.ModData.SelectedModName);
             _vibrationService.Init();
             _playerInput.Init();

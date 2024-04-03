@@ -33,13 +33,13 @@ namespace _Assets.Scripts.Services.StateMachine.States
 
         public async UniTask Enter()
         {
-            //await _continueGameService.Load();
-            //await _audioSettingsLoader.Load();
-            //await _vibrationSettingLoader.Load();
+            await _continueGameService.Load();
+            await _audioSettingsLoader.Load();
+            await _vibrationSettingLoader.Load();
             await _modDataLoader.Load();
-            //_playerDataLoader.LoadData();
+            _playerDataLoader.LoadData();
             await _configLoader.LoadDefaultConfig();
-            //_configLoader.LoadAllConfigs();
+            _configLoader.LoadAllConfigs();
             await _uiStateMachine.SwitchState(UIStateType.Loading);
             await _stateMachine.SwitchState(GameStateType.Init);
         }

@@ -25,11 +25,11 @@ namespace _Assets.Scripts.Services.StateMachine.States
 
         public async UniTask Enter()
         {
-            //_playerDataLoader.SaveData();
-            //_modDataLoader.Save();
-            //_audioSettingsLoader.Save();
-            //await _continueGameService.Save();
-            //_vibrationSettingLoader.Save();
+            _playerDataLoader.SaveData();
+            _modDataLoader.Save();
+            _audioSettingsLoader.Save();
+            await _continueGameService.Save();
+            _vibrationSettingLoader.Save();
         }
 
         public void Exit()
