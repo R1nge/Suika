@@ -29,19 +29,19 @@ namespace _Assets.Scripts.Services.StateMachine.States
 
         public async UniTask Enter()
         {
-            // await _uiStateMachine.SwitchState(UIStateType.Loading);
-            // _continueGameService.Continue();
-            // _containerFactory.Create();
-            // var player = await _playerFactory.Create();
-            // await _uiStateMachine.SwitchState(UIStateType.Game);
-            // _continueGameService.UpdateScore();
-            // player.GetComponent<PlayerController>().SpawnContinue();
-            // _playerInput.Enable();
-            //
-            // if (_gameModeService.SelectedGameMode == GameModeService.GameMode.TimeRush)
-            // {
-            //     _timeRushTimer.Resume();
-            // }
+            await _uiStateMachine.SwitchState(UIStateType.Loading);
+            _continueGameService.Continue();
+            _containerFactory.Create();
+            var player = await _playerFactory.Create();
+            await _uiStateMachine.SwitchState(UIStateType.Game);
+            _continueGameService.UpdateScore();
+            player.GetComponent<PlayerController>().SpawnContinue();
+            _playerInput.Enable();
+            
+            if (_gameModeService.SelectedGameMode == GameModeService.GameMode.TimeRush)
+            {
+                _timeRushTimer.Resume();
+            }
         }
 
         public void Exit()

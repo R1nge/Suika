@@ -17,7 +17,7 @@ namespace _Assets.Scripts.Services.StateMachine.States
 
         public async UniTask Enter()
         {
-            _timeRushTimer.Stop();
+            _timeRushTimer.Reset();
             _resetService.Reset();
             await _gameStateMachine.SwitchState(GameStateType.Classic);
         }
