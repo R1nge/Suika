@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -7,6 +8,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
 using VContainer;
+using Random = UnityEngine.Random;
 
 namespace _Assets.Scripts.Services.Audio
 {
@@ -19,7 +21,7 @@ namespace _Assets.Scripts.Services.Audio
         private int _lastSongIndex;
         private readonly List<int> _mergeSoundsQueue = new(10);
         private bool _queueIsPlaying;
-        private readonly CancellationTokenSource _cancellationSource = new();
+        private CancellationTokenSource _cancellationSource = new();
         private bool _alreadyLoading;
 
         public string GetSongName()
@@ -60,30 +62,36 @@ namespace _Assets.Scripts.Services.Audio
             var audioData = _configLoader.CurrentConfig.SuikaAudios[index];
             var extension = Path.GetExtension(audioData.Path);
 
-            if (_alreadyLoading)
-            {
-                _cancellationSource.Cancel();
-            }
-            
+            _cancellationSource?.Cancel();
+            _cancellationSource = new CancellationTokenSource();
             _alreadyLoading = true;
 
-            switch (extension)
+            try
             {
-                case ".mp3":
-                    await DownloadAndPlaySong(audioData.Path, audioData.Volume, AudioType.MPEG,
-                        _cancellationSource.Token).SuppressCancellationThrow();
-                    break;
-                case ".ogg":
-                    await DownloadAndPlaySong(audioData.Path, audioData.Volume, AudioType.OGGVORBIS,
-                        _cancellationSource.Token).SuppressCancellationThrow();
-                    break;
-                case ".wav":
-                    await DownloadAndPlaySong(audioData.Path, audioData.Volume, AudioType.WAV,
-                        _cancellationSource.Token).SuppressCancellationThrow();
-                    break;
+                switch (extension)
+                {
+                    case ".mp3":
+                        await DownloadAndPlaySong(audioData.Path, audioData.Volume, AudioType.MPEG,
+                            _cancellationSource.Token).SuppressCancellationThrow();
+                        break;
+                    case ".ogg":
+                        await DownloadAndPlaySong(audioData.Path, audioData.Volume, AudioType.OGGVORBIS,
+                            _cancellationSource.Token).SuppressCancellationThrow();
+                        break;
+                    case ".wav":
+                        await DownloadAndPlaySong(audioData.Path, audioData.Volume, AudioType.WAV,
+                            _cancellationSource.Token).SuppressCancellationThrow();
+                        break;
+                }
             }
-
-            _alreadyLoading = false;
+            catch (OperationCanceledException)
+            {
+                Debug.LogWarning("Loading cancelled");
+            }
+            finally
+            {
+                _alreadyLoading = false;
+            }
         }
 
         public async UniTask PlayRandomSong()
@@ -211,6 +219,7 @@ namespace _Assets.Scripts.Services.Audio
                 musicSource.clip.name = path;
                 musicSource.volume = volume * _audioSettingsLoader.AudioData.MusicVolume;
                 musicSource.Play();
+                _alreadyLoading = false;
                 webRequest.Dispose();
             }
             else
@@ -230,6 +239,7 @@ namespace _Assets.Scripts.Services.Audio
                     musicSource.clip.name = path;
                     musicSource.volume = volume;
                     musicSource.Play();
+                    _alreadyLoading = false;
                     webRequest.Dispose();
                 }
             }
