@@ -22,7 +22,7 @@ namespace _Assets.Scripts.Services.Audio
         private readonly List<int> _mergeSoundsQueue = new(10);
         private bool _queueIsPlaying;
         private CancellationTokenSource _cancellationSource = new();
-        private bool _alreadyLoading;
+        public event Action OnSongChanged;
 
         public string GetSongName()
         {
@@ -38,7 +38,6 @@ namespace _Assets.Scripts.Services.Audio
         public void ChangeMusicVolume(float volume)
         {
             _audioSettingsLoader.ChangeMusicVolume(volume);
-
             musicSource.volume = volume;
         }
 
@@ -64,7 +63,6 @@ namespace _Assets.Scripts.Services.Audio
 
             _cancellationSource?.Cancel();
             _cancellationSource = new CancellationTokenSource();
-            _alreadyLoading = true;
 
             try
             {
@@ -87,10 +85,6 @@ namespace _Assets.Scripts.Services.Audio
             catch (OperationCanceledException)
             {
                 Debug.LogWarning("Loading cancelled");
-            }
-            finally
-            {
-                _alreadyLoading = false;
             }
         }
 
@@ -219,7 +213,7 @@ namespace _Assets.Scripts.Services.Audio
                 musicSource.clip.name = path;
                 musicSource.volume = volume * _audioSettingsLoader.AudioData.MusicVolume;
                 musicSource.Play();
-                _alreadyLoading = false;
+                OnSongChanged?.Invoke();
                 webRequest.Dispose();
             }
             else
@@ -239,7 +233,7 @@ namespace _Assets.Scripts.Services.Audio
                     musicSource.clip.name = path;
                     musicSource.volume = volume;
                     musicSource.Play();
-                    _alreadyLoading = false;
+                    OnSongChanged?.Invoke();
                     webRequest.Dispose();
                 }
             }
