@@ -24,7 +24,7 @@ namespace _Assets.Scripts.Services.StateMachine.States
         
         public async UniTask Enter()
         {
-            await _continueGameService.Save();
+            //await _continueGameService.Save();
             _timeRushTimer.Reset();
             _resetService.Reset();
             await _uiStateMachine.SwitchStateAndExitFromAllPrevious(UIStateType.MainMenu);

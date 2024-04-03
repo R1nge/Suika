@@ -18,7 +18,7 @@ namespace _Assets.Scripts.Services.UIs.StateMachine.States
 
         public async UniTask Enter()
         {
-            _modDataLoader.Save();
+            //_modDataLoader.Save();
             _ui = await _uiFactory.CreateMainMenuUI();
             await _ui.GetComponent<UICanvasAnimation>().Play(AnimationType.FadeIn);
         }

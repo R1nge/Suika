@@ -38,28 +38,38 @@ namespace _Assets.Scripts.Services.UIs.StateMachine
                 return;
             }
 
-            await UniTask.Delay(switchDelayInMilliseconds);
+            if (switchDelayInMilliseconds > 0)
+            {
+                await UniTask.Delay(switchDelayInMilliseconds);
+            }
 
             _previousUIStateType = _currentUIStateType;
             _previousUIState = _currentUIState;
+            
+            if (_previousUIState != null)
+            {
+                _previousUIState.Exit();
+                _notExitedStates.Remove(_previousUIStateType);
+            }
 
             _currentUIState = _states[uiStateType];
             _currentUIStateType = uiStateType;
-            _notExitedStates.Remove(_previousUIStateType);
-            _currentUIState.Enter().Forget();
-            _previousUIState?.Exit();
+            await _currentUIState.Enter();
         }
 
         public async UniTask SwitchStateAndExitFromAllPrevious(UIStateType uiStateType,
             int switchDelayInMilliseconds = 0)
         {
             await SwitchState(uiStateType, switchDelayInMilliseconds);
-            
-            var statesToExit = _notExitedStates.Values;
 
-            foreach (var uiState in statesToExit)
+            var values = _notExitedStates.ToArray();
+            
+            foreach (var uiState in values)
             {
-                await uiState.Exit();
+                if (uiState.Value != null)
+                {
+                    await uiState.Value.Exit();
+                }
             }
 
             _notExitedStates.Clear();
