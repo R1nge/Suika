@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using _Assets.Scripts.Misc;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
@@ -10,9 +11,19 @@ namespace _Assets.Scripts.Services.Audio
     {
         private AudioSettingsData _audioSettingsData;
         public AudioSettingsData AudioData => _audioSettingsData;
-        public void ChangeSoundVolume(float volume) => _audioSettingsData.VFXVolume = volume;
+        public void ChangeSoundVolume(float volume)
+        {
+            _audioSettingsData.VFXVolume = volume;
+            OnDataChanged?.Invoke(_audioSettingsData);
+        }
 
-        public void ChangeMusicVolume(float volume) => _audioSettingsData.MusicVolume = volume;
+        public void ChangeMusicVolume(float volume)
+        {
+            _audioSettingsData.MusicVolume = volume;
+            OnDataChanged?.Invoke(_audioSettingsData);
+        }
+
+        public event Action<AudioSettingsData> OnDataChanged;
 
         public async UniTask Load()
         {
@@ -30,6 +41,7 @@ namespace _Assets.Scripts.Services.Audio
                 StreamReader reader = new StreamReader(fileInfo.FullName);
                 var json = await reader.ReadToEndAsync();
                 _audioSettingsData = JsonConvert.DeserializeObject<AudioSettingsData>(json);
+                OnDataChanged?.Invoke(_audioSettingsData);
                 reader.Close();
                 reader.Dispose();
             }

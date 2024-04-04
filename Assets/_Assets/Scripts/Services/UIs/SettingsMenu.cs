@@ -31,9 +31,16 @@ namespace _Assets.Scripts.Services.UIs
 
         private void Start()
         {
+            _audioSettingsLoader.OnDataChanged += SettingsChanged;
             soundSlider.value = _audioSettingsLoader.AudioData.VFXVolume;
             musicSlider.value = _audioSettingsLoader.AudioData.MusicVolume;
             ChangeButton();
+        }
+
+        private void SettingsChanged(AudioSettingsData data)
+        {
+            soundSlider.value = data.VFXVolume;
+            musicSlider.value = data.MusicVolume;
         }
 
         private void ChangeSoundVolume(float volume) => _audioService.ChangeSoundVolume(volume);
@@ -48,13 +55,15 @@ namespace _Assets.Scripts.Services.UIs
 
         private void ChangeButton()
         {
-            vibrationButtonImage.color = _vibrationSettingLoader.VibrationSettingsData.Enabled ? Color.green : Color.red;
+            vibrationButtonImage.color =
+                _vibrationSettingLoader.VibrationSettingsData.Enabled ? Color.green : Color.red;
         }
 
         private async void Back() => await _uiStateMachine.SwitchToPreviousState();
 
         private void OnDestroy()
         {
+            _audioSettingsLoader.OnDataChanged -= SettingsChanged;
             soundSlider.onValueChanged.RemoveAllListeners();
             musicSlider.onValueChanged.RemoveAllListeners();
             vibrationButton.onClick.RemoveAllListeners();
