@@ -23,8 +23,6 @@ namespace _Assets.Scripts.Services.UIs
 
         private void Awake()
         {
-            soundSlider.onValueChanged.AddListener(ChangeSoundVolume);
-            musicSlider.onValueChanged.AddListener(ChangeMusicVolume);
             vibrationButton.onClick.AddListener(ToggleVibration);
             backButton.onClick.AddListener(Back);
         }
@@ -35,6 +33,8 @@ namespace _Assets.Scripts.Services.UIs
             soundSlider.value = _audioSettingsLoader.AudioData.VFXVolume;
             musicSlider.value = _audioSettingsLoader.AudioData.MusicVolume;
             ChangeButton();
+            soundSlider.onValueChanged.AddListener(ChangeSoundVolume);
+            musicSlider.onValueChanged.AddListener(ChangeMusicVolume);
         }
 
         private void SettingsChanged(AudioSettingsData data)
