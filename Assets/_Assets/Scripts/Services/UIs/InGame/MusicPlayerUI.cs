@@ -36,6 +36,7 @@ namespace _Assets.Scripts.Services.UIs.InGame
 
         private void SongChanged()
         {
+            UpdateSongName();
             UpdatePlayButton();
         }
 
@@ -100,9 +101,9 @@ namespace _Assets.Scripts.Services.UIs.InGame
 
         private void Previous() => _audioService.PlayPreviousSong().Forget();
 
-        private void Shuffle()
+        private async void Shuffle()
         {
-            _audioService.PlayRandomSong().Forget();
+            await _audioService.PlayRandomSong();
             UpdateSongName();
         }
 

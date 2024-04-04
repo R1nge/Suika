@@ -81,6 +81,16 @@ namespace _Assets.Scripts.Services.Audio
                             _cancellationSource.Token).SuppressCancellationThrow();
                         break;
                 }
+
+                if (musicSource.isPlaying)
+                {
+                    while (musicSource.clip.length > musicSource.time)
+                    {
+                        await UniTask.Yield();
+                    }
+
+                    await PlayNextSong();
+                }
             }
             catch (OperationCanceledException)
             {
@@ -231,7 +241,7 @@ namespace _Assets.Scripts.Services.Audio
                     var song = DownloadHandlerAudioClip.GetContent(webRequest);
                     musicSource.clip = song;
                     musicSource.clip.name = path;
-                    musicSource.volume = volume;
+                    musicSource.volume = volume * _audioSettingsLoader.AudioData.MusicVolume;
                     musicSource.Play();
                     OnSongChanged?.Invoke();
                     webRequest.Dispose();
