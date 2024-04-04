@@ -81,16 +81,6 @@ namespace _Assets.Scripts.Services.Audio
                             _cancellationSource.Token).SuppressCancellationThrow();
                         break;
                 }
-
-                if (musicSource.isPlaying)
-                {
-                    while (musicSource.clip.length > musicSource.time)
-                    {
-                        await UniTask.Yield();
-                    }
-
-                    await PlayNextSong();
-                }
             }
             catch (OperationCanceledException)
             {
