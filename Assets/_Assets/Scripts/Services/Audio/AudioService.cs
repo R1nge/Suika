@@ -138,7 +138,7 @@ namespace _Assets.Scripts.Services.Audio
                 return;
             }
 
-            await PlayNextSong();
+            //await PlayNextSong();
         }
 
         private bool Ended()
