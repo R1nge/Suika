@@ -33,7 +33,7 @@ namespace _Assets.Scripts.Services.Audio
             return fileName;
         }
 
-        public bool IsMusicPlaying => musicSource.isPlaying;
+        public bool IsMusicPlaying => musicSource.isPlaying && !_paused;
 
         public int LastSongIndex => _lastSongIndex;
 
@@ -68,14 +68,15 @@ namespace _Assets.Scripts.Services.Audio
                 return;
             }
 
-            _paused = false;
-            if (index == _lastSongIndex && musicSource.clip != null && !Ended())
+            if (index == _lastSongIndex && musicSource.clip != null && !Ended() && _paused)
             {
                 musicSource.UnPause();
+                _paused = false;
                 Debug.LogWarning("Continue last played song (Unpause)");
                 return;
             }
 
+            _paused = false;
             _lastSongIndex = index;
             musicSource.clip = null;
             var audioData = _configLoader.CurrentConfig.SuikaAudios[index];
