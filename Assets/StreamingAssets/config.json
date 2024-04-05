@@ -99,47 +99,47 @@
       "volume": 1
     },
     {
-      "path": "sana.ogg",
+      "path": "sana.mp3",
       "volume": 0.25
     },
     {
-      "path": "ollie.ogg",
+      "path": "ollie.mp3",
       "volume": 0.1
     },
     {
-      "path": "aqua.ogg",
+      "path": "aqua.mp3",
       "volume": 0.25
     },
     {
-      "path": "ayame.ogg",
+      "path": "ayame.mp3",
       "volume": 0.15
     },
     {
-      "path": "fubuki.ogg",
+      "path": "fubuki.mp3",
       "volume": 0.5
     },
     {
-      "path": "gura.ogg",
+      "path": "gura.mp3",
       "volume": 0.25
     },
     {
-      "path": "hakos.ogg",
+      "path": "hakos.mp3",
       "volume": 0.2
     },
     {
-      "path": "mio.ogg",
+      "path": "mio.mp3",
       "volume": 0.3
     },
     {
-      "path": "kobo.ogg",
+      "path": "kobo.mp3",
       "volume": 0.25
     },
     {
-      "path": "koyori.ogg",
+      "path": "koyori.mp3",
       "volume": 0.25
     },
     {
-      "path": "towa.ogg",
+      "path": "towa.mp3",
       "volume": 0.25
     }
   ],
