@@ -29,7 +29,16 @@ namespace _Assets.Scripts.Services
         public event Action<InputDevice> OnDeviceChanged;
         public event Action<InputAction.CallbackContext> OnPause;
         public event Action<InputAction.CallbackContext> OnDrop;
-        public Vector2 MoveVector => _moveAction.ReadValue<Vector2>();
+
+        public Vector2 MoveVector
+        {
+            get
+            {
+                return LastUsedDevice.name == "Keyboard" || LastUsedDevice.name == "Gamepad"
+                    ? _moveAction.ReadValue<Vector2>() * 0.1f
+                    : _moveAction.ReadValue<Vector2>();
+            }
+        }
 
         public void Init()
         {
