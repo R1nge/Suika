@@ -22,6 +22,8 @@ namespace _Assets.Scripts.Services.Audio
         private readonly List<int> _mergeSoundsQueue = new(10);
         private bool _queueIsPlaying;
         private CancellationTokenSource _cancellationSource = new();
+        private bool _paused;
+        private bool _init;
         public event Action OnSongChanged;
 
         public string GetSongName()
@@ -35,6 +37,11 @@ namespace _Assets.Scripts.Services.Audio
 
         public int LastSongIndex => _lastSongIndex;
 
+        public void Init()
+        {
+            _init = true;
+        }
+
         public void ChangeMusicVolume(float volume)
         {
             _audioSettingsLoader.ChangeMusicVolume(volume);
@@ -47,7 +54,11 @@ namespace _Assets.Scripts.Services.Audio
             mergeSource.volume = volume;
         }
 
-        public void PauseMusic() => musicSource.Stop();
+        public void PauseMusic()
+        {
+            _paused = true;
+            musicSource.Pause();
+        }
 
         public async UniTask PlaySong(int index)
         {
@@ -57,7 +68,16 @@ namespace _Assets.Scripts.Services.Audio
                 return;
             }
 
+            _paused = false;
+            if (index == _lastSongIndex && musicSource.clip != null && !Ended())
+            {
+                musicSource.UnPause();
+                Debug.LogWarning("Continue last played song (Unpause)");
+                return;
+            }
+
             _lastSongIndex = index;
+            musicSource.clip = null;
             var audioData = _configLoader.CurrentConfig.SuikaAudios[index];
             var extension = Path.GetExtension(audioData.Path);
 
@@ -98,6 +118,31 @@ namespace _Assets.Scripts.Services.Audio
 
             var index = Random.Range(0, _configLoader.CurrentConfig.SuikaAudios.Length);
             await PlaySong(index);
+        }
+
+        private async void Update()
+        {
+            if (!_init)
+            {
+                return;
+            }
+            
+            if (_paused)
+            {
+                return;
+            }
+
+            if (!Ended())
+            {
+                return;
+            }
+
+            await PlayNextSong();
+        }
+
+        private bool Ended()
+        {
+            return musicSource.clip == null || musicSource.time >= musicSource.clip.length;
         }
 
         public async UniTask PlaySelectedSong()

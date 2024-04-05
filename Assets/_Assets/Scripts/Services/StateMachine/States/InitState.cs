@@ -37,6 +37,7 @@ namespace _Assets.Scripts.Services.StateMachine.States
             _configLoader.SetCurrentConfig(_modDataLoader.ModData.SelectedModName);
             _vibrationService.Init();
             _playerInput.Init();
+            _audioService.Init();
             await _uiStateMachine.SwitchState(UIStateType.MainMenu, 1000);
         }
 
