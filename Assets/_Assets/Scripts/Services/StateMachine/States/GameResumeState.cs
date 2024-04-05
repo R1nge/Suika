@@ -23,7 +23,7 @@ namespace _Assets.Scripts.Services.StateMachine.States
         {
             await _uiStateMachine.SwitchState(UIStateType.Game);
             await UniTask.DelayFrame(1);
-            _timeRushTimer.Resume();
+            //_timeRushTimer.Resume();
             _playerInput.Enable();
         }
 

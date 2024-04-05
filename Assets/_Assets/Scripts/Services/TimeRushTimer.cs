@@ -4,7 +4,7 @@ using VContainer.Unity;
 
 namespace _Assets.Scripts.Services
 {
-    public class TimeRushTimer : ITickable
+    public class TimeRushTimer : IInitializable, ITickable
     {
         private readonly float _maxTime = 60f * 5f;
         private float _currentTime;
@@ -57,8 +57,13 @@ namespace _Assets.Scripts.Services
 
         public void Reset()
         {
-            _currentTime = _maxTime;
+            CurrentTime = _maxTime;
             _enabled = false;
+        }
+
+        public void Initialize()
+        {
+            _currentTime = _maxTime;
         }
     }
 }
