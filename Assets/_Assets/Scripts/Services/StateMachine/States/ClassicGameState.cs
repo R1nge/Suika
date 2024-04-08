@@ -28,8 +28,8 @@ namespace _Assets.Scripts.Services.StateMachine.States
             await _uiStateMachine.SwitchState(UIStateType.Loading);
             _containerFactory.Create();
             var player = await _playerFactory.Create();
-            await _uiStateMachine.SwitchState(UIStateType.Game);
             player.GetComponent<PlayerController>().SpawnSuika();
+            await _uiStateMachine.SwitchState(UIStateType.Game);
             _playerInput.Enable();
         }
 

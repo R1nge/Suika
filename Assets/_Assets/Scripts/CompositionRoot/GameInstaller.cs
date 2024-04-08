@@ -22,6 +22,7 @@ namespace _Assets.Scripts.CompositionRoot
         [SerializeField] private AudioService audioService;
         [SerializeField] private PlayerInput playerInput;
         [SerializeField] private GamepadRumbleService gamepadRumbleService;
+        [SerializeField] private CameraShake cameraShake;
         
         protected override void Configure(IContainerBuilder builder)
         {
@@ -34,21 +35,22 @@ namespace _Assets.Scripts.CompositionRoot
 
             builder.Register<TimeRushTimer>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             builder.Register<GameModeService>(Lifetime.Singleton);
-            
+
             builder.RegisterComponent(gamepadRumbleService);
             builder.Register<VibrationSettingsDataLoaderJson>(Lifetime.Singleton).As<IVibrationSettingLoader>();
             builder.Register<VibrationService>(Lifetime.Singleton);
 
             builder.Register<CollisionService>(Lifetime.Singleton);
-            
+
             builder.Register<SuikaUIDataProvider>(Lifetime.Singleton);
             builder.Register<SuikasFactory>(Lifetime.Singleton);
 
 
             builder.Register<ContinueGameService>(Lifetime.Singleton);
-            
-            
+
+
             builder.RegisterEntryPoint<GameOverTimer>().AsSelf();
+            builder.RegisterComponent(cameraShake);
             builder.Register<ResetService>(Lifetime.Singleton);
 
             builder.Register<LeaderBoardService>(Lifetime.Singleton);
