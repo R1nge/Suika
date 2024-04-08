@@ -17,7 +17,7 @@ namespace _Assets.Scripts.Gameplay
         private PlayerMovement _playerMovement;
         private bool _dropQueued;
 
-        private void Start()
+        public void Init()
         {
             _playerDrop = new PlayerDrop(_coroutineRunner, _suikasFactory, transform);
             _playerInput.OnDrop += Drop;

@@ -27,7 +27,7 @@ namespace _Assets.Scripts.Services.StateMachine
         {
             _gameOverTimer.StopTimer();
             _scoreService.ResetScore();
-            
+
             var suikasCount = _suikas.Count - 1;
             for (int i = suikasCount; i >= 0; i--)
             {
@@ -36,8 +36,15 @@ namespace _Assets.Scripts.Services.StateMachine
 
             _suikas.Clear();
 
-            Object.Destroy(_suikaContainer);
-            Object.Destroy(_player);
+            if (_suikaContainer != null)
+            {
+                Object.Destroy(_suikaContainer);
+            }
+
+            if (_player != null)
+            {
+                Object.Destroy(_player);
+            }
         }
     }
 }
