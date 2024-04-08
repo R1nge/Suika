@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.agava.yandexgames": "https://github.com/forcepusher/com.agava.yandexgames.git#16.0.1",
     "com.benoitfreslon.vibration": "https://github.com/BenoitFreslon/Vibration.git",
     "com.unity.collab-proxy": "2.2.0",
     "com.unity.feature.2d": "2.0.0",
