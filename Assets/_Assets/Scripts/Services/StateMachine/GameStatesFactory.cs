@@ -101,7 +101,7 @@ namespace _Assets.Scripts.Services.StateMachine
 
         public IGameState CreateGameResumeState(GameStateMachine stateMachine)
         {
-            return new GameResumeState(_playerInput, _uiStateMachine, _audioSettingsLoader, _timeRushTimer);
+            return new GameResumeState(_playerInput, _uiStateMachine, _audioSettingsLoader, _timeRushTimer, _gameModeService);
         }
 
         public IGameState CreateContinueGameState(GameStateMachine stateMachine)

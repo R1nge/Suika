@@ -21,7 +21,9 @@ namespace _Assets.Scripts.Services
 
         public event Action<float> OnTimerStarted; 
         public event Action<float> OnTimerChanged;
-        public event Action<float> OnTimerEnded; 
+        public event Action<float> OnTimerEnded;
+
+        public void Initialize() => _currentTime = _maxTime;
 
         public void Start()
         {
@@ -45,25 +47,15 @@ namespace _Assets.Scripts.Services
             }    
         }
 
-        public void Pause()
-        {
-            _enabled = false;
-        }
-        
-        public void Resume()
-        {
-            _enabled = true;
-        }
+        public void Pause() => _enabled = false;
+
+        public void Resume() => _enabled = true;
+
 
         public void Reset()
         {
             CurrentTime = _maxTime;
             _enabled = false;
-        }
-
-        public void Initialize()
-        {
-            _currentTime = _maxTime;
         }
     }
 }
