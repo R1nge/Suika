@@ -9,6 +9,7 @@ using _Assets.Scripts.Services.GameModes;
 using _Assets.Scripts.Services.StateMachine.States;
 using _Assets.Scripts.Services.UIs.StateMachine;
 using _Assets.Scripts.Services.Vibrations;
+using _Assets.Scripts.Services.Yandex;
 
 namespace _Assets.Scripts.Services.StateMachine
 {
@@ -30,11 +31,12 @@ namespace _Assets.Scripts.Services.StateMachine
         private readonly IVibrationSettingLoader _vibrationSettingLoader;
         private readonly TimeRushTimer _timeRushTimer;
         private readonly GameModeService _gameModeService;
+        private readonly YandexService _yandexService;
 
         private GameStatesFactory(IPlayerDataLoader playerDataLoader, UIStateMachine uiStateMachine,
             CoroutineRunner coroutineRunner, PlayerFactory playerFactory, ContainerFactory containerFactory,
             ResetService resetService, PlayerInput playerInput, IConfigLoader configLoader, AudioService audioService,
-            IModDataLoader modDataLoader, IAudioSettingsLoader audioSettingsLoader, ContinueGameService continueGameService, VibrationService vibrationService, IVibrationSettingLoader vibrationSettingLoader, TimeRushTimer timeRushTimer, GameModeService gameModeService)
+            IModDataLoader modDataLoader, IAudioSettingsLoader audioSettingsLoader, ContinueGameService continueGameService, VibrationService vibrationService, IVibrationSettingLoader vibrationSettingLoader, TimeRushTimer timeRushTimer, GameModeService gameModeService, YandexService yandexService)
         {
             _playerDataLoader = playerDataLoader;
             _uiStateMachine = uiStateMachine;
@@ -52,6 +54,7 @@ namespace _Assets.Scripts.Services.StateMachine
             _vibrationSettingLoader = vibrationSettingLoader;
             _timeRushTimer = timeRushTimer;
             _gameModeService = gameModeService;
+            _yandexService = yandexService;
         }
 
         public IGameState CreateLoadSaveDataState(GameStateMachine stateMachine)
@@ -61,7 +64,7 @@ namespace _Assets.Scripts.Services.StateMachine
         
         public IGameState CreateInitState(GameStateMachine stateMachine)
         {
-            return new InitState(stateMachine, _audioService, _audioSettingsLoader, _configLoader, _modDataLoader, _uiStateMachine, _vibrationService, _playerInput);
+            return new InitState(stateMachine, _audioService, _audioSettingsLoader, _configLoader, _modDataLoader, _uiStateMachine, _vibrationService, _playerInput, _yandexService);
         }
 
         public IGameState CreateClassicGameState(GameStateMachine stateMachine)
@@ -71,7 +74,7 @@ namespace _Assets.Scripts.Services.StateMachine
 
         public IGameState CreateGameOverState(GameStateMachine stateMachine)
         {
-            return new GameOverState(stateMachine, _uiStateMachine, _playerInput, _continueGameService);
+            return new GameOverState(stateMachine, _uiStateMachine, _playerInput, _continueGameService, _yandexService);
         }
 
         public IGameState CreateGameOverAndMainMenuState(GameStateMachine stateMachine)

@@ -3,6 +3,7 @@ using _Assets.Scripts.Services.Datas.GameConfigs;
 using _Assets.Scripts.Services.Datas.Mods;
 using _Assets.Scripts.Services.UIs.StateMachine;
 using _Assets.Scripts.Services.Vibrations;
+using _Assets.Scripts.Services.Yandex;
 using Cysharp.Threading.Tasks;
 
 namespace _Assets.Scripts.Services.StateMachine.States
@@ -17,8 +18,9 @@ namespace _Assets.Scripts.Services.StateMachine.States
         private readonly UIStateMachine _uiStateMachine;
         private readonly VibrationService _vibrationService;
         private readonly PlayerInput _playerInput;
-        
-        public InitState(GameStateMachine stateMachine, AudioService audioService, IAudioSettingsLoader audioSettingsLoader, IConfigLoader configLoader, IModDataLoader modDataLoader, UIStateMachine uiStateMachine, VibrationService vibrationService, PlayerInput playerInput)
+        private readonly YandexService _yandexService;
+
+        public InitState(GameStateMachine stateMachine, AudioService audioService, IAudioSettingsLoader audioSettingsLoader, IConfigLoader configLoader, IModDataLoader modDataLoader, UIStateMachine uiStateMachine, VibrationService vibrationService, PlayerInput playerInput, YandexService yandexService)
         {
             _stateMachine = stateMachine;
             _audioService = audioService;
@@ -28,6 +30,7 @@ namespace _Assets.Scripts.Services.StateMachine.States
             _uiStateMachine = uiStateMachine;
             _vibrationService = vibrationService;
             _playerInput = playerInput;
+            _yandexService = yandexService;
         }
 
         public async UniTask Enter()
@@ -38,6 +41,7 @@ namespace _Assets.Scripts.Services.StateMachine.States
             _vibrationService.Init();
             _playerInput.Init();
             _audioService.Init();
+            _yandexService.Init();
             await _uiStateMachine.SwitchState(UIStateType.MainMenu, 1000);
         }
 

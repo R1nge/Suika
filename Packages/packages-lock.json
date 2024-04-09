@@ -1,19 +1,5 @@
 {
   "dependencies": {
-    "com.agava.yandexgames": {
-      "version": "https://github.com/forcepusher/com.agava.yandexgames.git#16.0.1",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "6c1dcfeb19d5b8ab6720dd36f9261149143c2578"
-    },
-    "com.benoitfreslon.vibration": {
-      "version": "https://github.com/BenoitFreslon/Vibration.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "0fe3ea18d2288b0c60dde2f369a70dc207f152b0"
-    },
     "com.unity.2d.animation": {
       "version": "9.0.3",
       "depth": 1,

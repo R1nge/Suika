@@ -7,6 +7,7 @@ using _Assets.Scripts.Services.Datas.Mods;
 using _Assets.Scripts.Services.Datas.Player;
 using _Assets.Scripts.Services.Providers;
 using _Assets.Scripts.Services.UIs;
+using _Assets.Scripts.Services.Yandex;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -19,6 +20,7 @@ namespace _Assets.Scripts.CompositionRoot
 
         protected override void Configure(IContainerBuilder builder)
         {
+            builder.Register<YandexService>(Lifetime.Singleton);
             builder.RegisterComponent(configProvider);
             builder.Register<UIThemeService>(Lifetime.Singleton);
             builder.Register<ComboService>(Lifetime.Singleton).As<ITickable>().AsSelf();
