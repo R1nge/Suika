@@ -2,6 +2,7 @@
 using _Assets.Scripts.Services.Datas.Mods;
 using _Assets.Scripts.Services.UIs.StateMachine.States;
 using _Assets.Scripts.Services.Vibrations;
+using _Assets.Scripts.Services.Yandex;
 
 namespace _Assets.Scripts.Services.UIs.StateMachine
 {
@@ -11,18 +12,20 @@ namespace _Assets.Scripts.Services.UIs.StateMachine
         private readonly IModDataLoader _modDataLoader;
         private readonly IAudioSettingsLoader _audioSettingsLoader;
         private readonly IVibrationSettingLoader _vibrationSettingLoader;
+        private readonly YandexService _yandexService;
 
-        private UIStatesFactory(UIFactory uiFactory, IModDataLoader modDataLoader, IAudioSettingsLoader audioSettingsLoader, IVibrationSettingLoader vibrationSettingLoader)
+        private UIStatesFactory(UIFactory uiFactory, IModDataLoader modDataLoader, IAudioSettingsLoader audioSettingsLoader, IVibrationSettingLoader vibrationSettingLoader, YandexService yandexService)
         {
             _uiFactory = uiFactory;
             _modDataLoader = modDataLoader;
             _audioSettingsLoader = audioSettingsLoader;
             _vibrationSettingLoader = vibrationSettingLoader;
+            _yandexService = yandexService;
         }
 
         public IUIState CreateLoadingState(UIStateMachine stateMachine) => new LoadingState(_uiFactory);
 
-        public IUIState CreateMainMenuState(UIStateMachine stateMachine) => new MainMenuState(_uiFactory, _modDataLoader);
+        public IUIState CreateMainMenuState(UIStateMachine stateMachine) => new MainMenuState(_uiFactory, _modDataLoader, _yandexService);
 
         public IUIState CreateGameState(UIStateMachine stateMachine) => new GameState(_uiFactory);
 
