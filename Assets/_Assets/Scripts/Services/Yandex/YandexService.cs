@@ -5,9 +5,10 @@ namespace _Assets.Scripts.Services.Yandex
 {
     public class YandexService
     {
-        public void Init()
+        public async UniTask Init()
         {
             YandexGame.GameReadyAPI();
+            await UniTask.WaitUntil(() => YandexGame.SDKEnabled);
         }
 
         public void ShowStickyAd()

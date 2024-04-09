@@ -26,6 +26,7 @@ namespace YG
 #endif
             }
         }
+
         public void _GameReadyAPI() => GameReadyAPI();
     }
 }

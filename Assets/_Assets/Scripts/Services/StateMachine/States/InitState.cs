@@ -20,7 +20,10 @@ namespace _Assets.Scripts.Services.StateMachine.States
         private readonly PlayerInput _playerInput;
         private readonly YandexService _yandexService;
 
-        public InitState(GameStateMachine stateMachine, AudioService audioService, IAudioSettingsLoader audioSettingsLoader, IConfigLoader configLoader, IModDataLoader modDataLoader, UIStateMachine uiStateMachine, VibrationService vibrationService, PlayerInput playerInput, YandexService yandexService)
+        public InitState(GameStateMachine stateMachine, AudioService audioService,
+            IAudioSettingsLoader audioSettingsLoader, IConfigLoader configLoader, IModDataLoader modDataLoader,
+            UIStateMachine uiStateMachine, VibrationService vibrationService, PlayerInput playerInput,
+            YandexService yandexService)
         {
             _stateMachine = stateMachine;
             _audioService = audioService;
@@ -41,8 +44,8 @@ namespace _Assets.Scripts.Services.StateMachine.States
             _vibrationService.Init();
             _playerInput.Init();
             _audioService.Init();
-            _yandexService.Init();
             await _uiStateMachine.SwitchState(UIStateType.MainMenu, 1000);
+            await _yandexService.Init();
         }
 
         public void Exit()
