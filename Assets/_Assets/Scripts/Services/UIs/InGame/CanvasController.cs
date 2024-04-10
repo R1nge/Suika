@@ -14,7 +14,11 @@ namespace _Assets.Scripts.Services.UIs.InGame
             inGameCanvas.sortingOrder = sortingOrder;
             inGameCanvas.planeDistance = 10;
 #if !UNITY_ANDROID
-            Camera.main.SetTargetBuffers(Display.main.colorBuffer, Display.main.depthBuffer); 
+            Camera.main.SetTargetBuffers(Display.main.colorBuffer, Display.main.depthBuffer);
+            // var width = Screen.width;
+            // var height = Screen.height;
+            // Screen.SetResolution(width + 1, height + 1, false);
+            // Screen.SetResolution(width, height, false);
 #endif
         }
     }
