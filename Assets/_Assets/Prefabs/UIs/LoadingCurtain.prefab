@@ -97,7 +97,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6001367268107108380
 RectTransform:
   m_ObjectHideFlags: 0
@@ -237,6 +237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: 0.5
   canvasGroup: {fileID: 6240975119771549535}
+  background: {fileID: 0}
 --- !u!1 &8765155749453806157
 GameObject:
   m_ObjectHideFlags: 0
