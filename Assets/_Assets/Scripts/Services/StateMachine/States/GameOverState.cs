@@ -24,10 +24,10 @@ namespace _Assets.Scripts.Services.StateMachine.States
         public async UniTask Enter()
         {
             _playerInput.Disable();
-            _yandexService.ShowVideoAd();
             await _gameStateMachine.SwitchState(GameStateType.SaveData);
             //_continueGameService.DeleteContinueData();
             await _uiStateMachine.SwitchStateWithoutExitFromPrevious(UIStateType.GameOver);
+            _yandexService.ShowVideoAd();
         }
 
         public void Exit()
