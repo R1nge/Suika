@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using _Assets.Scripts.Services.Datas.GameConfigs;
+using _Assets.Scripts.Services.Yandex;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -18,6 +19,7 @@ namespace _Assets.Scripts.Services.Audio
         [SerializeField] private AudioSource mergeSource;
         [Inject] private IConfigLoader _configLoader;
         [Inject] private IAudioSettingsLoader _audioSettingsLoader;
+        [Inject] private YandexService _yandexService;
         private int _lastSongIndex;
         private readonly List<int> _mergeSoundsQueue = new(10);
         private bool _queueIsPlaying;
@@ -40,6 +42,20 @@ namespace _Assets.Scripts.Services.Audio
         public void Init()
         {
             _init = true;
+            _yandexService.OnFullScreenAdShown += PauseAudioAd;
+            _yandexService.OnFullScreenAdClosed += UnPauseAudioAd;
+        }
+
+        private void UnPauseAudioAd()
+        {
+            _paused = false;
+            musicSource.UnPause();
+        }
+
+        private void PauseAudioAd()
+        {
+            _paused = true;
+            musicSource.Pause();
         }
 
         public void ChangeMusicVolume(float volume)
@@ -283,6 +299,12 @@ namespace _Assets.Scripts.Services.Audio
                     webRequest.Dispose();
                 }
             }
+        }
+
+        private void OnDestroy()
+        {
+            _yandexService.OnFullScreenAdShown -= PauseAudioAd;
+            _yandexService.OnFullScreenAdClosed -= UnPauseAudioAd;
         }
     }
 }
