@@ -12,19 +12,17 @@ namespace _Assets.Scripts.Services.Yandex
         public async UniTask Init()
         {
             YandexGame.GameReadyAPI();
-            await UniTask.WaitUntil(() => YandexGame.SDKEnabled);
             YandexGame.OpenFullAdEvent += OnFullScreenAdShown;
             YandexGame.CloseFullAdEvent += OnFullScreenAdClosed;
+            await UniTask.WaitUntil(() => YandexGame.SDKEnabled);
         }
 
         public void ShowStickyAd()
         {
-       
         }
-        
+
         public void HideStickyAd()
         {
-        
         }
 
         public void ShowVideoAd()

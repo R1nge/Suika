@@ -1,6 +1,5 @@
 ﻿using _Assets.Scripts.Misc;
 using _Assets.Scripts.Services.Audio;
-using _Assets.Scripts.Services.Datas;
 using _Assets.Scripts.Services.Datas.GameConfigs;
 using _Assets.Scripts.Services.Datas.Mods;
 using _Assets.Scripts.Services.Datas.Player;
@@ -32,11 +31,12 @@ namespace _Assets.Scripts.Services.StateMachine
         private readonly TimeRushTimer _timeRushTimer;
         private readonly GameModeService _gameModeService;
         private readonly YandexService _yandexService;
+        private readonly LocalizationService _localizationService;
 
         private GameStatesFactory(IPlayerDataLoader playerDataLoader, UIStateMachine uiStateMachine,
             CoroutineRunner coroutineRunner, PlayerFactory playerFactory, ContainerFactory containerFactory,
             ResetService resetService, PlayerInput playerInput, IConfigLoader configLoader, AudioService audioService,
-            IModDataLoader modDataLoader, IAudioSettingsLoader audioSettingsLoader, ContinueGameService continueGameService, VibrationService vibrationService, IVibrationSettingLoader vibrationSettingLoader, TimeRushTimer timeRushTimer, GameModeService gameModeService, YandexService yandexService)
+            IModDataLoader modDataLoader, IAudioSettingsLoader audioSettingsLoader, ContinueGameService continueGameService, VibrationService vibrationService, IVibrationSettingLoader vibrationSettingLoader, TimeRushTimer timeRushTimer, GameModeService gameModeService, YandexService yandexService, LocalizationService localizationService)
         {
             _playerDataLoader = playerDataLoader;
             _uiStateMachine = uiStateMachine;
@@ -55,6 +55,7 @@ namespace _Assets.Scripts.Services.StateMachine
             _timeRushTimer = timeRushTimer;
             _gameModeService = gameModeService;
             _yandexService = yandexService;
+            _localizationService = localizationService;
         }
 
         public IGameState CreateLoadSaveDataState(GameStateMachine stateMachine)
@@ -64,7 +65,7 @@ namespace _Assets.Scripts.Services.StateMachine
         
         public IGameState CreateInitState(GameStateMachine stateMachine)
         {
-            return new InitState(stateMachine, _audioService, _audioSettingsLoader, _configLoader, _modDataLoader, _uiStateMachine, _vibrationService, _playerInput, _yandexService);
+            return new InitState(stateMachine, _audioService, _audioSettingsLoader, _configLoader, _modDataLoader, _uiStateMachine, _vibrationService, _playerInput, _yandexService, _localizationService);
         }
 
         public IGameState CreateClassicGameState(GameStateMachine stateMachine)

@@ -420,6 +420,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   comboText: {fileID: 6238338460659754435}
+  comboString:
+    m_TableReference:
+      m_TableCollectionName: GUID:6d2996f3d1a07134893ae219fd71489e
+    m_TableEntryReference:
+      m_KeyId: 50740462960640
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!225 &-5613062450416019382
 CanvasGroup:
   m_ObjectHideFlags: 0
