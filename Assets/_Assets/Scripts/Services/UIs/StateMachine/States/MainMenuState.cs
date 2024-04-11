@@ -11,7 +11,7 @@ namespace _Assets.Scripts.Services.UIs.StateMachine.States
         private readonly IModDataLoader _modDataLoader;
         private readonly YandexService _yandexService;
         private MainMenu _ui;
-        
+
         public MainMenuState(UIFactory uiFactory, IModDataLoader modDataLoader, YandexService yandexService)
         {
             _uiFactory = uiFactory;
@@ -24,7 +24,6 @@ namespace _Assets.Scripts.Services.UIs.StateMachine.States
             //_modDataLoader.Save()
             _ui = await _uiFactory.CreateMainMenuUI();
             await _ui.GetComponent<UICanvasAnimation>().Play(AnimationType.FadeIn);
-            _yandexService.ShowVideoAd();
         }
 
         public async UniTask Exit()
