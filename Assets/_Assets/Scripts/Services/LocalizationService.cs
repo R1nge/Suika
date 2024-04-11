@@ -1,5 +1,6 @@
 ﻿using _Assets.Scripts.Services.Yandex;
 using Cysharp.Threading.Tasks;
+using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 
 namespace _Assets.Scripts.Services
@@ -7,6 +8,7 @@ namespace _Assets.Scripts.Services
     public class LocalizationService
     {
         private readonly YandexService _yandexService;
+        private bool _loaded;
 
         private LocalizationService(YandexService yandexService)
         {
@@ -21,8 +23,14 @@ namespace _Assets.Scripts.Services
 
         public async UniTask InitYandex(string str)
         {
+            LocalizationSettings.SelectedLocaleChanged += Loaded;
             await LocalizationSettings.InitializationOperation.Task;
 
+            if (LocalizationSettings.SelectedLocale == LocalizationSettings.AvailableLocales.Locales[0])
+            {
+                _loaded = true;
+            }
+            
             if (str == "en")
             {
                 LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[0];
@@ -39,8 +47,14 @@ namespace _Assets.Scripts.Services
             {
                 LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[0];
             }
+           
+            await UniTask.WaitUntil(() => _loaded);
+        }
 
-            await LocalizationSettings.SelectedLocaleAsync.Task;
+        private void Loaded(Locale locale)
+        {
+            _loaded = true;
+            LocalizationSettings.SelectedLocaleChanged -= Loaded;
         }
 
         public enum Language
