@@ -43,6 +43,10 @@ MonoBehaviour:
     m_Key: Restart
     m_Metadata:
       m_Items: []
+  - m_Id: 85395056705536
+    m_Key: Time Rush
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
