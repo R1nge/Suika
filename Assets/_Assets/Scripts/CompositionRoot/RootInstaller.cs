@@ -20,6 +20,7 @@ namespace _Assets.Scripts.CompositionRoot
 
         protected override void Configure(IContainerBuilder builder)
         {
+            builder.Register<LocalizationService>(Lifetime.Singleton);
             builder.Register<YandexService>(Lifetime.Singleton);
             builder.RegisterComponent(configProvider);
             builder.Register<UIThemeService>(Lifetime.Singleton);
