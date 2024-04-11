@@ -22,9 +22,9 @@ namespace _Assets.Scripts.Services.UIs.StateMachine.States
         public async UniTask Enter()
         {
             //_modDataLoader.Save()
-            _yandexService.ShowVideoAd();
             _ui = await _uiFactory.CreateMainMenuUI();
             await _ui.GetComponent<UICanvasAnimation>().Play(AnimationType.FadeIn);
+            _yandexService.ShowVideoAd();
         }
 
         public async UniTask Exit()
