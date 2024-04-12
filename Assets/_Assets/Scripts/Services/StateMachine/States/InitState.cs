@@ -47,9 +47,9 @@ namespace _Assets.Scripts.Services.StateMachine.States
             _vibrationService.Init();
             _playerInput.Init();
             _audioService.Init();
-            await _yandexService.Init();
             await _localizationService.InitYandex(YandexGame.lang);
             await _uiStateMachine.SwitchState(UIStateType.MainMenu, 1000);
+            await _yandexService.Init();
         }
 
         public void Exit()
