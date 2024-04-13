@@ -10,6 +10,8 @@ namespace _Assets.Scripts.Gameplay
         [SerializeField] private SpriteRenderer spriteRenderer;
         [SerializeField] private PolygonColliderOptimizer polygonColliderOptimizer;
         [SerializeField] private float originalScale;
+        [SerializeField] protected float gravityScale = 100;
+        [SerializeField] protected Rigidbody2D Rigidbody2D;
         public PolygonColliderOptimizer PolygonColliderOptimizer => polygonColliderOptimizer;
         public bool HasLanded => _landed;
         public bool HasDropped => _dropped;
@@ -34,6 +36,13 @@ namespace _Assets.Scripts.Gameplay
         {
             _dropped = true;
             ContinueGameService.AddSuika(this);
+        }
+
+        private void Update()
+        {
+           if (!_dropped) return;
+           if (_landed) return;
+           Rigidbody2D.AddForce(Vector2.down * gravityScale, ForceMode2D.Force);
         }
 
         public void Land() => _landed = true;

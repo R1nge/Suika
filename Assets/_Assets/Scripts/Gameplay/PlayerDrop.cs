@@ -12,7 +12,7 @@ namespace _Assets.Scripts.Gameplay
         private readonly Transform _transform;
         private Rigidbody2D _suikaRigidbody;
         private bool _canDrop = true;
-        private readonly YieldInstruction _wait = new WaitForSeconds(1f);
+        private readonly YieldInstruction _wait = new WaitForSeconds(0.25f);
         
         public PlayerDrop(CoroutineRunner coroutineRunner, SuikasFactory suikasFactory, Transform transform)
         {
