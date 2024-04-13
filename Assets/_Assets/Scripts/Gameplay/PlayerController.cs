@@ -29,7 +29,7 @@ namespace _Assets.Scripts.Gameplay
             _dropQueued = true;
         }
 
-        private void LateUpdate()
+        private void Update()
         {
             if (_playerInput.Enabled())
             {
