@@ -37,8 +37,10 @@ namespace _Assets.Scripts.Gameplay
 
                 if (_dropQueued)
                 {
-                    _playerDrop.TryDrop();
-                    _dropQueued = false;
+                    if (_playerDrop.TryDrop())
+                    {
+                        _dropQueued = false;
+                    }
                 }
             }
             else

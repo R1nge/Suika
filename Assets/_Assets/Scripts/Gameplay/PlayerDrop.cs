@@ -13,7 +13,7 @@ namespace _Assets.Scripts.Gameplay
         private Rigidbody2D _suikaRigidbody;
         private bool _canDrop = true;
         private readonly YieldInstruction _wait = new WaitForSeconds(0.25f);
-        
+
         public PlayerDrop(CoroutineRunner coroutineRunner, SuikasFactory suikasFactory, Transform transform)
         {
             _coroutineRunner = coroutineRunner;
@@ -21,13 +21,16 @@ namespace _Assets.Scripts.Gameplay
             _transform = transform;
         }
 
-        public void TryDrop()
+        public bool TryDrop()
         {
             if (_canDrop)
             {
                 Drop();
                 _coroutineRunner.StartCoroutine(Cooldown());
+                return true;
             }
+
+            return false;
         }
 
         public void SpawnSuika() => Spawn();
@@ -43,8 +46,11 @@ namespace _Assets.Scripts.Gameplay
         {
             _suikaRigidbody.transform.parent = null;
             _suikaRigidbody.isKinematic = false;
-            _suikaRigidbody.GetComponent<Suika>().Drop();
-            _suikaRigidbody = null;
+            if (_suikaRigidbody.TryGetComponent(out Suika suika))
+            {
+                suika.Drop();
+                _suikaRigidbody = null;
+            }
         }
 
         private IEnumerator Cooldown()

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 
@@ -15,7 +14,7 @@ namespace _Assets.Scripts.Services
 
         public bool Enabled(int fingerId = -1)
         {
-            bool enabled = _enabled && !EventSystem.current.IsPointerOverGameObject();
+            bool enabled = _enabled;
 #if UNITY_ANDROID
             enabled = _enabled && !EventSystem.current.IsPointerOverGameObject() &&
                       !EventSystem.current.IsPointerOverGameObject(fingerId);
