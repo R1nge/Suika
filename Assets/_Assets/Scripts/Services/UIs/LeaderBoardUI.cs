@@ -11,6 +11,7 @@ namespace _Assets.Scripts.Services.UIs
 
         private void Start()
         {
+            _leaderBoardService.GetLb();
             for (int i = 0; i < scores.Length; i++)
             {
                 if (_leaderBoardService.LbData.players[i] != null)

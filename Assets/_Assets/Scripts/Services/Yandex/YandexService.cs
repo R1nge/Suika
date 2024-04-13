@@ -52,5 +52,10 @@ namespace _Assets.Scripts.Services.Yandex
         {
             YandexGame.NewLeaderboardScores("leaderboard", score);
         }
+
+        public void GetLeaderBoard()
+        {
+            YandexGame.GetLeaderboard("leaderboard", 10, 3, 3, "100");
+        }
     }
 }

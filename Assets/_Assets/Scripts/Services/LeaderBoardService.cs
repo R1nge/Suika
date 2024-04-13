@@ -19,6 +19,12 @@ namespace _Assets.Scripts.Services
         public void Init()
         {
             _yandexService.OnGetLeaderboard += GetLB;
+            _yandexService.GetLeaderBoard();
+        }
+
+        public void GetLb()
+        {
+            _yandexService.GetLeaderBoard();
         }
 
         private void GetLB(LBData data)
