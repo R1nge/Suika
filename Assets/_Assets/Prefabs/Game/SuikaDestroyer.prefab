@@ -47,10 +47,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 2
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 10
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -76,6 +76,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 7754298195976050427}
   polygonColliderOptimizer: {fileID: -2897471063664506631}
+  originalScale: 0
+  gravityScale: 100
+  Rigidbody2D: {fileID: 3720540386366080918}
 --- !u!114 &-2897471063664506631
 MonoBehaviour:
   m_ObjectHideFlags: 0

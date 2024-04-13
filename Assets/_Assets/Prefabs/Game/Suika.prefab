@@ -129,6 +129,8 @@ MonoBehaviour:
   spriteRenderer: {fileID: 1619039663742882924}
   polygonColliderOptimizer: {fileID: 5025640543551179847}
   originalScale: 0
+  gravityScale: 100
+  Rigidbody2D: {fileID: 1714189555824604434}
 --- !u!114 &5025640543551179847
 MonoBehaviour:
   m_ObjectHideFlags: 0
