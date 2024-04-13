@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using VContainer;
 
@@ -13,24 +11,12 @@ namespace _Assets.Scripts.Services.UIs
 
         private void Start()
         {
-            var list = new List<int>(5);
             for (int i = 0; i < scores.Length; i++)
             {
-                if (_leaderBoardService.GetScore(i) != 0)
+                if (_leaderBoardService.LbData.players[i] != null)
                 {
-                    list.Add(_leaderBoardService.GetScore(i));
+                    scores[i].text = _leaderBoardService.LbData.players[i].score.ToString();       
                 }
-                else
-                {
-                    scores[i].text = string.Empty;
-                }
-            }
-
-            var sortedList = list.OrderByDescending(i1 => i1).Distinct().ToList();
-
-            for (int i = 0; i < sortedList.Count; i++)
-            {
-                scores[i].text = sortedList[i].ToString();
             }
         }
     }

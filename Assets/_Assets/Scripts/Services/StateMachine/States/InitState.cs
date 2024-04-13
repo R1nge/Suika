@@ -21,11 +21,12 @@ namespace _Assets.Scripts.Services.StateMachine.States
         private readonly PlayerInput _playerInput;
         private readonly YandexService _yandexService;
         private readonly LocalizationService _localizationService;
+        private readonly LeaderBoardService _leaderBoardService;
 
         public InitState(GameStateMachine stateMachine, AudioService audioService,
             IAudioSettingsLoader audioSettingsLoader, IConfigLoader configLoader, IModDataLoader modDataLoader,
             UIStateMachine uiStateMachine, VibrationService vibrationService, PlayerInput playerInput,
-            YandexService yandexService, LocalizationService localizationService)
+            YandexService yandexService, LocalizationService localizationService, LeaderBoardService leaderBoardService)
         {
             _stateMachine = stateMachine;
             _audioService = audioService;
@@ -37,6 +38,7 @@ namespace _Assets.Scripts.Services.StateMachine.States
             _playerInput = playerInput;
             _yandexService = yandexService;
             _localizationService = localizationService;
+            _leaderBoardService = leaderBoardService;
         }
 
         public async UniTask Enter()
@@ -50,6 +52,7 @@ namespace _Assets.Scripts.Services.StateMachine.States
             await _localizationService.InitYandex(YandexGame.lang);
             await _uiStateMachine.SwitchState(UIStateType.MainMenu, 1000);
             await _yandexService.Init();
+            _leaderBoardService.Init();
         }
 
         public void Exit()

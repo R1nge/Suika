@@ -1,25 +1,43 @@
-﻿using _Assets.Scripts.Services.Datas;
-using _Assets.Scripts.Services.Datas.Player;
+﻿using _Assets.Scripts.Services.Yandex;
+using YG.Utils.LB;
 
 namespace _Assets.Scripts.Services
 {
     public class LeaderBoardService
     {
-        private readonly IPlayerDataLoader _playerDataLoader;
+        private readonly YandexService _yandexService;
+        private readonly ScoreService _scoreService;
+        private LBData _lbData;
+        public LBData LbData => _lbData;
 
-        private LeaderBoardService(IPlayerDataLoader playerDataLoader)
+        private LeaderBoardService(YandexService yandexService, ScoreService scoreService)
         {
-            _playerDataLoader = playerDataLoader;
+            _yandexService = yandexService;
+            _scoreService = scoreService;
         }
 
-        public int GetScore(int index)
+        public void Init()
         {
-            if (index > _playerDataLoader.GameDatas.Count - 1)
-            {
-                return 0;
-            }
+            _yandexService.OnGetLeaderboard += GetLB;
+        }
 
-            return _playerDataLoader.GameDatas[index].Score;
+        private void GetLB(LBData data)
+        {
+            _lbData = data;
+        }
+
+        public void SetScore()
+        {
+            if (_lbData.thisPlayer.score < _scoreService.Score)
+            {
+                _lbData.thisPlayer.score = _scoreService.Score;
+                _yandexService.UpdateLeaderBoardScore(_scoreService.Score);
+            }
+        }
+
+        public void Destroy()
+        {
+            _yandexService.OnGetLeaderboard -= GetLB;
         }
     }
 }
