@@ -30,6 +30,7 @@ namespace _Assets.Scripts.Services
         private void GetLB(LBData data)
         {
             _lbData = data;
+            SetScore();
         }
 
         public void SetScore()
