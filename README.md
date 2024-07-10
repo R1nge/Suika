@@ -1,9 +1,11 @@
+A better-made version without modding support (WIP) https://yandex.com/games/app/327240?draft=true&lang=en  
+
 # About
 
 ![Hololive2](https://github.com/R1nge/Suika/assets/59400159/307924a9-c276-4448-ad11-9307273d9396)
 
 Suika-like with modding support, made to learn how to handle mods  
-I thought about using Addressables or AssetBundles, but chosen manual loading to enable modding without a need for Unity Engine  
+I thought about using Addressables or AssetBundles, but chose manual loading to enable modding without the need for Unity Engine  
 
 # Features  
 
