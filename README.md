@@ -9,11 +9,11 @@ I thought about using Addressables or AssetBundles, but chose manual loading to 
 
 # Features  
 
-A game loop  
-An ability to continue the last game  
-A high score system with saving and loading  
-A modding support  
-An auto image size detection  
+Complete game loop  
+Ability to continue the last game  
+High score system with saving and loading  
+Modding support  
+Auto image size detection  
 
 # Mods paths    
 Windows: C:/Users/{userName}/AppData/LocalLow/R1nge/Suika/Mods  
